@@ -6,37 +6,37 @@
 			<div class="container">
 				<div class="col-md-6 col_image_wrap">
 					<div class="image_section_top img_question_med">
-						<img src="img/img_sec_top1.png" alt="alt">
+						<img src="img/svg/medicine.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_psihology">
-						<img src="img/image_ask.png" alt="alt">
+						<img src="img/svg/psychology.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_yrist">
-						<img src="img/img_sec_top1.png" alt="alt">
+						<img src="img/svg/urist.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_science">
-						<img src="img/img_category_experts.png" alt="alt">
+						<img src="img/svg/ucheba.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_ezot">
-						<img src="img/image_ask.png" alt="alt">
+						<img src="img/svg/ezoteric.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_beautiful">
-						<img src="img/img_sec_top1.png" alt="alt">
+						<img src="img/svg/krasota.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_english">
-						<img src="img/image_ask.png" alt="alt">
+						<img src="img/svg/english.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_hobi">
-						<img src="img/img_sec_top1.png" alt="alt">
+						<img src="img/svg/hobbi.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_business">
-						<img src="img/img_category_experts.png" alt="alt">
+						<img src="img/svg/business.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_religion">
-						<img src="img/image_ask.png" alt="alt">
+						<img src="img/svg/religiya.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_tech">
-						<img src="img/img_category_experts.png" alt="alt">
+						<img src="img/svg/technology.svg" alt="alt">
 					</div>
 				</div>
 				<div class="col-md-6">

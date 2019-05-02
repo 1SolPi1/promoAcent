@@ -122,92 +122,15 @@
             <div class="container">
                 <div class="title_experts slideInUp wow" data-wow-iteration="1">Смотрите также экспертов этой категории</div>
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item_expert flipInY wow" data-wow-iteration="1">
-                            <div class="premium_expert"><span>входит в ТОП-25</span></div>
-                            <div class="image_expert">
-                                <div class="rating_expert">10</div>
-                                <ul class="rating_item value-5">
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                </ul>
-                                <img src="img/expert1.png" alt="alt">
-                            </div>
-                            <div class="name_expert">Николай Тамбровский <a href="#" class="link_share"></a></div>
-                            <div class="price_expert">от <span>400 ₽</span></div>
-                            <a href="#" class="reviews_expert"><span>1 200</span> отзывов</a>
-                            <div class="btn_chat_wrap">
-                                <a href="#" class="btn_chat">написать в чат</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item_expert flipInY wow" data-wow-iteration="1">
-                            <div class="image_expert">
-                                <div class="rating_expert">8.5</div>
-                                <ul class="rating_item value-4">
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                </ul>
-                                <img src="img/expert2.png" alt="alt">
-                            </div>
-                            <div class="name_expert">Алексей Афанасьев <a href="#" class="link_share"></a></div>
-                            <div class="price_expert">от <span>400 ₽</span></div>
-                            <a href="#" class="reviews_expert"><span>1 200</span> отзывов</a>
-                            <div class="btn_chat_wrap">
-                                <a href="#" class="btn_chat">написать в чат</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item_expert flipInY wow" data-wow-iteration="1">
-                            <div class="premium_expert"><span>входит в ТОП-25</span></div>
-                            <div class="image_expert">
-                                <div class="rating_expert">10</div>
-                                <ul class="rating_item value-5">
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                </ul>
-                                <img src="img/expert1.png" alt="alt">
-                            </div>
-                            <div class="name_expert">Николай Тамбровский <a href="#" class="link_share"></a></div>
-                            <div class="price_expert">от <span>400 ₽</span></div>
-                            <a href="#" class="reviews_expert"><span>1 200</span> отзывов</a>
-                            <div class="btn_chat_wrap">
-                                <a href="#" class="btn_chat">написать в чат</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item_expert flipInY wow" data-wow-iteration="1">
-                            <div class="image_expert">
-                                <div class="rating_expert">8.5</div>
-                                <ul class="rating_item value-4">
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                    <li><i class="glyphicon glyphicon-star"></i></li>
-                                </ul>
-                                <img src="img/expert2.png" alt="alt">
-                            </div>
-                            <div class="name_expert">Алексей Афанасьев <a href="#" class="link_share"></a></div>
-                            <div class="price_expert">от <span>400 ₽</span></div>
-                            <a href="#" class="reviews_expert"><span>1 200</span> отзывов</a>
-                            <div class="btn_chat_wrap">
-                                <a href="#" class="btn_chat">написать в чат</a>
-                            </div>
-                        </div>
-                    </div>
+                    <profItem
+                      v-for="(item, index) in profi"
+                      :key="index"
+                      :name="item.name"
+                      :price="item.price"
+                      :rating="item.rating"
+                      :reviews="item.reviews"
+                      :tops="item.tops"
+                    />
                 </div>
             </div>
         </div>
@@ -218,9 +141,10 @@
 
 <script>
     import questionItem from '../components/Questions/QuestionItem'
+    import profItem from '../components/Questions/ProfItem'
     export default {
         name: "Questions",
-        components: {questionItem},
+        components: {questionItem, profItem},
         props: {},
         data() {
             return {
@@ -246,6 +170,9 @@
             },
         },
         computed: {
+          profi(){
+            return this.$store.getters.PROFI
+          },
         pageCount () {
           let l = this.questionsList.length
           let s = this.size

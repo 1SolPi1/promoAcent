@@ -118,11 +118,63 @@ export default new Vuex.Store({
   person: 'Анонимно',
   countAnswer: 5
   },
+  ],
+  profi:[
+  {
+	tops: false,
+	rating: 5.58,
+	name:'Валерчик Валерон',
+	price: 900,
+	reviews: 122
+  },
+  {
+	tops: true,
+	rating: 10,
+	name:'Петр Семенович',
+	price: 12900,
+	reviews: 10220
+  },
+  {
+	tops: false,
+	rating: 1.58,
+	name:'Антон',
+	price: 100,
+	reviews: 2
+  },
+  {
+	tops: true,
+	rating: 8.58,
+	name:'Макар Андрееич',
+	price: 100,
+	reviews: 12
+  },
+  {
+	tops: false,
+	rating: 3.58,
+	name:'Маршал',
+	price: 9000,
+	reviews: 300
+  },
+  {
+	tops: false,
+	rating: 2.11,
+	name:'Тип',
+	price: 300,
+	reviews: 10
+  },
+  {
+	tops: true,
+	rating: 10,
+	name:'Мой дед',
+	price: 2200,
+	reviews: 1222
+  },
   ]
   },
   getters:{
 		COMMENTS: state=> state.comments,
-		QUESTIONS: state=> state.questions
+		QUESTIONS: state=> state.questions,
+		PROFI: state => state.profi
   },
   mutations: {
 
