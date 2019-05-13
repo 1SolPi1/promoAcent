@@ -13,10 +13,10 @@
   line-height: 43px;
 }
 .name_block_button {
-  font-size: 15px;
+	font-size: 15px;
 }
 .block_button p {
-  font-size: 14px;
+	font-size: 14px;
 }
 .pay_text, .wrap_input_ask {
   max-width: 435px;
@@ -112,13 +112,13 @@
   background-image: url(../img/line_step1.png);
 }
 .col-md-4:last-child .item_step img {
-  float: right;
+	float: right;
 }
 .col-md-4:last-child .name_step {
-  float: right;
+	float: right;
 }
 .item_step {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 .section_advantages {
   padding: 40px 0;
@@ -129,7 +129,7 @@
   margin-top: 30px;
 }
 .name_advantages {
-  font-size: 32px;
+	font-size: 32px;
 }
 .right_numbers {
   padding-top: 25px;
@@ -138,13 +138,13 @@
   margin-top: 20px;
 }
 .client_info {
-  margin-top: 20px;
-  padding-left: 25px;
-  padding-right: 25px;
+	margin-top: 20px;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 .image_client img {
-  width: 175px;
-  height: 175px;
+	width: 175px;
+	height: 175px;
 }
 .image_client::before {
   left: -85px;
@@ -157,31 +157,31 @@
   line-height: 40px;
 }
 .pagingInfo span span {
-  font-size: 30px;
+	font-size: 30px;
 }
 .slick-prev {
-  left: 30px;
+	left: 30px;
 }
 .slick-next {
   left: 75px;
 }
 .text_client {
-  font-size: 14px;
+	font-size: 14px;
 }
 .main_footer div:nth-child(4) {
   padding-left: 15px;
 }
 .col_pl {
-  padding-left: 15px;
+	padding-left: 15px;
 }
 .line_links_footer {
-  margin-top: 5px;
+	margin-top: 5px;
 }
 .wrapper {
-  padding-top: 100px;
+	padding-top: 100px;
 }
 .section_top::before {
-  top: -165px;
+	top: -165px;
 }
 .item_sorting {
   margin-left: 14px;
@@ -316,19 +316,19 @@
 }
 .parent_more,
 .item_question {
-  width: 50%;
-  max-width: 190px;
-  margin: 0 auto;
-  margin-bottom: 10px;
+	width: 50%;
+	max-width: 190px;
+	margin: 0 auto;
+	margin-bottom: 10px;
 }
 .parent_more {
   margin-bottom: 0;
 }
 .section_steps {
-  padding-top: 50px;
+	padding-top: 50px;
 }
 .img_number img {
-  width: 290px;
+	width: 290px;
 }
 .item_number strong {
   font-size: 35px;
@@ -551,29 +551,29 @@
   padding-top: 140px;
 }
 .header_nav li a {
-  font-size: 13px;
+	font-size: 13px;
 }
 .header_nav li {
   margin-right: 20px;
 }
 .header_nav {
-  margin-top: 7px;
+	margin-top: 7px;
 }
 .title_section {
   font-size: 24px;
   line-height: 29px;
 }
 .title_section br {
-  display: none;
+	display: none;
 }
 .section_advantages {
-  padding-top: 20px;
+	padding-top: 20px;
 }
 .item_advantages {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 .col-md-4:nth-child(1) .item_advantages {
-  margin-top: 0;
+	margin-top: 0;
 }
 .name_advantages {
   font-size: 26px;
@@ -584,30 +584,30 @@
 }
 .client_info::after,
 .client_info::before {
-  display: none;
+	display: none;
 }
 .client_info {
-  padding-left: 0;
-  padding-right: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 .image_client::before {
-  display: none;
+	display: none;
 }
 .block_button {
-  padding-left: 60px;
-  -webkit-background-size: 40px auto;
-  background-size: 40px auto;
+	padding-left: 60px;
+	-webkit-background-size: 40px auto;
+	background-size: 40px auto;
 }
 .main_footer .row > div:nth-child(1) {
-  text-align: center;
+	text-align: center;
 }
 .copiright > div {
-  width: 100%;
+	width: 100%;
 }
 .right_footer {
-  padding-top: 10px;
-  padding-bottom: 5px;
-  text-align: center;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	text-align: center;
 }
 .title_footer {
   font-size: 16px;
