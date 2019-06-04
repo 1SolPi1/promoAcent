@@ -33,31 +33,33 @@
                         </div>
                         <ul class="header_nav">
                             <li :class="{'active': $route.path == '/questions'}"> <router-link to="/questions">Ваши вопросы</router-link></li>
-                            <li :class="{'active': $route.path == '/expert'}"><a href="#">Эксперты</a></li>
+                            <li :class="{'active': $route.path == '/experts'}"><router-link to="/experts">Эксперты</router-link></li>
                             <li :class="{'active': $route.path == '/journal'}"><a href="#">Журнал</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-5 col-sm-4">
-                        <div class="right_header">
-                            <a href="#" class="btn_add"><span>добавить эксперта</span></a>
-                            <a href="#" class="btn_border btn_sign">личный кабинет</a>
-                        </div>
-                    </div>
+                    <logined  v-if="profile"/>
+                    <notLogined v-else/>
                 </div>
             </div>
-        </header> 
+        </header>
+        <chat />
     </div>
 </template>
 
 <script>
     import $ from 'jquery'
+    import logined from '@/components/Header/Logined'
+    import notLogined from '@/components/Header/NotLogined'
     export default {
         name: "Header",
-        components: {},
+        components: {
+          logined,
+          notLogined
+        },
         props: {},
         data() {
             return {
-                showHiddenMenu: false
+                showHiddenMenu: false,
                 }
         },
         created() {
@@ -90,7 +92,11 @@ $(window).scroll(function(){
         methods: {
 
         },
-        computed: {},
+        computed: {
+          profile(){
+            return this.$store.getters.PROFILE
+          }
+        },
     }
 </script>
 

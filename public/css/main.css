@@ -5268,7 +5268,7 @@ input[type="submit"],
 }
 
 .list_category .slick-next {
-	right: 0;
+	right: -40px;
 	top: 0;
 	margin: 6px 0;
 	left: auto;

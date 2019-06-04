@@ -1,7 +1,5 @@
 <template>	
 	<div>
- <headers/>
-
 <div class="section_top">
 			<div class="container">
 				<div class="col-md-6 col_image_wrap">
@@ -257,9 +255,6 @@
 				</div>
 			</div>
 		</div>
-
-
- <footers/>
   </div>
 </template>
 
@@ -381,3 +376,6 @@ computed: {
 },
 }
 </script>
+<style scoped>
+	
+</style>
