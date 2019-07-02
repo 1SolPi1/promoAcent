@@ -1,0 +1,69 @@
+<template>
+		<div class="helps_block boxLogin">
+      <div class="title_section">Логин</div>
+				<form class="form_help">
+          <input type="text" placeholder="Логин" v-model="login">
+          <input type="password" class="passInput" placeholder="Пароль" v-model="password">
+          <button class="btn_blue"  @click.prevent="submit()">Войти</button>
+        </form>
+    </div>
+</template>
+
+<script>
+	export default {
+    name: "Login",
+    components: {},
+    props: {},
+    data() {
+			return {
+        login: null,
+        password: null
+      }
+    },
+    created() {
+    },
+    mounted() {
+     },
+		methods: {
+			submit(){
+				let params = new URLSearchParams();
+            params.append('login', this.login);
+            params.append('password', this.password);
+
+            this.$http({
+                method: 'POST',
+                url: 'user/security/login',
+                data: params,
+            })
+                .then(response => {
+                  localStorage.setItem('token', response.data.token);
+                  this.$store.dispatch('getProfile');
+                });
+			}
+		},
+		computed: {},
+	}
+</script>
+
+<style scoped>
+.boxLogin{
+	position: fixed;
+	right: 60px;
+	top: 65px;
+	z-index: 900;
+}
+
+.passInput{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 20px;
+	padding: 0 15px;
+	font-size: 14px;
+	border-radius: 4px;
+	border: 1px #d5d5d6 solid;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+	color: #000;
+}
+</style>
