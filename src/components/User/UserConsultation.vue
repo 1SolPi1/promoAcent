@@ -74,22 +74,19 @@
 									<label for="radio9">решены</label>
 								</div>
 							</div>
-										<p>У Вас <span>1</span> вопрос</p>
-										<div class="block_question slideInUp wow" data-wow-iteration="1">
-							<div class="name_question">Лень и прокрастинация - как справиться и обрести силу воли?</div>
-							<div class="price_question">0 ₽</div>
-							<div class="category_question">Психология / Дети и подростки</div>
-							
-							<div class="wrap_link_question">
-								<a href="#" class="link_gray">Читать полностью</a>
-							</div>
-							<div class="bottom_question clearfix">
-								<div class="data_question">10 февраля 2018</div>
-								<div class="user_question">Анонимно</div>
-								<a href="#" class="all_questions_user">всего <span>4</span> ответа</a>
-							</div>
-							<p>Оплатите ваш вопрос, для гарантированного и ускоренного получения ответа <a href="#">Оплатить</a></p>
-						</div>
+										<p>У Вас <span>{{listQuestions.length}}</span> вопрос</p>
+											<questionItem
+                        v-for="(item, index) in listQuestions"
+                        :key="index"
+                        :category="item.category"
+                        :countAnswer="item.answer_count"
+                        :date="item.question.create_at"
+                        :person="item.question.anonim? ' Анонимно ': item.user_name"
+                        :price="item.question.price"
+                        :status="item.question.status"
+                        :title="item.question.title"
+                        :id="item.question.id"
+                    />
 											</div>
 										</div>
 									</div>
@@ -114,11 +111,33 @@ export default {
 	components: {},
 	props: {},
 	data() {
-		return {}
+		return {
+			listQuestions: []
+		}
 	},
 	created() {},
-	mounted() {},
-	methods: {},
+	mounted() {
+		this.getQuestions();
+	},
+	methods: {
+		getQuestions(){
+			let params = new URLSearchParams();
+        params.append('client_id', this.$store.getters.CLIENT.id);
+
+        this.$http({
+          method: 'POST',
+          url: 'question/question/find',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.listQuestions = response.data
+        })
+		}
+	},
 	computed: {},
 }
 </script>

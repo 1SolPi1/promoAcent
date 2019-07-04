@@ -13,6 +13,7 @@ import UserContentHeader from "../src/components/User/UserContentHeader"
 import Chats from '../src/components/Chats'
 import UserChatItem from '../src/components/User/UserConsultation/UserChatItem'
 import VueSocketIO from 'vue-socket.io'
+import questionItem from '../src/components/Questions/QuestionItem'
 
 Vue.use(Chats)
 
@@ -64,6 +65,7 @@ Vue.component('userProfileMenu', UserProfileMenu);
 Vue.component('userContentHeader', UserContentHeader);
 Vue.component('categories', Categories);
 Vue.component('userchatitem', UserChatItem);
+Vue.component('questionItem', questionItem);
 // Vue.component('testcomponent',{
 //    render: function (createElement) {
 //     items.map(function (item) {

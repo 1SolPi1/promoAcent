@@ -242,7 +242,7 @@
 						<div class="block_button flipInY wow" data-wow-delay="0.8s" data-wow-iteration="1">
 							<div class="name_block_button">Зарегистрируйтесь</div>
 							<p>Регистрация позволит задавать вопросы и получать ним ответы.</p>
-							<a href="#" class="btn_blue">Зарегистрироваться</a>
+							<a href="javascript:void(0)" @click="register = !register" class="btn_blue">Зарегистрироваться</a>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -255,6 +255,16 @@
 				</div>
 			</div>
 		</div>
+		<registration 
+      v-if="register" 
+      @close="register = !register"
+      @gotologin="showLogin()"
+    /> 
+    <login 
+      v-if="login" 
+      @close="login = !login"
+      @gotoregister="showRegister()"
+    /> 
   </div>
 </template>
 
@@ -262,26 +272,29 @@
 import Slick from 'vue-slick';
 import comments from '../components/Home/Comments'
 import journalItem from '../components/Home/JournalItem'
+import registration from '@/components/Registration'
+import login from '@/components/Login'
 import $ from 'jquery'; 
 export default {
 name: 'home',
-components: {Slick, comments, journalItem},
+components: {Slick, comments, journalItem, registration, login},
 props: {},
 data() {
   return {
-				slickOptions: {
-					arrows: true,
-					dots: false,
-					infinite: true,
-					speed: 500,
-					fade: true,
-					cssEase: 'linear',
-					slidesToShow: 1,
-					slidesToScroll: 1
-         },
-         currentSlideComment: 1,
-         showHidden: false
-
+  	register: false,
+  	login: false,
+  	slickOptions: {
+  		arrows: true,
+  		dots: false,
+  		infinite: true,
+  		speed: 500,
+  		fade: true,
+  		cssEase: 'linear',
+  		slidesToShow: 1,
+  		slidesToScroll: 1
+  	},
+  	currentSlideComment: 1,
+  	showHidden: false
   }
 },
 created() {
@@ -363,11 +376,16 @@ $(".question_med").on("mouseover", function () {
   },
 methods: {
 	handleSetPosition(event, slick) {
-            this.currentSlideComment = slick.currentSlide + 1;
-        },
-	showHiddenItem(){
-		
-}
+		this.currentSlideComment = slick.currentSlide + 1;
+	},
+	showRegister(){
+		this.login = false;
+		this.register = true
+	},
+	showLogin(){
+		this.login = true;
+		this.register = false;
+	}
 },
 computed: {
 	comments(){

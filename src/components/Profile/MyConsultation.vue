@@ -381,17 +381,18 @@ export default {
 			chatList: {
 				clientExpertChat: [],
 				expertExpertChat:[]
-			}
+			},
+			listQuestions: null
 		} 
 	},
 	mounted(){
 		// eslint-disable-next-line
 		 $('select:not([id^="multi"]), input[type=number]').styler();
 		this.getChats();
+		this.getQuestions();
 	},
 	methods:{
 		getChats(){
-
         this.$http({
           method: 'GET',
           url: 'chat/chat/chats',
@@ -402,6 +403,23 @@ export default {
         })
         .then(response =>{
 					this.chatList = response.data
+        })
+		},
+		getQuestions(){
+			let params = new URLSearchParams();
+        params.append('client_id', this.$store.getters.CLIENT.id);
+
+        this.$http({
+          method: 'POST',
+          url: 'question/question/find',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.listQuestions = response.data
         })
 		}
 	}

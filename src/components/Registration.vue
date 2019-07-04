@@ -6,6 +6,9 @@
 				<input type="email" class="passInput" placeholder="Почта" v-model="email">
 				<input type="password" class="passInput" placeholder="Пароль" v-model="password">
 				<button class="btn_blue"  @click.prevent="submit()">Зарегистрироваться</button>
+				<div style="display: flex; margin-top: 20px">
+          <a href="javascript:void(0)" @click="$emit('gotologin')">Логин</a>
+        </div>
 			</form>
 	</div>    
 </template>
@@ -51,7 +54,7 @@
 .boxRegister{
 	position: fixed;
 	right: 260px;
-	top: 65px;
+	top: 70px;
 	z-index: 900;
 }
 

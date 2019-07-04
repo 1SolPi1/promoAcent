@@ -5,6 +5,9 @@
           <input type="text" placeholder="Логин" v-model="login">
           <input type="password" class="passInput" placeholder="Пароль" v-model="password">
           <button class="btn_blue"  @click.prevent="submit()">Войти</button>
+          <div style="display: flex; margin-top: 20px">
+          <a href="javascript:void(0)" @click="$emit('gotoregister')">Регистрация</a>
+          </div>
         </form>
     </div>
 </template>
@@ -47,10 +50,10 @@
 
 <style scoped>
 .boxLogin{
-	position: fixed;
-	right: 60px;
-	top: 65px;
-	z-index: 900;
+  position: fixed;
+  right: 260px;
+  top: 70px;
+  z-index: 900;
 }
 
 .passInput{

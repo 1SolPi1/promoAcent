@@ -70,7 +70,7 @@
 								<span>500₽</span>
 								<a href="#">Пополнить</a>
 													</div>
-													
+
 												</div>
 												<div class="vivod money">
 													<p>доступно к выводу</p>
@@ -118,10 +118,10 @@
 								<span>500₽</span>
 								<a href="#">Вывести</a>
 													</div>
-													
+
 												</div>
 											</div>
-											<div class="col-xs-12">												
+											<div class="col-xs-12">
 												<div class="sorting_questions">
 													<div class="item_sorting">
 														<input type="radio" checked name="radio1" value="1" class="radio" id="radio6">
@@ -304,9 +304,9 @@
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
 								<span>500₽</span>
-								
+
 													</div>
-													
+
 												</div>
 												<div class="vivod money">
 													<p>доступно к выводу</p>
@@ -354,10 +354,10 @@
 								<span>500₽</span>
 								<a href="#">Вывести</a>
 													</div>
-													
+
 												</div>
 											</div>
-											<div class="col-xs-12 col-md-7">
+											<!-- <div class="col-xs-12 col-md-7">
 												<div class="valuta">
 													<p>Выберите валюту</p>
 													<div class="check_valuta">
@@ -379,17 +379,17 @@
 													</div>
 												</div>
 												</div>
-											</div>
-											<div class="col-xs-12 col-md-5">
+											</div> -->
+											<!-- <div class="col-xs-12 col-md-5">
 												<div class="valuta">
 													<p>Введите сумму</p>
 													<input type="text" placeholder="0 руб.">
 												</div>
-											</div>
-											<div class="col-xs-12">
+											</div> -->
+											<!-- <div class="col-xs-12">
 												<div class="valuta fix">
 													<p>Выберите поставщика</p>
-												
+
 													<div class="clearfix">
 														<div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
@@ -443,6 +443,9 @@
 													<a href="#" class="more">Показать еще</a>
 												</div>
 												<button class="pay">Пополнить</button>
+											</div> -->
+											<div class="row yandexPayBox">
+											<iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%81%D1%87%D0%B5%D1%82%D0%B0&targets-hint=&default-sum=&button-text=12&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=410013798584441" width="423" height="226" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 											</div>
 										</div>
 									</div>
@@ -495,7 +498,7 @@
 								<span>500₽</span>
 								<a href="#">Пополнить</a>
 													</div>
-													
+
 												</div>
 												<div class="vivod money">
 													<p>доступно к выводу</p>
@@ -541,9 +544,9 @@
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
 								<span>500₽</span>
-								
+
 													</div>
-													
+
 												</div>
 											</div>
 										<div class="col-xs-12">
@@ -584,7 +587,7 @@
 															</div>
 														</div>
 												</div>
-												
+
 											</div>
 											<button class="pay">Вывести</button>
 										</div>
@@ -616,5 +619,9 @@ export default {
 </script>
 
 <style scoped>
-    
+.yandexPayBox{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 </style>

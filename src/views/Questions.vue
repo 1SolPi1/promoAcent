@@ -115,11 +115,10 @@
 </template>
 
 <script>
-    import questionItem from '../components/Questions/QuestionItem'
     import profItem from '../components/Questions/ProfItem'
     export default {
         name: "Questions",
-        components: {questionItem, profItem},
+        components: {profItem},
         props: {},
         data() {
             return {
