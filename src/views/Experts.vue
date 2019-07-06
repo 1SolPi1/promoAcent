@@ -28,7 +28,10 @@
 				<div class="row">
 					<div class="col-lg-7 col-md-8">
 						<div class="title_section">Эксперты по {{selectCategory.name}}</div>
-						<sortField/>
+						<sortField
+							:childcategory="selectChildCategory"
+							@getexperts="getExpert"
+						/>
 					</div>
 					<div class="col-lg-5 col-md-4">
 						<div class="images_category_experts zoomIn wow" data-wow-iteration="1">
@@ -127,24 +130,46 @@ export default {
           }
         ]
       },
+      category: null,
+      childCategory: null,
+      selectChildCategory: null,
+      selectCategory: null,
+      sortItem:{
+      	sex: 1
+      }
     }
 	},
 	created(){
 		this.selectCategory = this.categoryItem[0]
 	},
 	methods:{
+		getParentCategory(id){
+        this.category = this.$store.getters.CATEGORIES.map(map => map.category);
+        this.childCategory = this.$store.getters.CATEGORIES.map(map => map.child);
+        this.getSelectCategory(id);
+      },
+      getSelectCategory(id){
+        this.selectCategory = this.category.find(item => item.id === id)
+        this.getChildCategory(this.selectCategory)
+      },
+      getChildCategory(arr){
+        this.selectChildCategory = this.childCategory.filter(map => map.parent_id === arr.id)
+      },
 		changeCategory(item){
 			this.selectCategory = item
 		},
+		getExpert(sex){
+			this.sortItem.sex = sex
+			this.getExperts()
+		},
 		getExperts(){
-        // let params = new URLSearchParams();
-        // params.append('first_name', names[0]);
-        // params.append('last_name', names[1]);
-        // params.append('email', this.email);
+        let params = new URLSearchParams();
+        params.append('sex', this.sortItem.sex);
 
         this.$http({
           method: 'POST',
           url: 'expert/profile/find',
+          data: params,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
 						Authorization: "Bearer " + localStorage.getItem('token')
@@ -158,7 +183,7 @@ export default {
 	mounted(){
 		// eslint-disable-next-line
 		$('select').styler();
-
+		this.getParentCategory(1)
 		this.getExperts()
 	},
 	computed:{

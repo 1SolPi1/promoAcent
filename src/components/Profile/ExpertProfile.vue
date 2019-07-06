@@ -35,8 +35,8 @@
 				Мои консультации
 			</router-link>
 		</li>
-		<li :class="{'active': $route.path == '/profile/pay'}">
-					<router-link to="/profile/pay">
+		<li :class="{'active': $route.path == '/userpays'}">
+					<router-link to="/userpays">
 						<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
 							<path d="M76,0H20C13.37,0,8,5.37,8,12v72c0,6.63,5.37,12,12,12h56c6.63,0,12-5.37,12-12V12C88,5.37,82.63,0,76,0z M80,84  c0,2.21-1.79,4-4,4H20c-2.21,0-4-1.79-4-4V12c0-2.21,1.79-4,4-4h56c2.21,0,4,1.79,4,4V84z" />
 							<path d="M68,72c0,2.209-1.791,4-4,4H32c-2.209,0-4-1.791-4-4l0,0c0-2.209,1.791-4,4-4h32C66.209,68,68,69.791,68,72L68,72z" />

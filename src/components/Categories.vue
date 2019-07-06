@@ -6,6 +6,7 @@
       v-for="(item, index) in category"
       :key="item.id"
       :value="item.id"
+      :selected="item.id === $store.getters.SELECTCATEGORY"
      >
        {{item.name}}
      </option>

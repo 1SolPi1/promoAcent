@@ -107,7 +107,7 @@ let router = new Router({
       }
     },
     {
-      path: '/profile/pay',
+      path: '/userpays',
       name: 'userpays',
       component: UserPays,
       meta: {

@@ -82,7 +82,8 @@ export default new Vuex.Store({
     },
   ],
   addquestion: null,
-  domen:'http://api.sprosi-online.ru/file/'
+  domen:'http://api.sprosi-online.ru/file/',
+  selectCategory: 1
   },
   getters:{
 		COMMENTS: state=> state.comments,
@@ -92,7 +93,8 @@ export default new Vuex.Store({
     CATEGORIES: state=>state.categories,
     CATEGORI: state=>state.categori,
     ADDQUESTION: state => state.addquestion,
-    DOMEN: state => state.domen
+    DOMEN: state => state.domen,
+    SELECTCATEGORY: state => state.selectCategory
   },
   mutations: {
     SET_CATEGORIES: (state, payload) => {
@@ -106,6 +108,9 @@ export default new Vuex.Store({
     },
     CLEAR_ADDQUESTION: (state) =>{
       state.addquestion = null
+    },
+    CHANGE_SELECT_CATEGORY: (state, playload) => {
+      state.selectCategory = playload
     }
   },
   actions: {
@@ -121,6 +126,9 @@ export default new Vuex.Store({
   },
   clearAddQuestion:({commit}) =>{
     commit('CLEAR_ADDQUESTION')
+  },
+  changeSelectCategory:({commit}, categoryId) =>{
+    commit('CHANGE_SELECT_CATEGORY', categoryId);
   }
 
   }

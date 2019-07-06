@@ -4,7 +4,7 @@
       <div class="name_question">{{title}}</div>
       <div class="price_question">{{price}} ₽</div>
       <div class="category_question">{{category}}</div>
-      <div class="status_question" v-if="status">Решено</div>
+      <div class="status_question" v-if="status !== 0">Решено</div>
         <div class="wrap_link_question">
           <router-link :to="{ path: `/questions/${id}` }" class="link_gray">Читать полностью</router-link>
         </div>
@@ -47,8 +47,8 @@
         default: 0
       },
       status:{
-        type: Boolean,
-        default: false
+        type: String,
+        default: 'not'
       },
       title:{
         type: String,

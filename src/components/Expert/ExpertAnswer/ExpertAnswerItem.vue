@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-6">
+<div :class="{'col-md-6' : !maincab}">
   <div class="block_question slideInUp wow" data-wow-iteration="1">
     <div class="name_question_min">Мне приснился что парень красивый дарит мне цветы но у него девушка и после как подарил цветы мы нашли что парень красивый дарит мне цветы но у него девушка и после как подарил цветы мы нашли</div>
     <div class="category_question">Психология / Дети и подростки</div>
@@ -25,7 +25,12 @@
     name: "ExpertAnswerItem",
     components: {
     },
-    props: {},
+    props: {
+      maincab:{
+        type: Boolean,
+        default: false
+      }
+    },
     data() {
 			return {
       }

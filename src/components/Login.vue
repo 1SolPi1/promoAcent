@@ -1,5 +1,6 @@
 <template>
 		<div class="helps_block boxLogin">
+      <div @click="$emit('close')" class="closeButton btn_add"></div>
       <div class="title_section">Логин</div>
 				<form class="form_help">
           <input type="text" placeholder="Логин" v-model="login">
@@ -68,5 +69,17 @@
 	-webkit-transition: all 0.3s;
 	transition: all 0.3s;
 	color: #000;
+}
+
+.closeButton{
+  position: absolute;
+  right: 0;
+  top: 5px;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.btn_add::before{
+  margin-right: 3px;
 }
 </style>

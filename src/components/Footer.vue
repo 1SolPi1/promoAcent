@@ -9,21 +9,20 @@
               <div class="col-md-2 col-sm-2 col-xs-6">
                   <div class="title_footer">Клиентам</div>
                   <ul class="footer_list">
-                      <li><a href="#">Психология</a></li>
-                      <li><a href="#">Юриспруденция</a></li>
-                      <li><a href="#">Нацка и учеьа</a></li>
-                      <li><a href="#">Технологии</a></li>
-                      <li><a href="#">Уроки английского</a></li>
+                      <li
+                        v-for="item in firstList"
+                        :key="item.id"
+                      >
+                        <a href="javascript:void(0)" @click="selectCategory(item.id)">
+                          {{item.name}}
+                        </a>
+                      </li>
                   </ul>
               </div>
               <div class="col-md-2 col-sm-3 col-xs-6">
                   <div class="title_footer"></div>
                   <ul class="footer_list">
-                      <li><a href="#">Медицина</a></li>
-                      <li><a href="#">Красота и злоровье</a></li>
-                      <li><a href="#">Бизнес</a></li>
-                      <li><a href="#">Дом , отдых, хобби</a></li>
-                      <li><a href="#">Религия</a></li>
+
                   </ul>
               </div>
               <div class="col-md-4 col-sm-2 col-xs-6">
@@ -64,11 +63,22 @@ export default {
   components: {},
   props: {},
   data() {
-    return {}
+    return {
+      firstList: [],
+      secondList:[]
+    }
   },
   created() {},
-  mounted() {},
-  methods: {},
+  mounted() {
+    let category = this.$store.getters.CATEGORIES.map(map => map.category);
+    this.firstList = category
+  },
+  methods: {
+  selectCategory(id){
+     this.$store.dispatch('changeSelectCategory', id);
+     this.$router.push('/questions')
+  }
+  },
   computed: {},
 }
 </script>

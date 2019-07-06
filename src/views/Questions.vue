@@ -47,11 +47,11 @@
                     <div class="sorting_questions">
                         <span class="title_sorting">Сортировать:</span>
                         <div class="item_sorting">
-                            <input type="radio" name="radio" value="1" class="radio" id="radio1" />
+                            <input type="radio" checked name="radio" value="1" class="radio" id="radio1" />
                             <label for="radio1"><img src="@/assets/img/sort1.png" alt="alt">последние</label>
                         </div>
                         <div class="item_sorting">
-                            <input type="radio" checked name="radio" value="1" class="radio" id="radio2" />
+                            <input type="radio" name="radio" value="1" class="radio" id="radio2" />
                             <label for="radio2"><img src="@/assets/img/sort2.png" alt="alt">платные</label>
                         </div>
                         <div class="item_sorting">
@@ -138,9 +138,9 @@
         created() {
         },
         mounted() {
-              this.getParentCategory()
-             this.questionsList = this.$store.getters.QUESTIONS
-             this.getAllQuestions(this.pageCount, this.selectCategory.id);
+            this.getParentCategory(this.$store.getters.SELECTCATEGORY)
+            this.questionsList = this.$store.getters.QUESTIONS
+            this.getAllQuestions(this.pageCount, this.selectCategory.id);
         },
         methods: {
           changeCategory(item){
@@ -152,12 +152,15 @@
             }, 300)
           },
           changeSubCategory(item){
-            alert('subcategory' + item)
+            console.log('subcategory' + item)
           },
-          getParentCategory(){
+      getParentCategory(id){
         this.category = this.$store.getters.CATEGORIES.map(map => map.category);
         this.childCategory = this.$store.getters.CATEGORIES.map(map => map.child);
-        this.selectCategory = this.category[0]
+        this.getSelectCategory(id);
+      },
+      getSelectCategory(id){
+        this.selectCategory = this.category.find(item => item.id === id)
         this.getChildCategory(this.selectCategory)
       },
       getChildCategory(arr){

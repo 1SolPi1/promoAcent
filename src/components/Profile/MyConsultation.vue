@@ -136,57 +136,11 @@
 										</svg><b>(1)</b></span>
 																			</div>
 																			</div>
-									<div class="block_question slideInUp wow" data-wow-iteration="1">
-										<div class="name_question_min">Лень и прокрастинация - как справиться и обрести силу воли?</div>
-										<div class="category_question">Психология / Дети и подростки</div>
-										<div class="wrap_like">
-											<div class="like_question">Ответ понравился</div>
-										</div>
-										<div class="text_question">
-											<div class="title_text_question">Ответ:</div>
-											<p>приветствую и предлагаю автору темы прослушать мой аудио ответ. он будет доступен в течении ближайших 5-10-ти минут. чтобы послушать его нужно нажать на центр окошка или на название записи. </p>
-											<div class="date_text_question">10 февраля 2018</div>
-										</div>
-										<div class="bottom_question clearfix">
-											<div class="data_question">10 февраля 2018</div>
-											<div class="user_question">Анонимно</div>
-											<a href="#" class="all_questions_user">все ответы</a>
-										</div>
-									</div>
-									<div class="block_question slideInUp wow" data-wow-iteration="1">
-									<div class="name_question_min">Мне приснился что парень красивый дарит мне цветы но у него девушка и после как подарил цветы мы наш<a href="#">читать полностью</a></div>
-									<div class="category_question">Психология / Дети и подростки</div>
-									<div class="wrap_like">
-										<div class="dislike_question">Ответ не понравился</div>
-									</div>
-									<div class="text_question">
-										<div class="title_text_question">Ответ:</div>
-										<p>приветствую и предлагаю автору темы прослушать мой аудио ответ. он будет доступен в течении ближайших 5-10-ти минут. чтобы послушать его нужно нажать на центр окошка или на название записи. </p>
-										<div class="date_text_question">10 февраля 2018</div>
-									</div>
-									<div class="bottom_question clearfix">
-										<div class="data_question">10 февраля 2018</div>
-										<div class="user_question">Анонимно</div>
-										<a href="#" class="all_questions_user">все ответы</a>
-									</div>
-								</div>
-								<div class="block_question slideInUp wow" data-wow-iteration="1">
-									<div class="name_question_min">Лень и прокрастинация - как справиться и обрести силу воли?</div>
-									<div class="category_question">Психология / Дети и подростки</div>
-									<div class="wrap_like">
-										<div class="status_question">Лучший ответ</div>
-									</div>
-									<div class="text_question">
-										<div class="title_text_question">Ответ:</div>
-										<p>приветствую и предлагаю автору темы прослушать мой аудио ответ. он будет доступен в течении ближайших 5-10-ти минут. чтобы послушать его нужно нажать на центр окошка или на название записи. </p>
-										<div class="date_text_question">10 февраля 2018</div>
-									</div>
-									<div class="bottom_question clearfix">
-										<div class="data_question">10 февраля 2018</div>
-										<div class="user_question">Анонимно</div>
-										<a href="#" class="all_questions_user">все ответы</a>
-									</div>
-								</div>
+									<expertAnswerItem
+										:maincab="true"
+										v-for="item in listQuestions[0]"
+										:key="item.question.id"
+									/>
 									</div>
 									<div class="tab-pane conslt" id="tab3">
 										<div class="clearfix">
@@ -374,8 +328,12 @@
 </div>
 </template>
 <script>
+import expertAnswerItem from '@/components/Expert/ExpertAnswer/ExpertAnswerItem'
 export default {
   name: "MyConsultation",
+  components:{
+  	expertAnswerItem
+  },
   data(){
 		return{
 			chatList: {
@@ -390,6 +348,7 @@ export default {
 		 $('select:not([id^="multi"]), input[type=number]').styler();
 		this.getChats();
 		this.getQuestions();
+		this.getAnswers();
 	},
 	methods:{
 		getChats(){
@@ -421,7 +380,24 @@ export default {
         .then(response =>{
 					this.listQuestions = response.data
         })
-		}
+		},
+		getAnswers(){
+			let params = new URLSearchParams();
+        params.append('expert_id', this.$store.getters.EXPERT.id);
+
+        this.$http({
+          method: 'POST',
+          url: 'question/answer/find',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.listAnswers = response.data
+        })
+		},
 	}
 }
 </script>

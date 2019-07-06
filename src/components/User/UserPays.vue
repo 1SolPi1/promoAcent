@@ -357,7 +357,14 @@
 
 												</div>
 											</div>
-											<!-- <div class="col-xs-12 col-md-7">
+											<form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+											<input type="hidden" name="receiver" value="410013798584441">
+											<input type="hidden" name="quickpay-form" value="shop">
+											<input type="hidden" name="targets" value="Пополнение кошелька">
+											<input type="hidden" name="comment" :value="token">
+											 <input type="hidden" name="label" :value="token">
+											<input type="hidden" name="successURL" value="http://sprosi-online.ru/userpays">
+											<div class="col-xs-12 col-md-7">
 												<div class="valuta">
 													<p>Выберите валюту</p>
 													<div class="check_valuta">
@@ -365,7 +372,7 @@
 														<input type="radio" checked name="radio2" value="1" class="radio" id="radio1">
 														<label for="radio1">RUB</label>
 													</div>
-													<div class="item_sorting">
+													<!-- <div class="item_sorting">
 														<input type="radio" name="radio2" value="1" class="radio" id="radio2">
 														<label for="radio2">UAH</label>
 													</div>
@@ -376,77 +383,75 @@
 													<div class="item_sorting">
 														<input type="radio" name="radio2" value="1" class="radio" id="radio4">
 														<label for="radio4">EUR</label>
-													</div>
+													</div> -->
 												</div>
 												</div>
-											</div> -->
-											<!-- <div class="col-xs-12 col-md-5">
+											</div>
+											<div class="col-xs-12 col-md-5">
 												<div class="valuta">
 													<p>Введите сумму</p>
-													<input type="text" placeholder="0 руб.">
+													<input type="text" name="sum" data-type="number" placeholder="0 руб.">
 												</div>
-											</div> -->
-											<!-- <div class="col-xs-12">
+											</div>
+											<div class="col-xs-12">
 												<div class="valuta fix">
 													<p>Выберите поставщика</p>
 
 													<div class="clearfix">
 														<div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
-																<input type="radio" checked name="radio3" value="1" class="radio" id="radio11">
+																<input type="radio" checked name="paymentType" value="AC" class="radio" id="radio11">
 																<label for="radio11"><p>VISA/Mastercard</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
 														</div>
-														<div class="col-xs-12 col-md-6 col-lg-3">
+														<!-- <div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
 																<input type="radio" name="radio3" value="1" class="radio" id="radio12">
 																<label for="radio12"><p>Qiwi</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
-														</div>
+														</div> -->
 														<div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
-																<input type="radio" name="radio3" value="1" class="radio" id="radio13">
+																<input type="radio" name="paymentType" value="PC" class="radio" id="radio13">
 																<label for="radio13"><p>Яндекс Деньги</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
 														</div>
-														<div class="col-xs-12 col-md-6 col-lg-3">
+														<!-- <div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
 																<input type="radio" name="radio3" value="1" class="radio" id="radio14">
 																<label for="radio14"><p>WebMoney</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
-														</div>
-														<div class="col-xs-12 col-md-6 col-lg-3">
+														</div> -->
+														<!-- <div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
 																<input type="radio" name="radio3" value="1" class="radio" id="radio15">
 																<label for="radio15"><p>МТС</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
-														</div>
+														</div> -->
 														<div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
-																<input type="radio" name="radio3" value="1" class="radio" id="radio16">
-																<label for="radio16"><p>Билайн</p><span>Комиссия: <b>5%</b></span></label>
+																<input type="radio" name="paymentType" value="MC" class="radio" id="radio16">
+																<label for="radio16"><p>Телефон</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
 														</div>
-														<div class="col-xs-12 col-md-6 col-lg-3">
+														<!-- <div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
 																<input type="radio" name="radio3" value="1" class="radio" id="radio17">
 																<label for="radio17"><p>Мегафон</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
-														</div>
-														<div class="col-xs-12 col-md-6 col-lg-3">
+														</div> -->
+<!-- 														<div class="col-xs-12 col-md-6 col-lg-3">
 															<div class="payment-item">
 																<input type="radio" name="radio3" value="1" class="radio" id="radio18">
 																<label for="radio18"><p>Сбербанк Онлайн</p><span>Комиссия: <b>5%</b></span></label>
 															</div>
-														</div>
+														</div> -->
 													</div>
-													<a href="#" class="more">Показать еще</a>
+													<!-- <a href="#" class="more">Показать еще</a> -->
 												</div>
-												<button class="pay">Пополнить</button>
-											</div> -->
-											<div class="row yandexPayBox">
-											<iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D1%81%D1%87%D0%B5%D1%82%D0%B0&targets-hint=&default-sum=&button-text=12&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=410013798584441" width="423" height="226" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+												<button type="submit" class="pay">Пополнить</button>
 											</div>
+										</form>
 										</div>
 									</div>
 									<div class="tab-pane payments vivod" id="tab3">
@@ -614,7 +619,11 @@ export default {
 	created() {},
 	mounted() {},
 	methods: {},
-	computed: {},
+	computed: {
+		token(){
+			return localStorage.getItem('token')
+		}
+	},
 }
 </script>
 

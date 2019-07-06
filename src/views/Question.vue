@@ -17,7 +17,8 @@
               <div class="data_question">{{dates}}</div>
                 <div class="user_question" v-if="question.question.anonim">Анонимно</div>
                 <div class="user_question" v-else>{{question.client.name}}</div>
-                <p class="all_questions_user">всего <span>2</span> ответа</p>
+                <p class="all_questions_user" v-if="question.answer === null">всего <span>0</span> ответа</p>
+                <p class="all_questions_user" v-else>всего <span>{{question.answer.length}}</span> ответа</p>
               <expertAnswer 
                 v-if="expert"
                 :id="question.question.id"
@@ -36,8 +37,11 @@
               </div>
             </div>
           </div>
+          <userControlQuestion 
+            v-if="creator"
+            :questionId="question.question.id"
+          />
         </div>
-        <userControlQuestion v-if="creator"/>
       </div>
     </div>
   </div>
@@ -61,7 +65,6 @@
 			return {
         login: null,
         password: null,
-        creator: false,
         question:null,
         dates: null
       }
@@ -118,6 +121,9 @@
 		computed: {
       expert(){
         return this.$store.getters.USERINFO.expert
+      },
+      creator(){
+        return this.$store.getters.USERINFO.id === this.question.client.id
       }
     },
 	}

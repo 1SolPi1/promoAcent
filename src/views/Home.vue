@@ -3,6 +3,7 @@
 <div class="section_top">
 			<div class="container">
 				<div class="col-md-6 col_image_wrap">
+
 					<div class="image_section_top img_question_med">
 						<img src="img/svg/medicine.svg" alt="alt">
 					</div>
@@ -41,19 +42,19 @@
 					<div class="title_section slideInUp wow" data-wow-iteration="1">Задайте бесплатно вопрос <br>и уже сейчас получите ответ</div>
 					<div class="descr_title slideInUp wow" data-wow-iteration="1">Выберите направление и задайте вопрос</div>
 					<div class="questions_items">
-						<a href="#" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
+						<!-- <a href="#" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
 							<img src="img/quest1.png" alt="alt">
 							<span>Медицина</span>
-						</a>
-						<a href="#" class="item_question question_psihology slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
+						</a> -->
+						<a href="javascript:void(0)" class="item_question question_psihology slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory(1)">
 							<img src="img/quest2.png" alt="alt">
 							<span>Психология</span>
 						</a>
-						<a href="#" class="item_question question_yrist slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
+						<a href="javascript:void(0)" class="item_question question_yrist slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory(3)">
 							<img src="img/quest3.png" alt="alt">
 							<span>Юриспруденция</span>
 						</a>
-						<a href="#" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
+						<!-- <a href="#" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
 							<img src="img/quest4.png" alt="alt">
 							<span>Учеба и наука</span>
 						</a>
@@ -64,12 +65,12 @@
 						<a href="#" class="item_question question_beautiful slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
 							<img src="img/quest6.png" alt="alt">
 							<span>Красота</span>
-						</a>
-						<a href="#" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
+						</a> -->
+						<!-- <a href="#" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
 							<img src="img/quest7.png" alt="alt">
 							<span>Английский</span>
-						</a>
-						<div class="parent_more" @mouseover="showHiddenItem()">
+						</a> -->
+<!-- 						<div class="parent_more" @mouseover="showHiddenItem()">
 							<a href="#" class="item_question question_more slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
 								<img src="img/quest8.png" alt="alt">
 								<span>Еще</span>
@@ -94,7 +95,7 @@
 									</a>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					
 				</div>
@@ -294,7 +295,8 @@ data() {
   		slidesToScroll: 1
   	},
   	currentSlideComment: 1,
-  	showHidden: false
+  	showHidden: false,
+  	componentsList: null
   }
 },
 created() {
@@ -373,6 +375,7 @@ $(".question_med").on("mouseover", function () {
 		$(".section_top .img_question_tech").fadeIn(400);
 		return false;
 	});
+	this.getComments()
   },
 methods: {
 	handleSetPosition(event, slick) {
@@ -385,6 +388,19 @@ methods: {
 	showLogin(){
 		this.login = true;
 		this.register = false;
+	},
+	getComments(){
+        this.$http({
+          method: 'GET',
+          url: 'comments/comments/all',
+        })
+        .then(response =>{
+        	this.commentsList = response.data
+        })
+		},
+	selectCategory(id){
+		 this.$store.dispatch('changeSelectCategory', id);
+		 this.$router.push('/questions')
 	}
 },
 computed: {
@@ -395,5 +411,7 @@ computed: {
 }
 </script>
 <style scoped>
-	
+.questions_items{
+	justify-content: flex-start;
+}
 </style>
