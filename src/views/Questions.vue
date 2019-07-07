@@ -168,11 +168,11 @@
       },
             nextPage () {
               this.pageNumber++
-              this.getAllQuestions(this.pageNumber);
+              this.getAllQuestions(this.pageNumber, this.selectCategory.id);
             },
             prevPage () {
               this.pageNumber--
-              this.getAllQuestions(this.pageNumber);
+              this.getAllQuestions(this.pageNumber, this.selectCategory.id);
             },
             getAllQuestions(page, category){
                 let params = new URLSearchParams();

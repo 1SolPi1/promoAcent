@@ -32,6 +32,11 @@ let router = new Router({
       component: Home
     },
     {
+      path: '/confirm',
+      name: 'confirm',
+      component: Home
+    },
+    {
       path: '/questions',
       name: 'questions',
       component: Questions

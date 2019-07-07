@@ -6,6 +6,11 @@
 				<input type="text" placeholder="Логин" v-model="username">
 				<input type="email" class="passInput" placeholder="Почта" v-model="email">
 				<input type="password" class="passInput" placeholder="Пароль" v-model="password">
+				<select id='sex' class="select_main select_gender">
+      				<option value="0">пол</option>
+      				<option value="1">Мужской</option>
+      				<option value="2">Женский</option>
+    			</select>
 				<button class="btn_blue"  @click.prevent="submit()">Зарегистрироваться</button>
 				<div style="display: flex; margin-top: 20px">
           <a href="javascript:void(0)" @click="$emit('gotologin')">Логин</a>
@@ -23,19 +28,37 @@
 			return {
         username: null,
         email: null,
-        password: null
+        password: null,
+        sex: 0
       }
     },
     created() {
     },
     mounted() {
+    	var vm = this;
+       $('#sex').styler({
+        onSelectClosed: function() {
+            vm.sex = $(this).find(":selected").val();
+            vm.sex = $(this).find(":selected").val();
+            }
+       });
      },
 		methods: {
 			submit(){
-				let params = new URLSearchParams();
+				if(!this.username){
+					alert(' Укажите логин ')
+				}else if(!this.email){
+					alert(' Укажите email ')
+				}else if(!this.password){
+					alert(' Укажите пароль ')
+				}else if(this.sex === 0){
+					alert(' Выберите пол ')
+				}else{
+					let params = new URLSearchParams();
             params.append('username', this.username);
             params.append('email', this.email);
             params.append('password', this.password);
+            params.append('sex', this.sex);
 
             this.$http({
                 method: 'POST',
@@ -43,8 +66,9 @@
                 data: params,
             })
                 .then(() => {
-									alert('Вы успещно прошли регистрацию, просьб перейти на потчу указанную при регистрации, для продолжения.');
+									alert('Вы успешно прошли регистрацию, просьба перейти на почту указанную при регистрации, для продолжения.');
                 });
+				}
 			}
 		},
 		computed: {},
@@ -83,5 +107,9 @@
 
 .btn_add::before{
 	margin-right: 3px;
+}
+
+.btn_blue{
+	margin-top: 10px;
 }
 </style>

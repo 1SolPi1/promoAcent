@@ -10,7 +10,7 @@
                   <div class="title_footer">Клиентам</div>
                   <ul class="footer_list">
                       <li
-                        v-for="item in firstList"
+                        v-for="item in category"
                         :key="item.id"
                       >
                         <a href="javascript:void(0)" @click="selectCategory(item.id)">
@@ -70,8 +70,6 @@ export default {
   },
   created() {},
   mounted() {
-    let category = this.$store.getters.CATEGORIES.map(map => map.category);
-    this.firstList = category
   },
   methods: {
   selectCategory(id){
@@ -79,7 +77,11 @@ export default {
      this.$router.push('/questions')
   }
   },
-  computed: {},
+  computed: {
+    category(){
+      return this.$store.getters.CATEGORI
+    }
+  },
 }
 </script>
 

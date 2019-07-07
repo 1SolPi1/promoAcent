@@ -4,9 +4,9 @@
 			<div class="container">
 				<div class="col-md-6 col_image_wrap">
 
-					<div class="image_section_top img_question_med">
+		<!-- 			<div class="image_section_top img_question_med">
 						<img src="img/svg/medicine.svg" alt="alt">
-					</div>
+					</div> -->
 					<div class="image_section_top img_question_psihology">
 						<img src="img/svg/psychology.svg" alt="alt">
 					</div>
@@ -277,7 +277,7 @@ import registration from '@/components/Registration'
 import login from '@/components/Login'
 import $ from 'jquery'; 
 export default {
-name: 'home',
+name: 'Home',
 components: {Slick, comments, journalItem, registration, login},
 props: {},
 data() {
@@ -376,8 +376,21 @@ $(".question_med").on("mouseover", function () {
 		return false;
 	});
 	this.getComments()
+	if(this.$route.path == '/confirm'){
+		let item = this.$route.query.id.split('code=')
+		this.confrimUser(item[0], item[1])
+	}
   },
 methods: {
+	confrimUser(id, token){
+		this.$http({
+          method: 'GET',
+          url: 'user/confirm/'+id+'/'+token,
+        })
+        .then(() =>{
+        	alert(' Аккаунт подтвержден ')
+        })
+	},
 	handleSetPosition(event, slick) {
 		this.currentSlideComment = slick.currentSlide + 1;
 	},

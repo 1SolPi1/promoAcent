@@ -22,6 +22,7 @@
               <expertAnswer 
                 v-if="expert"
                 :id="question.question.id"
+                @updatequestion="getQuestion()"
               />
               <div class="answers" v-if="question.answer && question.answer.length">
                 <answerItem
@@ -33,6 +34,9 @@
                   :answer="item.answer.description"
                   :rating="item.expert.rating"
                   :status="item.answer.score"
+                  :questionid="question.question.client_id"
+                  :answers="item"
+                  @updatequestion="getQuestion()"
                 />
               </div>
             </div>

@@ -67,6 +67,9 @@
             Authorization: "Bearer " + localStorage.getItem('token')
           }
         })
+        .then(()=>{
+          this.$emit('updatequestion')
+        })
       }
     },
     computed: {},

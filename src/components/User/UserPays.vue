@@ -361,7 +361,6 @@
 											<input type="hidden" name="receiver" value="410013798584441">
 											<input type="hidden" name="quickpay-form" value="shop">
 											<input type="hidden" name="targets" value="Пополнение кошелька">
-											<input type="hidden" name="comment" :value="token">
 											 <input type="hidden" name="label" :value="token">
 											<input type="hidden" name="successURL" value="http://sprosi-online.ru/userpays">
 											<div class="col-xs-12 col-md-7">

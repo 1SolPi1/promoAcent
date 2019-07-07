@@ -101,6 +101,7 @@
 												</div>
 												<degreeExpert
 													@changeDegree="changeDegree"
+													:selectdegree="education.degree"
 												/>
 												<div class="col-xs-12 col-md-7 col-lg-8">
 													<p>Специальность</p>
@@ -109,6 +110,8 @@
 												<yearEducation
 													@changeStartYear="changeStartYear"
 													@changeEndYear="changeEndYear"
+													:selectstart="education.startYear"
+													:selectend="education.endYear"
 												/>
 											</div>											
 											<span class="txt ml-0">Чтобы образование было подверждено <a href="#">прикрепите</a> копии документов подтверждающие получение образования.</span>
@@ -263,6 +266,11 @@ export default {
 		this.about = this.expert.about_us;
 		this.timeStart = this.expert.work_time_from;
 		this.timeEnd = this.expert.work_time_to;
+		this.education.nameUniversity = this.experteducation.institution_name;
+		this.education.specialty = this.experteducation.specialization;
+		this.education.degree = this.experteducation.name_educational;
+		this.education.startYear = this.experteducation.educate_start;
+		this.education.endYear = this.experteducation.educate_finish
 	},
 	methods: {
 		changeExperience(item){
@@ -369,6 +377,9 @@ export default {
 		},
 		userinfo(){
 			return this.$store.getters.USERINFO
+		},
+		experteducation(){
+			return this.$store.getters.EXPERTEDUCATION
 		}
 	},
 }

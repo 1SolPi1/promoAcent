@@ -9,7 +9,7 @@
           <router-link :to="{ path: `/questions/${id}` }" class="link_gray">Читать полностью</router-link>
         </div>
       <div class="bottom_question clearfix">
-        <div class="data_question">{{dates}}</div>
+        <div class="data_question">{{getDate()}}</div>
         <div class="user_question">{{person}}</div>
           <router-link :to="{ path: `/questions/${id}` }" class="all_questions_user">всего <span>{{countAnswer}}</span> ответа</router-link>
         </div>
@@ -63,35 +63,24 @@
     },
     created() {},
     mounted() {
-      this.getDate()
     },
     methods: {
       getDate(){
-        let item = this.date.split(' ')
-        let mydate = item[0].split('-')
+        const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
 
-        const months = {
-          '01': 'Января',
-          '02': 'Февраля',
-          '03': 'Марта',
-          '04': 'Апреля',
-          '05': 'Мая',
-          '06': 'Июня',
-          '07': 'Июля',
-          '08': 'Августа',
-          '09': 'Сентября',
-          '10': 'Октября',
-          '11': 'Ноября',
-          '12': 'Декабря',
-        };
+      let time = new Date(this.date);
+      let year = time.getFullYear();
+      let day = time.getDate();
+      let month = time.getMonth();
 
-        let year = mydate[0]
-        let month = months[mydate[1]]
-        let day = mydate[2]
+      if(day > months[month].days){
+        day = 1
+        month += 1
+      }
 
+      day < 10? day = '0' + day : day;
 
-
-        this.dates = day +" "+ month +" "+ year
+      return day + ' ' + months[month].name + ' ' + year
       }
     },
     computed: {},

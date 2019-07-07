@@ -135,7 +135,7 @@ export default {
       selectChildCategory: null,
       selectCategory: null,
       sortItem:{
-      	sex: 1
+      	sex: null
       }
     }
 	},

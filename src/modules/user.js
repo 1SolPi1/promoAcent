@@ -6,13 +6,15 @@ const state = {
   profile: null,
   userInfo: null,
   client: null,
-  expert: null
+  expert: null,
+  expertEducation: null
 };
 const getters = {
   PROFILE: state => state.profile,
   USERINFO: state => state.userInfo,
   CLIENT: state => state.client,
   EXPERT: state => state.expert,
+  EXPERTEDUCATION: state => state.expertEducation
 };
 const mutations = {
   SET_PROFILE: (state, payload) => {
@@ -39,6 +41,9 @@ const mutations = {
   SET_EMAIL: (state, payload) => {
     state.userInfo.email = payload;
   },
+  SET_EXPERT_EDUCATION: (state, playload) =>{
+    state.expertEducation = playload
+  }
 };
 const actions = {
   getProfile: async ({commit}) => {
@@ -46,7 +51,8 @@ const actions = {
     commit('SET_PROFILE', data.profile);
     commit('SET_USER_INFO', data.user);
     commit('SET_CLIENT', data.client);
-    commit('SET_EXPERT', data.expert);
+    commit('SET_EXPERT', data.expert[0]);
+    commit('SET_EXPERT_EDUCATION', data.expert.education[0]);
   },
   saveSettings: ({commit}, data) => {
     commit('SET_NAME', data.name);
