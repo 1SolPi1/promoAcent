@@ -1,7 +1,7 @@
 <template>
   <div class="table-header tbl color">
     <div>
-      <a href="#">Алексей Миронов</a><a href="javascript:void(0)" class="link_share" id="mod_chat_open" @click="$emit('openchat')">
+      <a href="javascript:void(0)" @click="$emit('openchat')">{{oponnent.fullName}}</a><a href="javascript:void(0)" class="link_share" id="mod_chat_open" @click="$emit('openchat')">
         
       </a>
     </div>
@@ -21,9 +21,9 @@
         
       </path>
     </svg>
-    10 февраля  -   сегодня 12:12
+    {{getDate()}}
   </div>
-  <div>
+ <!--  <div>
     <span>
       1000₽
     </span>
@@ -41,7 +41,7 @@
     ><svg viewBox="0.5 0.5 96 96" xmlns="http://www.w3.org/2000/svg">
       <path d="M84.5,20.5h-16v-4c0-6.63-5.37-12-12-12h-16c-6.63,0-12,5.37-12,12v4h-16c-2.209,0-4,1.791-4,4s1.791,4,4,4h4v48  c0,6.63,5.37,12,12,12h40c6.63,0,12-5.37,12-12v-48h4c2.209,0,4-1.791,4-4S86.709,20.5,84.5,20.5z M36.5,16.5c0-2.21,1.79-4,4-4h16  c2.21,0,4,1.79,4,4v4h-24V16.5z M72.5,76.5c0,2.21-1.79,4-4,4h-40c-2.21,0-4-1.79-4-4v-48h48V76.5z" />
     </svg>
-  </button>
+  </button> -->
 </div>
 </div>
 </template>
@@ -52,7 +52,8 @@
     components: {
     },
     props: {
-      expert: Number
+      oponnent:{required: true},
+      lastmessage:{required: true}
     },
     data() {
 			return {
@@ -67,6 +68,22 @@
     mounted() {
      },
 		methods: {
+      getDate(){
+       const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
+      let now = new Date(); 
+      let time = new Date(this.lastmessage[0].date * 1000);
+      let year = time.getFullYear();
+      let day = time.getDate();
+      let month = time.getMonth();
+      let minute = time.getMinutes();
+      let hour = time.getHours();
+
+      day < 10? day = '0' + day : day;
+      hour < 10? hour = '0' + hour : hour;
+      minute < 10? minute = '0' + minute : minute;
+
+      return day + ' ' + months[month].name
+      }
 		},
 		computed: {},
 	}

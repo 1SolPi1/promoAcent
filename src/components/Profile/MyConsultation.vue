@@ -32,26 +32,28 @@
 										<p>Как клиент</p>
 										<userchatitem
 											v-for="item in chatList.clientExpertChat"
-											:key="item.room_id"
-											:expert="item.expert_id"
+											:key="item[0].room_id"
+											:oponnent="item.opponent"
+											:lastmessage="item.last_message"
 											@openchat="$chatinfo.opens({
 																		name: 'Имя Фамилия',
 																		avatar: 'null',
-																		user_id: item.client_id,
-																		expert_id: item.expert_id,
+																		user_id: item[0].client_id,
+																		expert_id: item[0].expert_id,
 																		author: 0 
 																	})"
 										/>
 										<p>Как эксперт</p>
 										<userchatitem
 											v-for="item in chatList.expertExpertChat"
-											:key="item.room_id"
-											:expert="item.expert_id"
+											:key="item[0].room_id"
+											:oponnent="item.opponent"
+											:lastmessage="item.last_message"
 											@openchat="$chatinfo.opens({
 																		name: 'Имя Фамилия',
 																		avatar: null,
-																		user_id: item.client_id,
-																		expert_id: item.expert_id,
+																		user_id: item[0].client_id,
+																		expert_id: item[0].expert_id,
 																		author: 1 
 																	})"
 										/>
@@ -138,8 +140,10 @@
 																			</div>
 									<expertAnswerItem
 										:maincab="true"
-										v-for="item in listQuestions[0]"
-										:key="item.question.id"
+										v-for="item in listAnswers[0]"
+										:key="item.answer.id"
+										:answer="item.answer"
+										:question="item.question"
 									/>
 									</div>
 									<div class="tab-pane conslt" id="tab3">
@@ -313,7 +317,18 @@
 										</div>
 									</div>
 									<div class="tab-pane conslt" id="tab4">
-									
+										<questionItem
+                        v-for="(item, index) in listQuestions[0]"
+                        :key="item.question.id"
+                        :category="item.category"
+                        :countAnswer="item.answer_count"
+                        :date="item.question.create_at"
+                        :person="item.question.anonim ? ' Анонимно ': item.user_name"
+                        :price="item.question.price"
+                        :status="item.question.status"
+                        :title="item.question.title"
+                        :id="item.question.id"
+                    />
 									</div>
 									<div class="tab-pane conslt" id="tab5">
 									
@@ -340,15 +355,20 @@ export default {
 				clientExpertChat: [],
 				expertExpertChat:[]
 			},
-			listQuestions: null
+			listQuestions: null,
+			listAnswers:{
+				0:[]
+			}
 		} 
+	},
+	created(){
+		this.getQuestions();
+		this.getAnswers();
 	},
 	mounted(){
 		// eslint-disable-next-line
 		 $('select:not([id^="multi"]), input[type=number]').styler();
 		this.getChats();
-		this.getQuestions();
-		this.getAnswers();
 	},
 	methods:{
 		getChats(){

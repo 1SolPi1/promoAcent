@@ -156,13 +156,19 @@ export default {
             Authorization: "Bearer " + localStorage.getItem('token')
           }
         })
-      .then(()=>{
+      .then(response=>{
         this.$store.dispatch('clearAddQuestion');
         this.title = null;
         this.description = null;
         this.price =  0;
         this.anonim = false;
         this.selectCategory = this.categoryItem[0];
+        if(response.status === 200){
+          this.$toast.success({
+            title:'Успешно',
+            message:'Вопрос создан'
+          })
+          }
       })
     },
     addPrice(price){

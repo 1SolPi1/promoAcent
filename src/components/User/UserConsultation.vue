@@ -47,7 +47,19 @@
 								</div>
 							</div>
 										<p>У Вас <span>2</span> чата</p>
-										<userchatitem/>
+										<userchatitem
+											v-for="item in chatList.clientExpertChat"
+											:key="item[0].room_id"
+											:oponnent="item.opponent"
+											:lastmessage="item.last_message"
+											@openchat="$chatinfo.opens({
+																		name: 'Имя Фамилия',
+																		avatar: 'null',
+																		user_id: item[0].client_id,
+																		expert_id: item[0].expert_id,
+																		author: 0 
+																	})"
+										/>
 											</div>
 											
 										</div>
@@ -76,8 +88,8 @@
 							</div>
 										<p>У Вас <span>{{listQuestions.length}}</span> вопрос</p>
 											<questionItem
-                        v-for="(item, index) in listQuestions"
-                        :key="index"
+                        v-for="(item, index) in listQuestions[0]"
+                        :key="item.question.id"
                         :category="item.category"
                         :countAnswer="item.answer_count"
                         :date="item.question.create_at"
@@ -112,17 +124,24 @@ export default {
 	props: {},
 	data() {
 		return {
-			listQuestions: []
+			listQuestions:{
+				0:[]
+			},
+			chatList: {
+				clientExpertChat: [],
+				expertExpertChat:[]
+			},
 		}
 	},
 	created() {},
 	mounted() {
 		this.getQuestions();
+		this.getChats();
 	},
 	methods: {
 		getQuestions(){
 			let params = new URLSearchParams();
-        params.append('client_id', this.$store.getters.CLIENT.id);
+        params.append('client_id', this.$store.getters.USERINFO.id);
 
         this.$http({
           method: 'POST',
@@ -136,7 +155,20 @@ export default {
         .then(response =>{
 					this.listQuestions = response.data
         })
-		}
+		},
+		getChats(){
+        this.$http({
+          method: 'GET',
+          url: 'chat/chat/chats',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.chatList = response.data
+        })
+		},
 	},
 	computed: {},
 }

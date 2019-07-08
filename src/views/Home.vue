@@ -234,8 +234,8 @@
 							<div class="name_block_button">Подпишитесь на рассылку</div>
 							<p>Будем информировать об акциях важных изменениях и прочем.</p>
 							<form class="form_subscription">
-								<input type="text" required placeholder="ваша почта">
-								<button class="btn_subscription"></button>
+								<input type="text" required placeholder="ваша почта" v-model="emailSend">
+								<button class="btn_subscription" @click.prevent="setSubscription()"></button>
 							</form>
 						</div>
 					</div>
@@ -284,6 +284,7 @@ data() {
   return {
   	register: false,
   	login: false,
+  	emailSend: null,
   	slickOptions: {
   		arrows: true,
   		dots: false,
@@ -414,6 +415,35 @@ methods: {
 	selectCategory(id){
 		 this.$store.dispatch('changeSelectCategory', id);
 		 this.$router.push('/questions')
+	},
+	setSubscription(){
+			if(!this.emailSend){
+				this.$toast.error({
+					title:'Ошибка',
+    			message:'Вы не указали email'
+				})
+			}else{
+				let params = new URLSearchParams();
+        params.append('email', this.emailSend);
+
+        this.$http({
+          method: 'POST',
+          url: 'support/subscription/subscription-add',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+        	if(response.status === 200){
+					this.$toast.success({
+						title:'Успешно',
+    				message:'Вы подписались на рассылку'
+					})
+					}
+        })
+			}
 	}
 },
 computed: {

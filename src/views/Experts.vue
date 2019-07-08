@@ -48,7 +48,7 @@
 					<div class="result_search">По ващему запросу найдено <span>{{experts.length}}</span> эксперт</div>
 					<div class="pagination_page">
 						<div class="number_pagination">1</div>
-						<div class="all_numbers"><span>из</span> 15</div>
+						<div class="all_numbers"><span>из</span> 1</div>
 						<button class="btn_pagination prev_pagination disabled"></button>
 						<button class="btn_pagination next_pagination"></button>
 					</div>
@@ -70,7 +70,7 @@
 				<div class="bottom_pagination">
 					<div class="pagination_page">
 						<div class="number_pagination">1</div>
-						<div class="all_numbers"><span>из</span> 15</div>
+						<div class="all_numbers"><span>из</span> 1</div>
 						<button class="btn_pagination prev_pagination disabled"></button>
 						<button class="btn_pagination next_pagination"></button>
 					</div>

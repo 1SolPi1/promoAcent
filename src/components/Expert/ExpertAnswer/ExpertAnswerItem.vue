@@ -4,7 +4,7 @@
     <div class="name_question_min">{{question.title}}</div>
     <div class="category_question">Психология / Дети и подростки</div>
     <div class="wrap_like">
-       <div class="dislike_question">Ответ понравился</div>
+       <!-- <div class="dislike_question">Ответ понравился</div> -->
     </div>
     <div class="text_question">
       <div class="title_text_question">Ответ:</div>
@@ -13,8 +13,8 @@
     </div>
     <div class="bottom_question clearfix">
       <div class="data_question">{{getDate(question.create_at)}}</div>
-      <div class="user_question">Анонимно</div>
-      <a href="#" class="all_questions_user">всего <span>4</span> ответа</a>
+      <div class="user_question">{{question.author}}</div>
+       <router-link :to="{ path: `/questions/${question.id}` }" class="all_questions_user">всего <span>4</span> ответа</router-link>
     </div>
   </div>
 </div>
@@ -46,7 +46,7 @@
     mounted() {
      },
 		methods: {
-      getDate(date){
+    getDate(date){
        const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
 
       let time = new Date(date);

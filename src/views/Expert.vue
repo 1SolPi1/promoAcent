@@ -21,7 +21,7 @@
 						<div class="head_expert_item">
 							<div class="name_expert_big">{{expertinfo.name || 'Имя Фамилия'}}</div>
 							<div class="experience_expert"><span v-if="expertinfo.stay_year > 0">{{expertinfo.stay_year}} лет </span> <span v-if="expertinfo.stay_month > 0">{{expertinfo.stay_month}} мес. </span><span>{{expertinfo.stay_day}} д.</span> на сайте</div>
-							<div class="experience_expert">Стаж с <span>{{expertinfo.stage}} г.</span></div>
+							<div class="experience_expert">Стаж с <span>{{expertinfo.experience}} г.</span></div>
 							<!-- <div class="top_expert">Эксперт  месяца</div> -->
 						</div>
 						<div class="tags_experts">

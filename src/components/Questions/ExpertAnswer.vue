@@ -67,8 +67,14 @@
             Authorization: "Bearer " + localStorage.getItem('token')
           }
         })
-        .then(()=>{
+        .then(response=>{
           this.$emit('updatequestion')
+          if(response.status === 200){
+          this.$toast.success({
+            title:'Успешно',
+            message:'Ответ добавлен'
+          })
+          }
         })
       }
     },

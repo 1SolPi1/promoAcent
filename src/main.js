@@ -14,6 +14,18 @@ import Chats from '../src/components/Chats'
 import UserChatItem from '../src/components/User/UserConsultation/UserChatItem'
 import VueSocketIO from 'vue-socket.io'
 import questionItem from '../src/components/Questions/QuestionItem'
+import CxltToastr from 'cxlt-vue2-toastr'
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+
+var toastrConfigs = {
+    position: 'top right',
+    // showDuration: 5000,
+    // successColor:
+    // infoColor 
+    // warningColor 
+    // errorColor
+}
+Vue.use(CxltToastr, toastrConfigs)
 
 Vue.use(Chats)
 
