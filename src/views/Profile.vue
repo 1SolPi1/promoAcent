@@ -231,6 +231,7 @@ export default {
 		} 
 	},
 	mounted(){
+		new WOW().init();
 		// eslint-disable-next-line
 		$('select:not([id^="multi"]), input[type=number]').styler();
 		// eslint-disable-next-line

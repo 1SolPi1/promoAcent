@@ -49,6 +49,7 @@
     created() {
     },
     mounted() {
+      new WOW().init();
      },
 		methods: {
       itemStar(){

@@ -181,6 +181,7 @@ export default {
 		}
 	},
 	mounted(){
+		new WOW().init();
 		// eslint-disable-next-line
 		$('select').styler();
 		this.getParentCategory(1)

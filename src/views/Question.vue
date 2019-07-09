@@ -77,7 +77,7 @@
       this.getQuestion()
     },
     mounted() {
-      
+      new WOW().init();
      },
 		methods: {
       getQuestion(){

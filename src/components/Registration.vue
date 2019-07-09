@@ -16,6 +16,7 @@
           <a href="javascript:void(0)" @click="$emit('gotologin')">Логин</a>
         </div>
 			</form>
+			<span class="closeBackground" @click="$emit('close')"></span>
 	</div>    
 </template>
 
@@ -65,9 +66,21 @@
                 url: 'user/registration/register',
                 data: params,
             })
-                .then(() => {
-									alert('Вы успешно прошли регистрацию, просьба перейти на почту указанную при регистрации, для продолжения.');
-                });
+                .then(response => {
+                	if(response.status === 200){
+										this.$toast.success({
+											title:'Успешно',
+					    				message:'Вы успешно прошли регистрацию, просьба перейти на почту указанную при регистрации, для продолжения.'
+										})
+										this.$emit('close')
+									}
+                })
+                .catch(error =>{
+                	this.$toast.error({
+											title:'Ошибка',
+					    				message: error.response.data.error
+										})
+                })
 				}
 			}
 		},
@@ -111,5 +124,14 @@
 
 .btn_blue{
 	margin-top: 10px;
+}
+
+.closeBackground{
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 890;
 }
 </style>

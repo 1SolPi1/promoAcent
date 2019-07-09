@@ -144,6 +144,7 @@ export default {
 	},
 	created() {},
 	mounted() {
+		new WOW().init();
 		// eslint-disable-next-line
 		 $('#minute').styler();
 		$('.timeRange').timeEntry({

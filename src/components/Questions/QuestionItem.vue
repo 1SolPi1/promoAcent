@@ -63,6 +63,7 @@
     },
     created() {},
     mounted() {
+      new WOW().init();
     },
     methods: {
       getDate(){

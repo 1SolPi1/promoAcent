@@ -5,12 +5,24 @@
             <div class="container">
                 <div class="menu_block">
                     <ul class="list_menu">
-                        <li><a href="#" @click="showHiddenMenu = !showHiddenMenu">Ваши вопросы</a></li>
-                        <li><a href="#" @click="showHiddenMenu = !showHiddenMenu">Эксперты</a></li>
-                        <li><a href="#" @click="showHiddenMenu = !showHiddenMenu">Журнал</a></li>
-                        <li><a href="#" @click="showHiddenMenu = !showHiddenMenu">Ваши вопросы</a></li>
-                        <li><a href="#" @click="showHiddenMenu = !showHiddenMenu">Эксперты</a></li>
-                        <li><a href="#" @click="showHiddenMenu = !showHiddenMenu">Журнал</a></li>
+                      <li 
+                        :class="{'active': $route.path == '/questions'}" 
+                        @click="showHiddenMenu = !showHiddenMenu"
+                      >
+                        <router-link to="/questions">Ваши вопросы</router-link>
+                      </li>
+                      <li 
+                        :class="{'active': $route.path == '/experts'}" 
+                        @click="showHiddenMenu = !showHiddenMenu"
+                      >
+                        <router-link to="/experts">Эксперты</router-link>
+                      </li>
+                      <li 
+                        :class="{'active': $route.path == '/journal'}" 
+                        @click="showHiddenMenu = !showHiddenMenu"
+                      >
+                        <router-link to="/journal">Журнал</router-link>
+                      </li>
                     </ul>
                 </div>
             </div>
@@ -20,7 +32,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-sm-8">
-                       <router-link to="/" class="main_logo">Логотип</router-link>
+                       <router-link to="/" class="main_logo"><img src="@/assets/img/logo.svg" alt="logo"></router-link>
                         <span class="btn_nav">
                             <span class='sandwich' @click="showHiddenMenu = !showHiddenMenu">
                                 <span class='sw-topper'></span>
@@ -34,7 +46,7 @@
                         <ul class="header_nav">
                             <li :class="{'active': $route.path == '/questions'}"> <router-link to="/questions">Ваши вопросы</router-link></li>
                             <li :class="{'active': $route.path == '/experts'}"><router-link to="/experts">Эксперты</router-link></li>
-                            <li :class="{'active': $route.path == '/journal'}"><a href="#">Журнал</a></li>
+                            <li :class="{'active': $route.path == '/journal'}"><router-link to="/journal">Журнал</router-link></li>
                         </ul>
                     </div>
                     <logined  v-if="profile"/>

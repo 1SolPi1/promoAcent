@@ -10,6 +10,7 @@ import Categories from "../src/components/Categories"
 import ExpertProfile from "../src/components/Profile/ExpertProfile"
 import UserProfileMenu from "../src/components/User/UserProfileMenu"
 import UserContentHeader from "../src/components/User/UserContentHeader"
+import journalItem from '../src/components/Home/JournalItem'
 import Chats from '../src/components/Chats'
 import UserChatItem from '../src/components/User/UserConsultation/UserChatItem'
 import VueSocketIO from 'vue-socket.io'
@@ -78,6 +79,7 @@ Vue.component('userContentHeader', UserContentHeader);
 Vue.component('categories', Categories);
 Vue.component('userchatitem', UserChatItem);
 Vue.component('questionItem', questionItem);
+Vue.component('journalItem', journalItem);
 // Vue.component('testcomponent',{
 //    render: function (createElement) {
 //     items.map(function (item) {

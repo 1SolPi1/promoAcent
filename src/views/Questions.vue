@@ -138,6 +138,7 @@
         created() {
         },
         mounted() {
+          new WOW().init();
             this.getParentCategory(this.$store.getters.SELECTCATEGORY)
             this.questionsList = this.$store.getters.QUESTIONS
             this.getAllQuestions(this.pageCount, this.selectCategory.id);

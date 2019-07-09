@@ -10,6 +10,7 @@
           <a href="javascript:void(0)" @click="$emit('gotoregister')">Регистрация</a>
           </div>
         </form>
+        <span class="closeBackground" @click="$emit('close')"></span>
     </div>
 </template>
 
@@ -42,7 +43,13 @@
                 .then(response => {
                   localStorage.setItem('token', response.data.token);
                   this.$store.dispatch('getProfile');
-                });
+                })
+                .catch(error =>{
+                  this.$toast.error({
+                      title:'Ошибка',
+                      message: error.response.data.error
+                    })
+                })
 			}
 		},
 		computed: {},
@@ -81,5 +88,14 @@
 
 .btn_add::before{
   margin-right: 3px;
+}
+
+.closeBackground{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 890;
 }
 </style>

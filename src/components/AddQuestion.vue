@@ -14,15 +14,22 @@
                 :name="item.name"
                 :image="item.image"
                 :clases="item.class"
-                :active="item.id === selectCategory.id ? true:false"
-                @changeitem="changeCategory(item)"
+                :active="item.id == selectCategory.id ? true:false"
+                @changeitem="changeCategory(item.id)"
               />  
             </slick>
           </ul>
         </div>
       </div>
     </div>
-
+   <topFieldCategory
+    :category="category"
+    :childcategory="selectChildCategory"
+    :selectedCategory="selectCategory"
+    v-if="selectCategory"
+    @selectcategory="changeCategory"
+    @selectsubcategory="changeSubCategory"
+   />
     <div class="section_main_experts question_form">
       <div class="container">
         <div class="row">
@@ -79,13 +86,18 @@
 <script>
 import Slick from 'vue-slick';
 import ItemCategory from '@/components/Partner/ItemCategory'
+import topFieldCategory from '@/components/AddQuestion/TopFieldCategory'
 export default {
   name: "AddQuestion",
-  components: {Slick, ItemCategory},
+  components: {Slick, ItemCategory, topFieldCategory},
   props: {},
   data() {
     return {
+        category: null,
+        childCategory: null,
         selectCategory: null,
+        selectSubCategory: null,
+        selectChildCategory: null,
         slickOptions: {
         arrows: true,
         dots: false,
@@ -127,25 +139,46 @@ export default {
   },
   created() {
     this.title = this.$store.getters.ADDQUESTION;
-    this.selectCategory = this.categoryItem[0]
   },
   mounted() {
     // eslint-disable-next-line
     $('select').styler();
+
+    this.getParentCategory(1)
   },
   methods: {
     changeCategory(item){
-      this.selectCategory = item
+      this.selectCategory = this.category.find(map => map.id == item)
+      setTimeout(()=>{  
+        this.getChildCategory(this.selectCategory);
+      }, 300)
     },
+    changeSubCategory(item){
+      this.selectSubCategory= this.childCategory.find(map => map.id == item)
+    },
+      getParentCategory(id){
+        this.category = this.$store.getters.CATEGORIES.map(map => map.category);
+        this.childCategory = this.$store.getters.CATEGORIES.map(map => map.child);
+        this.getSelectCategory(id);
+      },
+      getSelectCategory(id){
+        this.selectCategory = this.category.find(item => item.id === id)
+        this.getChildCategory(this.selectCategory)
+      },
+      getChildCategory(arr){
+        this.selectChildCategory = this.childCategory.filter(map => map.parent_id === arr.id)
+      },
     addQuestion(){
       let anonimus = 0;
       this.anonim ? anonimus = 1 : 0 ;
+      let categoryId;
+      this.selectSubCategory ? categoryId = this.selectSubCategory.id : this.selectCategory.id;
       let params = new URLSearchParams();
         params.append('title', this.title);
         params.append('description', this.description);
         params.append('price', this.price);
         params.append('anonim', anonimus);
-        params.append('category_id', this.selectCategory.id);
+        params.append('category_id', categoryId);
 
       this.$http({
           method: 'POST',

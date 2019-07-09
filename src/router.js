@@ -8,6 +8,13 @@ const Experts = () => import('./views/Experts.vue')
 const Expert = () => import('./views/Expert.vue')
 const Profile = () => import('./views/Profile.vue')
 const AddQuesttion = () => import('./components/AddQuestion.vue')
+const Journal = () => import('./views/Journal.vue')
+const JournalArticle = () => import('./views/JournalArticle.vue')
+const About = () => import('./views/About.vue')
+const Help = () => import('./views/Help.vue')
+const MapSite = () => import('./views/MapSite.vue')
+const Policy = () => import('./views/Policy.vue')
+const AboutPartners = () => import('./views/AboutPartners.vue')
 
 const MyConsultation = () => import('./components/Profile/MyConsultation.vue')
 const MainSettings = () => import('./components/Profile/MainSettings.vue')
@@ -55,6 +62,41 @@ let router = new Router({
       path: '/experts',
       name: 'esperts',
       component: Experts,
+    },
+    {
+      path: '/journal',
+      name: 'journal',
+      component: Journal,
+    },
+    {
+      path: '/journal/article/:id',
+      name: 'journalarticle',
+      component: JournalArticle,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component: Help,
+    },
+    {
+      path: '/mapsite',
+      name: 'mapsite',
+      component: MapSite,
+    },
+    {
+      path: '/policy',
+      name: 'policy',
+      component: Policy,
+    },
+    {
+      path: '/aboutpartners',
+      name: 'aboutpartners',
+      component: AboutPartners,
     },
     {
       path: '/experts/:id',

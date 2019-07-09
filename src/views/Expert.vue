@@ -157,6 +157,7 @@ export default {
 
 	},
 	mounted() {
+		new WOW().init();
 		this.getExpert()
 	},
 	methods: {

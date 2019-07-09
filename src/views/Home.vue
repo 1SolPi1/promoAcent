@@ -272,13 +272,12 @@
 <script>
 import Slick from 'vue-slick';
 import comments from '../components/Home/Comments'
-import journalItem from '../components/Home/JournalItem'
 import registration from '@/components/Registration'
 import login from '@/components/Login'
 import $ from 'jquery'; 
 export default {
 name: 'Home',
-components: {Slick, comments, journalItem, registration, login},
+components: {Slick, comments, registration, login},
 props: {},
 data() {
   return {
@@ -303,6 +302,7 @@ data() {
 created() {
 	},
 mounted() {
+	new WOW().init();
 	if (document.documentElement.clientWidth > 746) {
 		$('.parent_more').hover(
 			function(){

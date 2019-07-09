@@ -4,7 +4,7 @@
       <div class="container">
           <div class="row">
               <div class="col-md-2 col-sm-2 col-xs-12">
-                  <a href="#" class="main_logo">Логотип</a>
+                   <router-link to="/" class="main_logo"><img src="@/assets/img/logo.svg" alt="logo"></router-link>
               </div>
               <div class="col-md-2 col-sm-2 col-xs-6">
                   <div class="title_footer">Клиентам</div>
@@ -28,28 +28,28 @@
               <div class="col-md-4 col-sm-2 col-xs-6">
                   <div class="title_footer">Экспертам</div>
                   <ul class="footer_list">
-                      <li><a href="#">Описание партнерства</a></li>
+                      <li><router-link to="/aboutpartners">Описание партнерства</router-link></li>
                   </ul>
               </div>
               <div class="col-md-2 col_pl col-sm-3 col-xs-6">
                   <ul class="footer_list footer_list_big">
-                      <li><a href="#">О проекте</a></li>
-                      <li><a href="#">Журнал</a></li>
-                      <li><a href="#">Помощь</a></li>
-                      <li><a href="#">Вопросы</a></li>
+                      <li><router-link to="/about">О проекте</router-link></li>
+                      <li><router-link to="/journal">Журнал</router-link></li>
+                      <li><router-link to="/help">Помощь</router-link></li>
+                      <li><router-link to="/questions">Вопросы</router-link></li>
                   </ul>
               </div>
           </div>
           <div class="line_links_footer">
-              <a href="#" class="link_footer">Политика конфиденциальности</a>
-              <a href="#" class="link_footer">Карта сайта</a>
+              <router-link to="/policy" class="link_footer">Политика конфиденциальности</router-link>
+              <router-link to="/mapsite" class="link_footer">Карта сайта</router-link>
           </div>
           <div class="row copiright">
               <div class="col-xs-6">
                   <p>2019  «Спроси Онлайн»</p>
               </div>
               <div class="col-xs-6 right_footer">
-                  <p>Сделано в <a href="#" class="link_copiright">Promoaccent</a></p>
+                  <p>Сделано <a href="https://web-rus.com" class="link_copiright">веб студией Русь</a></p>
               </div>
           </div>
       </div>
