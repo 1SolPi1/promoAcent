@@ -25,7 +25,8 @@
                                     <div class="btn_more_ask" @click="resizeTextarea = !resizeTextarea"><span>расширить поле</span></div>
                                 </div>
                             </div>
-                            <router-link to="addquestions"><button class="btn_blue">Задать вопрос</button></router-link>
+                            <router-link to="addquestions" v-if="logined"><button class="btn_blue">Задать вопрос</button></router-link>
+                            <button class="btn_blue" @click.prevent="showLogined()" v-else>Задать вопрос</button>
                             <div class="pay_wrap">
                                 <div class="pay_text">
                                     <span>Оплатите ваш вопрос, для гарантированного получения ответа</span><br><span>от самых лучших специалистов</span>
@@ -111,14 +112,36 @@
                 </div>
             </div>
         </div>
+        <registration 
+      v-if="register" 
+      @close="register = !register"
+      @gotologin="showLogin()"
+    /> 
+    <registration 
+      v-if="registerExpert"
+      :expert="true" 
+      @close="registerExpert = !registerExpert"
+      @gotologin="showLogin()"
+    /> 
+    <login 
+      v-if="login" 
+      @close="login = !login"
+      @gotoregister="showRegister()"
+    /> 
     </div>
 </template>
 
 <script>
     import profItem from '../components/Questions/ProfItem'
+    import registration from '@/components/Registration'
+    import login from '@/components/Login'
     export default {
         name: "Questions",
-        components: {profItem},
+        components: {
+          profItem,
+          registration,
+          login
+        },
         props: {},
         data() {
             return {
@@ -133,15 +156,23 @@
               childCategory: null,
               selectCategory: null,
               selectChildCategory: null,
+              login: false,
+              register: false,
+              registerExpert: false,
+              experts: []
             }
         },
         created() {
         },
         mounted() {
           new WOW().init();
-            this.getParentCategory(this.$store.getters.SELECTCATEGORY)
-            this.questionsList = this.$store.getters.QUESTIONS
-            this.getAllQuestions(this.pageCount, this.selectCategory.id);
+          const vm = this;
+            setTimeout(function() {  
+              vm.getParentCategory(vm.$store.getters.SELECTCATEGORY)
+              vm.questionsList = vm.$store.getters.QUESTIONS
+              vm.getAllQuestions(vm.pageCount, vm.selectCategory.id);
+            }, 500)
+          vm.getExperts()
         },
         methods: {
           changeCategory(item){
@@ -153,7 +184,8 @@
             }, 300)
           },
           changeSubCategory(item){
-            console.log('subcategory' + item)
+            this.pageNumber = 1;
+            this.getAllQuestions(1, item);
           },
       getParentCategory(id){
         this.category = this.$store.getters.CATEGORIES.map(map => map.category);
@@ -194,20 +226,52 @@
                 this.pageCount = response.data.page_count
                 this.allQuestions = response.data[0]
               })
-            }
+            },
+            showLogined(){
+              this.$toast.error({
+                title:'Ошибка',
+                message: 'Войдите или зарегистрируйтесь'
+              })
+              this.showLogin()
+            },
+            showLogin(){
+              this.login = true;
+              this.register = false;
+              this.registerExpert = false;
+            },
+             showRegister(){
+                this.login = false;
+                this.register = true
+            },
+      getExperts(){
+        this.$http({
+          method: 'POST',
+          url: 'expert/profile/find',
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+          this.experts = response.data
+        })
+    }
         },
         computed: {
             newQuestion: {
-    get: function () {
-      return this.$store.getters.ADDQUESTION
-    },
-    set: function (newValue) {
-     this.$store.dispatch('setAddQuestion', newValue);
-    }
-  },
+              get: function () {
+                return this.$store.getters.ADDQUESTION
+              },
+              set: function (newValue) {
+               this.$store.dispatch('setAddQuestion', newValue);
+              }
+            },
           profi(){
             return this.$store.getters.PROFI
           },
+          logined(){
+            return localStorage.getItem('token')
+          }
         },
     }
 </script>

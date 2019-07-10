@@ -17,7 +17,7 @@
 						     </option>
               </select>
               <select id="subcategory" class="select_main select_subcategory">
-                <option value="1">Выберите подкатегорию</option>
+                <option value="1" selected>Выберите подкатегорию</option>
 					      <option 
 					        v-for="(item, index) in childcategory"
 					        :value="item.id"
@@ -44,7 +44,13 @@ export default {
 	props: {
       category: Array,
       childcategory: Array,
-      selectedCategory: Object
+      selectedCategory: Object,
+      selectedSubCategory:{
+        type: Object,
+        default:()=>{
+          id: 0
+        }
+      }
     },
 	data() {
 		return {}

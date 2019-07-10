@@ -72,6 +72,9 @@
 			<div class="container">
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab1">
+						<expertBonus
+							v-if="creator"
+						/>
 						<div class="row about_expert">
 							<div class="col-md-6">
 								<div class="title_experts">О себе</div>
@@ -137,6 +140,7 @@
 	import reviewsStats from '@/components/Expert/Reviews/ReviewsStats'
 	import reviewsItem from '@/components/Expert/Reviews/ReviewsItem'
 	import expertAnswerItem from '@/components/Expert/ExpertAnswer/ExpertAnswerItem'
+	import expertBonus from '@/components/Expert/ExpertBonus'
 	import moreExpertList from '@/components/Expert/MoreExpert/MoreExpertList'
 export default {
 	name: "Expert",
@@ -145,7 +149,8 @@ export default {
 		reviewsStats,
 		reviewsItem,
 		expertAnswerItem,
-		moreExpertList
+		moreExpertList,
+		expertBonus
 	},
 	props: {},
 	data() {

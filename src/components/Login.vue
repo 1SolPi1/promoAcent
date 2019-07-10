@@ -1,4 +1,5 @@
 <template>
+  <div>
 		<div class="helps_block boxLogin">
       <div @click="$emit('close')" class="closeButton btn_add"></div>
       <div class="title_section">Логин</div>
@@ -10,8 +11,9 @@
           <a href="javascript:void(0)" @click="$emit('gotoregister')">Регистрация</a>
           </div>
         </form>
-        <span class="closeBackground" @click="$emit('close')"></span>
     </div>
+    <span class="closeBackground" @click="$emit('close')"></span>
+  </div>
 </template>
 
 <script>
@@ -43,6 +45,7 @@
                 .then(response => {
                   localStorage.setItem('token', response.data.token);
                   this.$store.dispatch('getProfile');
+                  this.$store.dispatch('getCategories');
                 })
                 .catch(error =>{
                   this.$toast.error({

@@ -4,7 +4,9 @@ Axios.defaults.baseURL = 'http://api.sprosi-online.ru/';
 
 const state = {
   profile: null,
-  userInfo: null,
+  userInfo: {
+    expert: false
+  },
   client: null,
   expert: null,
   expertEducation: null

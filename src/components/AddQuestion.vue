@@ -23,7 +23,7 @@
       </div>
     </div>
    <topFieldCategory
-    :category="category"
+    :category="categories"
     :childcategory="selectChildCategory"
     :selectedCategory="selectCategory"
     v-if="selectCategory"
@@ -143,31 +143,29 @@ export default {
   mounted() {
     // eslint-disable-next-line
     $('select').styler();
-
-    this.getParentCategory(1)
+    const vm = this
+    setTimeout(function() {  
+          vm.getSelectCategory(1)
+        }, 500)
   },
   methods: {
     changeCategory(item){
-      this.selectCategory = this.category.find(map => map.id == item)
+      this.selectCategory = this.categories.find(map => map.id == item)
       setTimeout(()=>{  
         this.getChildCategory(this.selectCategory);
+        this.selectSubCategory = null;
       }, 300)
     },
     changeSubCategory(item){
-      this.selectSubCategory= this.childCategory.find(map => map.id == item)
+      this.selectSubCategory= this.selectChildCategory.find(map => map.id == item)
     },
-      getParentCategory(id){
-        this.category = this.$store.getters.CATEGORIES.map(map => map.category);
-        this.childCategory = this.$store.getters.CATEGORIES.map(map => map.child);
-        this.getSelectCategory(id);
-      },
-      getSelectCategory(id){
-        this.selectCategory = this.category.find(item => item.id === id)
-        this.getChildCategory(this.selectCategory)
-      },
-      getChildCategory(arr){
-        this.selectChildCategory = this.childCategory.filter(map => map.parent_id === arr.id)
-      },
+    getSelectCategory(id){
+      this.selectCategory = this.categories.find(item => item.id === id)
+      this.getChildCategory(this.selectCategory)
+    },
+    getChildCategory(arr){
+      this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
+    },
     addQuestion(){
       let anonimus = 0;
       this.anonim ? anonimus = 1 : 0 ;
@@ -195,7 +193,7 @@ export default {
         this.description = null;
         this.price =  0;
         this.anonim = false;
-        this.selectCategory = this.categoryItem[0];
+        this.getSelectCategory(1)
         if(response.status === 200){
           this.$toast.success({
             title:'Успешно',
@@ -211,6 +209,12 @@ export default {
   computed: {
     categoryItem(){
       return this.$store.getters.CATEGORYITEM
+    },
+    categories(){
+      return this.$store.getters.CATEGORI
+    },
+    childCategories(){
+      return this.$store.getters.CHILDCATEGORI
     }
   },
 }

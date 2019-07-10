@@ -4,9 +4,9 @@
 			<div class="container">
 				<div class="col-md-6 col_image_wrap">
 
-		<!-- 			<div class="image_section_top img_question_med">
+					<div class="image_section_top img_question_med">
 						<img src="img/svg/medicine.svg" alt="alt">
-					</div> -->
+					</div>
 					<div class="image_section_top img_question_psihology">
 						<img src="img/svg/psychology.svg" alt="alt">
 					</div>
@@ -42,10 +42,10 @@
 					<div class="title_section slideInUp wow" data-wow-iteration="1">Задайте бесплатно вопрос <br>и уже сейчас получите ответ</div>
 					<div class="descr_title slideInUp wow" data-wow-iteration="1">Выберите направление и задайте вопрос</div>
 					<div class="questions_items">
-						<!-- <a href="#" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
+						<a href="javascript:void(0)" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory(6)">
 							<img src="img/quest1.png" alt="alt">
 							<span>Медицина</span>
-						</a> -->
+						</a>
 						<a href="javascript:void(0)" class="item_question question_psihology slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory(1)">
 							<img src="img/quest2.png" alt="alt">
 							<span>Психология</span>
@@ -54,48 +54,48 @@
 							<img src="img/quest3.png" alt="alt">
 							<span>Юриспруденция</span>
 						</a>
-						<!-- <a href="#" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1">
+						<a href="javascript:void(0)" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory(64)">
 							<img src="img/quest4.png" alt="alt">
 							<span>Учеба и наука</span>
 						</a>
-						<a href="#" class="item_question question_ezot slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
+						<a href="javascript:void(0)" class="item_question question_ezot slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory(81)">
 							<img src="img/quest5.png" alt="alt">
 							<span>Эзотерика</span>
 						</a>
-						<a href="#" class="item_question question_beautiful slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
+						<a href="javascript:void(0)" class="item_question question_beautiful slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory(103)">
 							<img src="img/quest6.png" alt="alt">
 							<span>Красота</span>
-						</a> -->
-						<!-- <a href="#" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
+						</a>
+						<a href="javascript:void(0)" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory(114)">
 							<img src="img/quest7.png" alt="alt">
 							<span>Английский</span>
-						</a> -->
-<!-- 						<div class="parent_more" @mouseover="showHiddenItem()">
+						</a>
+						<div class="parent_more" @mouseover="showHiddenItem()">
 							<a href="#" class="item_question question_more slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
 								<img src="img/quest8.png" alt="alt">
 								<span>Еще</span>
 							</a>
 							<div class="hidden_questions_items">
 								<div class="questions_items">
-									<a href="#" class="item_question question_hobi">
+									<a href="javascript:void(0)" class="item_question question_hobi" @click="selectCategory(119)">
 										<img src="img/bicycle.svg" alt="alt">
 										<span>Хобби</span>
 									</a>
-									<a href="#" class="item_question question_business">
+									<a href="javascript:void(0)" class="item_question question_business" @click="selectCategory(165)">
 										<img src="img/umbrella.svg" alt="alt">
 										<span>Бизнес</span>
 									</a>
-									<a href="#" class="item_question question_religion">
+									<a href="javascript:void(0)" class="item_question question_religion" @click="selectCategory(138)">
 										<img src="img/church.svg" alt="alt">
 										<span>Религия</span>
 									</a>
-									<a href="#" class="item_question question_tech">
+									<a href="javascript:void(0)" class="item_question question_tech" @click="selectCategory(144)">
 										<img src="img/antenna.svg" alt="alt">
 										<span>Технологии</span>
 									</a>
 								</div>
 							</div>
-						</div> -->
+						</div>
 					</div>
 					
 				</div>
@@ -250,7 +250,7 @@
 						<div class="block_button flipInY wow" data-wow-delay="1s" data-wow-iteration="1">
 							<div class="name_block_button">Разместите свои услуги</div>
 							<p>Размещение услуг позвоит вам как эксперту повысить узнаваемость</p>
-							<a href="#" class="btn_blue">Зарегистрироваться</a>
+							<a href="javascript:void(0)" class="btn_blue" @click="registerExpert = !registerExpert">Зарегистрироваться</a>
 						</div>
 					</div>
 				</div>
@@ -259,6 +259,12 @@
 		<registration 
       v-if="register" 
       @close="register = !register"
+      @gotologin="showLogin()"
+    /> 
+    <registration 
+      v-if="registerExpert"
+      :expert="true" 
+      @close="registerExpert = !registerExpert"
       @gotologin="showLogin()"
     /> 
     <login 
@@ -282,6 +288,7 @@ props: {},
 data() {
   return {
   	register: false,
+  	registerExpert: false,
   	login: false,
   	emailSend: null,
   	slickOptions: {
@@ -402,6 +409,7 @@ methods: {
 	showLogin(){
 		this.login = true;
 		this.register = false;
+		this.registerExpert = false;
 	},
 	getComments(){
         this.$http({

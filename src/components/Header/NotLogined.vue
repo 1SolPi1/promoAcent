@@ -1,12 +1,18 @@
 <template>
 	<div class="col-md-5 col-sm-4">
 		<div class="right_header">
-			<a href="javascript:void(0)" class="btn_add"><span>добавить эксперта</span></a>
+			<a href="javascript:void(0)" class="btn_add" @click="registerExpert = !registerExpert"><span>добавить эксперта</span></a>
 			<a href="javascript:void(0)" class="btn_border btn_sign" @click="login = !login"><span>личный кабинет</span></a>
 		</div>
 		<registration 
       v-if="register" 
       @close="register = !register"
+      @gotologin="showLogin()"
+    /> 
+    <registration 
+      v-if="registerExpert"
+      :expert="true" 
+      @close="registerExpert = !registerExpert"
       @gotologin="showLogin()"
     /> 
     <login 
@@ -30,7 +36,8 @@
     data() {
 			return {
 				register: false,
-        login: false
+        login: false,
+        registerExpert: false
       }
     },
     created() {
@@ -45,6 +52,7 @@
       showLogin(){
         this.login = true;
         this.register = false;
+        this.registerExpert = false;
       }
 		},
 		computed: {},

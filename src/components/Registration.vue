@@ -1,22 +1,26 @@
 <template>
+	<div>
 	<div class="helps_block boxRegister">
 		<div @click="$emit('close')" class="closeButton btn_add"></div>
-		<div class="title_section">Регистрация</div>
+		<div class="title_section" v-if="!expert">Регистрация</div>
+		<div class="title_section" v-else>Регистрация Експерта</div>
 			<form class="form_help">
 				<input type="text" placeholder="Логин" v-model="username">
 				<input type="email" class="passInput" placeholder="Почта" v-model="email">
 				<input type="password" class="passInput" placeholder="Пароль" v-model="password">
 				<select id='sex' class="select_main select_gender">
-      				<option value="0">пол</option>
-      				<option value="1">Мужской</option>
-      				<option value="2">Женский</option>
-    			</select>
-				<button class="btn_blue"  @click.prevent="submit()">Зарегистрироваться</button>
+					<option value="0">пол</option>
+					<option value="1">Мужской</option>
+					<option value="2">Женский</option>
+    		</select>
+				<button class="btn_blue"  @click.prevent="submit()" v-if="!expert">Зарегистрироваться</button>
+				<button class="btn_blue"  @click.prevent="submitExpert()" v-else>Зарегистрироваться</button>
 				<div style="display: flex; margin-top: 20px">
           <a href="javascript:void(0)" @click="$emit('gotologin')">Логин</a>
         </div>
 			</form>
-			<span class="closeBackground" @click="$emit('close')"></span>
+	</div>
+	<span class="closeBackground" @click="$emit('close')"></span>
 	</div>    
 </template>
 
@@ -24,13 +28,18 @@
 	export default {
     name: "Registration",
     components: {},
-    props: {},
+    props: {
+    	expert:{
+    		type: Boolean,
+    		default: false
+    	}
+    },
     data() {
 			return {
         username: null,
         email: null,
         password: null,
-        sex: 0
+        sex: 0,
       }
     },
     created() {
@@ -47,13 +56,25 @@
 		methods: {
 			submit(){
 				if(!this.username){
-					alert(' Укажите логин ')
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Укажите логин'
+					})
 				}else if(!this.email){
-					alert(' Укажите email ')
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Укажите email'
+					})
 				}else if(!this.password){
-					alert(' Укажите пароль ')
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Укажите пароль'
+					})
 				}else if(this.sex === 0){
-					alert(' Выберите пол ')
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Выберите пол'
+					})
 				}else{
 					let params = new URLSearchParams();
             params.append('username', this.username);
@@ -78,11 +99,64 @@
                 .catch(error =>{
                 	this.$toast.error({
 											title:'Ошибка',
-					    				message: error.response.data.error
+					    				message: error.response.data.message
 										})
                 })
 				}
-			}
+			},
+			submitExpert(){
+				if(!this.username){
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Укажите логин'
+					})
+				}else if(!this.email){
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Укажите email'
+					})
+				}else if(!this.password){
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Укажите пароль'
+					})
+				}else if(this.sex === 0){
+					this.$toast.error({
+						title:'Ошибка',
+					   message: 'Выберите пол'
+					})
+				}else{
+					let params = new URLSearchParams();
+            params.append('username', this.username);
+            params.append('email', this.email);
+            params.append('password', this.password);
+            params.append('sex', this.sex);
+
+            this.$http({
+                method: 'POST',
+                url: 'user/registration/register-expert',
+                data: params,
+            })
+                .then(response => {
+                	if(response.status === 200){
+										this.$toast.success({
+											title:'Успешно',
+					    				message:'Вы успешно прошли регистрацию, просьба перейти на почту указанную при регистрации, для продолжения.'
+										})
+										this.$emit('close')
+									}
+                })
+                .catch(error =>{
+                	this.$toast.error({
+											title:'Ошибка',
+					    				message: error.response.data.message
+										})
+                })
+				}
+			},
+		// changeExperience(item){
+		// 	this.experience = item
+		// },
 		},
 		computed: {},
 	}
@@ -134,4 +208,5 @@
 	left: 0;
 	z-index: 890;
 }
+
 </style>

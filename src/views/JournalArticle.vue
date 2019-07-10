@@ -1,5 +1,10 @@
 <template>
-  <div>Статья</div>
+	<div class="container">
+		<div class="your_question">Главная — Журнал - <span>Журнал</span></div>
+		<div class="title_section slideInUp wow" data-wow-iteration="1">
+			Статья
+		</div>
+	</div>
 </template>
 
 <script>
@@ -11,14 +16,16 @@ export default {
 		return {}
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		new WOW().init();
+	},
 	methods: {},
 	computed: {},
 }
 </script>
 
 <style scoped>
-div{
-	height: calc(100vh - 240px);
-}   
+.container{
+	height: calc(100vh - 237px);
+}  
 </style>

@@ -10,7 +10,7 @@
                   <div class="title_footer">Клиентам</div>
                   <ul class="footer_list">
                       <li
-                        v-for="item in category"
+                        v-for="item in firstList"
                         :key="item.id"
                       >
                         <a href="javascript:void(0)" @click="selectCategory(item.id)">
@@ -22,7 +22,14 @@
               <div class="col-md-2 col-sm-3 col-xs-6">
                   <div class="title_footer"></div>
                   <ul class="footer_list">
-
+                    <li
+                        v-for="item in secondList"
+                        :key="item.id"
+                      >
+                        <a href="javascript:void(0)" @click="selectCategory(item.id)">
+                          {{item.name}}
+                        </a>
+                      </li>
                   </ul>
               </div>
               <div class="col-md-4 col-sm-2 col-xs-6">
@@ -42,7 +49,6 @@
           </div>
           <div class="line_links_footer">
               <router-link to="/policy" class="link_footer">Политика конфиденциальности</router-link>
-              <router-link to="/mapsite" class="link_footer">Карта сайта</router-link>
           </div>
           <div class="row copiright">
               <div class="col-xs-6">
@@ -64,8 +70,6 @@ export default {
   props: {},
   data() {
     return {
-      firstList: [],
-      secondList:[]
     }
   },
   created() {},
@@ -78,8 +82,11 @@ export default {
   }
   },
   computed: {
-    category(){
-      return this.$store.getters.CATEGORI
+    firstList(){
+      return this.$store.getters.FIRSTLISTCATEGORYFOOTER
+    },
+    secondList(){
+      return this.$store.getters.SECONDLISTCATEGORYFOOTER
     }
   },
 }

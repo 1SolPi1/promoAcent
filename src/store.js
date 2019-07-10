@@ -15,6 +15,9 @@ export default new Vuex.Store({
   state: {
   categories:null,
   categori:null,
+  childCategori: null,
+  firstListCategoryFooter: null,
+  secondListCategoryFooter: null,
   comments:[
   {
   name: 'Валера Иванов',
@@ -80,6 +83,60 @@ export default new Vuex.Store({
       class: 'yrist',
       image: 'img/category3.png'
     },
+    {
+      id:6,
+      name: 'Медицина',
+      class: 'med',
+      image: 'img/category1.png'
+    },
+    {
+      id:64,
+      name: 'Учеба и наука',
+      class: 'scince',
+      image: 'img/category4.png'
+    },
+    {
+      id:144,
+      name: 'Технологии',
+      class: 'tech',
+      image: 'img/antenna.svg'
+    },
+    {
+      id:114,
+      name: 'Английский',
+      class: 'english',
+      image: 'img/category6.png'
+    },
+    {
+      id:103,
+      name: 'Красота',
+      class: 'beaut',
+      image: 'img/quest6.png'
+    },
+    {
+      id:119,
+      name: 'Хобби',
+      class: 'hobbi',
+      image: 'img/bicycle.svg'
+    },
+    {
+      id:165,
+      name: 'Бизнес',
+      class: 'busin',
+      image: 'img/umbrella.svg'
+    },
+    {
+      id:138,
+      name: 'Религия',
+      class: 'religion',
+      image: 'img/church.svg'
+    },
+    {
+      id:81,
+      name: 'Эзотерика',
+      class: 'ezot',
+      image: 'img/quest5.png'
+    },
   ],
   addquestion: null,
   domen:'http://api.sprosi-online.ru/file/',
@@ -92,9 +149,12 @@ export default new Vuex.Store({
     CATEGORYITEM: state=>state.categoryItem,
     CATEGORIES: state=>state.categories,
     CATEGORI: state=>state.categori,
+    CHILDCATEGORI: state=>state.childCategori,
     ADDQUESTION: state => state.addquestion,
     DOMEN: state => state.domen,
-    SELECTCATEGORY: state => state.selectCategory
+    SELECTCATEGORY: state => state.selectCategory,
+    FIRSTLISTCATEGORYFOOTER: state => state.firstListCategoryFooter,
+    SECONDLISTCATEGORYFOOTER: state => state.secondListCategoryFooter
   },
   mutations: {
     SET_CATEGORIES: (state, payload) => {
@@ -102,6 +162,9 @@ export default new Vuex.Store({
     },
     SET_CATEGORI: (state, payload) => {
       state.categori = payload;
+    },
+    SET_CHILD_CATEGORI: (state, payload) => {
+      state.childCategori = payload;
     },
     SET_ADDQUESTION: (state, playload) =>{
       state.addquestion = playload
@@ -111,15 +174,30 @@ export default new Vuex.Store({
     },
     CHANGE_SELECT_CATEGORY: (state, playload) => {
       state.selectCategory = playload
+    },
+    SET_FIRST_LIST_CATEGORY_FOOTER: (state, playload)=>{
+      state.firstListCategoryFooter = playload
+    },
+    SET_SECOND_LIST_CATEGORY_FOOTER: (state, playload) =>{
+      state.secondListCategoryFooter = playload
     }
   },
   actions: {
     getCategories: async ({commit}) => {
-    let parentCtegory;
+    let parentCategory;
+    let childCategories;
+    let firstlist;
+    let secondlist;
     let {data} = await Axios.get('category/category/find',{headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: "Bearer " + localStorage.getItem('token')}});
     commit('SET_CATEGORIES', data);
-    parentCtegory = data.map(map => map.category);
-    commit('SET_CATEGORI', parentCtegory);
+    parentCategory = data.map(map => map.category);
+    childCategories = data.map(map => map.child);
+    firstlist = parentCategory.slice(0,6);
+    secondlist = parentCategory.slice(6,15);
+    commit('SET_CATEGORI', parentCategory);
+    commit('SET_CHILD_CATEGORI', childCategories);
+    commit('SET_FIRST_LIST_CATEGORY_FOOTER', firstlist);
+    commit('SET_SECOND_LIST_CATEGORY_FOOTER', secondlist);
   },
   setAddQuestion:({commit}, question) => {
     commit('SET_ADDQUESTION', question);

@@ -62,7 +62,7 @@
       userPaysQuestion,
       userControlQuestion,
       expertAnswer,
-      answerItem
+      answerItem,
     },
     props: {},
     data() {

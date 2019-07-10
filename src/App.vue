@@ -19,8 +19,8 @@ export default {
 	mounted() {
 		if (localStorage.getItem('token')) {
 			this.$store.dispatch('getProfile');
-			this.$store.dispatch('getCategories');
 		}
+		this.$store.dispatch('getCategories');
 	},
 	methods: {
 	},

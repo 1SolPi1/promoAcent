@@ -24,7 +24,9 @@ export default {
 		return {}
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		new WOW().init();
+	},
 	methods: {},
 	computed: {},
 }

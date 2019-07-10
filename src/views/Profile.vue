@@ -120,45 +120,9 @@
 										<button class="save-button" @click="changeExpert()">Сохранить</button>
 										<button class="cancel-button">Отменить</button>
 									</div>
-									<div class="tab-pane akcii" id="tab2">
-										<div class="clearfix">
-										<div class="col-xs-12 col-md-8 col-lg-9">
-											<p>Заголовок<span>*</span></p>
-											<input type="text" placeholder="укажите заголовок акции">
-										</div>
-										<div class="col-xs-12 col-md-3 col-lg-2 mar-left">
-											<p>Срок действия<span>*</span></p>
-											<select name="srok" class="select_main select_day">
-												<option value='1'>1</option>
-												<option value='2'>2</option>
-												<option value='3'>3</option>
-												<option value='4'>4</option>
-												<option value='5'>5</option>
-												<option value='6'>6</option>
-												<option value='7'>7</option>
-											</select>
-											<span class="txt">дня</span>
-										</div>
-										<div class="col-xs-12">
-											<p class="no-marg">Стоимость консультации<span>*</span></p>
-											<div class="tlne">
-											<span class="txt">до акции</span>
-											<input class="lil-inp" type="text">
-											<span class="txt">во время акции</span>
-											<input class="lil-inp mpo" type="text">
-											<span class="txt">руб.</span>
-											</div>
-										</div>
-										<div class="col-xs-12 border">
-											<p>Текст акции</p>
-											<textarea name="akcia-text"></textarea>
-											<span class="txt ml-0">Описание акции, яркое и краткое (до 200 символов)</span>
-										</div>
-										</div>
-										<button class="save-button">Сохранить</button>
-										<button class="cancel-button">Отменить</button>
-										<button class="delete-button">удалить акцию</button>
-									</div>
+									<share
+
+									/>
 									<div class="tab-pane pro" id="tab3">
 										<div class="clearfix">
 										<div class="col-xs-12 col-md-8 col-lg-8">
@@ -199,13 +163,15 @@
 	import categoryExpert from '@/components/User/CreateExpert/Category'
 	import degreeExpert from '@/components/User/CreateExpert/Degree'
 	import yearEducation from '@/components/User/CreateExpert/YearEducation'
+	import share from '@/components/Profile/Share'
 export default {
   name: "Profile",
   components: {
 		experience,
 		categoryExpert,
 		degreeExpert,
-		yearEducation
+		yearEducation,
+		share
 	},
   data(){
 		return{
@@ -227,11 +193,11 @@ export default {
 				degree: null,
 				startYear: 2005,
 				endYear: 2005
-			}
+			},
 		} 
 	},
 	mounted(){
-		new WOW().init();
+		// const vm = this;
 		// eslint-disable-next-line
 		$('select:not([id^="multi"]), input[type=number]').styler();
 		// eslint-disable-next-line

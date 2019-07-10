@@ -41,7 +41,7 @@
                             </span>
                         </span>
                         <div class="search_main">
-                            <button class="btn_search"></button>
+                            <button class="btn_search" @click="showSearch = !showSearch"></button>
                         </div>
                         <ul class="header_nav">
                             <li :class="{'active': $route.path == '/questions'}"> <router-link to="/questions">Ваши вопросы</router-link></li>
@@ -55,6 +55,10 @@
             </div>
         </header>
         <chat />
+        <search
+          v-if="showSearch"
+          @close="showSearch = !showSearch"
+        />
     </div>
 </template>
 
@@ -62,16 +66,19 @@
     import $ from 'jquery'
     import logined from '@/components/Header/Logined'
     import notLogined from '@/components/Header/NotLogined'
+    import search from '@/components/Search'
     export default {
         name: "Header",
         components: {
           logined,
-          notLogined
+          notLogined,
+          search
         },
         props: {},
         data() {
             return {
                 showHiddenMenu: false,
+                showSearch: false
                 }
         },
         created() {
