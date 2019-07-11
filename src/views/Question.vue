@@ -14,8 +14,9 @@
           }
         ]"
         :currentPage="question.question.title"
+        :id="question.question.id"
+        :question="true"
         />
-        <div class="your_question">Ваши вопросы — {{question.category}} — Дети и подростки — <span>{{question.question.title}}</span></div>
       </div>
     </div>
     <userPaysQuestion v-if="creator"/>

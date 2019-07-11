@@ -2,7 +2,15 @@
 	<div>
    <div class="section_main_expert">
       <div class="container">
-        <div class="name_expert">Главная — Клиент</div>
+        <breadcrumbs
+        :wayPages="[
+          {
+            name: 'Главная',
+            route: '/',
+          }
+        ]"
+        currentPage="Клиент"
+        />
         <div class="item_main_expert">
           <div class="content_expert">
             <div class="image_expert expert_image_big">

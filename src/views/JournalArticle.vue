@@ -1,6 +1,18 @@
 <template>
 	<div class="container">
-		<div class="your_question">Главная — Журнал - <span>Журнал</span></div>
+		<breadcrumbs
+        :wayPages="[
+          {
+            name: 'Главная',
+            route: '/',
+          },
+          {
+            name: 'Журнал',
+            route: '/journal',
+          }
+        ]"
+        currentPage="Статья"
+        />
 		<div class="title_section slideInUp wow" data-wow-iteration="1">
 			Статья
 		</div>

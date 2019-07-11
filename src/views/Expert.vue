@@ -2,7 +2,15 @@
 	<div v-if="expertinfo !== null">
 	<div class="section_main_expert">
 			<div class="container">
-				<div class="name_expert">Эксперты — {{expertinfo.name || 'Имя Фамилия'}}</div>
+				<breadcrumbs
+        :wayPages="[
+          {
+            name: 'Эксперты',
+            route: '/experts',
+          }
+        ]"
+        :currentPage="expertinfo.name || 'Имя Фамилия'"
+        />
 				<div class="item_main_expert">
 					<div class="content_expert">
 						<div class="image_expert expert_image_big">

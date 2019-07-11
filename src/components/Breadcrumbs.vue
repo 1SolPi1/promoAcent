@@ -1,5 +1,6 @@
 <template>
-<div class="your_question">
+  <div>
+<div class="your_question" v-if="!question">
   <router-link 
     v-for="(item, index) in wayPages"
     :key = "index"
@@ -8,8 +9,23 @@
     {{item.name}} -
   </router-link>
   <span>
-    Журнал
+    {{currentPage}}
   </span>
+</div>
+<div class="your_question" v-else>
+  <a 
+    href="javascript:void(0)"
+    v-for="(item, index) in wayPages"
+    :key = "index"
+    :to="item.route"
+    @click.prevent="selectCategory(id)"
+  >
+    {{item.name}} -
+  </a>
+  <span>
+    {{currentPage}}
+  </span>
+</div>
 </div>
 </template>
 
@@ -23,6 +39,13 @@
       },
       currentPage:{
         type: String
+      },
+      question:{
+        type: Boolean,
+        default: false
+      },
+      id:{
+        type: Number
       }
     },
     data() {
@@ -34,6 +57,10 @@
     mounted() {
      },
 		methods: {
+    selectCategory(id){
+        this.$store.dispatch('changeSelectCategory', id);
+        this.$router.push('/questions/category/' + id);
+      }
 		},
 		computed: {},
 	}

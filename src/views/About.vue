@@ -1,6 +1,14 @@
 <template>
 <div class="container">
-	<div class="your_question">Главная — <span>О проекте</span></div>
+	<breadcrumbs
+        :wayPages="[
+          {
+            name: 'Главная',
+            route: '/',
+          }
+        ]"
+        currentPage="О проекте"
+        />
 	<div class="title_section slideInUp wow" data-wow-iteration="1">
 		О проекте
 	</div>

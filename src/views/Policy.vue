@@ -1,6 +1,14 @@
 <template>
 <div class="container">
-	<div class="your_question">Главная — <span>Политика конфиденциальности</span></div>
+	<breadcrumbs
+        :wayPages="[
+          {
+            name: 'Главная',
+            route: '/',
+          }
+        ]"
+        currentPage="Политика конфиденциальности"
+        />
 	<div class="title_section slideInUp wow" data-wow-iteration="1">
 		Политика конфиденциальности
 	</div>

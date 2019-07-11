@@ -2,7 +2,15 @@
     <div>
             <div class="section_questions_top">
             <div class="container">
-                <div class="your_question">Ваши вопросы — <span>Психология</span></div>
+                <breadcrumbs
+                  :wayPages="[
+                    {
+                      name: 'Главная',
+                      route: '/',
+                    }
+                  ]"
+                  currentPage="Ваши вопросы"
+                  />
                 <categories 
                   :category="category"
                   :childcategory="selectChildCategory"
