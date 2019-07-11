@@ -113,7 +113,7 @@ $(window).scroll(function(){
         },
         computed: {
           profile(){
-            return this.$store.getters.PROFILE
+            return this.$store.getters.CLIENT
           }
         },
     }

@@ -45,7 +45,7 @@
 		<div class="section_main_experts">
 			<div class="container">
 				<div class="head_pagination">
-					<div class="result_search">По ващему запросу найдено <span>{{experts.length}}</span> эксперт</div>
+					<div class="result_search">По вашему запросу найдено <span>{{experts.length}}</span> эксперт</div>
 					<div class="pagination_page">
 						<div class="number_pagination">1</div>
 						<div class="all_numbers"><span>из</span> 1</div>
@@ -176,7 +176,12 @@ export default {
           }
         })
         .then(response=>{
-					this.experts = response.data
+					let expert = [];
+          for (let key in response.data){
+             expert.push(response.data[key])
+          }
+
+          this.experts = expert.slice(0,-1);
         })
 		}
 	},

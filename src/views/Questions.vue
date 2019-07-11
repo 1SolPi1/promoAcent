@@ -101,13 +101,15 @@
                 <div class="title_experts slideInUp wow" data-wow-iteration="1">Смотрите также экспертов этой категории</div>
                 <div class="row">
                     <profItem
-                      v-for="(item, index) in profi"
-                      :key="index"
+                      v-for="(item, index) in experts"
+                      :key="item.id"
+                      :avatar="item.avatar"
+                      :id="item.id"
                       :name="item.name"
-                      :price="item.price"
+                      :price="item.price_from"
                       :rating="item.rating"
-                      :reviews="item.reviews"
-                      :tops="item.tops"
+                      :reviews="item.comment_count"
+                      :tops="false"
                     />
                 </div>
             </div>
@@ -143,6 +145,21 @@
           login
         },
         props: {},
+        beforeRouteUpdate (to, from, next) {
+          this.childCategory = null;
+          this.selectCategory = null;
+          this.selectChildCategory = null;
+          this.category = null;
+          this.pageCount = 1;
+          this.pageNumber = 1;
+          this.allQuestions = []
+          setTimeout(()=> {  
+              this.getParentCategory(this.$store.getters.SELECTCATEGORY)
+              this.questionsList = this.$store.getters.QUESTIONS
+              this.getAllQuestions(this.pageCount, this.selectCategory.id);
+            }, 500)
+          next()
+        },
         data() {
             return {
               resizeTextarea: false,
@@ -176,6 +193,7 @@
         },
         methods: {
           changeCategory(item){
+            this.$store.dispatch('changeSelectCategory', item);
             this.selectCategory = this.category.find(map => map.id == item)
             setTimeout(()=>{  
                 this.getChildCategory(this.selectCategory);
@@ -185,7 +203,13 @@
           },
           changeSubCategory(item){
             this.pageNumber = 1;
-            this.getAllQuestions(1, item);
+            let category;
+            if (item == 0) {
+              category = this.selectCategory.id
+            }else{
+              category = item
+            }
+            this.getAllQuestions(1, category);
           },
       getParentCategory(id){
         this.category = this.$store.getters.CATEGORIES.map(map => map.category);
@@ -253,7 +277,12 @@
           }
         })
         .then(response=>{
-          this.experts = response.data
+          let expert = [];
+          for (let key in response.data){
+             expert.push(response.data[key])
+          }
+
+          this.experts = expert.slice(0,4);
         })
     }
         },

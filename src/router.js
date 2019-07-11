@@ -15,6 +15,7 @@ const Help = () => import('./views/Help.vue')
 const MapSite = () => import('./views/MapSite.vue')
 const Policy = () => import('./views/Policy.vue')
 const AboutPartners = () => import('./views/AboutPartners.vue')
+const Person = () => import('./views/Person.vue')
 
 const MyConsultation = () => import('./components/Profile/MyConsultation.vue')
 const MainSettings = () => import('./components/Profile/MainSettings.vue')
@@ -46,6 +47,11 @@ let router = new Router({
     {
       path: '/questions',
       name: 'questions',
+      component: Questions
+    },
+    {
+      path: '/questions/category/:id',
+      name: 'questionscategory',
       component: Questions
     },
     {
@@ -102,6 +108,11 @@ let router = new Router({
       path: '/experts/:id',
       name: 'expert',
       component: Expert,
+    },
+    {
+      path: '/person/:id',
+      name: 'person',
+      component: Person
     },
     //Expert Section
     {

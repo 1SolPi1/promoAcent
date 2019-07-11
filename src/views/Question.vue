@@ -2,7 +2,20 @@
 <div v-if="question">
   <div class="section_questions_top">
       <div class="container">
-        <div class="your_question">Ваши вопросы — {{question.category}} — Дети и подростки — <span>{{question.question.title}}...</span></div>
+        <breadcrumbs
+        :wayPages="[
+          {
+            name: 'Ваши вопросы',
+            route: '/questions',
+          },
+          {
+            name: question.category,
+            route: '/questions/category/5',
+          }
+        ]"
+        :currentPage="question.question.title"
+        />
+        <div class="your_question">Ваши вопросы — {{question.category}} — Дети и подростки — <span>{{question.question.title}}</span></div>
       </div>
     </div>
     <userPaysQuestion v-if="creator"/>

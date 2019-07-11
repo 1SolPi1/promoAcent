@@ -44,7 +44,7 @@
 								</svg>
 								<span>{{userInfo.cash}}₽</span>
 							</a>
-							<a href="#" class="chat_mail">
+							<router-link to="/myconsultation" class="chat_mail">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550.795 550.795">
 									<path d="M501.613,491.782c12.381,0,23.109-4.088,32.229-12.16L377.793,323.567c-3.744,2.681-7.373,5.288-10.801,7.767
 			c-11.678,8.604-21.156,15.318-28.434,20.129c-7.277,4.822-16.959,9.737-29.045,14.755c-12.094,5.024-23.361,7.528-33.813,7.528
@@ -65,8 +65,8 @@
 			c25.482-17.705,63.01-43.764,112.742-78.281c14.957-10.447,27.453-23.054,37.496-37.803c10.025-14.749,15.051-30.22,15.051-46.408
 			c0-13.525-4.873-25.098-14.598-34.737C526.461,63.829,514.932,59.013,501.613,59.013z" />
 								</svg>
-								<span>0</span></a>
-							<a href="#" class="chat_mail chat">
+								<span>0</span></router-link>
+							<router-link to="/myconsultation" class="chat_mail chat">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.626 511.626">
 		<path d="M301.927,327.605c30.926-13.038,55.34-30.785,73.23-53.248c17.888-22.458,26.833-46.915,26.833-73.372
 			c0-26.458-8.945-50.917-26.84-73.376c-17.888-22.459-42.298-40.208-73.228-53.249c-30.93-13.039-64.571-19.556-100.928-19.556
@@ -91,8 +91,8 @@
 			/>
 </svg>
 
-								<span>0</span></a>
-							<div class="btn_border btn_sign_in">
+								<span>0</span></router-link>
+								<div class="btn_border btn_sign_in">
 								<userInfoHeader
 									:name="profile.first_name"
 									:surname="profile.last_name"

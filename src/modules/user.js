@@ -3,12 +3,16 @@ import Axios from 'axios'
 Axios.defaults.baseURL = 'http://api.sprosi-online.ru/';
 
 const state = {
-  profile: null,
+  profile: {
+    user_id: null
+  },
   userInfo: {
     expert: false
   },
   client: null,
-  expert: null,
+  expert: {
+    id: 0
+  },
   expertEducation: null
 };
 const getters = {
@@ -22,6 +26,9 @@ const mutations = {
   SET_PROFILE: (state, payload) => {
     state.profile = payload;
   },
+  SET_FALSE_ID: (state, playload) =>{
+    state.profile.user_id = playload;
+  },
   SET_USER_INFO: (state, payload) => {
     state.userInfo = payload;
   },
@@ -33,6 +40,9 @@ const mutations = {
   },
   CLEAR_PROFILE: (state) => {
     state.profile = null;
+    state.client = null;
+    state.expert = null;
+    state.userinfo = null;
   },
   SET_NAME: (state, payload) => {
     state.profile.first_name = payload;
@@ -60,6 +70,9 @@ const actions = {
     commit('SET_NAME', data.name);
     commit('SET_SURNAME', data.surname);
     commit('SET_EMAIL', data.email);
+  },
+  setFalseId: ({commit}, id)=>{
+    commit('SET_FALSE_ID', id)
   }
 };
 

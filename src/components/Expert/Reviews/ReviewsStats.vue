@@ -3,11 +3,11 @@
   <div class="summary_reviews">
     <div class="title_experts">Сводка отзывов</div>
     <ul class="summary_reviews_list">
-      <li>80% <span>(235)</span></li>
-      <li>10% <span>(25)</span></li>
-      <li>5% <span>(10)</span></li>
-      <li>3% <span>(4)</span></li>
-      <li>2% <span>(1)</span></li>
+      <li>0% <span>(0)</span></li>
+      <li>0% <span>(0)</span></li>
+      <li>0% <span>(0)</span></li>
+      <li>0% <span>(0)</span></li>
+      <li>0% <span>(0)</span></li>
     </ul>
   </div>
 </div>

@@ -103,9 +103,10 @@
 							<div class="col-md-10">
 								<div class="title_experts">Последние отзывы</div>
 								<div class="row">
-									<reviewsItem
+									<!-- <reviewsItem
 
-									/>
+									/> -->
+									<p>О эксперте ещё не оставляли отзывы</p>
 								</div>
 								<div class="bottom_btn_review" v-if="expertinfo.comment_count > 6">
 									<a href="#" class="btn_gray"><span>Смотреть <strong>все</strong> отзывы</span></a>

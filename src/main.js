@@ -7,6 +7,7 @@ import Header from "../src/components/Header"
 import Helpers from "../src/components/Helpers"
 import Footer from "../src/components/Footer"
 import Categories from "../src/components/Categories"
+import Breadcrumbs from "../src/components/Breadcrumbs"
 import ExpertProfile from "../src/components/Profile/ExpertProfile"
 import UserProfileMenu from "../src/components/User/UserProfileMenu"
 import UserContentHeader from "../src/components/User/UserContentHeader"
@@ -80,6 +81,7 @@ Vue.component('categories', Categories);
 Vue.component('userchatitem', UserChatItem);
 Vue.component('questionItem', questionItem);
 Vue.component('journalItem', journalItem);
+Vue.component('breadcrumbs', Breadcrumbs);
 // Vue.component('testcomponent',{
 //    render: function (createElement) {
 //     items.map(function (item) {
