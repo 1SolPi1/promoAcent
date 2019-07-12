@@ -2677,7 +2677,7 @@ input[type="submit"],
 
 .select_category .jq-selectbox__dropdown {
     background-color: #ffff;
-    font-size: 26px;
+    font-size: 18px;
     color: #2f2f32;
     width: 100%;
     min-width: 240px;
@@ -3166,7 +3166,10 @@ input.radio, input.checkbox {
     border: 2px #f7f7f7 dashed;
     border-radius: 2px;
 }
-
+.block_question:hover{
+    box-shadow: 0 0 13px #e0e0e0;
+    cursor: pointer;
+}
 .conslt .block_question {
     border-color: #fcfcfc;
 }

@@ -3,14 +3,16 @@
   <div class="item_review slideInUp wow" data-wow-iteration="1">
     <div class="head_item_review">
       <div class="left_head_review">
-        <div class="name_item_review">Александр</div>
-        <div class="date_item_review">10 февраля 2018</div>
+        <div class="name_item_review">{{name || 'Имя Фамилия'}}</div>
+        <div class="date_item_review">{{getDate()}}</div>
       </div>
       <!-- react_2, react_3 -->
       <div class="reaction_review react_1"><span>Оценка</span></div> 
+<!--       <div class="reaction_review react_2"><span>Оценка</span></div> 
+      <div class="reaction_review react_3"><span>Оценка</span></div>  -->
     </div>
     <div class="text_item_review">
-      <p>В целом, конечно, начало повседневной работы по формированию позиции обеспечивает широкому кругу (специалистов) участие в формировании соотвующих условий активизации. Разнообразный и богатый опыт говорит нам, что выбранный нами инновационный путь выявляет срочную потребность форм воздействия.</p>
+      <p>{{desc}}</p>
     </div>
   </div>
 </div> 
@@ -21,7 +23,20 @@
     name: "ReviewsItem",
     components: {
     },
-    props: {},
+    props: {
+      name:{
+        type: String,
+        default: ' Имя фамилия '
+      },
+      desc:{
+        type: String,
+        default: ''
+      },
+      date:{
+        type: String,
+        default: '10 Июня 2019'
+      }
+    },
     data() {
 			return {
       }
@@ -31,6 +46,23 @@
     mounted() {
      },
 		methods: {
+      getDate(){
+        const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
+
+      let time = new Date(this.date);
+      let year = time.getFullYear();
+      let day = time.getDate();
+      let month = time.getMonth();
+
+      if(day > months[month].days){
+        day = 1
+        month += 1
+      }
+
+      day < 10? day = '0' + day : day;
+
+      return day + ' ' + months[month].name + ' ' + year
+      },
 		},
 		computed: {},
 	}

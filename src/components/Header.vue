@@ -41,7 +41,8 @@
                             </span>
                         </span>
                         <div class="search_main">
-                            <button class="btn_search" @click="showSearch = !showSearch"></button>
+                            <button class="btn_search" @click="showSearchQuest = !showSearchQuest" v-if="$route.path == '/questions'"></button>
+                             <button class="btn_search" @click="showSearchExp = !showSearchExp" v-if="$route.path == '/experts'"></button>
                         </div>
                         <ul class="header_nav">
                             <li :class="{'active': $route.path == '/questions'}"> <router-link to="/questions">Ваши вопросы</router-link></li>
@@ -56,8 +57,14 @@
         </header>
         <chat />
         <search
-          v-if="showSearch"
-          @close="showSearch = !showSearch"
+          v-if="showSearchQuest"
+          :questions="true"
+          @close="showSearchQuest = !showSearchQuest"
+        />
+        <search
+          v-if="showSearchExp"
+          :experts="true"
+          @close="showSearchExp = !showSearchExp"
         />
     </div>
 </template>
@@ -78,7 +85,8 @@
         data() {
             return {
                 showHiddenMenu: false,
-                showSearch: false
+                showSearchQuest: false,
+                showSearchExp: false
                 }
         },
         created() {

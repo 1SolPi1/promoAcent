@@ -4,7 +4,7 @@
     <div class="clearfix">
       <div class="znanie first">
         <p>Основная<span>*</span></p>
-        <select id="multi" multiple="multiple">
+        <select id="multi">
           <option 
             v-for="(item, index) in category"
             :key="index"
@@ -17,12 +17,13 @@
       <div class="znanie">
         <p>Дополнительная</p>
         <select id="multi-2" multiple="multiple"> 
-          <option value="знание1">знание1</option>
-          <option value="знание2">знание2</option>
-          <option value="знание3">знание3</option>
-          <option value="знание4">знание4</option>
-          <option value="знание5">знание5</option>
-          <option value="знание6">знание6</option>
+          <option 
+            v-for="item in childcategory"
+            :value="item.id"
+            :key="item.id"
+            >
+            {{item.name}}
+          </option>
         </select>
       </div>
       <button class="add_new"></button>
@@ -40,11 +41,26 @@
     props: {
       category:{
         required: true
+      },
+      childcategory: Array,
+      selectedCategory: Object,
+      selectedSubCategory:{
+        type: Object,
+        default:()=>{
+          id: 0
+        }
       }
     },
     data() {
 			return {
       }
+    },
+    watch:{
+       childcategory(){
+        setTimeout(function() {  
+         $('#multi-2').multiselect('rebuild');
+        }, 100) 
+      },
     },
     created() {
     },

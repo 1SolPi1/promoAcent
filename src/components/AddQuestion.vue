@@ -146,7 +146,7 @@ export default {
     const vm = this
     setTimeout(function() {  
           vm.getSelectCategory(1)
-        }, 500)
+    }, 500)
   },
   methods: {
     changeCategory(item){

@@ -40,7 +40,11 @@
     components: {
     },
     props: {
-      expert:{required: true}
+      expert:{required: true},
+      search:{
+        type: Boolean,
+        default: false
+      }
     },
     data() {
 			return {
@@ -49,7 +53,9 @@
     created() {
     },
     mounted() {
-      new WOW().init();
+      if(!this.search){
+        new WOW().init();
+      }
      },
 		methods: {
       itemStar(){

@@ -1,6 +1,6 @@
 <template>
 <div class="choose_question">
-  <span>Вопросы по </span>
+  <span style="margin-right: 10px;">Вопросы по</span>
     <select id="basecategory" class="select_category">
      <option
       v-for="(item, index) in category"

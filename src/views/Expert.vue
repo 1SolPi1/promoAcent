@@ -40,13 +40,14 @@
 						<div class="text_expert">
 							<p>{{expertinfo.about_us || 'Эксперт не оставил о себе информацию'}}</p>
 						</div>
-						<a href="#" v-if="!creator" class="btn_chat btn_chat_big" @click="$chatinfo.opens({
+						<a href="javascript:void(0)" v-if="!creator" class="btn_chat btn_chat_big" @click="$chatinfo.opens({
 							name: expertinfo.name || 'Имя Фамилия',
 							avatar: expertinfo.avatar,
 							user_id: $store.getters.PROFILE.user_id,
 							expert_id: expertinfo.id,
 							author: 0 
 						})">написать в чат</a>
+						<a href="javascript:void(0)" v-if="!creator" class="btn_add" @click="reviewForms = !reviewForms">оставить отзыв</a>
 					</div>
 				</div>
 			</div>
@@ -110,10 +111,16 @@
 							/>
 							<div class="col-md-10">
 								<div class="title_experts">Последние отзывы</div>
-								<div class="row">
-									<!-- <reviewsItem
-
-									/> -->
+								<div class="row" v-if="reviews.length > 0">
+									<reviewsItem
+										v-for="item in reviews"
+										:key="item.id"
+										:name="null"
+										:desc="item.description"
+										:date="item.create_at"
+									/>
+								</div>
+								<div class="row" v-else>
 									<p>О эксперте ещё не оставляли отзывы</p>
 								</div>
 								<div class="bottom_btn_review" v-if="expertinfo.comment_count > 6">
@@ -142,12 +149,19 @@
 		<moreExpertList
 			v-if="!userinfo.expert"
 		/>
+		<reviewForm
+			v-if="reviewForms"
+			:id="expertinfo.id"
+			@refresh="refresh()"
+			@close="reviewForms = !reviewForms"
+		/>
 	</div>
 </template>
 <script>
 	import expertStats from '@/components/Expert/Profile/ExpertStats'
 	import reviewsStats from '@/components/Expert/Reviews/ReviewsStats'
 	import reviewsItem from '@/components/Expert/Reviews/ReviewsItem'
+	import reviewForm from '@/components/Expert/Reviews/FormReview'
 	import expertAnswerItem from '@/components/Expert/ExpertAnswer/ExpertAnswerItem'
 	import expertBonus from '@/components/Expert/ExpertBonus'
 	import moreExpertList from '@/components/Expert/MoreExpert/MoreExpertList'
@@ -159,12 +173,15 @@ export default {
 		reviewsItem,
 		expertAnswerItem,
 		moreExpertList,
-		expertBonus
+		expertBonus,
+		reviewForm
 	},
 	props: {},
 	data() {
 		return {
-			expertinfo: null
+			expertinfo: null,
+			reviewForms: false,
+			reviews:[]
 		}
 	},
 	created() {
@@ -172,11 +189,16 @@ export default {
 	},
 	mounted() {
 		new WOW().init();
-		this.getExpert()
+		this.getExpert();
+		this.getReviews();
 	},
 	methods: {
 		itemStar(){
         return Math.trunc(this.expertinfo.rating / 2)
+      },
+      refresh(){
+      	this.getExpert();
+      	this.getReviews();
       },
 		getExpert(){
         // let params = new URLSearchParams();
@@ -195,7 +217,21 @@ export default {
         .then(response=>{
 					this.expertinfo = response.data
         })
-		}
+		},
+		getReviews(){
+        this.$http({
+          method: 'GET',
+          url: 'expert/comment/index?id=' + this.$route.params.id,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+					this.reviews = response.data
+        })
+		},
+
 	},
 	computed: {
 		domen(){

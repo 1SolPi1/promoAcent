@@ -29,6 +29,7 @@
 							<div class="section_content_tabs">
 								<div class="tab-content">
 									<div class="tab-pane chat-tab active" id="tab1">
+										<div v-if="chatList.clientExpertChat.length > 0">
 										<p>Как клиент</p>
 										<userchatitem
 											v-for="item in chatList.clientExpertChat"
@@ -57,6 +58,7 @@
 																		author: 1 
 																	})"
 										/>
+										</div>
 									</div>
 									<div class="tab-pane conslt" id="tab2">
 									<div class="clearfix">
@@ -138,13 +140,15 @@
 										</svg><b>(1)</b></span>
 																			</div>
 																			</div>
+									<div v-if="listAnswers.length > 0">										
 									<expertAnswerItem
 										:maincab="true"
-										v-for="item in listAnswers[0]"
+										v-for="item in listAnswers"
 										:key="item.answer.id"
 										:answer="item.answer"
 										:question="item.question"
 									/>
+									</div>
 									</div>
 									<div class="tab-pane conslt" id="tab3">
 										<div class="clearfix">
@@ -317,8 +321,9 @@
 										</div>
 									</div>
 									<div class="tab-pane conslt" id="tab4">
+										<div v-if="listQuestions.length > 0">
 										<questionItem
-                        v-for="(item, index) in listQuestions[0]"
+                        v-for="(item, index) in listQuestions"
                         :key="item.question.id"
                         :category="item.category"
                         :countAnswer="item.answer_count"
@@ -329,6 +334,7 @@
                         :title="item.question.title"
                         :id="item.question.id"
                     />
+                    </div>
 									</div>
 									<div class="tab-pane conslt" id="tab5">
 									
@@ -355,15 +361,12 @@ export default {
 				clientExpertChat: [],
 				expertExpertChat:[]
 			},
-			listQuestions: null,
-			listAnswers:{
-				0:[]
-			}
+			listQuestions: [],
+			listAnswers:[]
 		} 
 	},
 	created(){
-		this.getQuestions();
-		this.getAnswers();
+		this.getProfile()
 	},
 	mounted(){
 		// eslint-disable-next-line
@@ -384,9 +387,25 @@ export default {
 					this.chatList = response.data
         })
 		},
-		getQuestions(){
-			let params = new URLSearchParams();
-        params.append('client_id', this.$store.getters.CLIENT.id);
+		getProfile(){
+			this.$http({
+          method: 'GET',
+          url: 'user/profile/show',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.getQuestions(response.data.client.id)
+					if(response.data.expert !== null){
+						this.getAnswers(response.data.expert[0].id)
+					}
+        })
+		},
+		getQuestions(id){
+				let params = new URLSearchParams();
+        params.append('client_id', id);
 
         this.$http({
           method: 'POST',
@@ -398,12 +417,12 @@ export default {
           }
         })
         .then(response =>{
-					this.listQuestions = response.data
+					this.listQuestions = response.data[0]
         })
 		},
-		getAnswers(){
+		getAnswers(id){
 			let params = new URLSearchParams();
-        params.append('expert_id', this.$store.getters.EXPERT.id);
+        params.append('expert_id', id);
 
         this.$http({
           method: 'POST',
@@ -415,7 +434,7 @@ export default {
           }
         })
         .then(response =>{
-					this.listAnswers = response.data
+					this.listAnswers = response.data[0]
         })
 		},
 	}

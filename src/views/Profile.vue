@@ -79,6 +79,8 @@
 										<categoryExpert
 											@changeKnowledge="changeKnowledge"
 											@changeSubKnowledge="changeSubKnowledge"
+											:childcategory="selectChildCategory"
+											:selectedCategory="selectCategory"
 											:category="categori"
 										/>
 										<div class="col-xs-12">
@@ -175,6 +177,11 @@ export default {
 	},
   data(){
 		return{
+			category: null,
+	        childCategory: null,
+	        selectCategory: null,
+	        selectSubCategory: null,
+	        selectChildCategory: null,
 			name: null,
 			login: null,
 			minute: 0,
@@ -211,7 +218,11 @@ export default {
       spinnerBigSize: [30, 32, 0],
       spinnerIncDecOnly: true
     });
-		
+	const vm = this
+    setTimeout(function() {  
+          vm.getSelectCategory(1)
+    }, 500)
+
     function customRange(input) {
       return {
         minTime: (input.id === 'timeTo' ?
@@ -244,13 +255,19 @@ export default {
 			this.experience = item
 		},
 		changeKnowledge(item){
-			let arr = this.knowledge;
-        if (arr.find(map => map === item) === undefined) {
-          arr.push(item)
-        }else{
-          arr.splice(arr.indexOf(item), 1);
-        }
-		},
+	      this.selectCategory = this.categori.find(map => map.id == item)
+	      setTimeout(()=>{  
+	        this.getChildCategory(this.selectCategory);
+	        this.selectSubCategory = null;
+	      }, 300)
+	    },
+	    getSelectCategory(id){
+	      this.selectCategory = this.categori.find(item => item.id === id)
+	      this.getChildCategory(this.selectCategory)
+	    },
+	    getChildCategory(arr){
+	      this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
+	    },
 		changeSubKnowledge(item){
 			let arr = this.subKnowledge;
         if (arr.find(map => map === item) === undefined) {
@@ -315,7 +332,7 @@ export default {
 		},
 		addCategoryExpert(){
 			let params = new URLSearchParams();
-        params.append('expert_id', 1);
+        params.append('expert_id', this.expert.id);
         params.append('category_id', this.knowledge);
 
         this.$http({
@@ -329,6 +346,10 @@ export default {
         })
         .then(()=>{
 					this.$store.dispatch('getProfile');
+					this.$toast.success({
+						title:'Успешно',
+						message:'Новая информация сохранена'
+					})
         })
 		}
 	},
@@ -347,7 +368,10 @@ export default {
 		},
 		experteducation(){
 			return this.$store.getters.EXPERTEDUCATION
-		}
+		},
+	    childCategories(){
+	      return this.$store.getters.CHILDCATEGORI
+	    }
 	},
 }
 </script>

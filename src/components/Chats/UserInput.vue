@@ -20,10 +20,10 @@
         :style="{color: colors.userInput.text}"
       >
       </div>
-      <div class="sc-user-input--buttons">
+      <div class="sc-user-input--buttons" @click="_submitText()">
         <div class="sc-user-input--button"></div>
         <div class="sc-user-input--button">
-          <SendIcon :onClick="_submitText" :color="colors.userInput.text" />
+          <SendIcon :color="colors.userInput.text" />
         </div>
       </div>
     </form>

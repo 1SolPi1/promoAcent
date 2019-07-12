@@ -18,7 +18,7 @@
     v-for="(item, index) in wayPages"
     :key = "index"
     :to="item.route"
-    @click.prevent="selectCategory(id)"
+    @click.prevent="selectCategory($store.getters.SELECTCATEGORY)"
   >
     {{item.name}} -
   </a>
@@ -44,7 +44,7 @@
         type: Boolean,
         default: false
       },
-      id:{
+      idCat:{
         type: Number
       }
     },

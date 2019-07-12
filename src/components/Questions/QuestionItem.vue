@@ -1,17 +1,17 @@
 <template>
   <div class="col-md-6">
-    <div class="block_question slideInUp wow" data-wow-iteration="1">
+    <div class="block_question slideInUp wow" data-wow-iteration="1" @click="openQuestion()">
       <div class="name_question">{{title}}</div>
       <div class="price_question">{{price}} ₽</div>
       <div class="category_question">{{category}}</div>
       <div class="status_question" v-if="status !== 0">Решено</div>
         <div class="wrap_link_question">
-          <router-link :to="{ path: `/questions/${id}` }" class="link_gray">Читать полностью</router-link>
+          <a href="javascript:void(0)" class="link_gray" @click="openQuestion()">Читать полностью</a>
         </div>
       <div class="bottom_question clearfix">
         <div class="data_question">{{getDate()}}</div>
         <div class="user_question">{{person}}</div>
-          <router-link :to="{ path: `/questions/${id}` }" class="all_questions_user">всего <span>{{countAnswer}}</span> ответа</router-link>
+          <a href="javascript:void(0)" @click="openQuestion()" class="all_questions_user">всего <span>{{countAnswer}}</span> ответа</a>
         </div>
       </div>  
   </div>
@@ -47,12 +47,16 @@
         default: 0
       },
       status:{
-        type: String,
-        default: 'not'
+        type: Number,
+        default: 0
       },
       title:{
         type: String,
         default: 'title1'
+      },
+      question:{
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -63,7 +67,9 @@
     },
     created() {},
     mounted() {
-      new WOW().init();
+      if(!this.question){
+        new WOW().init();
+      }
     },
     methods: {
       getDate(){
@@ -82,6 +88,10 @@
       day < 10? day = '0' + day : day;
 
       return day + ' ' + months[month].name + ' ' + year
+      },
+      openQuestion(){
+        this.$emit('closesearch')
+        this.$router.push('/questions/' + this.id);
       }
     },
     computed: {},

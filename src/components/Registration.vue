@@ -97,10 +97,13 @@
 									}
                 })
                 .catch(error =>{
-                	this.$toast.error({
+                	let mass = error.response.data.error
+                	for (let i in mass){
+         	 					this.$toast.error({
 											title:'Ошибка',
-					    				message: error.response.data.message
+					    				message: mass[i]
 										})
+        					}
                 })
 				}
 			},

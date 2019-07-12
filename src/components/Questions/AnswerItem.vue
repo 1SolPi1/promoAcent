@@ -152,7 +152,8 @@
             <li><i class="glyphicon glyphicon-star"></i></li>
             <li><i class="glyphicon glyphicon-star"></i></li>
           </ul>
-          <img :src="domen + avatar" alt="alt">
+           <img src="@/assets/img/svg/avatar.svg" alt="alt" v-if="avatar === null">
+          <img :src="domen + avatar" alt="alt" v-else>
         </div>
         <div class="info-blk">
           <p class="name">{{name}}</p>

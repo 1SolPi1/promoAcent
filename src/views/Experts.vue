@@ -14,9 +14,9 @@
 				:name="item.name"
 				:image="item.image"
 				:clases="item.class"
-				:active="item.id === selectCategory.id ? true:false"
-				@changeitem="changeCategory(item)"
-              />	
+				:active="item.id == selectCategory.id ? true:false"
+				@changeitem="changeCategory(item.id)"
+              />  
             </slick>
 					</ul>
 				</div>
@@ -31,6 +31,7 @@
 						<sortField
 							:childcategory="selectChildCategory"
 							@getexperts="getExpert"
+							@selectsubcategory="changeSubCategory"
 						/>
 					</div>
 					<div class="col-lg-5 col-md-4">
@@ -53,7 +54,7 @@
 						<button class="btn_pagination next_pagination"></button>
 					</div>
 				</div>
-
+				<div v-if="experts.length > 0">
 				<expertItem
 					v-for="(item, index) in experts"
 					:key="index"
@@ -66,7 +67,7 @@
 							author: 0 
 						})"
 				/>
-
+				</div>
 				<div class="bottom_pagination">
 					<div class="pagination_page">
 						<div class="number_pagination">1</div>
@@ -95,7 +96,6 @@ export default {
   name: "Partners",
   data(){
 	return{
-		selectCategory: null,
 		experts:[],
 		slickOptions: {
 				arrows: true,
@@ -134,37 +134,45 @@ export default {
       childCategory: null,
       selectChildCategory: null,
       selectCategory: null,
+      selectSubCategory: null,
       sortItem:{
-      	sex: null
+      	sex: null,
+      	online: null
       }
     }
 	},
 	created(){
-		this.selectCategory = this.categoryItem[0]
 	},
 	methods:{
-		getParentCategory(id){
-        this.category = this.$store.getters.CATEGORIES.map(map => map.category);
-        this.childCategory = this.$store.getters.CATEGORIES.map(map => map.child);
-        this.getSelectCategory(id);
-      },
-      getSelectCategory(id){
-        this.selectCategory = this.category.find(item => item.id === id)
-        this.getChildCategory(this.selectCategory)
-      },
-      getChildCategory(arr){
-        this.selectChildCategory = this.childCategory.filter(map => map.parent_id === arr.id)
-      },
-		changeCategory(item){
-			this.selectCategory = item
-		},
-		getExpert(sex){
-			this.sortItem.sex = sex
+      changeCategory(item){
+      this.selectCategory = this.categories.find(map => map.id == item)
+      setTimeout(()=>{  
+        this.getChildCategory(this.selectCategory);
+        this.selectSubCategory = null;
+      }, 300)
+    },
+    changeSubCategory(item){
+      this.selectSubCategory= this.selectChildCategory.find(map => map.id == item)
+    },
+    getSelectCategory(id){
+      this.selectCategory = this.categories.find(item => item.id === id)
+      this.getChildCategory(this.selectCategory)
+    },
+    getChildCategory(arr){
+      this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
+    },
+		getExpert(data){
+			this.sortItem.sex = data.sex
+			this.sortItem.online = data.online
 			this.getExperts()
 		},
 		getExperts(){
+				// let categoryId;
+    //   	this.selectSubCategory ? categoryId = this.selectSubCategory.id : this.selectCategory.id;
         let params = new URLSearchParams();
+        // params.append('category_id', categoryId);
         params.append('sex', this.sortItem.sex);
+        params.append('online', this.sortItem.online)
 
         this.$http({
           method: 'POST',
@@ -186,16 +194,24 @@ export default {
 		}
 	},
 	mounted(){
-		new WOW().init();
 		// eslint-disable-next-line
 		$('select').styler();
-		this.getParentCategory(1)
+    const vm = this
+    setTimeout(function() {  
+          vm.getSelectCategory(1)
+        }, 500)
 		this.getExperts()
 	},
 	computed:{
 		categoryItem(){
 			return this.$store.getters.CATEGORYITEM
-		}
+		},
+		categories(){
+      return this.$store.getters.CATEGORI
+    },
+    childCategories(){
+      return this.$store.getters.CHILDCATEGORI
+    }
 	}
 }
 </script>

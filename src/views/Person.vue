@@ -20,7 +20,7 @@
               <div class="name_expert_big">Игорь Летучий</div>
               <div class="experience_expert">Зарегистрирован: 19.06.2019</div>
               <div class="experience_expert">Последний раз был в сети: 19.06.19 20:21</div>
-              <div class="experience_expert status_expert">Статус: Серебряный</div>
+              <div class="experience_expert status_expert">Статус: Серебряный <b>s</b></div>
             </div>
           </div>
         </div>
@@ -144,6 +144,12 @@
 
 .status_expert{
   margin-left: 0;
+}
+
+.status_expert b{
+  font-size: 16px;
+    color: #4d2ed1;
+    margin-right: 5px;
 }
 
 .question_item{

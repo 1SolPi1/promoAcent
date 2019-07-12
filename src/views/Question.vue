@@ -14,7 +14,7 @@
           }
         ]"
         :currentPage="question.question.title"
-        :id="question.question.id"
+        :idCat="question.question.id"
         :question="true"
         />
       </div>

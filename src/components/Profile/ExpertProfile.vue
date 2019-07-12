@@ -1,7 +1,7 @@
 <template>
 <div class="profile-menu">
 	<div class="image_expert expert_image_big">
-		<div class="status__expert online_expert my_profile"></div>
+		<div class="status__expert online_expert my_profile" @click="upload = !upload"></div>
 		<div class="rating_expert">8.9</div>
 		<ul class="rating_item value-4">
 			<li><i class="glyphicon glyphicon-star"></i></li>
@@ -76,13 +76,22 @@
 					</router-link>
 				</li>
 			</ul>
+			<uploadAvatar 
+				v-if="upload"
+				@close="upload = !upload"
+			/>
 		</div>
 </template>
 <script>
+	import uploadAvatar from '@/components/UploadAvatar'
 export default {
   name: "ExpertProfile",
+  components:{
+  	uploadAvatar
+  },
   data(){
 		return{
+			upload: false
 		} 
 	},
 	mounted(){

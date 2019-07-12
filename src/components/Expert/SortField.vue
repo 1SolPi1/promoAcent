@@ -25,27 +25,27 @@
     <div class="sorting_questions">
       <span class="title_sorting">Сортировать:</span>
       <div class="item_sorting">
-        <input type="radio" name="radio" value="1" class="radio" id="radio1" />
-        <label for="radio1"><img src="@/assets/img/sort5.png" alt="alt">на сайте</label>
+        <input type="radio" name="radio" value="online" class="radio" id="radio1" v-model="items" />
+        <label for="radio1" ><img src="@/assets/img/sort5.png" alt="alt">на сайте</label>
       </div>
       <div class="item_sorting">
-        <input type="radio" checked name="radio" value="1" class="radio" id="radio2" />
+        <input type="radio" checked name="radio" value="rating" class="radio" id="radio2" v-model="items"/>
         <label for="radio2"><img src="@/assets/img/sort6.png" alt="alt">рейтингу</label>
       </div>
       <div class="item_sorting">
-        <input type="radio" name="radio" value="1" class="radio" id="radio3" />
+        <input type="radio" name="radio" value="akcii" class="radio" id="radio3"  v-model="items"/>
         <label for="radio3"><img src="@/assets/img/sort7.png" alt="alt">акции</label>
       </div>
       <div class="item_sorting">
-        <input type="radio" name="radio" value="1" class="radio" id="radio4" />
+        <input type="radio" name="radio" value="price" class="radio" id="radio4"  v-model="items"/>
         <label for="radio4"><img src="@/assets/img/sort2.png" alt="alt">стоимости</label>
       </div>
       <div class="item_sorting">
-        <input type="radio" name="radio" value="1" class="radio" id="radio5" />
+        <input type="radio" name="radio" value="date" class="radio" id="radio5"  v-model="items"/>
         <label for="radio5"><img src="@/assets/img/sort1.png" alt="alt">дате</label>
       </div>
       <div class="item_sorting">
-        <input type="radio" name="radio" value="1" class="radio" id="radio6" />
+        <input type="radio" name="radio" value="1" class="radio" id="radio6"/>
         <label for="radio6"><img src="@/assets/img/svg/favorite-heart-button.svg" alt="alt">мои эксперты</label>
       </div>
     </div>
@@ -64,13 +64,40 @@
     data() {
 			return {
         sex: 1,
-        rating: 6
+        rating: 6,
+        items: null,
+        child: null,
+        sortItems:{
+          online: null,
+          rating: null,
+          akcii: null,
+          price: null,
+          date: null
+        }
       }
+    },
+    watch:{
+      items(item){
+        for (let i in this.sortItems){
+          this.sortItems[i] = null
+        }
+        this.sortItems[item] = 1
+      },
+      childcategory(){
+        setTimeout(function() {  
+         $('#subcategory').trigger('refresh'); 
+        }, 100) 
+      },
     },
     created() {
     },
     mounted() {
       var vm = this;
+      $('#subcategory').styler({
+        onSelectClosed: function() {
+           vm.$emit('selectsubcategory', $(this).find(":selected").val())
+            }
+       });
        $('#sex').styler({
         onSelectClosed: function() {
             vm.sex = $(this).find(":selected").val();
@@ -89,7 +116,10 @@
      },
 		methods: {
       getExperts(){
-        this.$emit('getexperts', this.sex)
+        this.$emit('getexperts', {
+          sex: this.sex,
+          online: this.sortItems.online
+        })
       }
 		},
 		computed: {},
