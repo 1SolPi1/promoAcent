@@ -1,5 +1,5 @@
 <template>
-<div class="tab-pane akcii" id="tab2">
+<div>
  <div class="clearfix">
    <div class="col-xs-12 col-md-8 col-lg-9">
      <p>Заголовок<span>*</span></p>

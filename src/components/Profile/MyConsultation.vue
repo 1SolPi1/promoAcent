@@ -398,9 +398,7 @@ export default {
         })
         .then(response =>{
 					this.getQuestions(response.data.client.id)
-					if(response.data.expert !== null){
-						this.getAnswers(response.data.expert[0].id)
-					}
+					this.getAnswers(response.data.expert[0].id)
         })
 		},
 		getQuestions(id){

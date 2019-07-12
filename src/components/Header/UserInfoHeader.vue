@@ -5,7 +5,7 @@
 			<img :src="domen + avatar" class="avatar" alt="alt" v-else/>
 			<span class="activity my_profile"></span>
 		</div>
-		<span>{{name || 'Имя'}} {{surname || 'Фамилия'}}</span>
+		<span>{{name || 'Имя'}} {{surname || ''}}</span>
 	</div>
 </template>
 

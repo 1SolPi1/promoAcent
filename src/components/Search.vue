@@ -157,7 +157,7 @@ body{
 .searchField{
   height: 125px;
   min-width: 300px;
-  width: 50%;
+  width: 90%;
   background: white;
   z-index: 1900;
   margin: 0 15px;
@@ -211,7 +211,7 @@ margin-left: 6%;
 
 .searchAnswer{
   min-width: 300px;
-  width: 50%;
+  width: 90%;
   background: white;
   z-index: 1900;
   margin: 0 15px;

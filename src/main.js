@@ -53,6 +53,7 @@ require('./assets/css/fonts.css');
 require('./assets/css/main.css');
 require('./assets/css/animate.min.css');
 require('./assets/css/media.css');
+require('./assets/css/js-offcanvas.css');
 
 Vue.config.productionTip = false
 

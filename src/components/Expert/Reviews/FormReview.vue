@@ -4,7 +4,16 @@
       <div @click="$emit('close')" class="closeButton btn_add"></div>
       <div class="title_section">Оставьте отзыв</div>
         <form class="form_help">
-          <input type="text" placeholder="Название" v-model="title" required class="titleReview">
+          <div class="title_section tittle_icon">Выберите оценку</div>
+          <div>
+            <ul class="summary_reviews_list">
+              <li class="review_list_item" :class="{active: select === 1}" @click="select = 1"></li>
+              <li class="review_list_item" :class="{active: select === 2}" @click="select = 2"></li>
+              <li class="review_list_item" :class="{active: select === 3}" @click="select = 3"></li>
+              <li class="review_list_item" :class="{active: select === 4}" @click="select = 4"></li>
+              <li class="review_list_item" :class="{active: select === 5}" @click="select = 5"></li>
+            </ul>
+          </div>
           <textarea placeholder="Отзыв" v-model="description" class="descReview"></textarea>
           <button class="btn_blue"  @click.prevent="submit()">Отправить</button>
         </form>
@@ -27,7 +36,8 @@
     data() {
 			return {
         title: null,
-        description: null
+        description: null,
+        select: 0
       }
     },
     created() {
@@ -38,7 +48,6 @@
       submit(){
         let params = new URLSearchParams();
             params.append('expert_id', this.id);
-            params.append('title', this.title);
             params.append('description', this.description);
 
             this.$http({
@@ -132,5 +141,33 @@
     resize: none;
     border-radius: 5px;
     height: 100px;
+}
+
+.summary_reviews_list{
+  display: flex;
+  flex-direction: row;
+}
+
+.review_list_item{
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.active{
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.active::before{
+  content: "";
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.tittle_icon{
+  font-size: 14px;
+  line-height: 14px;
+  text-align: left;
+  
 }
 </style>

@@ -86,9 +86,10 @@
 									<label for="radio9">решены</label>
 								</div>
 							</div>
+							<div v-if="listQuestions.length > 0">
 										<p>У Вас <span>{{listQuestions.length}}</span> вопрос</p>
 											<questionItem
-                        v-for="(item, index) in listQuestions[0]"
+                        v-for="(item, index) in listQuestions"
                         :key="item.question.id"
                         :category="item.category"
                         :countAnswer="item.answer_count"
@@ -99,6 +100,7 @@
                         :title="item.question.title"
                         :id="item.question.id"
                     />
+              </div>
 											</div>
 										</div>
 									</div>
@@ -124,9 +126,7 @@ export default {
 	props: {},
 	data() {
 		return {
-			listQuestions:{
-				0:[]
-			},
+			listQuestions:{},
 			chatList: {
 				clientExpertChat: [],
 				expertExpertChat:[]
@@ -135,13 +135,26 @@ export default {
 	},
 	created() {},
 	mounted() {
-		this.getQuestions();
+		this.getProfile()
 		this.getChats();
 	},
 	methods: {
-		getQuestions(){
-			let params = new URLSearchParams();
-        params.append('client_id', this.$store.getters.USERINFO.id);
+		getProfile(){
+			this.$http({
+          method: 'GET',
+          url: 'user/profile/show',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.getQuestions(response.data.client.id)
+        })
+		},
+		getQuestions(id){
+				let params = new URLSearchParams();
+        params.append('client_id', id);
 
         this.$http({
           method: 'POST',
@@ -153,7 +166,7 @@ export default {
           }
         })
         .then(response =>{
-					this.listQuestions = response.data
+					this.listQuestions = response.data[0]
         })
 		},
 		getChats(){

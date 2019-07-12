@@ -7,7 +7,7 @@
 				<img :src="domen + profile.avatar" alt="alt" class="avatar" v-else>
 			</div>
 			<div class="sh_info">
-				<div class="name_expert_big checked">{{profile.first_name || 'Имя'}} {{profile.last_name || 'Фамилия'}}</div>
+				<div class="name_expert_big checked">{{profile.first_name || 'Имя'}} {{profile.last_name || ''}}</div>
 			</div>
 			<ul class="menu">
 				<li :class="{'active': $route.path == '/userprofile'}">

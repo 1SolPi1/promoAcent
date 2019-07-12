@@ -47,7 +47,7 @@
 							expert_id: expertinfo.id,
 							author: 0 
 						})">написать в чат</a>
-						<a href="javascript:void(0)" v-if="!creator" class="btn_add" @click="reviewForms = !reviewForms">оставить отзыв</a>
+						<a href="javascript:void(0)" v-if="token" class="btn_add" @click="reviewForms = !reviewForms">оставить отзыв</a>
 					</div>
 				</div>
 			</div>
@@ -246,7 +246,9 @@ export default {
 			}else{
 				return false
 			}
-			
+		},
+		token(){
+			return localStorage.getItem('token')
 		}
 	},
 }

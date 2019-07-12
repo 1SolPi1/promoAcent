@@ -9,17 +9,17 @@
 						<div class="profile-header">
 							<h3>Редактировать профиль</h3>
 							<div class="buttons">
-								<a class="akcii" href="#">Мои акции</a>
-								<a class="pro" href="#">Стать PRO</a>
+								<a class="akcii" href="javascript:void(0)" @click="changeShow('akcii')">Мои акции</a>
+								<a class="pro" href="javascript:void(0)" @click="changeShow('pro')">Стать PRO</a>
 							</div>
 						</div>
 						<div class="profile-content">
 							<div class="section_nav_expert">
 								<div class="head_nav_expert">
 									<ul class="nav nav-tabs">
-										<li class="active"><a href="#tab1" data-toggle="tab">Редактировать</a></li>
-										<li><a href="#tab2" data-toggle="tab">Мои акции</a></li>
-										<li><a href="#tab3" data-toggle="tab">Стать PRO</a></li>
+										<li :class="{active: listSectionMenu.home}"><a href="#tab1" data-toggle="tab">Редактировать</a></li>
+										<li :class="{active: listSectionMenu.akcii}"><a href="#tab2" data-toggle="tab">Мои акции</a></li>
+										<li :class="{active: listSectionMenu.pro}"><a href="#tab3" data-toggle="tab">Стать PRO</a></li>
 									</ul>
 									<a href="#" class="vacation">
 										<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -33,15 +33,15 @@
 							</div>
 							<div class="section_content_tabs">
 								<div class="tab-content">
-									<div class="tab-pane edit active" id="tab1">
+									<div class="tab-pane edit" :class="{active: listSectionMenu.home}" id="tab1">
 									<div class="clearfix">
 										<div class="col-xs-12 col-md-4">
 											<p>ФИО<span>*</span></p>
-											<input type="text" placeholder="введите ФИО" v-model="name" disabled="true">
+											<input type="text" placeholder="введите ФИО" v-model="name">
 										</div>
 										<div class="col-xs-12 col-md-4 mar-left">
 											<p>Логин<span>*</span></p>
-											<input type="text" placeholder="укажите логин" v-model="login" disabled>
+											<input type="text" placeholder="укажите логин" v-model="login">
 										</div>
 											<experience
 												@changevalue="changeExperience"
@@ -122,10 +122,12 @@
 										<button class="save-button" @click="changeExpert()">Сохранить</button>
 										<button class="cancel-button">Отменить</button>
 									</div>
+									<div class="tab-pane akcii" :class="{active: listSectionMenu.akcii}" id="tab2">
 									<share
 
 									/>
-									<div class="tab-pane pro" id="tab3">
+									</div>
+									<div class="tab-pane pro" :class="{active: listSectionMenu.pro}" id="tab3">
 										<div class="clearfix">
 										<div class="col-xs-12 col-md-8 col-lg-8">
 											<p>Статус PRO позволяет привлечь гораздо больше клиентов за счет того что:</p>
@@ -201,6 +203,11 @@ export default {
 				startYear: 2005,
 				endYear: 2005
 			},
+			listSectionMenu:{
+				home: true,
+				akcii: false,
+				pro: false
+			}
 		} 
 	},
 	mounted(){
@@ -345,12 +352,37 @@ export default {
           }
         })
         .then(()=>{
+					this.editName()
+        })
+		},
+		editName(){
+			let params = new URLSearchParams();
+        params.append('first_name', this.name);
+        params.append('last_name', '');
+        params.append('login', this.login);
+
+        this.$http({
+          method: 'POST',
+          url: 'user/profile/edit',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
 					this.$store.dispatch('getProfile');
 					this.$toast.success({
 						title:'Успешно',
 						message:'Новая информация сохранена'
 					})
         })
+		},
+		changeShow(item){
+			for (let i in this.listSectionMenu){
+				this.listSectionMenu[i] = false
+			}
+			this.listSectionMenu[item] = true
 		}
 	},
 	computed: {

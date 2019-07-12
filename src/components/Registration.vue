@@ -101,7 +101,7 @@
                 	for (let i in mass){
          	 					this.$toast.error({
 											title:'Ошибка',
-					    				message: mass[i]
+					    				message: mass[i][0]
 										})
         					}
                 })
