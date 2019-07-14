@@ -14,7 +14,7 @@
 				<div class="item_main_expert">
 					<div class="content_expert">
 						<div class="image_expert expert_image_big">
-							<div class="status__expert online_expert"></div>
+							<div class="status__expert online_expert" v-if="expertinfo.online"></div>
 							<div class="rating_expert">{{expertinfo.rating || 0}}</div>
 							<ul class="rating_item" :class="'value-'+itemStar()">
 								<li><i class="glyphicon glyphicon-star"></i></li>
@@ -29,7 +29,7 @@
 						<div class="head_expert_item">
 							<div class="name_expert_big">{{expertinfo.name || 'Имя Фамилия'}}</div>
 							<div class="experience_expert"><span v-if="expertinfo.stay_year > 0">{{expertinfo.stay_year}} лет </span> <span v-if="expertinfo.stay_month > 0">{{expertinfo.stay_month}} мес. </span><span>{{expertinfo.stay_day}} д.</span> на сайте</div>
-							<div class="experience_expert">Стаж с <span>{{expertinfo.experience}} г.</span></div>
+							<div class="experience_expert">Стаж с <span>{{expertinfo.experience || 'Эксперт не указал свой стаж'}} г.</span></div>
 							<!-- <div class="top_expert">Эксперт  месяца</div> -->
 						</div>
 						<div class="tags_experts">
@@ -60,8 +60,8 @@
 						<img src="@/assets/img/social_btns.jpg" alt="alt">
 					</div>
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1" data-toggle="tab">Профиль</a></li>
-						<li><a href="#tab2" data-toggle="tab">Отзывы <span>({{expertinfo.comment_count}}) </span></a></li>
+						<li  :class="{active: $route.query.id !== '1'}"><a href="#tab1" data-toggle="tab">Профиль</a></li>
+						<li  :class="{active: $route.query.id == '1'}"><a href="#tab2" data-toggle="tab">Отзывы <span>({{expertinfo.comment_count}}) </span></a></li>
 						<li><a href="#tab3" data-toggle="tab">Ответы на вопросы <span>({{expertinfo.answer.length}})</span></a></li>
 					</ul>
 				</div>
@@ -80,7 +80,7 @@
 		<div class="section_content_tabs">
 			<div class="container">
 				<div class="tab-content">
-					<div class="tab-pane active" id="tab1">
+					<div class="tab-pane"  :class="{active: $route.query.id !== '1'}" id="tab1">
 						<expertBonus
 							v-if="creator"
 						/>
@@ -104,10 +104,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane" id="tab2">
+					<div class="tab-pane" :class="{active: $route.query.id == '1'}" id="tab2">
 						<div class="row">
 							<reviewsStats
-
+								:stats="stats"
 							/>
 							<div class="col-md-10">
 								<div class="title_experts">Последние отзывы</div>
@@ -115,9 +115,10 @@
 									<reviewsItem
 										v-for="item in reviews"
 										:key="item.id"
-										:name="null"
+										:name="item.userName"
 										:desc="item.description"
 										:date="item.create_at"
+										:score="item.score"
 									/>
 								</div>
 								<div class="row" v-else>
@@ -181,7 +182,8 @@ export default {
 		return {
 			expertinfo: null,
 			reviewForms: false,
-			reviews:[]
+			reviews:[],
+			stats: []
 		}
 	},
 	created() {
@@ -191,6 +193,7 @@ export default {
 		new WOW().init();
 		this.getExpert();
 		this.getReviews();
+		console.log(this.$route.query)
 	},
 	methods: {
 		itemStar(){
@@ -221,7 +224,7 @@ export default {
 		getReviews(){
         this.$http({
           method: 'GET',
-          url: 'expert/comment/index?id=' + this.$route.params.id,
+          url: 'expert/comment/all-expert?id=' + this.$route.params.id,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
 						Authorization: "Bearer " + localStorage.getItem('token')
@@ -229,6 +232,8 @@ export default {
         })
         .then(response=>{
 					this.reviews = response.data
+					let stats = response.data.map(map => map.score)
+					this.stats = stats
         })
 		},
 

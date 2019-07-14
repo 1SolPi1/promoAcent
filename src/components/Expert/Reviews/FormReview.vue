@@ -36,7 +36,7 @@
     data() {
 			return {
         title: null,
-        description: null,
+        description: '',
         select: 0
       }
     },
@@ -46,9 +46,21 @@
      },
 		methods: {
       submit(){
-        let params = new URLSearchParams();
+        if (this.select === 0) {
+          this.$toast.error({
+            title:'Ошибка',
+            message: ' Выберите оценку '
+          })
+        }else if (this.description.length < 15) {
+          this.$toast.error({
+            title:'Ошибка',
+            message: ' Напишите отзыв, минимум 15 символов '
+          })
+        }else{
+          let params = new URLSearchParams();
             params.append('expert_id', this.id);
             params.append('description', this.description);
+            params.append('score', this.select)
 
             this.$http({
                 method: 'POST',
@@ -73,6 +85,7 @@
                       message: error.response.data.error
                     })
                 })
+        }
       }
 
 		},

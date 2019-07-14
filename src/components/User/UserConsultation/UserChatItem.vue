@@ -71,7 +71,7 @@
       getDate(){
        const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
       let now = new Date(); 
-      let time = new Date(this.lastmessage[0].date * 1000);
+      let time = new Date(this.lastmessage[0].date.slice(0, -3) * 1000);
       let year = time.getFullYear();
       let day = time.getDate();
       let month = time.getMonth();

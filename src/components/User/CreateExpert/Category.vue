@@ -9,6 +9,7 @@
             v-for="(item, index) in category"
             :key="index"
             :value="item.id"
+            :selected="item.id === selectedCategory.id"
           >
             {{item.name}}
           </option>
@@ -16,7 +17,8 @@
       </div>
       <div class="znanie">
         <p>Дополнительная</p>
-        <select id="multi-2" multiple="multiple"> 
+        <select id="multi-2"> 
+          <option value="0">Выберите подкатегорию</option>
           <option 
             v-for="item in childcategory"
             :value="item.id"
@@ -43,7 +45,12 @@
         required: true
       },
       childcategory: Array,
-      selectedCategory: Object,
+      selectedCategory:{
+        type: Object,
+        default:()=>{
+          id: 1
+        }
+      },
       selectedSubCategory:{
         type: Object,
         default:()=>{
@@ -59,6 +66,16 @@
        childcategory(){
         setTimeout(function() {  
          $('#multi-2').multiselect('rebuild');
+        }, 100) 
+      },
+      category(){
+        setTimeout(function() {  
+         $('#multi').multiselect('rebuild');
+        }, 100) 
+      },
+      selectedCategory(){
+        setTimeout(function() {  
+         $('#multi').multiselect('rebuild');
         }, 100) 
       },
     },

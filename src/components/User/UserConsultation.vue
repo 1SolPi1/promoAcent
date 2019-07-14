@@ -149,7 +149,7 @@ export default {
           }
         })
         .then(response =>{
-					this.getQuestions(response.data.client.id)
+					this.getQuestions(response.data.user.id)
         })
 		},
 		getQuestions(id){

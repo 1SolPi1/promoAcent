@@ -63,8 +63,13 @@
             let id = $(this).data('target');
             $('.quest_click').removeClass('qc_active');
             $('.quest_item_content').removeClass('q_active');
-            $(this).addClass('qc_active');
-            $('#'+id).addClass('q_active');
+            // if($(this).find('.quest_item_content').hasClass('q_active')){
+            //   alert('У этого блока есть класс q_active');
+            //   }else{
+            //     alert('У этого блока нет класса q_active');
+            // }
+            $(this).toggleClass('qc_active');
+            $('#'+id).toggleClass('q_active');
           });
         },
         methods: {
@@ -74,5 +79,7 @@
 </script>
 
 <style scoped>
-    
+.quest_item .quest_item_content {
+    transition: 0.3s;
+}
 </style>

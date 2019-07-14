@@ -113,7 +113,7 @@
 
         this.$http({
           method: 'POST',
-          url: 'expert/action/create',
+          url: 'expert/action/add',
           data: params,
           headers: { 
             'Content-Type': 'application/x-www-form-urlencoded', 

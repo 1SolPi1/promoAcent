@@ -18,13 +18,24 @@
             <div class="head_expert_item">
               <div class="name_expert_big">{{expert.name || 'Имя Фамилия'}} <a href="#" class="link_share"></a></div>
               <div class="price_expert_big">от <span>{{expert.price_from}} ₽</span></div>
-              <a href="#" class="reviews_expert_big"><span>{{expert.comment_count}}</span> отзывов</a>
+              <router-link :to="'/experts/'+expert.id + '?id=1'" class="reviews_expert_big"><span>{{expert.comment_count}}</span> отзывов</router-link>
               <!-- <div class="top_expert">Эксперт  месяца</div> -->
             </div>
-            <div class="tags_experts">
-              <p>Дети и подростки</p>
-              <p>Любовные отношения </p>
-              <p>Самопознание и развитие</p>
+            <div 
+              class="boxCategory"
+              v-if="expert.category_parent.length > 0"
+              >
+              <div 
+                class="iconCategory" 
+                :style="{background: getColor()}"
+              >
+                <img :src="getImage()" alt="">
+              </div>
+              <p 
+                v-for="item in expert.sub_category"
+                :key="item.id"
+                style="margin-right: 10px"
+              >{{item.name}}</p>
             </div>
             <div class="text_expert">
               <p>{{expert.about_us || 'Эксперт не оставил о себе информацию'}}</p>
@@ -48,6 +59,7 @@
     },
     data() {
 			return {
+        isActive: false
       }
     },
     created() {
@@ -60,6 +72,12 @@
 		methods: {
       itemStar(){
         return Math.trunc(this.expert.rating / 2)
+      },
+      getColor(){
+        return this.categoryItem.find(item => item.id === this.expert.category_parent[0].id).color
+      },
+      getImage(){
+        return this.categoryItem.find(item => item.id === this.expert.category_parent[0].id).image
       }
 		},
 		computed: {
@@ -72,11 +90,46 @@
         }else{
           return false
         }
-      }
+      },
+      classObject: function () {
+        return {
+          active: this.isActive
+        }
+      },
+      categoryItem(){
+        return this.$store.getters.CATEGORYITEM
+      },
     },
 	}
 </script>
 
 <style scoped>
+.active{
+  color: red;
+}
 
+.active::before{
+  background-color: black
+}
+
+.boxCategory{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.iconCategory{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.iconCategory img{
+  width: 22px;
+  height: 22px;
+}
 </style>

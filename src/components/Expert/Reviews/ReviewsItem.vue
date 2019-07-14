@@ -6,10 +6,7 @@
         <div class="name_item_review">{{name || 'Имя Фамилия'}}</div>
         <div class="date_item_review">{{getDate()}}</div>
       </div>
-      <!-- react_2, react_3 -->
-      <div class="reaction_review react_1"><span>Оценка</span></div> 
-<!--       <div class="reaction_review react_2"><span>Оценка</span></div> 
-      <div class="reaction_review react_3"><span>Оценка</span></div>  -->
+      <div class="reaction_review" :class="'react_' + score"><span>Оценка</span></div> 
     </div>
     <div class="text_item_review">
       <p>{{desc}}</p>
@@ -35,6 +32,10 @@
       date:{
         type: String,
         default: '10 Июня 2019'
+      },
+      score:{
+        type: Number,
+        default: 0
       }
     },
     data() {

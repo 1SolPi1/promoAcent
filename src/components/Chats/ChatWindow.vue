@@ -125,7 +125,9 @@ export default {
   mounted(){
     this.createChat()
     this.connect()
-    this.getHistory()
+    setTimeout(()=>{
+      this.getHistory()
+    }, 500)
   },
   computed: {
 

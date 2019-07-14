@@ -110,7 +110,7 @@ let router = new Router({
       component: Expert,
     },
     {
-      path: '/person/:id',
+      path: '/person/user',
       name: 'person',
       component: Person
     },

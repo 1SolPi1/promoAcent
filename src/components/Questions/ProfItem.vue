@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-3 col-sm-6">
-    <div class="item_expert flipInY wow" data-wow-iteration="1">
+    <div class="item_expert flipInY wow" data-wow-iteration="1" @click="goToExpert()">
       <div class="premium_expert" v-if="tops">
         <span>входит в ТОП-25</span>
       </div>
@@ -86,6 +86,9 @@
         methods: {
             itemStar(){
                 return Math.trunc(this.rating / 2)
+            },
+            goToExpert(){
+               this.$router.push('/experts/'+ this.id);
             }
         },
         computed: {
@@ -97,5 +100,8 @@
 </script>
 
 <style scoped>
-    
+   .item_expert:hover{
+    box-shadow: 0 0 13px #e0e0e0;
+    cursor: pointer;
+   }
 </style>

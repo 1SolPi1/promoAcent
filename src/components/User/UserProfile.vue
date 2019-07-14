@@ -107,20 +107,16 @@ export default {
 	created() {},
 	mounted() {
 		this.email = this.userInfo.email
-
-		if (this.profile.first_name) {
-			this.fullname = this.profile.first_name + " " + this.profile.last_name
-		}
+		this.fullname = this.profile.first_name
 	},
 	methods: {
 		save(){
-			let names = this.fullname.split(' ');
-			let data = {name: names[0], surname: names[1], email: this.email};
+			let data = {name: this.fullname, surname: '', email: this.email};
 			this.$store.dispatch('saveSettings', data);
 
         let params = new URLSearchParams();
-        params.append('first_name', names[0]);
-        params.append('last_name', names[1]);
+        params.append('first_name', this.fullname);
+        params.append('last_name', '');
         params.append('email', this.email);
 
         this.$http({
@@ -131,6 +127,12 @@ export default {
 						'Content-Type': 'application/x-www-form-urlencoded', 
 						Authorization: "Bearer " + localStorage.getItem('token')
           }
+        })
+        .then(()=>{
+        	this.$toast.success({
+						title:'Успешно',
+						message:'Новая информация сохранена'
+					})
         })
 		}
 	},

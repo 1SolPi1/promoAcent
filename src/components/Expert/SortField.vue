@@ -14,28 +14,28 @@
       <option value="1">Мужской</option>
       <option value="2">Женский</option>
     </select>
-    <select id="rating" class="select_main select_rating">
+    <!-- <select id="rating" class="select_main select_rating">
       <option value="0">рейтинг от</option>
       <option value="10">10</option>
       <option value="9">9</option>
       <option value="8">8</option>
       <option value="7">7</option>
       <option value="6">6</option>
-     </select>
+     </select> -->
     <div class="sorting_questions">
       <span class="title_sorting">Сортировать:</span>
       <div class="item_sorting">
         <input type="radio" name="radio" value="online" class="radio" id="radio1" v-model="items" />
         <label for="radio1" ><img src="@/assets/img/sort5.png" alt="alt">на сайте</label>
       </div>
-      <div class="item_sorting">
+      <!-- <div class="item_sorting">
         <input type="radio" checked name="radio" value="rating" class="radio" id="radio2" v-model="items"/>
         <label for="radio2"><img src="@/assets/img/sort6.png" alt="alt">рейтингу</label>
-      </div>
-      <div class="item_sorting">
+      </div> -->
+<!--       <div class="item_sorting">
         <input type="radio" name="radio" value="akcii" class="radio" id="radio3"  v-model="items"/>
         <label for="radio3"><img src="@/assets/img/sort7.png" alt="alt">акции</label>
-      </div>
+      </div> -->
       <div class="item_sorting">
         <input type="radio" name="radio" value="price" class="radio" id="radio4"  v-model="items"/>
         <label for="radio4"><img src="@/assets/img/sort2.png" alt="alt">стоимости</label>
@@ -44,10 +44,10 @@
         <input type="radio" name="radio" value="date" class="radio" id="radio5"  v-model="items"/>
         <label for="radio5"><img src="@/assets/img/sort1.png" alt="alt">дате</label>
       </div>
-      <div class="item_sorting">
+      <!-- <div class="item_sorting">
         <input type="radio" name="radio" value="1" class="radio" id="radio6"/>
         <label for="radio6"><img src="@/assets/img/svg/favorite-heart-button.svg" alt="alt">мои эксперты</label>
-      </div>
+      </div> -->
     </div>
      <a href="javascript:void(0)" class="btn_blue" @click="getExperts()">Показать</a>
   </form>
@@ -118,7 +118,11 @@
       getExperts(){
         this.$emit('getexperts', {
           sex: this.sex,
-          online: this.sortItems.online
+          online: this.sortItems.online,
+          rating: this.sortItems.rating,
+          akcii: this.sortItems.akcii,
+          price: this.sortItems.price,
+          date: this.sortItems.date
         })
       }
 		},

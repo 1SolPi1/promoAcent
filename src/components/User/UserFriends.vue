@@ -8,7 +8,9 @@
 						<expertProfile v-else/>
 					</div>
 					<div class="col-md-9">
-						<userContentHeader/>
+						<userContentHeader 
+
+						/>
 						<div class="profile-content">
 							<div class="section_nav_expert">
 								<div class="head_nav_expert">
@@ -35,8 +37,9 @@
 											</div>
 											<div class="col-xs-12 col-md-5 no-mr">
 												<div class="fr-block">
+													<input id="post-shortlink" :value="'http://sprosi-online.ru/?token=' + client.friend_token">
 													<p>Публикуйте ссылку на Ваш профиль</p>
-													<a href="#">Скопировать ссылку</a>
+													<a href="javascript:void(0)" id="copy-button" data-clipboard-target="#post-shortlink">Скопировать ссылку</a>
 												</div>
 											</div>
 											<div class="col-xs-12 col-md-7">
@@ -51,7 +54,7 @@
 											<div class="col-xs-12 col-md-7 no-mr">
 												<div class="fr-block">
 													<p>Размещайте кнопку с приглашением на форумах</p>
-													<a href="#">Скопировать ссылку</a>
+													<a href="javascript:void(0)" id="copy-button" data-clipboard-target="#post-shortlink">Скопировать ссылку</a>
 												</div>
 											</div>
 											<div class="col-xs-12 col-md-5">
@@ -184,12 +187,21 @@ export default {
 		return {}
 	},
 	created() {},
-	mounted() {},
+	mounted() {
+		 new Clipboard('#copy-button');
+	},
 	methods: {},
-	computed: {},
+	computed: {
+		client(){
+			return this.$store.getters.CLIENT
+		}
+	},
 }
 </script>
 
 <style scoped>
-    
+#post-shortlink{
+	position: absolute;
+	right: 9999999px;
+}
 </style>

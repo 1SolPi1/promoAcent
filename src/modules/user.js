@@ -13,14 +13,18 @@ const state = {
   expert: {
     id: 0
   },
-  expertEducation: null
+  expertEducation: null,
+  myCategory: null,
+  mySubCategories: null,
 };
 const getters = {
   PROFILE: state => state.profile,
   USERINFO: state => state.userInfo,
   CLIENT: state => state.client,
   EXPERT: state => state.expert,
-  EXPERTEDUCATION: state => state.expertEducation
+  EXPERTEDUCATION: state => state.expertEducation,
+  MYCATEGORY: state => state.myCategory,
+  MYSUBCATEGORIES: state => state.mySubCategories
 };
 const mutations = {
   SET_PROFILE: (state, payload) => {
@@ -55,6 +59,10 @@ const mutations = {
   },
   SET_EXPERT_EDUCATION: (state, playload) =>{
     state.expertEducation = playload
+  },
+  SET_MY_CATEGORY:(state, playload) =>{
+    state.myCategory = playload.myCategory;
+    state.mySubCategories = playload.mySubCategories
   }
 };
 const actions = {
@@ -64,6 +72,10 @@ const actions = {
     commit('SET_USER_INFO', data.user);
     commit('SET_CLIENT', data.client);
     commit('SET_EXPERT', data.expert[0]);
+    commit('SET_MY_CATEGORY', {
+      myCategory: data.expert.category[0],
+      mySubCategories: data.expert.sub_categories
+    });
     commit('SET_EXPERT_EDUCATION', data.expert.education[0]);
   },
   saveSettings: ({commit}, data) => {

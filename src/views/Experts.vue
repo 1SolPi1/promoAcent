@@ -6,7 +6,7 @@
 					<ul class="list_category">
 			<slick
 				ref="slick"
-              :options="slickOptions"
+				:options="slickOptions"
             >
 			<ItemCategory
 				v-for="item in categoryItem"
@@ -98,7 +98,7 @@ export default {
 	return{
 		experts:[],
 		slickOptions: {
-				arrows: true,
+				// arrows: true,
         dots: false,
         slidesToShow: 6,
         variableWidth: false,
@@ -136,8 +136,11 @@ export default {
       selectCategory: null,
       selectSubCategory: null,
       sortItem:{
-      	sex: null,
-      	online: null
+      		online: null,
+          rating: null,
+          akcii: null,
+          price: null,
+          date: null
       }
     }
 	},
@@ -164,6 +167,10 @@ export default {
 		getExpert(data){
 			this.sortItem.sex = data.sex
 			this.sortItem.online = data.online
+			this.sortItem.akcii = data.akcii
+			this.sortItem.price = data.price
+			this.sortItem.date = data.date
+			this.sortItem.rating = data.rating
 			this.getExperts()
 		},
 		getExperts(){
@@ -172,7 +179,17 @@ export default {
         let params = new URLSearchParams();
         // params.append('category_id', categoryId);
         params.append('sex', this.sortItem.sex);
-        params.append('online', this.sortItem.online)
+        if (this.sortItem.online !== null) {
+        	params.append('online', this.sortItem.online)
+        }
+        if (this.sortItem.date !== null) {
+        	params.append('create_at', this.sortItem.date)
+        }
+        // params.append('percent', this.sortItem.online)
+        if (this.sortItem.price !== null) {
+        	params.append('price_from', this.sortItem.price)
+        }
+        // params.append('online', this.sortItem.online)
 
         this.$http({
           method: 'POST',
@@ -202,6 +219,11 @@ export default {
         }, 500)
 		this.getExperts()
 	},
+	watch:{
+		categories(){
+			this.getSelectCategory(1)
+		}
+	},
 	computed:{
 		categoryItem(){
 			return this.$store.getters.CATEGORYITEM
@@ -216,5 +238,4 @@ export default {
 }
 </script>
 <style scoped>
-	
 </style>

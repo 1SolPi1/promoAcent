@@ -9,10 +9,10 @@
 					<div class="col-md-9">
 						<div class="profile-header">
 							<h3>Мои консультации</h3>
-							<div class="buttons">
+							<!-- <div class="buttons">
 								<a class="akcii" href="#">Мои акции</a>
 								<a class="pro" href="#">Стать PRO</a>
-							</div>
+							</div> -->
 						</div>
 						<div class="profile-content">
 							<div class="section_nav_expert">
@@ -37,8 +37,8 @@
 											:oponnent="item.opponent"
 											:lastmessage="item.last_message"
 											@openchat="$chatinfo.opens({
-																		name: 'Имя Фамилия',
-																		avatar: 'null',
+																		name: item.opponent.fullName,
+																		avatar: item.opponent.avatar,
 																		user_id: item[0].client_id,
 																		expert_id: item[0].expert_id,
 																		author: 0 
@@ -51,8 +51,8 @@
 											:oponnent="item.opponent"
 											:lastmessage="item.last_message"
 											@openchat="$chatinfo.opens({
-																		name: 'Имя Фамилия',
-																		avatar: null,
+																		name: item.opponent.fullName,
+																		avatar: item.opponent.avatar,
 																		user_id: item[0].client_id,
 																		expert_id: item[0].expert_id,
 																		author: 1 
@@ -62,7 +62,8 @@
 									</div>
 									<div class="tab-pane conslt" id="tab2">
 									<div class="clearfix">
-																			<p>У Вас <span>3</span> ответа</p>
+																			<p v-if="listAnswers.length > 0">У Вас <span>{{listAnswers.length}}</span> ответа</p>
+																			<p v-else>У Вас <span>0</span> ответов</p>
 																			<div class="stats">
 																				<span>
 																					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.531 31.531">
@@ -362,7 +363,8 @@ export default {
 				expertExpertChat:[]
 			},
 			listQuestions: [],
-			listAnswers:[]
+			listAnswers:[],
+			score:[]
 		} 
 	},
 	created(){
@@ -399,6 +401,7 @@ export default {
         .then(response =>{
 					this.getQuestions(response.data.client.id)
 					this.getAnswers(response.data.expert[0].id)
+					this.getScore(response.data.expert[0].id)
         })
 		},
 		getQuestions(id){
@@ -433,6 +436,24 @@ export default {
         })
         .then(response =>{
 					this.listAnswers = response.data[0]
+        })
+		},
+		getScore(id){
+			let params = new URLSearchParams();
+        params.append('expert_id', id);
+        params.append('score', 1)
+
+        this.$http({
+          method: 'POST',
+          url: 'question/answer/find',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.score = response.data
         })
 		},
 	}

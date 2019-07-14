@@ -20,7 +20,19 @@
               <div class="name_expert_big">Игорь Летучий</div>
               <div class="experience_expert">Зарегистрирован: 19.06.2019</div>
               <div class="experience_expert">Последний раз был в сети: 19.06.19 20:21</div>
-              <div class="experience_expert status_expert">Статус: Серебряный <b>s</b></div>
+              <div class="experience_expert status_expert">Статус: Серебряный 
+                    <img 
+                      src="@/assets/img/svg/information.svg" 
+                      alt="alt"
+                      style="cursor: pointer;"
+                      @mouseover="showModal = true"
+                      @mouseleave="showModal = false"
+                      class="info"
+                    >
+              </div>
+              <bonusPerson
+                v-if="showModal"
+              />
             </div>
           </div>
         </div>
@@ -76,13 +88,16 @@
 </template>
 
 <script>
+  import bonusPerson from '@/components/BonusModal'
 	export default {
     name: "Person",
     components: {
+      bonusPerson
     },
     props: {},
     data() {
 			return {
+        showModal: false,
         allQuestions:[
           {
             category: ' Психология  ',
@@ -144,12 +159,15 @@
 
 .status_expert{
   margin-left: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .status_expert b{
   font-size: 16px;
-    color: #4d2ed1;
-    margin-right: 5px;
+  color: #4d2ed1;
+  margin-right: 5px;
 }
 
 .question_item{
@@ -158,5 +176,11 @@ font-size: 18px;
 color: #2F2F32;
 letter-spacing: 0;
 line-height: 45px;
+}
+
+.info{
+    width: 14px;
+    height: 14px;
+    margin-left: 10px;
 }
 </style>

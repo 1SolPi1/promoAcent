@@ -76,6 +76,8 @@
 					   message: 'Выберите пол'
 					})
 				}else{
+					let token;
+					this.$route.query.token ? token = '?token=' + this.$route.query.token : token = ''
 					let params = new URLSearchParams();
             params.append('username', this.username);
             params.append('email', this.email);
@@ -84,7 +86,7 @@
 
             this.$http({
                 method: 'POST',
-                url: 'user/registration/register',
+                url: 'user/registration/register' + token,
                 data: params,
             })
                 .then(response => {

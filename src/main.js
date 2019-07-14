@@ -55,6 +55,7 @@ require('./assets/css/animate.min.css');
 require('./assets/css/media.css');
 require('./assets/css/js-offcanvas.css');
 
+
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Axios.create({baseURL: 'http://api.sprosi-online.ru/'});

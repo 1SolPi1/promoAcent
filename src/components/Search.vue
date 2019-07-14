@@ -127,9 +127,6 @@
 </script>
 
 <style scoped>
-body{
-  overflow: hidden;
-}
 .close{
   width: 100vw;
   height: 100vh;

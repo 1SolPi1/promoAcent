@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="client_info">
-            <router-link to="/person/1" class="link_client">{{name}}</router-link>
+            <router-link to="/person/user?id=1" class="link_client">{{name}}</router-link>
             <div class="text_client">
               <p>{{desc}}</p>
             </div>

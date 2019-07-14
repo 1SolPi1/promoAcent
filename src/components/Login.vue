@@ -50,7 +50,7 @@
                 .catch(error =>{
                   this.$toast.error({
                       title:'Ошибка',
-                      message: error.response.data.error
+                      message: error.response.data.error.password[0]
                     })
                 })
 			}

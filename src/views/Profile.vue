@@ -8,7 +8,7 @@
 					<div class="col-md-9">
 						<div class="profile-header">
 							<h3>Редактировать профиль</h3>
-							<div class="buttons">
+							<div class="buttons" v-if="$route.path == '/profile'">
 								<a class="akcii" href="javascript:void(0)" @click="changeShow('akcii')">Мои акции</a>
 								<a class="pro" href="javascript:void(0)" @click="changeShow('pro')">Стать PRO</a>
 							</div>
@@ -181,7 +181,9 @@ export default {
 		return{
 			category: null,
 	        childCategory: null,
-	        selectCategory: null,
+	        selectCategory: {
+	        	id: 1
+	        },
 	        selectSubCategory: null,
 	        selectChildCategory: null,
 			name: null,
@@ -210,6 +212,32 @@ export default {
 			}
 		} 
 	},
+	watch:{
+	expert(){
+		this.experience = this.expert.experience;
+		this.name = this.profile.first_name + " " + this.profile.last_name;
+		this.login = this.userinfo.username;
+		this.minute = this.expert.duration_consultation;
+		this.startPrice = this.expert.price_from;
+		this.endPrice = this.expert.price_to;
+		this.baseText = this.expert.cutaway;
+		this.about = this.expert.about_us;
+		this.timeStart = this.expert.work_time_from;
+		this.timeEnd = this.expert.work_time_to;
+		this.education.nameUniversity = this.experteducation.institution_name;
+		this.education.specialty = this.experteducation.specialization;
+		this.education.degree = this.experteducation.name_educational;
+		this.education.startYear = this.experteducation.educate_start;
+		this.education.endYear = this.experteducation.educate_finish
+	},
+	mycategory(){
+		// setTimeout(() => {  
+  //         this.getSelectCategory(this.mycategory.id)
+  //   }, 500)
+  this.getSelectCategory(this.mycategory.id)
+  this.knowledge = this.mycategory.id
+	}
+	},
 	mounted(){
 		// const vm = this;
 		// eslint-disable-next-line
@@ -225,11 +253,6 @@ export default {
       spinnerBigSize: [30, 32, 0],
       spinnerIncDecOnly: true
     });
-	const vm = this
-    setTimeout(function() {  
-          vm.getSelectCategory(1)
-    }, 500)
-
     function customRange(input) {
       return {
         minTime: (input.id === 'timeTo' ?
@@ -276,12 +299,7 @@ export default {
 	      this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
 	    },
 		changeSubKnowledge(item){
-			let arr = this.subKnowledge;
-        if (arr.find(map => map === item) === undefined) {
-          arr.push(item)
-        }else{
-          arr.splice(arr.indexOf(item), 1);
-        }
+			this.addSubCategory(item)
 		},
 		changeDegree(item){
 			this.education.degree = item
@@ -337,14 +355,40 @@ export default {
           }
         })
 		},
-		addCategoryExpert(){
+		addSubCategory(id){
 			let params = new URLSearchParams();
-        params.append('expert_id', this.expert.id);
-        params.append('category_id', this.knowledge);
+        params.append('sub_category_id', id);
 
         this.$http({
           method: 'POST',
-          url: 'expert/category/edit?id=' + this.expert.id,
+          url: 'expert/sub-category/add',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
+        	this.$toast.success({
+						title:'Успешно',
+						message:'Подкатегория добавлена'
+					})
+        })
+        .catch(e=>{
+        	this.$toast.error({
+						title:'Ошибка',
+						message: e.response.data.return
+					})
+        })
+		},
+		addCategoryExpert(){
+			let params = new URLSearchParams();
+        params.append('expert_id', this.expert.id);
+        params.append('category_id', this.selectCategory.id);
+
+        this.$http({
+          method: 'POST',
+          url: '/expert/category/add',
           data: params,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
@@ -403,7 +447,13 @@ export default {
 		},
 	    childCategories(){
 	      return this.$store.getters.CHILDCATEGORI
-	    }
+	  },
+	  mycategory(){
+	  	return this.$store.getters.MYCATEGORY
+	  },
+	  mysubcategories(){
+	  	return this.$store.getters.MYSUBCATEGORIES
+	  }
 	},
 }
 </script>
