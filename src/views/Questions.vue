@@ -181,6 +181,7 @@
               childCategory: null,
               selectCategory: null,
               selectChildCategory: null,
+              selectSubCategory: null,
               login: false,
               register: false,
               registerExpert: false,
@@ -211,13 +212,12 @@
           },
           changeSubCategory(item){
             this.pageNumber = 1;
-            let category;
             if (item == 0) {
-              category = this.selectCategory.id
+              this.selectSubCategory = null
             }else{
-              category = item
+              this.selectSubCategory = this.selectChildCategory.find(map => map.id == item)
             }
-            this.getAllQuestions(1, category);
+            this.getAllQuestions(1, this.selectCategory.id);
           },
       getParentCategory(id){
         this.category = this.$store.getters.CATEGORIES.map(map => map.category);
@@ -242,6 +242,9 @@
             getAllQuestions(page, category){
                 let params = new URLSearchParams();
                 params.append('category_id', category);
+                if (this.selectSubCategory !== null) {
+                  params.append('sub_category_id', this.selectSubCategory.id)
+                }
                 params.append('page', page);
 
 

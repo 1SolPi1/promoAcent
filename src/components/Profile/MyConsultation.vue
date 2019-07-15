@@ -148,6 +148,7 @@
 										:key="item.answer.id"
 										:answer="item.answer"
 										:question="item.question"
+										:answercount="item.answer_count"
 									/>
 									</div>
 									</div>

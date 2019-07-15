@@ -52,7 +52,7 @@
             </form>
           </div>
           <div class="col-xs-12 col-md-7 col-lg-6 uslovia">
-            <p>Условия размещения <a href="#">Ознакомится с тарифами размещения</a></p>
+            <p>Условия размещения <router-link href="javascript:void(0)" to="/tariggquestions">Ознакомится с тарифами размещения</router-link></p>
               <div class="sorting_questions">
                 <div class="item_sorting">
                   <input type="radio" name="radio" value="0" class="radio" id="radio1" />
@@ -96,7 +96,7 @@ export default {
         category: null,
         childCategory: null,
         selectCategory: null,
-        selectSubCategory: null,
+        selectSubCategory: {id: null},
         selectChildCategory: null,
         slickOptions: {
         arrows: true,
@@ -153,11 +153,12 @@ export default {
       this.selectCategory = this.categories.find(map => map.id == item)
       setTimeout(()=>{  
         this.getChildCategory(this.selectCategory);
-        this.selectSubCategory = null;
+        this.selectSubCategory = {id: null};
       }, 300)
     },
     changeSubCategory(item){
-      this.selectSubCategory= this.selectChildCategory.find(map => map.id == item)
+      let cat = this.selectChildCategory.find(map => map.id == item)
+      cat === undefined ? this.selectSubCategory = {id: null} : this.selectSubCategory = cat
     },
     getSelectCategory(id){
       this.selectCategory = this.categories.find(item => item.id === id)
@@ -168,15 +169,16 @@ export default {
     },
     addQuestion(){
       let anonimus = 0;
-      this.anonim ? anonimus = 1 : 0 ;
-      let categoryId;
-      this.selectSubCategory ? categoryId = this.selectSubCategory.id : this.selectCategory.id;
+      this.anonim ? anonimus = 1 : anonimus = 0 ;
       let params = new URLSearchParams();
         params.append('title', this.title);
         params.append('description', this.description);
         params.append('price', this.price);
         params.append('anonim', anonimus);
-        params.append('category_id', categoryId);
+        params.append('category_id', this.selectCategory.id);
+        if (this.selectSubCategory.id !== null) {
+          params.append('sub_category_id', this.selectSubCategory.id);
+        }
 
       this.$http({
           method: 'POST',

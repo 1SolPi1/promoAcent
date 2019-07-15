@@ -13,15 +13,15 @@
 							<div class="section_nav_expert">
 								<div class="head_nav_expert">
 									<ul class="nav nav-tabs">
-										<li class="active"><a href="#tab1" data-toggle="tab">История платежей</a></li>
-										<li><a href="#tab2" data-toggle="tab">Пополнить счет</a></li>
-										<li><a href="#tab3" data-toggle="tab">Вывод средств</a></li>
+										<li :class="{active: listSectionMenu.history}"><a href="#tab1" data-toggle="tab">История платежей</a></li>
+										<li :class="{active: listSectionMenu.pays}"><a href="#tab2" data-toggle="tab">Пополнить счет</a></li>
+										<li :class="{active: listSectionMenu.return}"><a href="#tab3" data-toggle="tab">Вывод средств</a></li>
 									</ul>
 								</div>
 							</div>
 							<div class="section_content_tabs">
 								<div class="tab-content">
-									<div class="tab-pane payments fst active" id="tab1">
+									<div class="tab-pane payments fst" id="tab1" :class="{active: listSectionMenu.history}">
 										<div class="row">
 											<div class="clearfix">
 												<div class="schet money">
@@ -67,8 +67,8 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>500₽</span>
-								<a href="#">Пополнить</a>
+								<span>{{userInfo.cash}}₽</span>
+								<a href="javascript:void(0)" @click="changeShow('pays')">Пополнить</a>
 													</div>
 
 												</div>
@@ -115,15 +115,15 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>500₽</span>
-								<a href="#">Вывести</a>
+								<span>0₽</span>
+								<a href="javascript:void(0)" @click="changeShow('return')">Вывести</a>
 													</div>
 
 												</div>
 											</div>
 											<div class="col-xs-12">
 												<div class="sorting_questions">
-													<div class="item_sorting">
+													<!-- <div class="item_sorting">
 														<input type="radio" checked name="radio1" value="1" class="radio" id="radio6">
 														<label for="radio6">все</label>
 													</div>
@@ -142,9 +142,9 @@
 													<div class="item_sorting">
 														<input type="radio" name="radio1" value="1" class="radio" id="radio10">
 														<label for="radio10">арбитаж</label>
-													</div>
+													</div> -->
 												</div>
-												<p>У Вас <span>2</span> платежа</p>
+												<p v-if="paysList.length > 0">У Вас <span>{{paysList.length}}</span> платежа</p>
 												<div class="table-header">
 													<div>сумма</div>
 													<div>дата</div>
@@ -161,7 +161,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane payments" id="tab2">
+									<div class="tab-pane payments" id="tab2" :class="{active: listSectionMenu.pays}">
 										<div class="row">
 											<div class="clearfix">
 												<div class="schet money">
@@ -207,7 +207,7 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>500₽</span>
+								<span>{{userInfo.cash}}₽</span>
 
 													</div>
 
@@ -255,8 +255,8 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>500₽</span>
-								<a href="#">Вывести</a>
+								<span>0₽</span>
+								<a href="javascript:void(0)" @click="changeShow('return')">Вывести</a>
 													</div>
 
 												</div>
@@ -357,7 +357,7 @@
 										</form>
 										</div>
 									</div>
-									<div class="tab-pane payments vivod" id="tab3">
+									<div class="tab-pane payments vivod" id="tab3" :class="{active: listSectionMenu.return}">
 										<div class="row">
 											<div class="clearfix">
 												<div class="schet money">
@@ -403,8 +403,8 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>500₽</span>
-								<a href="#">Пополнить</a>
+								<span>{{userInfo.cash}}₽</span>
+								<a href="javascript:void(0)" @click="changeShow('pays')">Пополнить</a>
 													</div>
 
 												</div>
@@ -451,7 +451,7 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>500₽</span>
+								<span>0₽</span>
 
 													</div>
 
@@ -497,7 +497,7 @@
 												</div>
 
 											</div>
-											<button class="pay">Вывести</button>
+											<button class="pay" @click="alert('Не достаточно денег для вывода')">Вывести</button>
 										</div>
 										</div>
 									</div>
@@ -521,7 +521,12 @@ export default {
 	props: {},
 	data() {
 		return {
-			paysList: null
+			paysList: [],
+			listSectionMenu:{
+				history: true,
+				pays: false,
+				return: false
+			}
 		}
 	},
 	created() {},
@@ -539,13 +544,30 @@ export default {
           }
         })
         .then(response =>{
-					this.paysList = response.data
+        	for(let key in response.data){
+        		this.paysList.push(response.data[key])
+        	}
         })
 		},
+		changeShow(item){
+			for (let i in this.listSectionMenu){
+				this.listSectionMenu[i] = false
+			}
+			this.listSectionMenu[item] = true
+		},
+		alert(item){
+			this.$toast.error({
+				title:'Ошибка',
+				message:item
+			})
+		}
 	},
 	computed: {
 		token(){
 			return localStorage.getItem('token')
+		},
+		userInfo(){
+			return this.$store.getters.USERINFO
 		}
 	},
 }

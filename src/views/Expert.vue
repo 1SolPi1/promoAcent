@@ -32,11 +32,22 @@
 							<div class="experience_expert">Стаж с <span>{{expertinfo.experience || 'Эксперт не указал свой стаж'}} г.</span></div>
 							<!-- <div class="top_expert">Эксперт  месяца</div> -->
 						</div>
-						<div class="tags_experts">
-							<p>Дети и подростки</p>
-							<p>Любовные отношения </p>
-							<p>Самопознание и развитие</p>
-						</div>
+						<div 
+              class="boxCategory"
+              v-if="expertinfo.category_parent.length > 0"
+              >
+              <div 
+                class="iconCategory" 
+                :style="{background: getColor()}"
+              >
+                <img :src="getImage()" alt="">
+              </div>
+              <p 
+                v-for="item in expertinfo.sub_category"
+                :key="item.id"
+                style="margin-right: 10px"
+              >{{item.name}}</p>
+            </div>
 						<div class="text_expert">
 							<p>{{expertinfo.about_us || 'Эксперт не оставил о себе информацию'}}</p>
 						</div>
@@ -47,7 +58,7 @@
 							expert_id: expertinfo.id,
 							author: 0 
 						})">написать в чат</a>
-						<a href="javascript:void(0)" v-if="token" class="btn_add" @click="reviewForms = !reviewForms">оставить отзыв</a>
+						<a href="javascript:void(0)" v-if="token && !creator" class="btn_add" @click="reviewForms = !reviewForms">оставить отзыв</a>
 					</div>
 				</div>
 			</div>
@@ -236,6 +247,12 @@ export default {
 					this.stats = stats
         })
 		},
+		getColor(){
+        return this.categoryItem.find(item => item.id === this.expertinfo.category_parent[0].id).color
+      },
+      getImage(){
+        return this.categoryItem.find(item => item.id === this.expertinfo.category_parent[0].id).image
+      }
 
 	},
 	computed: {
@@ -254,10 +271,32 @@ export default {
 		},
 		token(){
 			return localStorage.getItem('token')
-		}
+		},
+		categoryItem(){
+        return this.$store.getters.CATEGORYITEM
+      },
 	},
 }
 </script>
 <style scoped>
-	
+.boxCategory{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.iconCategory{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.iconCategory img{
+  width: 22px;
+  height: 22px;
+}	
 </style>

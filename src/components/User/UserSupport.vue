@@ -15,44 +15,46 @@
 									<div class="tab-pane settings_user active" id="tab1">
 										<div class="row">
 											<div class="col-xs-12">
-												<p>Возможно, ответ на Ваш вопрос уже готов и Вы найдете его в разделе <a href="#">Помощь</a></p>
+												<p>Возможно, ответ на Ваш вопрос уже готов и Вы найдете его в разделе <a data-offcanvas-trigger="right" href="#right">Помощь</a></p>
 											</div>
 											<div class="col-xs-12 col-md-4">
 												<p>Имя</p>
-												<input type="text" placeholder="введите имя">
+												<input type="text" placeholder="введите имя" v-model="name">
 											</div>
 											<div class="col-xs-12 col-md-4">
 												<p>Email<span>*</span></p>
-												<input type="text" placeholder="введите e-mail" >
+												<input type="text" placeholder="введите e-mail" v-model="email">
 											</div>
 											<div class="col-xs-5">
 												<p>Цель обращения</p>
-												<select id="multi" multiple="multiple">
-													<option value="1">знание1</option>
-													<option value="2">знание2</option>
-													<option value="3">знание3</option>
-													<option value="4">знание4</option>
-													<option value="5">знание5</option>
-													<option value="6">знание6</option>
+												<select id="multi">
+													<option value="0">Выберите цель обращения</option>
+													<option value="1">Необходима помощь</option>
+													<option value="2">Предложение по улучшению сервиса</option>
+													<option value="3">Сообщение о неполадке на сайте</option>
+													<option value="4">Проблема с олпатой услуги</option>
+													<option value="5">Добавить новую категорию</option>
+													<option value="6">Пожаловаться на нарушителя</option>
+													<option value="7">Совместное сотрудничество</option>
 												</select>
 											</div>
 											<div class="col-xs-8">
 												<p>Тема обращения<span>*</span></p>
-												<input type="text" placeholder="укажите тему">
+												<input type="text" placeholder="укажите тему" v-model="type">
 											</div>
 											<div class="col-xs-12">
 												<p>Описание<span>*</span></p>
-												<textarea name="opis" placeholder="опишите вопрос"></textarea>
+												<textarea name="opis" placeholder="опишите вопрос" v-model="quest"></textarea>
 											</div>
 										</div>
 										<div class="border"></div>
-										<button class="save-button">Отправить</button>
-										<button class="cancel-button">Отменить</button>
+										<button class="save-button" @click="send()">Отправить</button>
+										<!-- <button class="cancel-button">Отменить</button> -->
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="help-man">
+<!-- 					<div class="help-man">
 							<h3>Обратитесь к сотруднику поддержки в чате</h3>
 							<div class="answ-wrap">
 									<div class="image_expert ">
@@ -75,7 +77,7 @@
 							</div>
 							</div>
 								</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -89,16 +91,65 @@ export default {
 	components: {},
 	props: {},
 	data() {
-		return {}
+		return {
+			name: null,
+			email: null,
+			type: '',
+			quest: '',
+			category: null
+		}
 	},
 	created() {},
 	mounted() {
 		// eslint-disable-next-line
 		 $('select:not([id^="multi"]), input[type=number]').styler();
+		 $( document ).trigger( "enhance" );
 // eslint-disable-next-line
-		$('#multi,#multi-2').multiselect();
+		var vm = this;
+      $('#multi').multiselect({
+        onChange: function(element) {
+              vm.change(element.val())
+            },
+      });
 	},
-	methods: {},
+	methods: {
+		send(){
+			if (!this.name) {
+			this.$toast.error({
+				title:'Ошибка',
+				message:'Укажите имя'
+			})
+			}else if (!this.email) {
+			this.$toast.error({
+				title:'Ошибка',
+				message:'Укажите email'
+			})
+			}else if (!this.category) {
+				this.$toast.error({
+				title:'Ошибка',
+				message:'Укажите цель обращения'
+			})
+			}else if (this.type.length < 10) {
+			this.$toast.error({
+				title:'Ошибка',
+				message:'Тема должна содержать не меньше 10 символов'
+			})
+			}else if (this.quest.length < 20) {
+				this.$toast.error({
+				title:'Ошибка',
+				message:'Описание должно содержать не меньше 20 символов'
+			})
+			}else{
+				this.$toast.success({
+				title:'Успешно',
+				message:'Ваша заявка отправлена в тех поддержку, ожидайте обратной связи'
+			})
+			}
+		},
+		change(id){
+			this.category = id
+		}
+	},
 	computed: {},
 }
 </script>

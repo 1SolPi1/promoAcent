@@ -2,8 +2,8 @@
 <div class="profile-menu">
 	<div class="image_expert expert_image_big">
 		<div class="status__expert online_expert my_profile" @click="upload = !upload"></div>
-		<div class="rating_expert">8.9</div>
-		<ul class="rating_item value-4">
+		<div class="rating_expert">{{expert.rating}}</div>
+		<ul class="rating_item" :class="'value-'+itemStar()">
 			<li><i class="glyphicon glyphicon-star"></i></li>
 			<li><i class="glyphicon glyphicon-star"></i></li>
 			<li><i class="glyphicon glyphicon-star"></i></li>
@@ -15,7 +15,7 @@
 	</div>
 	<div class="sh_info">
 		<div class="name_expert_big checked">{{profile.first_name || 'Имя'}} {{profile.last_name || ''}}</div>
-		<a href="#" class="view-profile">посмотреть профиль</a>
+		<router-link :to="'/experts/'+ expert.id" href="javascript:void(0)" class="view-profile">посмотреть профиль</router-link>
 	</div>
 	<ul class="menu">
 		<li :class="{'active': $route.path == '/profile'}">
@@ -97,12 +97,20 @@ export default {
 	mounted(){
 		 
 	},
+	methods:{
+		itemStar(){
+        return Math.trunc(this.expert.rating / 2)
+      },
+	},
 	computed: {
 		profile(){
 			return this.$store.getters.PROFILE
 		},
 		domen(){
 			return this.$store.getters.DOMEN
+		},
+		expert(){
+			return this.$store.getters.EXPERT
 		}
 	}
 }

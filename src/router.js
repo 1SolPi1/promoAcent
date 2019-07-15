@@ -15,7 +15,9 @@ const Help = () => import('./views/Help.vue')
 const MapSite = () => import('./views/MapSite.vue')
 const Policy = () => import('./views/Policy.vue')
 const AboutPartners = () => import('./views/AboutPartners.vue')
-const Person = () => import('./views/Person.vue')
+const ProgramShareFriends = () => import('./views/ProgramShareFriend.vue')
+const TariffQuestions = () => import('./views/TariffQuestions.vue')
+import Person from '@/views/Person'
 
 const MyConsultation = () => import('./components/Profile/MyConsultation.vue')
 const MainSettings = () => import('./components/Profile/MainSettings.vue')
@@ -113,6 +115,16 @@ let router = new Router({
       path: '/person/user',
       name: 'person',
       component: Person
+    },
+    {
+      path: '/programsharefriends',
+      name: 'programsharefriends',
+      component: ProgramShareFriends
+    },
+    {
+      path: '/tariggquestions',
+      name: 'tariffquestions',
+      component: TariffQuestions
     },
     //Expert Section
     {
