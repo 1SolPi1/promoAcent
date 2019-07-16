@@ -82,6 +82,8 @@
 											:childcategory="selectChildCategory"
 											:selectedCategory="selectCategory"
 											:category="categori"
+											:mysubcategori = "mysubcategories"
+											v-if="categori"
 										/>
 										<div class="col-xs-12">
 											<p>Текст визитка<span>*</span></p>
@@ -143,12 +145,12 @@
 												<p>статус PRO на 7 дней</p>
 												<div class="price first">
 													<span>390₽</span>
-													<a href="#">Приобрести</a>
+													<a href="javascript:void(0)" @click="alert()">Приобрести</a>
 												</div>
 												<p>статус PRO на 30 дней</p>
 												<div class="price">
-													<span>390₽</span>
-													<a href="#">Приобрести</a>
+													<span>990₽</span>
+													<a href="javascript:void(0)" @click="alert()">Приобрести</a>
 												</div>
 											</div>
 											</div>
@@ -230,7 +232,7 @@ export default {
 		this.education.startYear = this.experteducation.educate_start;
 		this.education.endYear = this.experteducation.educate_finish
 	},
-	mycategory(){
+	categori(){
 		// setTimeout(() => {  
   //         this.getSelectCategory(this.mycategory.id)
   //   }, 500)
@@ -279,6 +281,8 @@ export default {
 		this.education.degree = this.experteducation.name_educational;
 		this.education.startYear = this.experteducation.educate_start;
 		this.education.endYear = this.experteducation.educate_finish
+		this.getSelectCategory(this.mycategory.id)
+		// this.getStatusAnswer()
 	},
 	methods: {
 		changeExperience(item){
@@ -347,7 +351,7 @@ export default {
 
         this.$http({
           method: 'POST',
-          url: 'expert/education/edit?id=' + this.expert.id,
+          url: 'expert/education/add',
           data: params,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
@@ -422,11 +426,32 @@ export default {
 					})
         })
 		},
+		getStatusAnswer(){
+        this.$http({
+          method: 'GET',
+          url: 'question/answer/status-field',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
+        })
+		},
 		changeShow(item){
 			for (let i in this.listSectionMenu){
 				this.listSectionMenu[i] = false
 			}
 			this.listSectionMenu[item] = true
+		},
+		alert(){
+			this.$toast.error({
+						title:'Ошибка',
+						message:'Не достаточно денег на счету'
+					})
+			setTimeout(()=>{
+				this.$router.push('/userpays')
+			}, 1000)
 		}
 	},
 	computed: {

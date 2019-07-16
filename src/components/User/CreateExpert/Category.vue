@@ -17,18 +17,16 @@
       </div>
       <div class="znanie">
         <p>Дополнительная</p>
-        <select id="multi-2"> 
-          <option value="0">Выберите подкатегорию</option>
-          <option 
-            v-for="item in childcategory"
-            :value="item.id"
-            :key="item.id"
-            >
-            {{item.name}}
-          </option>
-        </select>
+        <subCategory
+          v-if="mysubcategories"
+          v-for="item in mysubcategories"
+          :key="item.id"
+          :id="item.id"
+          @selectsub="changeSubKnowledge"
+          :childcategory = "childcategory"
+        />
       </div>
-      <button class="add_new"></button>
+      <button class="add_new" @click="addNewItem()"></button>
     </div>
     <span class="txt ml-0">Несколько категорий в одной области знаний можно выбрать, удерживая клавишу Ctrl.<br/><a href="#">Сообщите нам</a>, если области Вашей экспертизы нет в списке.</span>
   </div>
@@ -36,9 +34,11 @@
 
 <script>
     /* eslint-disable */
+    import subCategory from '@/components/User/CreateExpert/SubCategory'
 	export default {
     name: "Category",
     components: {
+      subCategory
     },
     props: {
       category:{
@@ -56,27 +56,30 @@
         default:()=>{
           id: 0
         }
+      },
+      mysubcategori:{
+        type: Array,
+        default: () => []
       }
     },
     data() {
 			return {
+        count: 1,
+        mysubcategories: null
       }
     },
     watch:{
-       childcategory(){
-        setTimeout(function() {  
-         $('#multi-2').multiselect('rebuild');
-        }, 100) 
-      },
       category(){
         setTimeout(function() {  
          $('#multi').multiselect('rebuild');
         }, 100) 
       },
       selectedCategory(){
-        setTimeout(function() {  
+        setTimeout(() => {  
          $('#multi').multiselect('rebuild');
+         this.getSubCategories()
         }, 100) 
+
       },
     },
     created() {
@@ -88,14 +91,7 @@
               vm.changeKnowledge(element.val())
             },
       });
-      $('#multi-2').multiselect({
-        onChange: function(element) {
-              vm.changeSubKnowledge(element.val())
-            },
-      });
-      setTimeout(function() {  
-        $('select').trigger('refresh');  
-      }, 1)
+      this.getSubCategories()
      },
 		methods: {
       changeKnowledge(item){
@@ -103,6 +99,12 @@
       },
       changeSubKnowledge(item){
         this.$emit('changeSubKnowledge', item)
+      },
+      addNewItem(){
+        this.mysubcategories.push({})
+      },
+      getSubCategories(){
+        this.mysubcategories = this.mysubcategori.filter(map => map.parent_id === this.selectedCategory.id)
       }
 		},
 		computed: {

@@ -12,9 +12,9 @@
                   currentPage="Ваши вопросы"
                   />
                 <categories 
-                  :category="category"
+                  :category="categories"
                   :childcategory="selectChildCategory"
-                  v-if="category"
+                  v-if="categories"
                   @selectcategory="changeCategory"
                   @selectsubcategory="changeSubCategory"
                   />
@@ -84,6 +84,7 @@
                         v-for="(item, index) in allQuestions"
                         :key="index"
                         :category="item.category"
+                        :subcategory="item.sub_category"
                         :countAnswer="item.answer_count"
                         :date="item.question.create_at"
                         :person="item.question.anonim? ' Анонимно ': item.user_name"
@@ -162,7 +163,7 @@
           this.pageNumber = 1;
           this.allQuestions = []
           setTimeout(()=> {  
-              this.getParentCategory(this.$store.getters.SELECTCATEGORY)
+              this.getSelectCategory(this.$store.getters.SELECTCATEGORY)
               this.questionsList = this.$store.getters.QUESTIONS
               this.getAllQuestions(this.pageCount, this.selectCategory.id);
             }, 500)
@@ -194,16 +195,16 @@
           new WOW().init();
           const vm = this;
             setTimeout(function() {  
-              vm.getParentCategory(vm.$store.getters.SELECTCATEGORY)
+              vm.getSelectCategory(vm.selectCat)
               vm.questionsList = vm.$store.getters.QUESTIONS
               vm.getAllQuestions(vm.pageCount, vm.selectCategory.id);
-            }, 500)
+            }, 900)
           vm.getExperts()
         },
         methods: {
           changeCategory(item){
             this.$store.dispatch('changeSelectCategory', item);
-            this.selectCategory = this.category.find(map => map.id == item)
+            this.selectCategory = this.categories.find(map => map.id == item)
             setTimeout(()=>{  
                 this.getChildCategory(this.selectCategory);
                 this.pageNumber = 1;
@@ -219,17 +220,12 @@
             }
             this.getAllQuestions(1, this.selectCategory.id);
           },
-      getParentCategory(id){
-        this.category = this.$store.getters.CATEGORIES.map(map => map.category);
-        this.childCategory = this.$store.getters.CATEGORIES.map(map => map.child);
-        this.getSelectCategory(id);
-      },
       getSelectCategory(id){
-        this.selectCategory = this.category.find(item => item.id === id)
+        this.selectCategory = this.categories.find(item => item.id === id)
         this.getChildCategory(this.selectCategory)
       },
       getChildCategory(arr){
-        this.selectChildCategory = this.childCategory.filter(map => map.parent_id === arr.id)
+        this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
       },
             nextPage () {
               this.pageNumber++
@@ -311,6 +307,15 @@
           },
           logined(){
             return localStorage.getItem('token')
+          },
+          categories(){
+            return this.$store.getters.CATEGORI
+          },
+          childCategories(){
+            return this.$store.getters.CHILDCATEGORI
+          },
+          selectCat(){
+            return this.$store.getters.SELECTCATEGORY
           }
         },
     }

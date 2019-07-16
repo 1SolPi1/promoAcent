@@ -3,7 +3,7 @@
     <div class="block_question slideInUp wow" data-wow-iteration="1" @click="openQuestion()">
       <div class="name_question">{{title}}</div>
       <div class="price_question">{{price}} ₽</div>
-      <div class="category_question">{{category}}</div>
+      <div class="category_question">{{category}} / {{subcategory}}</div>
       <div class="status_question" v-if="status !== 0">Решено</div>
         <div class="wrap_link_question">
           <a href="javascript:void(0)" class="link_gray" @click="openQuestion()">Читать полностью</a>
@@ -29,6 +29,10 @@
       category:{
         type: String,
         default: 'category'
+      },
+      subcategory:{
+        type: String,
+        default: ''
       },
       countAnswer:{ 
         type: Number,

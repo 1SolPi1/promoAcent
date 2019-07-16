@@ -6,7 +6,7 @@
       v-for="(item, index) in category"
       :key="item.id"
       :value="item.id"
-      :selected="item.id === $store.getters.SELECTCATEGORY"
+      :selected="item.id === select"
      >
        {{item.name}}
      </option>
@@ -37,8 +37,16 @@
     },
     watch:{
       childcategory(){
+        setTimeout(()=>{
+          $('#subcategory').trigger('refresh');  
+        }, 400)
         $('#subcategory').trigger('refresh');  
-        $('#subcategory').trigger('refresh');  
+      },
+      select(){
+        setTimeout(()=>{
+          $('#basecategory').trigger('refresh');  
+        }, 400)
+        $('#basecategory').trigger('refresh');  
       }
     },
     created() {},
@@ -63,6 +71,9 @@
       
     },
     computed: {
+      select(){
+        return this.$store.getters.SELECTCATEGORY
+      }
     },
   }
 </script>

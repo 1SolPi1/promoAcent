@@ -196,13 +196,14 @@ export default new Vuex.Store({
   actions: {
     getCategories: async ({commit}) => {
     let parentCategory;
-    let childCategories;
+    let childCategories = [];
+    let massChild;
     let firstlist;
     let secondlist;
     let {data} = await Axios.get('category/category/find',{headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: "Bearer " + localStorage.getItem('token')}});
     commit('SET_CATEGORIES', data);
     parentCategory = data.map(map => map.category);
-    childCategories = data.map(map => map.child);
+    massChild = data.map(map => map.child).forEach(item => item.forEach(function(entry) {childCategories.push(entry)}));
     firstlist = parentCategory.slice(0,6);
     secondlist = parentCategory.slice(6,15);
     commit('SET_CATEGORI', parentCategory);

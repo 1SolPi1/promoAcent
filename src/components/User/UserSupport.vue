@@ -144,6 +144,11 @@ export default {
 				title:'Успешно',
 				message:'Ваша заявка отправлена в тех поддержку, ожидайте обратной связи'
 			})
+				this.name = null;
+				this.email = null;
+				this.type = '';
+				this.quest = '';
+				this.category = null;
 			}
 		},
 		change(id){

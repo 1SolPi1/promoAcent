@@ -105,7 +105,7 @@
 							<div class="col-md-6">
 								<div class="title_experts">Время консультирования</div>
 								<div class="time_expert">По предварительной договоренности. Обычно с {{expertinfo.work_time_from}} до {{expertinfo.work_time_to}} по московскому времени</div>
-								<div class="title_experts title_education">Образование <div class="confirmed_expert">подтверждено</div></div>
+								<div class="title_experts title_education">Образование <!-- <div class="confirmed_expert">подтверждено</div> --></div>
 								<div class="education_expert" v-if="expertinfo.education.length > 0">{{expertinfo.education[0].institution_name || ' Институт '}}<div class="years_education">{{expertinfo.education[0].educate_start}} - {{expertinfo.education[0].educate_finish}}</div>
 									<p><span>{{expertinfo.education[0].name_educational || ' Специалист '}}</span><span>{{expertinfo.education[0].specialization || ' Образование '}}</span></p>
 								</div>
@@ -152,7 +152,7 @@
 							/>
 						</div>
 						<div class="bottom_btn_review">
-							<a href="" class="btn_gray"><span>Смотреть <strong>все</strong> ответы</span></a>
+							<!-- <a href="" class="btn_gray"><span>Смотреть <strong>все</strong> ответы</span></a> -->
 						</div>
 					</div>
 				</div>
