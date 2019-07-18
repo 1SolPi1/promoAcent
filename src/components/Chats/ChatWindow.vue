@@ -100,6 +100,7 @@ export default {
     date: message.date,
     expert_id: message.expert_id,
     message: message.content,
+    writer: message.writer,
     room_id: message.room
    })
   },

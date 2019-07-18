@@ -94,6 +94,7 @@ export default {
             client_id: this.$chatinfo.user_id,
             expert_id: this.$chatinfo.expert_id,
             author: this.$chatinfo.author,
+            writer: this.$store.getters.USERINFO.id,
             content: text
           });
           this.$emit('addmessage',{
@@ -101,6 +102,7 @@ export default {
             date: new Date(),
             expert_id:2,
             author: this.$chatinfo.author,
+            writer: this.$store.getters.USERINFO.id,
             message:text
           })
           }

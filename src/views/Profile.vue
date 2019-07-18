@@ -282,7 +282,7 @@ export default {
 		this.education.startYear = this.experteducation.educate_start;
 		this.education.endYear = this.experteducation.educate_finish
 		this.getSelectCategory(this.mycategory.id)
-		// this.getStatusAnswer()
+		this.getStatusAnswer()
 	},
 	methods: {
 		changeExperience(item){

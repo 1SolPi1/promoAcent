@@ -28,14 +28,14 @@
         <input type="radio" name="radio" value="online" class="radio" id="radio1" v-model="items" />
         <label for="radio1" ><img src="@/assets/img/sort5.png" alt="alt">на сайте</label>
       </div>
-      <div class="item_sorting">
+      <!-- <div class="item_sorting">
         <input type="radio" checked name="radio" value="rating" class="radio" id="radio2" v-model="items"/>
         <label for="radio2"><img src="@/assets/img/sort6.png" alt="alt">рейтингу</label>
-      </div>
-<!--       <div class="item_sorting">
+      </div> -->
+      <div class="item_sorting">
         <input type="radio" name="radio" value="akcii" class="radio" id="radio3"  v-model="items"/>
         <label for="radio3"><img src="@/assets/img/sort7.png" alt="alt">акции</label>
-      </div> -->
+      </div>
       <div class="item_sorting">
         <input type="radio" name="radio" value="price" class="radio" id="radio4"  v-model="items"/>
         <label for="radio4"><img src="@/assets/img/sort2.png" alt="alt">стоимости</label>

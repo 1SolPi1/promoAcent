@@ -33,8 +33,7 @@
 							<!-- <div class="top_expert">Эксперт  месяца</div> -->
 						</div>
 						<div 
-              class="boxCategory"
-              v-if="expertinfo.category_parent.length > 0"
+              class="boxCategory"v-if="expertinfo.category_parent.length > 0"
               >
               <div 
                 class="iconCategory" 
@@ -284,6 +283,7 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
 }
 .iconCategory{
   width: 36px;

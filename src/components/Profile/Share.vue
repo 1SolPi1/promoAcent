@@ -102,8 +102,8 @@
       endDay < 10? endDay = '0' + endDay : endDay;
       endMonth < 10? endMonth = '0' + endMonth : endMonth;
 
-      let start = day+"."+month+"."+year;
-      let end = endDay+"."+endMonth+"."+endYear;
+      let start = month+"."+day+"."+year;
+      let end = endMonth+"."+endDay+"."+endYear;
 
       let params = new URLSearchParams();
         params.append('name', this.share.name);

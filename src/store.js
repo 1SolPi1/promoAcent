@@ -75,77 +75,77 @@ export default new Vuex.Store({
       id:1,
       name: 'Психология',
       class: 'psihol',
-      image: 'img/category2.png',
+      image: require('@/assets/img/category2.png'),
       color: '#fff68a'
     },
     {
       id:3,
       name: 'Юриспруденция',
       class: 'yrist',
-      image: 'img/category3.png',
+      image: require('@/assets/img/category3.png'),
       color: '#f5b485'
     },
     {
       id:6,
       name: 'Медицина',
       class: 'med',
-      image: 'img/category1.png',
+      image: require('@/assets/img/category1.png'),
       color: '#85f5b7'
     },
     {
       id:64,
       name: 'Учеба и наука',
       class: 'scince',
-      image: 'img/category4.png',
+      image: require('@/assets/img/category4.png'),
       color: '#858ef5'
     },
     {
       id:144,
       name: 'Технологии',
       class: 'tech',
-      image: 'img/antenna.svg',
+      image: require('@/assets/img/antenna.svg'),
       color: '#858ef5'
     },
     {
       id:114,
       name: 'Английский',
       class: 'english',
-      image: 'img/category6.png',
+      image: require('@/assets/img/category6.png'),
       color: '#f58585'
     },
     {
       id:103,
       name: 'Красота',
       class: 'beaut',
-      image: 'img/quest6.png',
+      image: require('@/assets/img/quest6.png'),
       color: '#f585b9'
     },
     {
       id:119,
       name: 'Хобби',
       class: 'hobbi',
-      image: 'img/bicycle.svg',
+      image: require('@/assets/img/bicycle.svg'),
       color: '#85f5b7'
     },
     {
       id:165,
       name: 'Бизнес',
       class: 'busin',
-      image: 'img/umbrella.svg',
+      image: require('@/assets/img/umbrella.svg'),
       color: '#858ef5'
     },
     {
       id:138,
       name: 'Религия',
       class: 'religion',
-      image: 'img/church.svg',
+      image: require('@/assets/img/church.svg'),
       color: 'black'
     },
     {
       id:81,
       name: 'Эзотерика',
       class: 'ezot',
-      image: 'img/quest5.png',
+      image: require('@/assets/img/quest5.png'),
       color: '#916cea'
     },
   ],

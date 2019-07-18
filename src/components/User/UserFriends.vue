@@ -122,14 +122,29 @@ export default {
 	props: {},
 	data() {
 		return {
-			email: null
+			email: null,
+			usersList: []
 		}
 	},
 	created() {},
 	mounted() {
 		 new Clipboard('#copy-button');
+		 this.getUsersFriend()
 	},
 	methods: {
+		getUsersFriend(){
+			this.$http({
+          method: 'GET',
+          url: 'client/friend/all',
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+              Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+          this.usersList = response.data
+        })
+		},
 		alert(){
 			this.$toast.success({
 				title:'Успешно',

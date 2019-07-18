@@ -532,6 +532,9 @@ export default {
 	created() {},
 	mounted() {
 		this.getPays()
+		if (this.$route.query.query) {
+			this.changeShow(this.$route.query.query)
+		}
 	},
 	methods: {
 		getPays(){

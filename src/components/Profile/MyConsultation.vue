@@ -18,17 +18,17 @@
 							<div class="section_nav_expert">
 								<div class="head_nav_expert">
 									<ul class="nav nav-tabs">
-										<li class="active"><a href="#tab1" data-toggle="tab">Мои сообщения</a></li>
-										<li><a href="#tab2" data-toggle="tab">Мои ответы</a></li>
-										<li><a href="#tab3" data-toggle="tab">Голоса за ответы</a></li>
-										<li><a href="#tab4" data-toggle="tab">Мои вопросы</a></li>
-										<li><a href="#tab5" data-toggle="tab">Мои эксперты</a></li>
+										<li :class="{active: listSectionMenu.message}"><a href="#tab1" data-toggle="tab">Мои сообщения</a></li>
+										<li :class="{active: listSectionMenu.answer}"><a href="#tab2" data-toggle="tab">Мои ответы</a></li>
+										<li :class="{active: listSectionMenu.quote}"><a href="#tab3" data-toggle="tab">Голоса за ответы</a></li>
+										<li :class="{active: listSectionMenu.question}"><a href="#tab4" data-toggle="tab">Мои вопросы</a></li>
+										<li :class="{active: listSectionMenu.expert}"><a href="#tab5" data-toggle="tab">Мои эксперты</a></li>
 									</ul>
 								</div>
 							</div>
 							<div class="section_content_tabs">
 								<div class="tab-content">
-									<div class="tab-pane chat-tab active" id="tab1">
+									<div class="tab-pane chat-tab" id="tab1" :class="{active: listSectionMenu.message}">
 										<div v-if="chatList.clientExpertChat.length > 0">
 										<p>Как клиент</p>
 										<userchatitem
@@ -44,6 +44,8 @@
 																		author: 0 
 																	})"
 										/>
+									</div>
+									<div v-if="chatList.expertExpertChat.length > 0">
 										<p>Как эксперт</p>
 										<userchatitem
 											v-for="item in chatList.expertExpertChat"
@@ -60,7 +62,7 @@
 										/>
 										</div>
 									</div>
-									<div class="tab-pane conslt" id="tab2">
+									<div class="tab-pane conslt" id="tab2" :class="{active: listSectionMenu.answer}">
 									<div class="clearfix">
 																			<p v-if="listAnswers.length > 0">У Вас <span>{{listAnswers.length}}</span> ответа</p>
 																			<p v-else>У Вас <span>0</span> ответов</p>
@@ -152,7 +154,7 @@
 									/>
 									</div>
 									</div>
-									<div class="tab-pane conslt" id="tab3">
+									<div class="tab-pane conslt" id="tab3" :class="{active: listSectionMenu.quote}">
 										<div class="clearfix">
 											<p>У Вас <span>3</span> ответа</p>
 										</div>
@@ -322,7 +324,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane conslt" id="tab4">
+									<div class="tab-pane conslt" id="tab4" :class="{active: listSectionMenu.question}">
 										<div v-if="listQuestions.length > 0">
 										<questionItem
                         v-for="(item, index) in listQuestions"
@@ -338,7 +340,7 @@
                     />
                     </div>
 									</div>
-									<div class="tab-pane conslt" id="tab5">
+									<div class="tab-pane conslt" id="tab5" :class="{active: listSectionMenu.expert}">
 									
 									</div>
 								</div>
@@ -365,16 +367,30 @@ export default {
 			},
 			listQuestions: [],
 			listAnswers:[],
-			score:[]
+			score:[],
+			listSectionMenu:{
+				message: true,
+				answer: false,
+				quote: false,
+				question: false,
+				expert: false
+			}
 		} 
 	},
 	created(){
 		this.getProfile()
 	},
+	// beforeRouteUpdate (to, from, next) {
+	// 		this.changeShow(this.$route.query.query)
+	// 	next()
+	// },
 	mounted(){
 		// eslint-disable-next-line
 		 $('select:not([id^="multi"]), input[type=number]').styler();
 		this.getChats();
+		if (this.$route.query.query) {
+			this.changeShow(this.$route.query.query)
+		}
 	},
 	methods:{
 		getChats(){
@@ -456,6 +472,12 @@ export default {
         .then(response =>{
 					this.score = response.data
         })
+		},
+		changeShow(item){
+			for (let i in this.listSectionMenu){
+				this.listSectionMenu[i] = false
+			}
+			this.listSectionMenu[item] = true
 		},
 	}
 }
