@@ -113,6 +113,7 @@ export default {
  historyUsers(data){
      this.mess = data;
      let arr = this.messages
+     const that = this
      // for (let i =0; i<data.length; i++){
      //     let author;
     //     if(data[i].user_id === this.idForUser){
@@ -120,7 +121,17 @@ export default {
     //     }else{
     //         author = data[i].user_id.toString();
     //     }
-    data.forEach(function(entry) {arr.push(entry)});
+    data.forEach(function(entry) {
+      if (entry.writer !== that.$store.getters.USERINFO.id && entry.read !== true) {
+        that.$socket.emit('readUser',
+        {
+         message: entry.message,
+         room_id: entry.room_id,
+         date: entry.date
+        });
+      }
+      arr.push(entry)
+    });
     }
   },
   mounted(){

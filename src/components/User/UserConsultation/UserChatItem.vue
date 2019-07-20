@@ -1,6 +1,7 @@
 <template>
   <div class="table-header tbl color">
     <div>
+      <span class="message" v-if="notRead > 0">{{notRead}}</span>
       <a href="javascript:void(0)" @click="$emit('openchat')">{{oponnent.fullName}}</a><a href="javascript:void(0)" class="link_share" id="mod_chat_open" @click="$emit('openchat')">
         
       </a>
@@ -53,7 +54,11 @@
     },
     props: {
       oponnent:{required: true},
-      lastmessage:{required: true}
+      lastmessage:{required: true},
+      notRead:{
+        type: Number,
+        default: 0
+      }
     },
     data() {
 			return {
@@ -90,5 +95,17 @@
 </script>
 
 <style scoped>
-
+.message{
+  height: 18px;
+width: 18px;
+border-radius: 100%;
+position: absolute;
+left: 17px;
+padding: 3px 0;
+background: #D3341F;
+color: white;
+font-size: 12px;
+top: 15px;
+text-align: center;
+}
 </style>

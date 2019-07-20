@@ -83,7 +83,7 @@
                     <questionItem
                         v-for="(item, index) in allQuestions"
                         :key="index"
-                        :category="item.category"
+                        :category="item.parent_category"
                         :subcategory="item.sub_category"
                         :countAnswer="item.answer_count"
                         :date="item.question.create_at"

@@ -65,7 +65,7 @@
 			c25.482-17.705,63.01-43.764,112.742-78.281c14.957-10.447,27.453-23.054,37.496-37.803c10.025-14.749,15.051-30.22,15.051-46.408
 			c0-13.525-4.873-25.098-14.598-34.737C526.461,63.829,514.932,59.013,501.613,59.013z" />
 								</svg>
-								<span>0</span></router-link>
+								<span>{{notReadChats}}</span></router-link>
 							<router-link to="/myconsultation?query=answer" class="chat_mail chat">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.626 511.626">
 		<path d="M301.927,327.605c30.926-13.038,55.34-30.785,73.23-53.248c17.888-22.458,26.833-46.915,26.833-73.372
@@ -118,19 +118,33 @@
     props: {},
     data() {
 			return {
-
+				notReadChats: null
       }
     },
     created() {
     },
     mounted() {
+    	this.getNotReadChats()
      },
 		methods: {
 			logout(){
 				localStorage.removeItem('token');
 				this.$store.commit('CLEAR_PROFILE');
 				this.$router.push('/')
-			}
+			},
+			getNotReadChats(){
+			this.$http({
+          method: 'GET',
+          url: 'chat/chat/not-read',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					this.notReadChats = response.data
+        })
+		},
 		},
 		computed: {
 			profile(){

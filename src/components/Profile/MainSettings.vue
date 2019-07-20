@@ -99,15 +99,15 @@
 												<div class="col-xs-12 col-md-4 col-lg-4 col-lg-offset-1">
 													<form class="change-class">
 													<p>Изменить пароль</p>
-													<input type="password" placeholder="старый пароль">
-													<input type="password" placeholder="новый пароль">
-													<button class="save-button">Сохранить</button>
+													<input type="password" placeholder="старый пароль" v-model="oldPassword">
+													<input type="password" placeholder="новый пароль" v-model="newPassword">
+													<button class="save-button" @click.prevent="changePassword()">Сохранить</button>
 													<button class="reset-button">Сбросить</button>
 													</form>
 												</div>
 										</div>
 										<div class="border"></div>
-										<button class="save-button" @click="save()">Сохранить</button>
+										<button class="save-button" @click.prevent="save()">Сохранить</button>
 										<button class="cancel-button">Отменить</button>
 										<button class="delete-button">удалить профиль</button>
 									</div>
@@ -154,6 +154,8 @@ export default {
   name: "MainSettings",
   data(){
 		return{
+			oldPassword: null,
+			newPassword: null,
 			selectcategoryes:{
 				pay: null,
 				all: null,
@@ -236,7 +238,36 @@ export default {
 						message:'Новая информация сохранена'
 					})
         })
-		}
+		},
+		changePassword(){
+				let params = new URLSearchParams();
+        params.append('oldPassword', this.oldPassword);
+        params.append('newPassword', this.newPassword);
+
+        this.$http({
+          method: 'POST',
+          url: 'user/profile/change-password',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+					if (response.status === 200) {
+						this.$toast.success({
+						title:'Успешно',
+						message:'Пароль изменен'
+					})
+					}
+        })
+        .catch(error =>{
+        	this.$toast.error({
+						title:'Ошибка',
+						message: error.response.data.return
+        })
+        })
+      }
 	},
 	 watch:{
       category(){

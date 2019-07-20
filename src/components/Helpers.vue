@@ -61,13 +61,8 @@
           $( document ).trigger( "enhance" );
           $('.quest_click').click(function(){
             let id = $(this).data('target');
-            $('.quest_click').removeClass('qc_active');
-            $('.quest_item_content').removeClass('q_active');
-            // if($(this).find('.quest_item_content').hasClass('q_active')){
-            //   alert('У этого блока есть класс q_active');
-            //   }else{
-            //     alert('У этого блока нет класса q_active');
-            // }
+            $('.quest_click').not(this).removeClass('qc_active');
+            $('.quest_item_content').not('#'+id).removeClass('q_active');
             $(this).toggleClass('qc_active');
             $('#'+id).toggleClass('q_active');
           });

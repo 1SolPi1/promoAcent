@@ -663,7 +663,7 @@ h6 {
     margin-bottom: 10px;
 }
 
-.akcia-in-profile .right-side .days,.akcia-in-profile .right-side .hours, .akcia-in-profile .right-side .minutes {
+.days, .hours, .minutes {
     display: inline-block;
     font-size:30px;
     font-family: "SFUIDisplay-Semibold";
@@ -675,7 +675,7 @@ h6 {
     background:#FEFEFE;
     border-radius:4px;
 }
-.akcia-in-profile .right-side .days p,.akcia-in-profile .right-side .hours p, .akcia-in-profile .right-side .minutes p{
+.days p,  .hours p, .minutes p{
         font-family: "SFUIDisplay-Regular";
     font-size:14px;
     color:#323235;
@@ -2278,13 +2278,13 @@ input[type="submit"],
     left: 92px;
 }
 
-/*.slick-prev::before {
+.slick-prev::before {
     background-image: url(../img/prev.png);
 }
 
 .slick-prev::after {
     background-image: url(../img/prev_hover.png);
-}*/
+}
 
 .slick-next::before {
     background-image: url(../img/next.png);
@@ -5766,6 +5766,10 @@ input.radio, input.checkbox {
 
 .list_category .slick-next::before,
 .list_category .slick-next::after {
+    display: none;
+}
+.list_category .slick-prev::before,
+.list_category .slick-prev::after {
     display: none;
 }
 

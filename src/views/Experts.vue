@@ -140,7 +140,8 @@ export default {
           rating: null,
           akcii: null,
           price: null,
-          date: null
+          date: null,
+          sex: 1
       }
     }
 	},
@@ -153,6 +154,7 @@ export default {
         this.getChildCategory(this.selectCategory);
         this.selectSubCategory = null;
       }, 300)
+      this.getExperts()
     },
     changeSubCategory(item){
       this.selectSubCategory= this.selectChildCategory.find(map => map.id == item)
@@ -174,20 +176,23 @@ export default {
 			this.getExperts()
 		},
 		getExperts(){
-				// let categoryId;
-    //   	this.selectSubCategory ? categoryId = this.selectSubCategory.id : this.selectCategory.id;
         let params = new URLSearchParams();
-        // params.append('category_id', categoryId);
-        params.append('sex', this.sortItem.sex);
+       // params.append('category_id', this.selectCategory.id);
+       // if (this.selectSubCategory !== null) {
+       // 	params.append('sub_category_id', this.selectSubCategory.id)
+       // }
+        // params.append('sex', this.sortItem.sex);
         if (this.sortItem.online !== null) {
         	params.append('online', this.sortItem.online)
         }
         if (this.sortItem.date !== null) {
         	params.append('create_at', this.sortItem.date)
+        	params.append('sort', 'create_at')
         }
         // params.append('percent', this.sortItem.online)
         if (this.sortItem.price !== null) {
         	params.append('price_from', this.sortItem.price)
+        	params.append('sort', 'price_from')
         }
         // params.append('online', this.sortItem.online)
 
@@ -222,6 +227,7 @@ export default {
 	watch:{
 		categories(){
 			this.getSelectCategory(1)
+			this.getExperts()
 		}
 	},
 	computed:{

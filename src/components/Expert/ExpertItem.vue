@@ -42,6 +42,19 @@
             </div>
             <a href="javascript:void(0)" class="btn_chat btn_chat_big" @click="$emit('openchat')" v-if="!creator">написать в чат</a>
           </div>
+          <div class="firts_consultation" v-if="expert.action.length > 0">
+            <div class="action_consultation"><span>Акция</span></div>
+            <div class="left_first">
+              <div class="title_middle">{{expert.action[0].name}}</div>
+              <p>{{expert.action[0].description}}</p>
+              <div class="price_consultation">200 ₽ <div class="old_price">1 000₽</div></div>
+            </div>
+            <div class="right_first">
+              <p>До конца акции:</p>
+              <div class="countdown clearfix" :data-countdown="times()"></div>
+              <a href="javascript:void(0)" class="btn_blue" @click="alert()">Воспользоваться</a>
+            </div>
+          </div>
         </div>
 </template>
 
@@ -67,6 +80,15 @@
     mounted() {
       if(!this.search){
         new WOW().init();
+        $('[data-countdown]').each(function() {
+  var $this = $(this), finalDate = $(this).data('countdown');
+      $this.countdown(finalDate, function(event) {
+      $this.html(event.strftime(''
+    + '<div class="days"><span>%D</span><p>дней</p></div> '
+    + '<div class="hours"><span>%H</span><p>часа</p></div> '
+    + '<div class="minutes"><span>%M</span><p>минут</p></div> '));
+  });
+});
       }
      },
 		methods: {
@@ -78,6 +100,28 @@
       },
       getImage(){
         return this.categoryItem.find(item => item.id === this.expert.category_parent[0].id).image
+      },
+      alert(){
+        this.$toast.success({
+            title:'Успешно',
+            message:'Ваш запрос отправлен эксперту'
+          })
+      },
+      times(){
+        const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
+
+        let time = new Date(this.expert.action[0].action_end);
+        let year = time.getFullYear();
+        let day = time.getDate();
+        let month = time.getMonth() + 1;
+
+        if(day > months[month].days){
+          day = 1
+          month += 1
+        }
+        day < 10? day = '0' + day : day;
+        month < 10? month = '0' + month : month;
+        return year + '/' + month+ '/' + day
       }
 		},
 		computed: {

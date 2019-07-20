@@ -52,6 +52,7 @@
 											:key="item[0].room_id"
 											:oponnent="item.opponent"
 											:lastmessage="item.last_message"
+											:notRead="item.not_read"
 											@openchat="$chatinfo.opens({
 																		name: 'Имя Фамилия',
 																		avatar: 'null',

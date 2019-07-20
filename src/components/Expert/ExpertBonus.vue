@@ -2,8 +2,8 @@
 <div class="akcia-in-profile clearfix">
   <p class="label-akcia">Акция</p>
   <div class="left-side">
-    <p class="akcia-header">Первая консультация</p>
-    <span class="akcia-body">20 минут первой консультации видео/ аудио формат предварительная запись и оплата</span>
+    <p class="akcia-header">{{action.name}}</p>
+    <span class="akcia-body">{{action.description}}</span>
     <div class="price">
       <span class="new-price">200 ₽</span>
       <span class="old-price">1 000 ₽</span>
@@ -23,7 +23,11 @@
     components: {
 
     },
-    props: {},
+    props: {
+      action:{
+        required: true
+      }
+    },
     data() {
 			return {
 				

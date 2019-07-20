@@ -92,7 +92,8 @@
 				<div class="tab-content">
 					<div class="tab-pane"  :class="{active: $route.query.id !== '1'}" id="tab1">
 						<expertBonus
-							v-if="creator"
+							v-if="creator && expertinfo.action.length > 0"
+							:action="expertinfo.action[0]"
 						/>
 						<div class="row about_expert">
 							<div class="col-md-6">
