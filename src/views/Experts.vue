@@ -135,7 +135,7 @@ export default {
       category: null,
       childCategory: null,
       selectChildCategory: null,
-      selectCategory: null,
+      selectCategory: {id: 1},
       selectSubCategory: null,
       bigImage: null,
       sortItem:{
