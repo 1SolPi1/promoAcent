@@ -25,6 +25,7 @@
 							</ul>
 							<img src="@/assets/img/svg/avatar.svg" alt="alt" v-if="expertinfo.avatar === null">
               <img :src="domen + expertinfo.avatar" alt="alt" class="avatar" v-else>
+              <a href="javascript:void(0)" v-if="token && !creator" class="btn_add addToMyExpert" @click="addToMyExpert()">мои эксперты</a>
 						</div>
 						<div class="head_expert_item">
 							<div class="name_expert_big">{{expertinfo.name || 'Имя Фамилия'}}</div>
@@ -67,7 +68,10 @@
 			<div class="container">
 				<div class="head_nav_expert">
 					<div class="social_btns">
-						<img src="@/assets/img/social_btns.jpg" alt="alt">
+						<socialButton
+							linkVk="http://sprosi-online.ru/#/experts/"
+							:idVk="expertinfo.id"
+						/>
 					</div>
 					<ul class="nav nav-tabs">
 						<li  :class="{active: $route.query.id !== '1'}"><a href="#tab1" data-toggle="tab">Профиль</a></li>
@@ -94,6 +98,7 @@
 						<expertBonus
 							v-if="creator && expertinfo.action.length > 0"
 							:action="expertinfo.action[0]"
+							@refresh="getExpert()"
 						/>
 						<div class="row about_expert">
 							<div class="col-md-6">
@@ -136,7 +141,7 @@
 									<p>О эксперте ещё не оставляли отзывы</p>
 								</div>
 								<div class="bottom_btn_review" v-if="expertinfo.comment_count > 6">
-									<a href="#" class="btn_gray"><span>Смотреть <strong>все</strong> отзывы</span></a>
+									<a href=javvascript:void(0) class="btn_gray"><span>Смотреть <strong>все</strong> отзывы</span></a>
 								</div>
 							</div>
 						</div>
@@ -198,13 +203,11 @@ export default {
 		}
 	},
 	created() {
-
+		this.getExpert();
+		this.getReviews();
 	},
 	mounted() {
 		new WOW().init();
-		this.getExpert();
-		this.getReviews();
-		console.log(this.$route.query)
 	},
 	methods: {
 		itemStar(){
@@ -252,8 +255,35 @@ export default {
       },
       getImage(){
         return this.categoryItem.find(item => item.id === this.expertinfo.category_parent[0].id).image
-      }
+      },
+      addToMyExpert(){
+      	let params = new URLSearchParams();
+        params.append('expert_id', this.expertinfo.id);
 
+        this.$http({
+          method: 'POST',
+          data: params,
+          url: 'user/profile/expert-favorite',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+        	if (response.status === 200) {
+        		this.$toast.success({
+        			title:'Успешно',
+        			message:'Эксперт добавлен в избранное'
+        		})
+        	}
+      })
+        .catch(error=>{
+        	this.$toast.error({
+						title:'Ошибка',
+						message:error.response.data.error
+        	})
+        })
+      }
 	},
 	computed: {
 		domen(){
@@ -300,4 +330,10 @@ export default {
   width: 22px;
   height: 22px;
 }	
+
+.addToMyExpert{
+	position: absolute;
+	bottom: -70px;
+	left: 30px;
+}
 </style>

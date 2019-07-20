@@ -1,7 +1,7 @@
 <template>
 	<li @click="$emit('changeitem')">
 		<a 
-			href="#" 
+			href="javascript:void(0)" 
 			class="item_category" 
 			:class="[{active: active},'cat_'+ clases]"
 			>

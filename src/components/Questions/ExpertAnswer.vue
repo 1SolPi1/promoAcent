@@ -76,6 +76,12 @@
           })
           }
         })
+        .catch(error =>{
+           this.$toast.error({
+            title:'Ошибка',
+            message: error.response.data.error
+          })
+        })
       }
     },
     computed: {},

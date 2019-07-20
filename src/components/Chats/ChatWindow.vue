@@ -113,7 +113,10 @@ export default {
  historyUsers(data){
      this.mess = data;
      let arr = this.messages
-     const that = this
+     if (data.length > 0) {
+      this.readMessage(data[0].room_id)
+     }
+     // const that = this
      // for (let i =0; i<data.length; i++){
      //     let author;
     //     if(data[i].user_id === this.idForUser){
@@ -121,17 +124,21 @@ export default {
     //     }else{
     //         author = data[i].user_id.toString();
     //     }
-    data.forEach(function(entry) {
-      if (entry.writer !== that.$store.getters.USERINFO.id && entry.read !== true) {
-        that.$socket.emit('readUser',
-        {
-         message: entry.message,
-         room_id: entry.room_id,
-         date: entry.date
-        });
-      }
-      arr.push(entry)
+    data.forEach((entry) => {
+      // if (entry.writer !== that.$store.getters.USERINFO.id && entry.read !== true) {
+      //   that.$socket.emit('readUser',
+      //   {
+      //    message: entry.message,
+      //    room_id: entry.room_id,
+      //    date: entry.date,
+      //    id: entry._id
+      //   });
+      // }
+     this.messages.push(entry)
     });
+    },
+    readUser(data){
+      console.log(data)
     }
   },
   mounted(){
@@ -145,6 +152,21 @@ export default {
 
   },
   methods: {
+    readMessage(roomId){
+      // let params = new URLSearchParams();
+        // params.append('first_name', names[0]);
+        // params.append('last_name', names[1]);
+        // params.append('email', this.email);
+
+        this.$http({
+          method: 'GET',
+          url: 'chat/chat/read-user-message?roomId=' + roomId,
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+    },
     addMessages(data){
       // this.$socket.emit('newMessageUsers', message);
       this.messages.push(data);

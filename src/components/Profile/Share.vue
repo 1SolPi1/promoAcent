@@ -108,6 +108,8 @@
       let params = new URLSearchParams();
         params.append('name', this.share.name);
         params.append('description', this.share.description);
+        params.append('price_to', this.share.startPrice);
+        params.append('price_from', this.share.sharePrice);
         params.append('action_start', start);
         params.append('action_end', end);
 

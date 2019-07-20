@@ -76,6 +76,7 @@ export default new Vuex.Store({
       name: 'Психология',
       class: 'psihol',
       image: require('@/assets/img/category2.png'),
+      bigImage: require('@/assets/img/svg/psychology.svg'),
       color: '#fff68a'
     },
     {
@@ -83,6 +84,7 @@ export default new Vuex.Store({
       name: 'Юриспруденция',
       class: 'yrist',
       image: require('@/assets/img/category3.png'),
+      bigImage: require('@/assets/img/svg/urist.svg'),
       color: '#f5b485'
     },
     {
@@ -90,6 +92,7 @@ export default new Vuex.Store({
       name: 'Медицина',
       class: 'med',
       image: require('@/assets/img/category1.png'),
+      bigImage: require('@/assets/img/svg/medicine.svg'),
       color: '#85f5b7'
     },
     {
@@ -97,6 +100,7 @@ export default new Vuex.Store({
       name: 'Учеба и наука',
       class: 'scince',
       image: require('@/assets/img/category4.png'),
+      bigImage: require('@/assets/img/svg/ucheba.svg'),
       color: '#858ef5'
     },
     {
@@ -104,6 +108,7 @@ export default new Vuex.Store({
       name: 'Технологии',
       class: 'tech',
       image: require('@/assets/img/antenna.svg'),
+      bigImage: require('@/assets/img/svg/technology.svg'),
       color: '#858ef5'
     },
     {
@@ -111,6 +116,7 @@ export default new Vuex.Store({
       name: 'Английский',
       class: 'english',
       image: require('@/assets/img/category6.png'),
+      bigImage: require('@/assets/img/svg/english.svg'),
       color: '#f58585'
     },
     {
@@ -118,6 +124,7 @@ export default new Vuex.Store({
       name: 'Красота',
       class: 'beaut',
       image: require('@/assets/img/quest6.png'),
+      bigImage: require('@/assets/img/svg/krasota.svg'),
       color: '#f585b9'
     },
     {
@@ -125,6 +132,7 @@ export default new Vuex.Store({
       name: 'Хобби',
       class: 'hobbi',
       image: require('@/assets/img/bicycle.svg'),
+      bigImage: require('@/assets/img/svg/hobbi.svg'),
       color: '#85f5b7'
     },
     {
@@ -132,6 +140,7 @@ export default new Vuex.Store({
       name: 'Бизнес',
       class: 'busin',
       image: require('@/assets/img/umbrella.svg'),
+      bigImage: require('@/assets/img/svg/business.svg'),
       color: '#858ef5'
     },
     {
@@ -139,6 +148,7 @@ export default new Vuex.Store({
       name: 'Религия',
       class: 'religion',
       image: require('@/assets/img/church.svg'),
+      bigImage: require('@/assets/img/svg/religiya.svg'),
       color: 'black'
     },
     {
@@ -146,6 +156,7 @@ export default new Vuex.Store({
       name: 'Эзотерика',
       class: 'ezot',
       image: require('@/assets/img/quest5.png'),
+      bigImage: require('@/assets/img/svg/ezoteric.svg'),
       color: '#916cea'
     },
   ],

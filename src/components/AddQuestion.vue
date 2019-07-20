@@ -203,6 +203,12 @@ export default {
           })
           }
       })
+      .catch(erorr=>{
+         this.$toast.error({
+            title:'Ошибка',
+            message: error.response.data.error
+          })
+      })
     },
     addPrice(price){
       this.price = price

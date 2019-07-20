@@ -27,7 +27,7 @@
             <div class="block_question slideInUp wow" data-wow-iteration="1">
               <div class="name_question">{{question.question.title}}</div>
               <div class="price_question">{{question.question.price}} ₽</div>
-              <div class="category_question">{{question.category}} / </div>
+              <div class="category_question">{{question.parent_category}} /{{question.sub_category}} </div>
               <div class="data_question">{{dates}}</div>
                 <div class="user_question" v-if="question.question.anonim">Анонимно</div>
                 <div class="user_question" v-else>{{question.client.name}}</div>

@@ -14,7 +14,8 @@ export default {
 		return {
 		}
 	},
-	created() {
+	beforeCreate() {
+
 	},
 	mounted() {
 		if (localStorage.getItem('token')) {

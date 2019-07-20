@@ -47,7 +47,7 @@
             <div class="left_first">
               <div class="title_middle">{{expert.action[0].name}}</div>
               <p>{{expert.action[0].description}}</p>
-              <div class="price_consultation">200 ₽ <div class="old_price">1 000₽</div></div>
+              <div class="price_consultation">{{expert.action[0].price_to}} ₽ <div class="old_price">{{expert.action[0].price_from}}₽</div></div>
             </div>
             <div class="right_first">
               <p>До конца акции:</p>
@@ -80,7 +80,8 @@
     mounted() {
       if(!this.search){
         new WOW().init();
-        $('[data-countdown]').each(function() {
+      }
+      $('[data-countdown]').each(function() {
   var $this = $(this), finalDate = $(this).data('countdown');
       $this.countdown(finalDate, function(event) {
       $this.html(event.strftime(''
@@ -89,7 +90,6 @@
     + '<div class="minutes"><span>%M</span><p>минут</p></div> '));
   });
 });
-      }
      },
 		methods: {
       itemStar(){
@@ -161,6 +161,8 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  overflow: hidden;
 }
 .iconCategory{
   width: 36px;

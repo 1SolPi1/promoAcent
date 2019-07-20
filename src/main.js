@@ -16,6 +16,7 @@ import Chats from '../src/components/Chats'
 import UserChatItem from '../src/components/User/UserConsultation/UserChatItem'
 import VueSocketIO from 'vue-socket.io'
 import questionItem from '../src/components/Questions/QuestionItem'
+import socialButton from '../src/components/SocialButton'
 import CxltToastr from 'cxlt-vue2-toastr'
 import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 
@@ -84,6 +85,7 @@ Vue.component('userchatitem', UserChatItem);
 Vue.component('questionItem', questionItem);
 Vue.component('journalItem', journalItem);
 Vue.component('breadcrumbs', Breadcrumbs);
+Vue.component('socialButton', socialButton);
 // Vue.component('testcomponent',{
 //    render: function (createElement) {
 //     items.map(function (item) {

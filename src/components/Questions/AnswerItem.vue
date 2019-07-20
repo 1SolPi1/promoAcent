@@ -140,7 +140,7 @@
               </label>
             </div>
           </div>
-          <a class="help" href="#"><img src="img/svg/life-buoy.svg" alt=""></a>
+          <!-- <a class="help" href="#"><img src="img/svg/life-buoy.svg" alt=""></a> -->
     </div>
         <div class="image_expert ">
           <div class="status__expert" :class="{online_expert: status }"></div>

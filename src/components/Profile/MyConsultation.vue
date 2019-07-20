@@ -263,11 +263,23 @@
                         :status="item.question.status"
                         :title="item.question.title"
                         :id="item.question.id"
+                        :question="true"
                     />
                     </div>
 									</div>
 									<div class="tab-pane conslt" id="tab5" :class="{active: listSectionMenu.expert}">
-									
+										<expertItem
+											v-for="(item, index) in expertList"
+											:key="index"
+											:expert="item"
+											@openchat="$chatinfo.opens({
+													name: item.name || 'Имя Фамилия',
+													avatar: item.avatar,
+													user_id: $store.getters.PROFILE.user_id,
+													expert_id: item.id,
+													author: 0 
+												})"
+										/>
 									</div>
 								</div>
 							</div>
@@ -281,11 +293,13 @@
 <script>
 import expertAnswerItem from '@/components/Expert/ExpertAnswer/ExpertAnswerItem'
 import scoreItem from '@/components/Profile/Myconsultation/ScoreItem'
+import expertItem from '@/components/Expert/ExpertItem'
 export default {
   name: "MyConsultation",
   components:{
   	expertAnswerItem,
-  	scoreItem
+  	scoreItem,
+  	expertItem
   },
   data(){
 		return{
@@ -296,6 +310,7 @@ export default {
 			listQuestions: [],
 			listAnswers:[],
 			score:[],
+			expertList: [],
 			listSectionMenu:{
 				message: true,
 				answer: false,
@@ -320,6 +335,7 @@ export default {
 			this.changeShow(this.$route.query.query)
 		}
 		this.getScore()
+		this.getExpert()
 	},
 	methods:{
 		getChats(){
@@ -398,6 +414,24 @@ export default {
 					this.score = response.data
         })
 		},
+		getExpert(){
+        // let params = new URLSearchParams();
+        // params.append('first_name', names[0]);
+        // params.append('last_name', names[1]);
+        // params.append('email', this.email);
+
+        this.$http({
+          method: 'GET',
+          url: 'user/profile/get-favorites',
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+					this.expertList = response.data
+        })
+      },
 		changeShow(item){
 			for (let i in this.listSectionMenu){
 				this.listSectionMenu[i] = false
