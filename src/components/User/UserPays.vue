@@ -13,9 +13,9 @@
 							<div class="section_nav_expert">
 								<div class="head_nav_expert">
 									<ul class="nav nav-tabs">
-										<li :class="{active: listSectionMenu.history}"><a href="#tab1" data-toggle="tab">История платежей</a></li>
-										<li :class="{active: listSectionMenu.pays}"><a href="#tab2" data-toggle="tab">Пополнить счет</a></li>
-										<li :class="{active: listSectionMenu.return}"><a href="#tab3" data-toggle="tab">Вывод средств</a></li>
+										<li :class="{active: listSectionMenu.history}"><a href="javascript:void(0)" @click="changeShow('history')" data-toggle="tab">История платежей</a></li>
+										<li :class="{active: listSectionMenu.pays}"><a href="javascript:void(0)" @click="changeShow('pays')" data-toggle="tab">Пополнить счет</a></li>
+										<li :class="{active: listSectionMenu.return}"><a href="javascript:void(0)" @click="changeShow('return')" data-toggle="tab">Вывод средств</a></li>
 									</ul>
 								</div>
 							</div>
@@ -567,7 +567,7 @@ export default {
 
         this.$http({
           method: 'POST',
-          url: 'user/profile/edit',
+          url: 'expert/application/add',
           data: params,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 

@@ -68,6 +68,9 @@ const mutations = {
   },
   SET_CHATS:(state, playload) =>{
     state.chats = playload
+  },
+  CLEAR_CHATS: (state) =>{
+    state.chats = null
   }
 };
 const actions = {
@@ -94,7 +97,7 @@ const actions = {
   getChats: async ({commit}) => {
     let {data} = await Axios.get('chat/chat/chats',{headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: "Bearer " + localStorage.getItem('token')}});
     commit('SET_CHATS', data);
-  }, 
+  }
 };
 
 export default {

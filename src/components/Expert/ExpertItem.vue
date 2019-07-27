@@ -40,7 +40,7 @@
             <div class="text_expert">
               <p>{{expert.about_us || 'Эксперт не оставил о себе информацию'}}</p>
             </div>
-            <a href="javascript:void(0)" class="btn_chat btn_chat_big" @click="$emit('openchat')" v-if="!creator">написать в чат</a>
+            <a href="javascript:void(0)" class="btn_chat btn_chat_big" @click="$emit('openchat')" v-if="!creator && token">написать в чат</a>
           </div>
           <div class="firts_consultation" v-if="expert.action.length > 0">
             <div class="action_consultation"><span>Акция</span></div>
@@ -143,6 +143,9 @@
       categoryItem(){
         return this.$store.getters.CATEGORYITEM
       },
+      token(){
+      return localStorage.getItem('token')
+    }
     },
 	}
 </script>

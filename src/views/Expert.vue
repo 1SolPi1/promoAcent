@@ -51,10 +51,14 @@
 						<div class="text_expert">
 							<p>{{expertinfo.about_us || 'Эксперт не оставил о себе информацию'}}</p>
 						</div>
-						<a href="javascript:void(0)" v-if="!creator" class="btn_chat btn_chat_big" @click="$chatinfo.opens({
+						<a href="javascript:void(0)" v-if="!creator && token" class="btn_chat btn_chat_big" @click="$chatinfo.opens({
 							name: expertinfo.name || 'Имя Фамилия',
 							avatar: expertinfo.avatar,
 							activechat: {
+								0:{
+									client_id: $store.getters.PROFILE.user_id,
+									expert_id: item.id,
+								},
 								opponent:{
 									avatar: item.avatar,
 									fullName: item.name || 'Имя Фамилия'

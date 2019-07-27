@@ -1,5 +1,5 @@
 <template>
-	<div class="boxListChats">
+	<div class="boxListChats" :class="{'showList': showList}">
    <listChats
     :chatlist="chatlist"
     @selectchat="selectChat"
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+  import EventBus from '@/scripts/eventBus';
   import listChats from '@/components/Chat/ListChats'
 	export default {
     name: "LeftSidebar",
@@ -22,12 +23,21 @@
     },
     data() {
 			return {
+        showList: false
       }
     },
     created() {
     },
     mounted() {
+    EventBus.$on('showListChat', ()=> {
+      this.showList = !this.showList
+    });
      },
+     beforeDestroy() {
+      EventBus.$off('showListChat', ()=> {
+          this.showList = !this.showList
+        });
+  },
 		methods: {
       selectChat(data){
         this.$emit('selectchat',
@@ -40,4 +50,11 @@
 </script>
 
 <style scoped>
+.boxListChats{
+  width: 40%;
+}
+
+.showList{
+  width: 0% !important;
+}
 </style>

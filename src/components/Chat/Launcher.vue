@@ -21,24 +21,8 @@
     created() {
     },
     mounted() {
-      this.createChat()
      },
 		methods: {
-      createChat(){
-        this.$http({
-          method: 'GET',
-          url: 'user/profile/add-chat?expert_id=' + this.$chatinfo.expert_id,
-          headers: { 
-            'Content-Type': 'application/x-www-form-urlencoded', 
-            Authorization: "Bearer " + localStorage.getItem('token')
-          }
-        })
-        .then(response=>{
-          if (response.status === 200) {
-            this.$store.dispatch('getChats');
-          }
-        })
-    }
 		},
 		computed: {
     open(){

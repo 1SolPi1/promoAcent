@@ -130,6 +130,7 @@
 			logout(){
 				localStorage.removeItem('token');
 				this.$store.commit('CLEAR_PROFILE');
+				this.$store.commit('CLEAR_CHATS');
 				this.$router.push('/')
 			},
 			getNotReadChats(){

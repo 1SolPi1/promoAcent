@@ -63,6 +63,10 @@
 							name: item.name || 'Имя Фамилия',
 							avatar: item.avatar,
 							activechat: {
+								0:{
+									client_id: $store.getters.PROFILE.user_id,
+									expert_id: item.id,
+								},
 								opponent:{
 									avatar: item.avatar,
 									fullName: item.name || 'Имя Фамилия'

@@ -23,7 +23,7 @@
 							<div class="section_content_tabs">
 								<div class="tab-content">
 										<div class="clearfix friends_bonuses">
-											<div class="ritem">Вы пригласили <span>0</span> друзей</div>
+											<div class="ritem">Вы пригласили <span>{{usersList.length}}</span> друзей</div>
 											<div class="ritem">Заработали <span>0₽</span></div>
 											<div class="ritem">Получили <span>0</span> бесплатных VIP вопросов</div>
 										</div>

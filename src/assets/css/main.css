@@ -470,7 +470,7 @@ h6 {
 }
 
 .payments .table-header>div:nth-child(3) {
-    min-width: 320px;
+    width: 320px;
 }
 
 .payments .table-header.tbl>div:nth-child(2) svg {

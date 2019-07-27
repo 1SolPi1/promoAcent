@@ -1,5 +1,6 @@
 <template>
 <div class="modal-body">
+  <p class="notPay" v-if="activechat[0].counter < 1 && activechat[0].client_id === $store.getters.PROFILE.user_id">Для продолжения общения оплатите чат</p>
   <div class="boxMessages" ref="scrollList">
   <messageItem
     v-for="message in messages"
@@ -63,5 +64,20 @@
 .boxMessages{
   height: 300px;
   overflow-y: auto;
+}
+
+.hide{
+  display: none;
+}
+
+.notPay{
+  width: 100%;
+  height: 25px;
+  text-align: center;
+  background: red;
+  color: white;
+  position: absolute;
+  line-height: 25px;
+  top: 0;
 }
 </style>

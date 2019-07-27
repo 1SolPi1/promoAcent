@@ -32,6 +32,11 @@
         activeChat: null
       }
     },
+    watch:{
+      chatList(){
+        this.setActiveChat()
+      }
+    },
     created() {
     },
     mounted() {
@@ -46,7 +51,45 @@
     getChats(){
       this.expertId = this.$chatinfo.expert_id
       this.clientId = this.$chatinfo.user_id
-      this.activeChat = this.$chatinfo.activechat
+      this.checkCreatingChat()
+    },
+    checkCreatingChat(){
+      let chats = [];
+      for(let key in this.chatList){
+        this.chatList[key].forEach(item => chats.push(item))
+      }
+
+      let chatuser = chats.find(item => item[0].expert_id === this.$chatinfo.expert_id)
+      if (chatuser === undefined) {
+        this.createChat()
+      }else{
+        this.setActiveChat()
+      }
+    },
+    setActiveChat(){
+      let chats = [];
+      for(let key in this.chatList){
+        this.chatList[key].forEach(item => chats.push(item))
+      }
+      let chatuser = chats.find(item => item[0].expert_id === this.$chatinfo.expert_id)
+      let expertchat = chats.find(item => item[0].client_id === this.$chatinfo.client_id)
+
+      chatuser !== undefined ? this.activeChat = chatuser : this.activeChat = expertchat;
+    },
+    createChat(){
+        this.$http({
+          method: 'GET',
+          url: 'user/profile/add-chat?expert_id=' + this.$chatinfo.expert_id,
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+          if (response.status === 200) {
+            this.$store.dispatch('getChats');
+          }
+        })
     }
 		},
 		computed: {

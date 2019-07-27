@@ -22,8 +22,7 @@
 			</svg>
 			{{date}}
 		</div>
-		<div>
-			{{desc}}
+		<div v-html="desc">
 		</div>
 		<div>
 			<span class="done">

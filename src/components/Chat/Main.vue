@@ -1,8 +1,23 @@
 <template>
-<div class="col-xs-12 col-sm-8">
+<div class="col-xs-12 col-sm-8" style="width: 100%;">
   <headers
     :activechat="activechat"
+    v-if="activechat[0].client_id === $store.getters.PROFILE.user_id"
   />
+  <div class="modal-header" v-else>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="$chatinfo.close()">
+    <svg fill="none" height="24" stroke="#979797" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/>
+    </svg>
+  </button>
+  <div class="image_expert">
+    <img src="@/assets/img/svg/avatar.svg" alt="alt" v-if="activechat.opponent.avatar === null">
+    <img :src="domen + activechat.opponent.avatar " alt="alt" v-else>
+  </div>
+  <div class="opis">
+    <p>{{activechat.opponent.fullName}}</p> 
+  </div>
+</div>
   <listMessage
     :messages="messages"
     :user="activechat.opponent"
@@ -40,6 +55,7 @@
     data() {
 			return {
         messages:[],
+         domen: 'http://api.sprosi-online.ru/file/'
       }
     },
     watch:{
@@ -124,6 +140,9 @@ sockets: {
     addMessages(data){
       // this.$socket.emit('newMessageUsers', message);
       this.messages.push(data);
+      if (data.author === 0) {
+        this.activechat[0].counter--
+      }
     },
     connect(){
       this.$socket.emit('joinUsers',this.clietnId, this.expertId);
