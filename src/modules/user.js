@@ -16,6 +16,7 @@ const state = {
   expertEducation: null,
   myCategory: null,
   mySubCategories: null,
+  chats: null
 };
 const getters = {
   PROFILE: state => state.profile,
@@ -24,7 +25,8 @@ const getters = {
   EXPERT: state => state.expert,
   EXPERTEDUCATION: state => state.expertEducation,
   MYCATEGORY: state => state.myCategory,
-  MYSUBCATEGORIES: state => state.mySubCategories
+  MYSUBCATEGORIES: state => state.mySubCategories,
+  CHATS: state => state.chats
 };
 const mutations = {
   SET_PROFILE: (state, payload) => {
@@ -63,6 +65,9 @@ const mutations = {
   SET_MY_CATEGORY:(state, playload) =>{
     state.myCategory = playload.myCategory;
     state.mySubCategories = playload.mySubCategories
+  },
+  SET_CHATS:(state, playload) =>{
+    state.chats = playload
   }
 };
 const actions = {
@@ -85,7 +90,11 @@ const actions = {
   },
   setFalseId: ({commit}, id)=>{
     commit('SET_FALSE_ID', id)
-  }
+  },
+  getChats: async ({commit}) => {
+    let {data} = await Axios.get('chat/chat/chats',{headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: "Bearer " + localStorage.getItem('token')}});
+    commit('SET_CHATS', data);
+  }, 
 };
 
 export default {

@@ -115,7 +115,7 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>0₽</span>
+								<span>{{userInfo.cash}}₽</span>
 								<a href="javascript:void(0)" @click="changeShow('return')">Вывести</a>
 													</div>
 
@@ -255,7 +255,7 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>0₽</span>
+								<span>{{userInfo.cash}}₽</span>
 								<a href="javascript:void(0)" @click="changeShow('return')">Вывести</a>
 													</div>
 
@@ -451,7 +451,7 @@
 			c0.027,14.721,43.792,26.66,97.795,26.66c54.017,0,97.785-11.939,97.796-26.66v-28.454
 			C404.098,344.155,360.311,356.103,306.294,356.103z"></path>
 								</svg>
-								<span>0₽</span>
+								<span>{{userInfo.cash}}₽</span>
 
 													</div>
 
@@ -462,19 +462,19 @@
 												<div class="clearfix">
 														<div class="left-col-pay">
 															<p>Куда вывести средства</p>
-															<div class="payment-item">
+															<div class="payment-item" @click="changeTypeReturn('Яндекс Деньги')">
 																<input type="radio" checked="" name="radio4" value="1" class="radio" id="radio19">
 																<label for="radio19"><p>ЯндексДеньги</p></label>
 															</div>
-															<div class="payment-item">
+															<div class="payment-item" @click="changeTypeReturn('WebMoney')">
 																<input type="radio" name="radio4" value="1" class="radio" id="radio20">
 																<label for="radio20"><p>WebMoney</p></label>
 															</div>
-															<div class="payment-item">
+															<div class="payment-item" @click="changeTypeReturn('Мобильный')">
 																<input type="radio" name="radio4" value="1" class="radio" id="radio21">
 																<label for="radio21"><p>Мобильный (от 50₽)</p></label>
 															</div>
-															<div class="payment-item">
+															<div class="payment-item" @click="changeTypeReturn('PayPal')">
 																<input type="radio" name="radio4" value="1" class="radio" id="radio22">
 																<label for="radio22"><p>PayPal</p></label>
 															</div>
@@ -482,22 +482,22 @@
 														<div class="right-col-pay">
 															<div class="summa">
 																<p>Введите сумму</p>
-																<input type="text" name="" placeholder="0 руб.">
+																<input type="text" name="" placeholder="0 руб." v-model="returnCash.cash">
 																<span>не более 200₽</span>
 															</div>
 															<div class="recs">
 																<p>Реквизиты для вывода</p>
-																<input type="text" name="" placeholder="Номер кошелька от 12 до 15 символов">
+																<input type="text" name="" placeholder="Номер кошелька от 12 до 15 символов" v-model="returnCash.number">
 															</div>
 															<div class="comm">
 																<p>Комментарий</p>
-																<textarea placeholder="не обязательно"></textarea>
+																<textarea placeholder="не обязательно" v-model="returnCash.comment"></textarea>
 															</div>
 														</div>
 												</div>
 
 											</div>
-											<button class="pay" @click="alert('Не достаточно денег для вывода')">Вывести</button>
+											<button class="pay" @click="returnCashs()">Вывести</button>
 										</div>
 										</div>
 									</div>
@@ -526,7 +526,13 @@ export default {
 				history: true,
 				pays: false,
 				return: false
-			}
+			},
+			returnCash:{
+				cash: null,
+				type: null,
+				comment: null,
+				number: null
+			},
 		}
 	},
 	created() {},
@@ -552,11 +558,45 @@ export default {
         	}
         })
 		},
+		returnCashs(){
+        let params = new URLSearchParams();
+        params.append('cash', this.returnCash.cash);
+        params.append('type', this.returnCash.type);
+        params.append('comment', this.returnCash.comment);
+        params.append('number', this.returnCash.number)
+
+        this.$http({
+          method: 'POST',
+          url: 'user/profile/edit',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+        	if (response.status === 200) {
+        		this.$toast.success({
+							title:'Успешно',
+							message:'Ваша заявка отправлена'
+						})
+        	}	
+        })
+        .catch(error=>{
+        	this.$toast.error({
+						title:'Ошибка',
+						message: error.response.data.error
+					})
+        })
+		},
 		changeShow(item){
 			for (let i in this.listSectionMenu){
 				this.listSectionMenu[i] = false
 			}
 			this.listSectionMenu[item] = true
+		},
+		changeTypeReturn(data){
+			this.returnCash.type = data
 		},
 		alert(item){
 			this.$toast.error({

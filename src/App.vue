@@ -20,6 +20,7 @@ export default {
 	mounted() {
 		if (localStorage.getItem('token')) {
 			this.$store.dispatch('getProfile');
+			this.$store.dispatch('getChats');
 		}else if(localStorage.getItem('falsetoken')){
 			this.$store.dispatch('setFalseId', localStorage.getItem('falsetoken'));
 		}else{

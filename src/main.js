@@ -12,7 +12,7 @@ import ExpertProfile from "../src/components/Profile/ExpertProfile"
 import UserProfileMenu from "../src/components/User/UserProfileMenu"
 import UserContentHeader from "../src/components/User/UserContentHeader"
 import journalItem from '../src/components/Home/JournalItem'
-import Chats from '../src/components/Chats'
+import Chats from '../src/components/Chat'
 import UserChatItem from '../src/components/User/UserConsultation/UserChatItem'
 import VueSocketIO from 'vue-socket.io'
 import questionItem from '../src/components/Questions/QuestionItem'

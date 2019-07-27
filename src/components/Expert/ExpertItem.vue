@@ -1,6 +1,6 @@
 <template>
         <div class="item_main_expert slideInUp wow" data-wow-duration="1.5s" data-wow-iteration="1">
-          <router-link class="item_main_expert_link" :to="'/experts/'+expert.id"></router-link>
+          <router-link class="item_main_expert_link" :to="'/expert?expert='+expert.id"></router-link>
           <div class="content_expert">
             <div class="image_expert expert_image_big">
               <div class="status__expert online_expert" v-if="expert.online"></div>
@@ -18,7 +18,7 @@
             <div class="head_expert_item">
               <div class="name_expert_big">{{expert.name || 'Имя Фамилия'}} <a href="#" class="link_share"></a></div>
               <div class="price_expert_big">от <span>{{expert.price_from}} ₽</span></div>
-              <router-link :to="'/experts/'+expert.id + '?id=1'" class="reviews_expert_big"><span>{{expert.comment_count}}</span> отзывов</router-link>
+              <router-link :to="'/expert?expert='+expert.id + '&id=1'" class="reviews_expert_big"><span>{{expert.comment_count}}</span> отзывов</router-link>
               <!-- <div class="top_expert">Эксперт  месяца</div> -->
             </div>
             <div 

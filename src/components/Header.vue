@@ -56,13 +56,15 @@
     import menuList from '@/components/Header/MenuList'
     import notLogined from '@/components/Header/NotLogined'
     import search from '@/components/Search'
+    import launcher from '@/components/Chat/Launcher'
     export default {
         name: "Header",
         components: {
           logined,
           notLogined,
           search,
-          menuList
+          menuList,
+          launcher
         },
         props: {},
         data() {
@@ -75,14 +77,14 @@
         created() {
         },
         mounted() {
-            $(".btn_nav").click(function(e) {
+            $(".btn_nav").click(function() {
             $(".go_menu_container").toggleClass("active");
             $(".btn_nav").toggleClass("actived");
             $(".h_kl").toggleClass("activedi");
           });
 
 
-            $(".h_kl").click(function(e) {
+            $(".h_kl").click(function() {
             $(".go_menu_container").toggleClass("active");
             $(".btn_nav").toggleClass("actived");
             $(".h_kl").toggleClass("activedi");

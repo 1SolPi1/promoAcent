@@ -62,6 +62,12 @@
 					@openchat="$chatinfo.opens({
 							name: item.name || 'Имя Фамилия',
 							avatar: item.avatar,
+							activechat: {
+								opponent:{
+									avatar: item.avatar,
+									fullName: item.name || 'Имя Фамилия'
+								}
+							},
 							user_id: $store.getters.PROFILE.user_id,
 							expert_id: item.id,
 							author: 0 

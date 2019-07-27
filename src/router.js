@@ -33,7 +33,7 @@ const UserSupport = () => import('./components/User/UserSupport.vue')
 Vue.use(Router)
 
 let router = new Router({
-  // mode: 'history',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -52,12 +52,7 @@ let router = new Router({
       component: Questions
     },
     {
-      path: '/questions/category/:id',
-      name: 'questionscategory',
-      component: Questions
-    },
-    {
-      path: '/questions/:id',
+      path: '/question',
       name: 'fullquestion',
       component: Question,
     },
@@ -107,12 +102,12 @@ let router = new Router({
       component: AboutPartners,
     },
     {
-      path: '/experts/:id',
+      path: '/expert',
       name: 'expert',
       component: Expert,
     },
     {
-      path: '/person/user',
+      path: '/person',
       name: 'person',
       component: Person
     },

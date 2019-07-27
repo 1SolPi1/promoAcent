@@ -39,6 +39,7 @@
 											:notRead="item.not_read"
 											@openchat="$chatinfo.opens({
 																		name: item.opponent.fullName,
+																		activechat: item,
 																		avatar: item.opponent.avatar,
 																		user_id: item[0].client_id,
 																		expert_id: item[0].expert_id,
@@ -56,6 +57,7 @@
 											:notRead="item.not_read"
 											@openchat="$chatinfo.opens({
 																		name: item.opponent.fullName,
+																		activechat: item,
 																		avatar: item.opponent.avatar,
 																		user_id: item[0].client_id,
 																		expert_id: item[0].expert_id,

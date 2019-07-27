@@ -29,7 +29,7 @@
 		methods: {
       selectCategory(id){
         this.$store.dispatch('changeSelectCategory', id);
-        this.$router.push('/questions/category/' + id);
+        this.$router.push('/questions?category=' + id);
         this.$emit('close')
       }
 		},

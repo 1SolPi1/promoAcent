@@ -14,7 +14,7 @@
     <div class="bottom_question clearfix">
       <div class="data_question">{{getDate(question.create_at)}}</div>
       <div class="user_question">{{question.author}}</div>
-       <router-link :to="{ path: `/questions/${question.id}` }" class="all_questions_user">всего <span>{{answercount}}</span> ответа</router-link>
+       <router-link :to="{ path: `/question?question=${question.id}` }" class="all_questions_user">всего <span>{{answercount}}</span> ответа</router-link>
     </div>
   </div>
 </div>

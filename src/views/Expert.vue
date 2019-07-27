@@ -54,6 +54,12 @@
 						<a href="javascript:void(0)" v-if="!creator" class="btn_chat btn_chat_big" @click="$chatinfo.opens({
 							name: expertinfo.name || 'Имя Фамилия',
 							avatar: expertinfo.avatar,
+							activechat: {
+								opponent:{
+									avatar: item.avatar,
+									fullName: item.name || 'Имя Фамилия'
+								}
+							},
 							user_id: $store.getters.PROFILE.user_id,
 							expert_id: expertinfo.id,
 							author: 0 
@@ -69,7 +75,7 @@
 				<div class="head_nav_expert">
 					<div class="social_btns">
 						<socialButton
-							linkVk="http://sprosi-online.ru/#/experts/"
+							linkVk="http://sprosi-online.ru/experts?expert="
 							:idVk="expertinfo.id"
 						/>
 					</div>
@@ -225,7 +231,7 @@ export default {
 
         this.$http({
           method: 'GET',
-          url: 'expert/profile/views?id=' + this.$route.params.id,
+          url: 'expert/profile/views?id=' + this.$route.query.expert,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
 						Authorization: "Bearer " + localStorage.getItem('token')
@@ -238,7 +244,7 @@ export default {
 		getReviews(){
         this.$http({
           method: 'GET',
-          url: 'expert/comment/all-expert?id=' + this.$route.params.id,
+          url: 'expert/comment/all-expert?id=' + this.$route.query.expert,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
 						Authorization: "Bearer " + localStorage.getItem('token')

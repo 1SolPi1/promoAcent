@@ -18,7 +18,7 @@
   </div>
   <div>{{score.questionAuthor}}</div>
   <div>{{score.category}}</div>
-  <div><router-link :to="'/questions/' + score.id">{{score.questionName}}</router-link></div>
+  <div><router-link :to="'/question?question=' + score.id">{{score.questionName}}</router-link></div>
   <div>
     <span v-if="score.best">1</span>
     <span v-else>0</span>

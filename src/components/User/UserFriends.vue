@@ -37,7 +37,7 @@
 											</div>
 											<div class="col-xs-12 col-md-5 no-mr">
 												<div class="fr-block">
-													<input id="post-shortlink" :value="'http://sprosi-online.ru/#/?token=' + client.friend_token">
+													<input id="post-shortlink" :value="'http://sprosi-online.ru/?token=' + client.friend_token">
 													<p>Публикуйте ссылку на Ваш профиль</p>
 													<a href="javascript:void(0)" @click="alert()" id="copy-button" data-clipboard-target="#post-shortlink">Скопировать ссылку</a>
 												</div>

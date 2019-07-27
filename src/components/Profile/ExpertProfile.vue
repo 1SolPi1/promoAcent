@@ -15,7 +15,7 @@
 	</div>
 	<div class="sh_info">
 		<div class="name_expert_big checked">{{profile.first_name || 'Имя'}} {{profile.last_name || ''}}</div>
-		<router-link :to="'/experts/'+ expert.id" href="javascript:void(0)" class="view-profile">посмотреть профиль</router-link>
+		<router-link :to="'/expert?expert='+ expert.id" href="javascript:void(0)" class="view-profile">посмотреть профиль</router-link>
 	</div>
 	<ul class="menu">
 		<li :class="{'active': $route.path == '/profile'}">

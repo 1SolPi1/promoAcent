@@ -81,7 +81,7 @@
     methods: {
       openQuestion(){
         this.$emit('closesearch')
-        this.$router.push('/questions/' + this.id);
+        this.$router.push('/question?question=' + this.id);
       }
     },
     computed: {},
