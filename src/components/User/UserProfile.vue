@@ -22,8 +22,8 @@
 										<div class="row">
 											<div class="col-xs-12 main-info-user">
 												<span>Зарегистрирован: {{dateRegistration}}</span>
-												<span>Последний раз был в сети: 19.06.18 20:21</span>
-												<span>Статус: Серебряный<span class="info"></span></span>
+												<span>Последний раз был в сети: {{userInfo.data_last_login}}</span>
+												<span>Статус: Стандарт<span class="info"></span></span>
 											</div>
 											<div class="col-xs-12 col-md-4 mb-us-20">
 												<p>Имя</p>
@@ -42,7 +42,7 @@
 									<div class="tab-pane bonuses_users" id="tab2">
 										<div class="row">
 											<div class="col-xs-12">
-												<p>Мой статус: <b>Серебрянный</b></p>
+												<p>Мой статус: <b>Стандарт</b></p>
 												<p>Мои VIP кредиты: <b>0</b></p>
 												<span>Чтобы достичь следующего уровня вам нужно потратить еще <b>50 руб.</b></span>
 												<div class="table-header user">
@@ -144,7 +144,7 @@ export default {
 			return this.$store.getters.USERINFO
 		},
 		dateRegistration(){
-			return new Date(this.$store.getters.USERINFO.created_at).getFullYear()
+			return new Date(this.$store.getters.USERINFO.created_at * 1000).getFullYear()
 		}
 	},
 }

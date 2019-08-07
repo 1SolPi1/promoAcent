@@ -34,7 +34,7 @@
                 <p class="all_questions_user" v-if="question.answer === null">всего <span>0</span> ответа</p>
                 <p class="all_questions_user" v-else>всего <span>{{question.answer.length}}</span> ответа</p>
               <expertAnswer 
-                v-if="expert"
+                v-if="expert && token"
                 :id="question.question.id"
                 @updatequestion="getQuestion()"
               />
@@ -142,7 +142,10 @@
       },
       creator(){
         return this.$store.getters.USERINFO.id === this.question.client.id
-      }
+      },
+      token(){
+      return localStorage.getItem('token')
+    },
     },
 	}
 </script>
