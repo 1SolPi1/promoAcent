@@ -16,7 +16,6 @@
 
 <script>
     /* eslint-disable */
-    let item = 0;
 	export default {
     name: "Experience",
     components: {
@@ -40,15 +39,14 @@
             vm.$emit('changevalue',$(this).find(":selected").val())
             }
        });
-       setTimeout(function() {  
-      $('select').trigger('refresh');  
-    }, 1)
-
      },
 		methods: {
 		},
 		computed: {
     },
+    updated (){
+      $('#experience').trigger('refresh');
+    } 
 	}
 </script>
 

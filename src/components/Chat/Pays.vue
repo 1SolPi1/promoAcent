@@ -43,7 +43,7 @@
               title:'Успешно',
               message:'Оплата подтверждена, вы можете продолжить общение'
             })
-             this.$store.dispatch('getChats');
+            this.activechat[0].counter += 30
              this.$store.dispatch('getProfile');
           }
         })

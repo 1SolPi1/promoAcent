@@ -23,7 +23,6 @@
 
 <script>
     /* eslint-disable */
-    let item = 0;
 	export default {
     name: "YearEducation",
     components: {

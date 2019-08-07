@@ -72,7 +72,7 @@
         this.chatList[key].forEach(item => chats.push(item))
       }
       let chatuser = chats.find(item => item[0].expert_id === this.$chatinfo.expert_id)
-      let expertchat = chats.find(item => item[0].client_id === this.$chatinfo.client_id)
+      let expertchat = chats.find(item => item[0].client_id === this.$chatinfo.user_id)
 
       chatuser !== undefined ? this.activeChat = chatuser : this.activeChat = expertchat;
     },

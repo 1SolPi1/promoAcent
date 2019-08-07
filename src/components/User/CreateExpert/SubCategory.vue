@@ -5,7 +5,7 @@
      v-for="item in childcategory"
      :value="item.id"
      :key="item.id"
-     :selected="item.id === id"
+     :selected="item.id === select"
      >
      {{item.name}}
    </option>
@@ -19,7 +19,8 @@
     },
     props: {
       childcategory: Array,
-      id: Number
+      id: Number,
+      select: Number
     },
     data() {
 			return {
@@ -46,6 +47,9 @@
 		methods: {
     
 		},
+     updated () {
+         $('#multi').multiselect('rebuild')
+    },
 		computed: {},
 	}
 </script>

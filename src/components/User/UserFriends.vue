@@ -32,7 +32,7 @@
 											<div class="col-xs-12">
 												<div class="fr-block main">
 													<p>Пригласи друга и получит бесплатный VIP вопрос, а также до 500 рублей за каждого</p>
-													<a href="#">Ознакомится с условиями программы</a>
+													<router-link  to="/programsharefriends">Ознакомится с условиями программы</router-link>
 												</div>
 											</div>
 											<div class="col-xs-12 col-md-5 no-mr">

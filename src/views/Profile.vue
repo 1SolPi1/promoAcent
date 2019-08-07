@@ -6,12 +6,15 @@
 						<expertProfile/>
 					</div>
 					<div class="col-md-9">
-						<div class="profile-header">
+						<div class="profile-header" v-if="expert.is_confirmed">
 							<h3>Редактировать профиль</h3>
 							<div class="buttons" v-if="$route.path == '/profile'">
 								<a class="akcii" href="javascript:void(0)" @click="changeShow('akcii')">Мои акции</a>
 								<a class="pro" href="javascript:void(0)" @click="changeShow('pro')">Стать PRO</a>
 							</div>
+						</div>
+							<div class="profile-header boxNotConfirmed" v-else>
+									<p class="textNotConfirmed">Ваш профиль ожидает подтверждение модератором, после подтверждения вы сможете пользоваться всеми возможностями сервиса</p>
 						</div>
 						<div class="profile-content">
 							<div class="section_nav_expert">
@@ -118,7 +121,15 @@
 													:selectend="education.endYear"
 												/>
 											</div>											
-											<span class="txt ml-0">Чтобы образование было подверждено <a href="#">прикрепите</a> копии документов подтверждающие получение образования.</span>
+											<span class="txt ml-0">Чтобы образование было подверждено <a href="javascript:void(0)"><label for="AddFile" style="cursor: pointer;">прикрепите</label> </a> копии документов подтверждающие получение образования.</span>
+											<input type='file' @change="loadFiles" id="AddFile" style="display: none">
+											<span 
+												class="txt ml-0"
+												v-for="item in filesData"
+												:key="item.name"
+											>
+												{{item.name}}
+											</span>
 										</div>
 										</div>
 										<button class="save-button" @click="changeExpert()">Сохранить</button>
@@ -211,7 +222,8 @@ export default {
 				home: true,
 				akcii: false,
 				pro: false
-			}
+			},
+			filesData: []
 		} 
 	},
 	watch:{
@@ -226,6 +238,8 @@ export default {
 		this.about = this.expert.about_us;
 		this.timeStart = this.expert.work_time_from;
 		this.timeEnd = this.expert.work_time_to;
+	},
+	experteducation(){
 		this.education.nameUniversity = this.experteducation.institution_name;
 		this.education.specialty = this.experteducation.specialization;
 		this.education.degree = this.experteducation.name_educational;
@@ -236,8 +250,10 @@ export default {
 		// setTimeout(() => {  
   //         this.getSelectCategory(this.mycategory.id)
   //   }, 500)
-  this.getSelectCategory(this.mycategory.id)
+  if (this.mycategory !== undefined) {
+  	this.getSelectCategory(this.mycategory.id)
   this.knowledge = this.mycategory.id
+  }
 	}
 	},
 	mounted(){
@@ -281,7 +297,9 @@ export default {
 		this.education.degree = this.experteducation.name_educational;
 		this.education.startYear = this.experteducation.educate_start;
 		this.education.endYear = this.experteducation.educate_finish
-		this.getSelectCategory(this.mycategory.id)
+		if (this.mycategory !== null ) {
+			this.getSelectCategory(this.mycategory.id)
+		}
 		this.getStatusAnswer()
 	},
 	methods: {
@@ -337,6 +355,10 @@ export default {
         })
         .then(()=>{
 					this.createEducationExpert()
+					if (this.filesData.length > 0) {
+						this.filesData.forEach(item => this.setDocument(item.file))
+					}
+					this.editName()
 					this.addCategoryExpert()
         })
 		},
@@ -400,7 +422,6 @@ export default {
           }
         })
         .then(()=>{
-					this.editName()
         })
 		},
 		editName(){
@@ -452,7 +473,37 @@ export default {
 			setTimeout(()=>{
 				this.$router.push('/userpays')
 			}, 1000)
-		}
+		},
+		loadFiles: function(event) {
+            let files = event.target.files[0];
+            let type = files.name.split(".");
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    this.filesData.push({
+                    	file: e.target.result,
+                    	type: type[type.length - 1],
+                    	size: (files.size / 1000).toFixed(2),
+                    	name: files.name
+                    });
+                    console.log(e.target.result)
+                }
+                reader.readAsDataURL(files);
+        },
+     setDocument(file){
+
+			let params = new URLSearchParams();
+        params.append('file', file);
+
+        this.$http({
+          method: 'POST',
+          url: 'expert/file/set-document',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+		},
 	},
 	computed: {
 		categori(){
@@ -470,7 +521,7 @@ export default {
 		experteducation(){
 			return this.$store.getters.EXPERTEDUCATION
 		},
-	    childCategories(){
+	  childCategories(){
 	      return this.$store.getters.CHILDCATEGORI
 	  },
 	  mycategory(){
@@ -483,5 +534,15 @@ export default {
 }
 </script>
 <style scoped>
-	
+.boxNotConfirmed{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 5px;
+	background: red;
+}	
+
+.textNotConfirmed{
+	color: white;
+}
 </style>

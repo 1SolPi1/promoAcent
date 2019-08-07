@@ -59,7 +59,11 @@
 										<categoryExpert
 											@changeKnowledge="changeKnowledge"
 											@changeSubKnowledge="changeSubKnowledge"
+											:childcategory="selectChildCategory"
+											:selectedCategory="selectCategory"
 											:category="categori"
+											:mysubcategori = "mysubcategories"
+											v-if="categori"
 										/>
 										<div class="col-xs-12">
 											<p>Текст визитка<span>*</span></p>
@@ -91,7 +95,15 @@
 													@changeEndYear="changeEndYear"
 												/>
 											</div>											
-											<span class="txt ml-0">Чтобы образование было подверждено <a href="#">прикрепите</a> копии документов подтверждающие получение образования.</span>
+											<span class="txt ml-0">Чтобы образование было подверждено <a href="javascript:void(0)"><label for="AddFile" style="cursor: pointer;">прикрепите</label> </a> копии документов подтверждающие получение образования.</span>
+											<input type='file' @change="loadFiles" id="AddFile" style="display: none">
+											<span 
+												class="txt ml-0"
+												v-for="item in filesData"
+												:key="item.name"
+											>
+												{{item.name}}
+											</span>
 										</div>
 										</div>
 										<button class="save-button" @click="convertUserToExpert()">Стать экспертом</button>
@@ -129,6 +141,12 @@ export default {
 			startPrice: 0,
 			endPrice: 0,
 			experience: 2005,
+			childCategory: null,
+	    selectCategory: {
+	    	id: 1
+	    },
+	    selectSubCategory: null,
+	    selectChildCategory: null,
 			knowledge:[],
 			subKnowledge:[],
 			baseText: null,
@@ -139,8 +157,14 @@ export default {
 				degree: null,
 				startYear: 2005,
 				endYear: 2005
-			}
+			},
+			filesData: []
 		}
+	},
+	watch:{
+		categori(){
+			this.getSelectCategory(1)
+	}
 	},
 	created() {},
 	mounted() {
@@ -170,16 +194,22 @@ export default {
 			this.experience = item
 		},
 		changeKnowledge(item){
-			let arr = this.knowledge;
-        if (arr.find(map => map === item) === undefined) {
-          arr.push(item)
-        }else{
-          arr.splice(arr.indexOf(item), 1);
-        }
-		},
+	      this.selectCategory = this.categori.find(map => map.id == item)
+	      setTimeout(()=>{  
+	        this.getChildCategory(this.selectCategory);
+	        this.selectSubCategory = null;
+	      }, 300)
+	    },
+	    getSelectCategory(id){
+	      this.selectCategory = this.categori.find(item => item.id === id)
+	      this.getChildCategory(this.selectCategory)
+	    },
+	    getChildCategory(arr){
+	      this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
+	    },
 		changeSubKnowledge(item){
 			let arr = this.subKnowledge;
-        if (arr.find(map => map === item) === undefined) {
+        if (arr.find(map => map === item) == undefined) {
           arr.push(item)
         }else{
           arr.splice(arr.indexOf(item), 1);
@@ -206,6 +236,12 @@ export default {
 			.then(()=>{
 				this.createExpert()
 			})
+			.catch(error=>{
+				this.$toast.error({
+						title:'Ошибка',
+						message: error.response.data.error
+					})
+			})
 		},
 		createExpert(){
 
@@ -229,8 +265,20 @@ export default {
         })
         .then(response=>{
         	// alert('Expert Create');
+        	if (this.filesData.length > 0) {
+						this.filesData.forEach(item => this.setDocument(item.file))
+					}
         	this.createEducationExpert()
+        	this.subKnowledge.forEach(item => this.addSubCategory(item))
         	this.addCategoryExpert()
+        	 this.$toast.success({
+						title:'Успешно',
+						message:'Вы успешно стали экспертом, ожидайте подтверждения модератора'
+					})
+        	 setTimeout(()=>{
+        	 	this.$store.dispatch('getProfile');
+        	 	this.$router.push('/profile')
+        	 }, 2000)
         })
 		},
 		createEducationExpert(){
@@ -250,10 +298,9 @@ export default {
           }
         })
 		},
-		addCategoryExpert(expertId){
+		addCategoryExpert(){
 			let params = new URLSearchParams();
-        params.append('expert_id', expertId);
-        params.append('category_id', this.knowledge);
+        params.append('category_id', this.selectCategory.id);
         
         this.$http({
           method: 'POST',
@@ -265,14 +312,66 @@ export default {
           }
         })
         .then(()=>{
-        	 alert('Expert Create');
+        	
         })
-		}
+		},
+		addSubCategory(id){
+			let params = new URLSearchParams();
+        params.append('sub_category_id', id);
+
+        this.$http({
+          method: 'POST',
+          url: 'expert/sub-category/add',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+		},
+		loadFiles: function(event) {
+            let files = event.target.files[0];
+            let type = files.name.split(".");
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    this.filesData.push({
+                    	file: e.target.result,
+                    	type: type[type.length - 1],
+                    	size: (files.size / 1000).toFixed(2),
+                    	name: files.name
+                    });
+                }
+                reader.readAsDataURL(files);
+        },
+     setDocument(file){
+
+			let params = new URLSearchParams();
+        params.append('file', file);
+
+        this.$http({
+          method: 'POST',
+          url: 'expert/file/set-document',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+		},
 	},
 	computed: {
 		categori(){
 			return this.$store.getters.CATEGORI
-		}
+		},
+		childCategories(){
+	      return this.$store.getters.CHILDCATEGORI
+	  },
+	  mycategory(){
+	  	return this.$store.getters.MYCATEGORY
+	  },
+	  mysubcategories(){
+	  	return this.$store.getters.MYSUBCATEGORIES
+	  }
 	},
 }
 </script>

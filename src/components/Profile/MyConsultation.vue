@@ -246,18 +246,21 @@
 												<span>итого</span>
 											</div>
 										</div>
+										<div v-if="!Array.isArray(score.success)">
 										<scoreItem
 											v-for="item in score"
 											:key="score.success.id"
 											:score="score.success"
 										/>
+										</div>
 									</div>
 									<div class="tab-pane conslt" id="tab4" :class="{active: listSectionMenu.question}">
 										<div v-if="listQuestions.length > 0">
 										<questionItem
                         v-for="(item, index) in listQuestions"
                         :key="item.question.id"
-                        :category="item.category"
+                        :category="item.parent_category"
+                        :subcategory="item.sub_category"
                         :countAnswer="item.answer_count"
                         :date="item.question.create_at"
                         :person="item.question.anonim ? ' Анонимно ': item.user_name"

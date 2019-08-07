@@ -10,7 +10,7 @@
           },
           {
             name: question.category,
-            route: '/questions/category/5',
+            route: '/questions?category=5',
           }
         ]"
         :currentPage="question.question.title"

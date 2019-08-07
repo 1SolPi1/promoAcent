@@ -19,9 +19,10 @@
         <p>Дополнительная</p>
         <subCategory
           v-if="mysubcategories"
-          v-for="item in mysubcategories"
+          v-for="(item, index) in mysubcategories"
           :key="item.id"
-          :id="item.id"
+          :select="item.id"
+          :id="index"
           @selectsub="changeSubKnowledge"
           :childcategory = "childcategory"
         />
@@ -65,21 +66,20 @@
     data() {
 			return {
         count: 1,
-        mysubcategories: null
+        mysubcategories: []
       }
     },
     watch:{
       category(){
         setTimeout(function() {  
          $('#multi').multiselect('rebuild');
-        }, 100) 
+        }, 200) 
       },
       selectedCategory(){
         setTimeout(() => {  
          $('#multi').multiselect('rebuild');
-         this.getSubCategories()
-        }, 100) 
-
+        }, 200) 
+this.getSubCategories()
       },
     },
     created() {
@@ -104,10 +104,17 @@
         this.mysubcategories.push({})
       },
       getSubCategories(){
-        this.mysubcategories = this.mysubcategori.filter(map => map.parent_id === this.selectedCategory.id)
+        if (this.mysubcategori.length > 0) {
+          this.mysubcategories = this.mysubcategori.filter(map => map.parent_id === this.selectedCategory.id)
+        }else{
+          this.mysubcategories = []
+        }
       }
 		},
 		computed: {
+    },
+    updated () {
+      $('#multi').multiselect('rebuild')
     },
 	}
 </script>

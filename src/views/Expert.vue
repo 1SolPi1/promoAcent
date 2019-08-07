@@ -57,11 +57,11 @@
 							activechat: {
 								0:{
 									client_id: $store.getters.PROFILE.user_id,
-									expert_id: item.id,
+									expert_id: expertinfo.id,
 								},
 								opponent:{
-									avatar: item.avatar,
-									fullName: item.name || 'Имя Фамилия'
+									avatar: expertinfo.avatar,
+									fullName: expertinfo.name || 'Имя Фамилия'
 								}
 							},
 							user_id: $store.getters.PROFILE.user_id,
@@ -106,7 +106,7 @@
 				<div class="tab-content">
 					<div class="tab-pane"  :class="{active: $route.query.id !== '1'}" id="tab1">
 						<expertBonus
-							v-if="creator && expertinfo.action.length > 0"
+							v-if="creator && expertinfo.action.length > 0 && actionTime"
 							:action="expertinfo.action[0]"
 							@refresh="getExpert()"
 						/>
@@ -314,7 +314,10 @@ export default {
 		},
 		categoryItem(){
         return this.$store.getters.CATEGORYITEM
-      },
+    },
+    actionTime(){
+        return new Date() < new Date(this.expertinfo.action[0].action_end)
+      }
 	},
 }
 </script>

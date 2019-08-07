@@ -34,6 +34,7 @@
         :key="index"
         :expert="item"
         :search="true"
+        @closesearch="$emit('close')"
         @openchat="$chatinfo.opens({
           name: item.name || 'Имя Фамилия',
           avatar: item.avatar,

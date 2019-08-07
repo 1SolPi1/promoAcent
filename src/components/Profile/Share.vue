@@ -82,6 +82,7 @@
 
       if(day > months[now.getMonth()].days){
         month += 1
+        day = day - months[now.getMonth()].days
       }
 
       if(month > 12){
@@ -90,6 +91,7 @@
 
       if(endDay > months[now.getMonth()].days){
         endMonth += 1
+        endDay = endDay - months[now.getMonth()].days
       }
 
       if(endMonth > 12){

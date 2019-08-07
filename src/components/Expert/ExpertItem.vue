@@ -1,6 +1,6 @@
 <template>
         <div class="item_main_expert slideInUp wow" data-wow-duration="1.5s" data-wow-iteration="1">
-          <router-link class="item_main_expert_link" :to="'/expert?expert='+expert.id"></router-link>
+          <a href="javascript:void(0)"  class="item_main_expert_link" @click="goToExpert()"></a>
           <div class="content_expert">
             <div class="image_expert expert_image_big">
               <div class="status__expert online_expert" v-if="expert.online"></div>
@@ -42,7 +42,7 @@
             </div>
             <a href="javascript:void(0)" class="btn_chat btn_chat_big" @click="$emit('openchat')" v-if="!creator && token">написать в чат</a>
           </div>
-          <div class="firts_consultation" v-if="expert.action.length > 0">
+          <div class="firts_consultation" v-if="expert.action.length > 0 && actionTime">
             <div class="action_consultation"><span>Акция</span></div>
             <div class="left_first">
               <div class="title_middle">{{expert.action[0].name}}</div>
@@ -122,6 +122,10 @@
         day < 10? day = '0' + day : day;
         month < 10? month = '0' + month : month;
         return year + '/' + month+ '/' + day
+      },
+      goToExpert(){
+        this.$emit('closesearch')
+        this.$router.push('/expert?expert=' +this.expert.id);
       }
 		},
 		computed: {
@@ -145,7 +149,10 @@
       },
       token(){
       return localStorage.getItem('token')
-    }
+      },
+      actionTime(){
+        return new Date() < new Date(this.expert.action[0].action_end)
+      }
     },
 	}
 </script>

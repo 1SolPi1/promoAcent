@@ -55,7 +55,7 @@
             <p>Условия размещения <router-link href="javascript:void(0)" to="/tariggquestions">Ознакомится с тарифами размещения</router-link></p>
               <div class="sorting_questions">
                 <div class="item_sorting">
-                  <input type="radio" name="radio" value="0" class="radio" id="radio1" />
+                  <input type="radio" name="radio" value="0" class="radio" id="radio1" checked/>
                   <label for="radio1" @click="addPrice(0)">бесплатно</label>
                 </div>
                 <div class="item_sorting">
@@ -168,7 +168,13 @@ export default {
       this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
     },
     addQuestion(){
-      let anonimus = 0;
+      if (!this.title) {
+        this.$toast.error({
+            title:'Ошибка',
+            message: ' Укажите вопрос '
+          })
+      }else{
+        let anonimus = 0;
       this.anonim ? anonimus = 1 : anonimus = 0 ;
       let params = new URLSearchParams();
         params.append('title', this.title);
@@ -209,6 +215,7 @@ export default {
             message: error.response.data.error
           })
       })
+      }
     },
     addPrice(price){
       this.price = price
