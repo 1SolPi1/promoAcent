@@ -46,7 +46,7 @@
 									<label for="radio5">черный список</label>
 								</div>
 							</div>
-										<p>У Вас <span>2</span> чата</p>
+										<p>У Вас <span>{{chatList.clientExpertChat.length}}</span> чата</p>
 										<userchatitem
 											v-for="item in chatList.clientExpertChat"
 											:key="item[0].room_id"
@@ -54,8 +54,9 @@
 											:lastmessage="item.last_message"
 											:notRead="item.not_read"
 											@openchat="$chatinfo.opens({
-																		name: 'Имя Фамилия',
-																		avatar: 'null',
+																		name: item.opponent.fullName,
+																		activechat: item,
+																		avatar: item.opponent.avatar,
 																		user_id: item[0].client_id,
 																		expert_id: item[0].expert_id,
 																		author: 0 

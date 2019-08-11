@@ -160,7 +160,8 @@
 									</div>
 									<div class="tab-pane conslt" id="tab3" :class="{active: listSectionMenu.quote}">
 										<div class="clearfix">
-											<p>У Вас <span>1</span> ответа</p>
+											<p v-if="!Array.isArray(score.success)">У Вас <span>{{score.success.length}}</span> ответа</p>
+											<p v-else>У Вас <span>0</span> ответов</p>
 										</div>
 										<div class="table-header">
 											<div>дата</div>

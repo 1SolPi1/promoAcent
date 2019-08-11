@@ -146,9 +146,11 @@ h6 {
 }
 
 .chat-list a {
-    display: block;
-    padding: 15px;
-    background: #fbfbfb;
+  display: flex;
+  padding: 15px;
+  background: #fbfbfb;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .chat-list a>p {
@@ -158,6 +160,7 @@ h6 {
     font-family: "SFUIDisplay-Medium";
     color: #2f2f32;
     margin-left: 20px;
+    word-wrap: break-word;
 }
 
 .user-red-menu button {

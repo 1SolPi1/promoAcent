@@ -123,7 +123,7 @@
                 </div>
             </div>
         </div>
-        <registration 
+    <registration 
       v-if="register" 
       @close="register = !register"
       @gotologin="showLogin()"

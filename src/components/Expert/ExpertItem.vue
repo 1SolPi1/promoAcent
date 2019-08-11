@@ -1,6 +1,7 @@
 <template>
         <div class="item_main_expert slideInUp wow" data-wow-duration="1.5s" data-wow-iteration="1">
-          <a href="javascript:void(0)"  class="item_main_expert_link" @click="goToExpert()"></a>
+          <a href="javascript:void(0)"  class="item_main_expert_link" @click="goToExpert()" v-if="logined"></a>
+          <a href="javascript:void(0)"  class="item_main_expert_link" @click="showLogined()" v-else></a>
           <div class="content_expert">
             <div class="image_expert expert_image_big">
               <div class="status__expert online_expert" v-if="expert.online"></div>
@@ -72,7 +73,10 @@
     },
     data() {
 			return {
-        isActive: false
+        isActive: false,
+        login: false,
+        register: false,
+        registerExpert: false,
       }
     },
     created() {
@@ -105,8 +109,14 @@
         this.$toast.success({
             title:'Успешно',
             message:'Ваш запрос отправлен эксперту'
-          })
+      })
       },
+      showLogined(){
+        this.$toast.error({
+          title:'Ошибка',
+          message: 'Войдите или зарегистрируйтесь'
+        })
+       },
       times(){
         const months =[{name: 'Января',days: 31}, {name:'Февраля',days: 28,}, {name: 'Марта',days: 31}, {name: 'Апреля',days: 30}, {name:'Мая',days: 31}, {name:'Июня',days: 30}, {name:'Июля',days: 31}, {name:'Августа',days: 31}, {name:'Сентября',days: 30}, {name: 'Октября',days: 31}, {name: 'Ноября',days: 30}, {name: 'Декабря',days: 31}]
 
@@ -152,7 +162,10 @@
       },
       actionTime(){
         return new Date() < new Date(this.expert.action[0].action_end)
-      }
+      },
+      logined(){
+            return localStorage.getItem('token')
+      },
     },
 	}
 </script>

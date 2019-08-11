@@ -82,7 +82,7 @@
       <p>Оценка</p>
       <div class="sorting_questions">
         <div class="item_sorting">
-          <input type="radio" checked="" name="radio" value="1" class="radio" id="radio1">
+          <input type="radio" :checked="answers.answer.like !== 0" name="radio" value="1" class="radio" id="radio1" @click="setLike()">
             <label for="radio1">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.814 456.814">
                 <path d="M441.11,252.677c10.468-11.99,15.704-26.169,15.704-42.54c0-14.846-5.432-27.692-16.259-38.547
@@ -111,7 +111,15 @@
             </label>
           </div>
           <div class="item_sorting">
-            <input type="radio" name="radio" value="1" class="radio" id="radio2">
+            <input 
+              type="radio" 
+              name="radio" 
+              :checked="answers.answer.dislike !== null" 
+              value="1" 
+              class="radio" 
+              id="radio2"
+              @click="setDisLike()"
+            >
               <label for="radio2">
                 <svg class="negtv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.814 456.814">
                   <path d="M441.11,252.677c10.468-11.99,15.704-26.169,15.704-42.54c0-14.846-5.432-27.692-16.259-38.547
@@ -232,6 +240,40 @@
         this.$http({
           method: 'POST',
           url: 'question/question/remove-best-answer',
+          data: params,
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
+          this.$emit('updatequestion')
+        })
+    },
+    setLike(){
+        let params = new URLSearchParams();
+        params.append('answer_id', this.answers.answer.id);
+
+        this.$http({
+          method: 'POST',
+          url: 'question/answer-score/like',
+          data: params,
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
+          this.$emit('updatequestion')
+        })
+    },
+    setDisLike(){
+      let params = new URLSearchParams();
+        params.append('answer_id', this.answers.answer.id);
+
+        this.$http({
+          method: 'POST',
+          url: 'question/answer-score/dislike',
           data: params,
           headers: { 
             'Content-Type': 'application/x-www-form-urlencoded', 

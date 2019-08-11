@@ -71,10 +71,9 @@
       for(let key in this.chatList){
         this.chatList[key].forEach(item => chats.push(item))
       }
-      let chatuser = chats.find(item => item[0].expert_id === this.$chatinfo.expert_id)
-      let expertchat = chats.find(item => item[0].client_id === this.$chatinfo.user_id)
-
-      chatuser !== undefined ? this.activeChat = chatuser : this.activeChat = expertchat;
+      let chatuser = chats.filter(item => item[0].expert_id === this.$chatinfo.expert_id)
+      let expertchat = chatuser.find(item => item[0].client_id === this.$chatinfo.user_id)
+      this.activeChat = expertchat;
     },
     createChat(){
         this.$http({
