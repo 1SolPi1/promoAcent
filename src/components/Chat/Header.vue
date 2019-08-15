@@ -24,7 +24,7 @@
     <img :src="domen + activechat.opponent.avatar " alt="alt" v-else>
   </div>
   <div class="opis">
-    <p>{{activechat.opponent.fullName}}</p>  
+    <p style="width: 100px">{{activechat.opponent.fullName}}</p>  
     <div class="clearfix">
       <div class="item_statistics fst">
         <img src="img/statistics_icon1.png" alt="alt">
