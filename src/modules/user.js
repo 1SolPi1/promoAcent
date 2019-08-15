@@ -11,7 +11,8 @@ const state = {
   },
   client: null,
   expert: {
-    id: 0
+    id: 0,
+    is_confirmed: false
   },
   expertEducation: null,
   myCategory: null,

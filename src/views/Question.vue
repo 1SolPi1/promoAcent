@@ -138,7 +138,7 @@
 		},
 		computed: {
       expert(){
-        return this.$store.getters.USERINFO.expert
+        return this.$store.getters.USERINFO.expert && this.$store.getters.EXPERT.is_confirmed
       },
       creator(){
         return this.$store.getters.USERINFO.id === this.question.client.id
