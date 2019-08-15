@@ -160,8 +160,7 @@
 									</div>
 									<div class="tab-pane conslt" id="tab3" :class="{active: listSectionMenu.quote}">
 										<div class="clearfix">
-											<p v-if="!Array.isArray(score.success)">У Вас <span>{{score.success.length}}</span> ответа</p>
-											<p v-else>У Вас <span>0</span> ответов</p>
+											<p>У Вас <span>{{score.success.length}}</span> ответов</p>
 										</div>
 										<div class="table-header">
 											<div>дата</div>
@@ -247,13 +246,11 @@
 												<span>итого</span>
 											</div>
 										</div>
-										<div v-if="!Array.isArray(score.success)">
 										<scoreItem
-											v-for="item in score"
-											:key="score.success.id"
-											:score="score.success"
+											v-for="item in score.success"
+											:key="item.id"
+											:score="item"
 										/>
-										</div>
 									</div>
 									<div class="tab-pane conslt" id="tab4" :class="{active: listSectionMenu.question}">
 										<div v-if="listQuestions.length > 0">

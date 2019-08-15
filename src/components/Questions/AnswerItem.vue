@@ -114,7 +114,7 @@
             <input 
               type="radio" 
               name="radio" 
-              :checked="answers.answer.dislike !== null" 
+              :checked="answers.answer.dislike !== 0" 
               value="1" 
               class="radio" 
               id="radio2"

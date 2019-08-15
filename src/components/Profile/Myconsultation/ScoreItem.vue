@@ -24,7 +24,8 @@
     <span v-else>0</span>
     <span>{{score.like || 0}}</span>
     <span>{{score.dislike || 0}}</span>
-    <span>1</span>
+    <span v-if="score.best">{{score.like + score.dislike + 1}}</span>
+    <span v-else>{{score.like + score.dislike}}</span>
   </div>
 </div>
 </template>
