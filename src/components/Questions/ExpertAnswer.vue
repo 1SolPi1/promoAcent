@@ -74,6 +74,7 @@
             title:'Успешно',
             message:'Ответ добавлен'
           })
+          this.answer = null
           }
         })
         .catch(error =>{
