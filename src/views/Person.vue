@@ -14,13 +14,14 @@
         <div class="item_main_expert">
           <div class="content_expert">
             <div class="image_expert expert_image_big">
-              <img src="@/assets/img/svg/avatar.svg" alt="alt">
+              <img v-if="person.avatar === null" src="@/assets/img/svg/avatar.svg" alt="alt">
+              <img v-esle :src="domen + person.avatar" alt="alt">
             </div>
             <div class="head_expert_item">
-              <div class="name_expert_big">Игорь Летучий</div>
-              <div class="experience_expert">Зарегистрирован: 19.06.2019</div>
-              <div class="experience_expert">Последний раз был в сети: 19.06.19 20:21</div>
-              <div class="experience_expert status_expert">Статус: Серебряный 
+              <div class="name_expert_big">{{person.name}}</div>
+              <div class="experience_expert">Зарегистрирован: {{registerDate}}</div>
+              <div class="experience_expert">Последний раз был в сети: {{lastLogin}}</div>
+              <div class="experience_expert status_expert">Статус: Стандарт
                     <img 
                       src="@/assets/img/svg/information.svg" 
                       alt="alt"
@@ -41,7 +42,7 @@
     <div class="section_nav_expert">
       <div class="container">
         <div class="head_nav_expert">
-         <div class="experience_expert question_item">Вопросы пользователя (2)</div>
+         <div class="experience_expert question_item">Вопросы пользователя ({{allQuestions.length}})</div>
         </div>
       </div>
     </div>
@@ -72,14 +73,15 @@
           <questionItem
             v-for="(item, index) in allQuestions"
             :key="index"
-            :category="item.category"
-            :countAnswer="item.countAnwer"
-            :date="item.date"
-            :person="item.person"
-            :price="item.price"
-            :status="item.status"
-            :title="item.title"
-            :id="item.id"
+            :category="item.parent_category"
+            :subcategory="item.sub_category"
+            :countAnswer="item.answer_count"
+            :date="item.question.create_at"
+            :person="item.question.anonim? ' Анонимно ': item.user_name"
+            :price="item.question.price"
+            :status="item.question.status"
+            :title="item.question.title"
+            :id="item.question.id"
           />
         </div>
       </div>
@@ -88,6 +90,7 @@
 </template>
 
 <script>
+  import dates from '@/scripts/getDate.js';
   import bonusPerson from '@/components/BonusModal'
 	export default {
     name: "Person",
@@ -98,57 +101,49 @@
     data() {
 			return {
         showModal: false,
-        allQuestions:[
-          {
-            category: ' Психология  ',
-            countAnswer: 6,
-            date: "2019-07-08 12:04:20",
-            person: 'Валерий Иванов',
-            price: 400,
-            status: 0,
-            title: 'Вопрос 1',
-            id: 1,
-          },
-          {
-            category: ' Психология  ',
-            countAnswer: 6,
-            date: "2019-07-08 12:04:20",
-            person: 'Валерий Иванов',
-            price: 400,
-            status: 0,
-            title: 'Вопрос 1',
-            id: 2,
-          },
-          {
-            category: ' Психология  ',
-            countAnswer: 6,
-            date: "2019-07-08 12:04:20",
-            person: 'Валерий Иванов',
-            price: 400,
-            status: 0,
-            title: 'Вопрос 1',
-            id: 3,
-          },
-          {
-            category: ' Психология  ',
-            countAnswer: 6,
-            date: "2019-07-08 12:04:20",
-            person: 'Валерий Иванов',
-            price: 400,
-            status: 0,
-            title: 'Вопрос 1',
-            id: 4,
-          }
-        ]
+        allQuestions:[],
+        person: null,
+        lastLogin: null,
+        registerDate: null
       }
     },
     created() {
     },
     mounted() {
+      this.getUser()
+      this.getQuestion()
      },
 		methods: {
+      getUser(){
+        this.$http({
+          method: 'GET',
+          url: 'user/profile/short-show?id=' + this.$route.query.id,
+        })
+        .then(response =>{
+          this.person = response.data
+          this.lastLogin = dates(response.data.last_login_at * 1000)
+          this.registerDate = dates(response.data.created_at * 1000)
+        })
+      },
+      getQuestion(){
+        let params = new URLSearchParams();
+        params.append('client_id', this.$route.query.id);
+
+        this.$http({
+          method: 'POST',
+          data: params,
+          url: 'question/question/find',
+        })
+        .then(response =>{
+         this.allQuestions = response.data[0]
+        })
+      }
 		},
-		computed: {},
+		computed: {
+      domen(){
+      return this.$store.getters.DOMEN
+      }
+    },
 	}
 </script>
 
