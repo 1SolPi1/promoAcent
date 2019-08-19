@@ -23,7 +23,18 @@
 											<div class="col-xs-12 main-info-user">
 												<span>Зарегистрирован: {{dateRegistration}}</span>
 												<span>Последний раз был в сети: {{userInfo.data_last_login}}</span>
-												<span>Статус: Стандарт<span class="info"></span></span>
+												<span>Статус: Стандарт
+													<span 
+														class="info"
+														style="cursor: pointer;"
+														@mouseover="showModal = true"
+														@mouseleave="showModal = false"
+													>
+													</span>
+												</span>
+												<bonusPerson
+													v-if="showModal"
+												/>
 											</div>
 											<div class="col-xs-12 col-md-4 mb-us-20">
 												<p>Имя</p>
@@ -94,14 +105,16 @@
 </template>
 
 <script>
+	import bonusPerson from '@/components/BonusModal'
 export default {
 	name: "UserProfile",
-	components: {},
+	components: {bonusPerson},
 	props: {},
 	data() {
 		return {
 			fullname: null,
-			email: null
+			email: null,
+			showModal: false
 		}
 	},
 	created() {},

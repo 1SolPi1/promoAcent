@@ -62,5 +62,6 @@
 <style scoped>
 .row{
   position: absolute;
+  z-index: 900;
 }
 </style>
