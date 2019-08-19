@@ -92,6 +92,9 @@
                         :status="item.question.status"
                         :title="item.question.title"
                         :id="item.question.id"
+                        :expert="item.expert"
+                        :personId="item.question.client_id"
+                        :anonim="item.question.anonim"
                     />
                 </div>
                 <div class="bottom_pagination">

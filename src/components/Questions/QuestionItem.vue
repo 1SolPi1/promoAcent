@@ -10,7 +10,7 @@
         </div>
       <div class="bottom_question clearfix">
         <div class="data_question">{{resultDate}}</div>
-        <div class="user_question">{{person}}</div>
+        <div class="user_question" @click.stop="goToProfile()">{{person}}</div>
           <a href="javascript:void(0)" @click="openQuestion()" class="all_questions_user">всего <span>{{countAnswer}}</span> ответа</a>
         </div>
       </div>  
@@ -62,6 +62,18 @@
       question:{
         type: Boolean,
         default: false
+      },
+      expert:{
+        type: Boolean,
+        default: false
+      },
+      personId:{
+        type: Number,
+        default: 0
+      },
+      anonim:{
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -82,6 +94,15 @@
       openQuestion(){
         this.$emit('closesearch')
         this.$router.push('/question?question=' + this.id);
+      },
+      goToProfile(){
+        if (this.anonim) {
+          return;
+        }else if(this.expert){
+          this.$router.push('/expert?expert=' + this.personId);
+        }else {
+          this.$router.push('/person?id=' + this.personId);
+        }
       }
     },
     computed: {},
