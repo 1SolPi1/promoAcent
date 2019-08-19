@@ -388,6 +388,12 @@ h6 {
     background: transparent;
 }
 
+.centerFlex{
+    display: flex;
+justify-content: center;
+align-items: center;
+}
+
 .table-header.tbl.color {
     background: #FCFCFC;
     margin-bottom: 3px;

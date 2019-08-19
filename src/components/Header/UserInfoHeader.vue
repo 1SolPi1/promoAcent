@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="boxHeaderProfile">
 		<div class="profile-img">
 			<img src="img/svg/man.svg" alt="alt" v-if="avatar === null" />
 			<img :src="domen + avatar" class="avatar" alt="alt" v-else/>
@@ -39,5 +39,11 @@
 <style scoped>
 .avatar{
 	border-radius: 50%;
+}
+
+.boxHeaderProfile{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 }
 </style>

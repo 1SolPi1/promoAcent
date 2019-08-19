@@ -108,7 +108,7 @@
         <div class="section_experts">
             <div class="container">
                 <div class="title_experts slideInUp wow" data-wow-iteration="1">Смотрите также экспертов этой категории</div>
-                <div class="row">
+                <div class="row" v-if="experts.length > 0">
                     <profItem
                       v-for="(item, index) in experts"
                       :key="item.id"
@@ -209,6 +209,7 @@
                 this.getChildCategory(this.selectCategory);
                 this.pageNumber = 1;
                 this.getAllQuestions(1, this.selectCategory.id);
+                this.getExperts();
             }, 300)
           },
           changeSubCategory(item){
@@ -275,9 +276,13 @@
                 this.register = true
             },
       getExperts(){
+        let params = new URLSearchParams();
+        params.append('category_id', this.$store.getters.SELECTCATEGORY);
+
         this.$http({
           method: 'POST',
           url: 'expert/profile/find',
+          data:params,
           headers: { 
             'Content-Type': 'application/x-www-form-urlencoded', 
             Authorization: "Bearer " + localStorage.getItem('token')
@@ -289,7 +294,7 @@
              expert.push(response.data[key])
           }
 
-          this.experts = expert.slice(0,4);
+          this.experts = expert.slice(0, -1)
         })
     }
         },
