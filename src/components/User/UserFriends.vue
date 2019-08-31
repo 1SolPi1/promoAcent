@@ -148,10 +148,27 @@ export default {
 						message:'Укажите email'
 					})
 			}else{
-				this.$toast.success({
-						title:'Успешно',
-						message:'Письмо отправлено другу'
-					})
+				this.$http({
+          method: 'GET',
+          url: 'client/friend/invitation?email=test@' + this.email,
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+              Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+          if (response.status === 200) {
+          	this.$toast.success({
+							title:'Успешно',
+							message:'Письмо отправлено другу'
+						})
+          }
+        })
+        .catch(error =>{
+        	this.$toast.error({
+							title:'Ошибка',
+						})
+        })
 			}
 		}
 	},
