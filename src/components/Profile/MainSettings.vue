@@ -115,7 +115,7 @@
 										<div class="row">
 											<div class="col-xs-12 col-lg-5 pr-5">
 												<p>Автоответ гостю</p>
-												<textarea name="autoanswer" id="autoanswer">Здравствуйте! Напишите Ваш вопрос и мы начнем консультацию. Чтобы мой ответ не потерялся, рекомендую зарегистрироваться.</textarea>
+												<textarea name="autoanswer" id="autoanswer" v-model="profiles.greeting_question_chat"></textarea>
 												<span class="txt ml-0">до 200 символов</span>
 											</div>
 											<div class="col-xs-12 col-lg-7 pl-5">
@@ -137,7 +137,7 @@
 											</div>
 										</div>
 										<div class="border"></div>
-										<button class="save-button">Сохранить</button>
+										<button class="save-button" @click="saveGreeting() ">Сохранить</button>
 										<button class="cancel-button">Отменить</button>
 									</div>
 								</div>
@@ -173,6 +173,7 @@ export default {
 	mounted(){
 		this.profiles = this.profile
 		  var vm = this;
+		  $('select').styler()
        $('#paysquestion').styler({
         onSelectClosed: function() {
             vm.checkPay($(this).find(":selected").val())
@@ -266,6 +267,27 @@ export default {
 						title:'Ошибка',
 						message: error.response.data.return
         })
+        })
+      },
+      saveGreeting(){
+      	let params = new URLSearchParams();
+        params.append('greeting_question_chat', this.profiles.greeting_question_chat);
+
+        this.$http({
+          method: 'POST',
+          url: 'expert/profile/edit',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
+        	this.$store.dispatch('getProfile');
+        	this.$toast.success({
+						title:'Успешно',
+						message:'Новая информация сохранена'
+					})
         })
       }
 	},

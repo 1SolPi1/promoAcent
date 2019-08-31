@@ -266,6 +266,7 @@
                         :status="item.question.status"
                         :title="item.question.title"
                         :id="item.question.id"
+                        :url="item.url"
                         :question="true"
                     />
                     </div>

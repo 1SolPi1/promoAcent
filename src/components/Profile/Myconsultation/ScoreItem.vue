@@ -18,7 +18,7 @@
   </div>
   <div>{{score.questionAuthor}}</div>
   <div>{{score.category}}</div>
-  <div><router-link :to="'/question?question=' + score.id">{{score.questionName}}</router-link></div>
+  <div><a href="javascript:void()" @click="goToQuestion()">{{score.questionName}}</a></div>
   <div>
     <span v-if="score.best">1</span>
     <span v-else>0</span>
@@ -50,6 +50,9 @@
     mounted() {
      },
 		methods: {
+      goToQuestion(){
+        this.$router.push('/question'+ this.score.questionUrl);
+      }
 		},
 		computed: {},
 	}

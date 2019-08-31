@@ -29,6 +29,7 @@ const UserPays = () => import('./components/User/UserPays.vue')
 const UserFriends = () => import('./components/User/UserFriends.vue')
 const UserSettings = () => import('./components/User/UserSettings.vue')
 const UserSupport = () => import('./components/User/UserSupport.vue')
+const NotFound = () => import('./views/404.vue')
 
 Vue.use(Router)
 
@@ -52,7 +53,12 @@ let router = new Router({
       component: Questions
     },
     {
-      path: '/question',
+      path: '/question/:category/:subcategory/:question',
+      name: 'fullquestion',
+      component: Question,
+    },
+    {
+      path: '/question/:category/:question',
       name: 'fullquestion',
       component: Question,
     },
@@ -202,6 +208,11 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     },
   ],
   scrollBehavior () {

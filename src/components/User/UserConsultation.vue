@@ -100,6 +100,7 @@
                         :price="item.question.price"
                         :status="item.question.status"
                         :title="item.question.title"
+                        :url="item.url"
                         :id="item.question.id"
                     />
               </div>

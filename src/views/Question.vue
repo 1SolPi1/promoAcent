@@ -97,7 +97,7 @@
       getQuestion(){
         this.$http({
           method: 'GET',
-          url: 'question/question/views?id=' + this.$route.query.question,
+          url: 'question/question/views?id=' + this.$route.params.question,
           headers: { 
             'Content-Type': 'application/x-www-form-urlencoded', 
               Authorization: "Bearer " + localStorage.getItem('token')

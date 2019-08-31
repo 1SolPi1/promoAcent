@@ -95,6 +95,7 @@
                         :expert="item.expert"
                         :personId="item.question.client_id"
                         :anonim="item.question.anonim"
+                        :url="item.url"
                     />
                 </div>
                 <div class="bottom_pagination">

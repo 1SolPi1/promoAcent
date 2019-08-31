@@ -74,6 +74,9 @@
       anonim:{
         type: Boolean,
         default: false
+      },
+      url:{
+        type: String
       }
     },
     data() {
@@ -93,7 +96,7 @@
     methods: {
       openQuestion(){
         this.$emit('closesearch')
-        this.$router.push('/question?question=' + this.id);
+        this.$router.push('/question'+ this.url);
       },
       goToProfile(){
         if (this.anonim) {
