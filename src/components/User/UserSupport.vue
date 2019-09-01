@@ -17,25 +17,25 @@
 											<div class="col-xs-12">
 												<p>Возможно, ответ на Ваш вопрос уже готов и Вы найдете его в разделе <a data-offcanvas-trigger="right" href="#right">Помощь</a></p>
 											</div>
-											<div class="col-xs-12 col-md-4">
+											<!-- <div class="col-xs-12 col-md-4">
 												<p>Имя</p>
 												<input type="text" placeholder="введите имя" v-model="name">
 											</div>
 											<div class="col-xs-12 col-md-4">
 												<p>Email<span>*</span></p>
 												<input type="text" placeholder="введите e-mail" v-model="email">
-											</div>
+											</div> -->
 											<div class="col-xs-5">
 												<p>Цель обращения</p>
 												<select id="multi">
-													<option value="0">Выберите цель обращения</option>
-													<option value="1">Необходима помощь</option>
-													<option value="2">Предложение по улучшению сервиса</option>
-													<option value="3">Сообщение о неполадке на сайте</option>
-													<option value="4">Проблема с олпатой услуги</option>
-													<option value="5">Добавить новую категорию</option>
-													<option value="6">Пожаловаться на нарушителя</option>
-													<option value="7">Совместное сотрудничество</option>
+													<option value="1">Выберите цель обращения</option>
+													<option value="2">Необходима помощь</option>
+													<option value="3">Предложение по улучшению сервиса</option>
+													<option value="4">Сообщение о неполадке на сайте</option>
+													<option value="5">Проблема с олпатой услуги</option>
+													<option value="6">Добавить новую категорию</option>
+													<option value="7">Пожаловаться на нарушителя</option>
+													<option value="8">Совместное сотрудничество</option>
 												</select>
 											</div>
 											<div class="col-xs-8">
@@ -96,10 +96,17 @@ export default {
 			email: null,
 			type: '',
 			quest: '',
-			category: null
+			category: null,
+			typeSupport: []
+
 		}
 	},
 	created() {},
+	watch:{
+		typeSupport(){
+			$('#multi').multiselect('rebuild');
+		}
+	},
 	mounted() {
 		// eslint-disable-next-line
 		 $('select:not([id^="multi"]), input[type=number]').styler();
@@ -111,20 +118,28 @@ export default {
               vm.change(element.val())
             },
       });
+
+      setTimeout(function() {  
+          $('#multi').multiselect('rebuild');
+        }, 1)
+      this.getTypeSupport();
 	},
 	methods: {
+	    getTypeSupport(){
+          this.$http({
+              method: 'GET',
+              url: 'client/tech-support/theme',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  Authorization: "Bearer " + localStorage.getItem('token')
+              }
+          })
+              .then(response =>{
+                  this.typeSupport = response.data
+              })
+      },
 		send(){
-			if (!this.name) {
-			this.$toast.error({
-				title:'Ошибка',
-				message:'Укажите имя'
-			})
-			}else if (!this.email) {
-			this.$toast.error({
-				title:'Ошибка',
-				message:'Укажите email'
-			})
-			}else if (!this.category) {
+			 if (!this.category) {
 				this.$toast.error({
 				title:'Ошибка',
 				message:'Укажите цель обращения'
@@ -141,15 +156,15 @@ export default {
 			})
 			}else{
         let params = new URLSearchParams();
-        params.append('', this.name);
-        params.append('', this.email);
-        params.append('', this.type);
-        params.append('', this.quest);
-        params.append('', this.category);
+        // params.append('', this.name);
+        // params.append('', this.email);
+        params.append('title', this.type);
+        params.append('description', this.quest);
+        params.append('theme_id', 1);
 
         this.$http({
           method: 'POST',
-          url: 'user/profile/edit',
+          url: 'client/tech-support/add',
           data: params,
           headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded', 
@@ -162,8 +177,8 @@ export default {
 						title:'Успешно',
 						message:'Ваша заявка отправлена в тех поддержку, ожидайте обратной связи'
 					})
-						this.name = null;
-						this.email = null;
+						// this.name = null;
+						// this.email = null;
 						this.type = '';
 						this.quest = '';
 						this.category = null;
