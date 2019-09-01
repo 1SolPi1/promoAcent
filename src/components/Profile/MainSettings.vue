@@ -52,7 +52,7 @@
 														<label for="uved-email-4">О новостях и услугах сайта (раз в неделю)</label>
 													</div>
 													<p>О новых вопросах?</p> 
-													<div class="checkbox">
+													<!-- <div class="checkbox">
 														<input id="uved-email-5" name="uved-email-quest-inobl-all" type="checkbox">
 														<label for="uved-email-5">Да, о всех вопросах в областях знаний:</label>
 														<select id="allquestion" name="oblast" class="select_main select_stag">
@@ -64,35 +64,37 @@
 																       {{item.name}}
 																     </option>
 														</select>
-													</div>
+													</div> -->
 													<div class="checkbox">
-														<input id="uved-email-6" name="uved-email-quest-incat" type="checkbox">
+														<input id="uved-email-6" name="uved-email-quest-incat" type="checkbox" :checked="profiles.only_category_question">
 														<label for="uved-email-6">Да, только на вопросы в категориях:</label>
 														<select id="categoryquestion" name="cat" class="select_main select_stag">
 															<option
 																      v-for="item in category"
 																      :key="item.id"
 																      :value="item.id"
+																      :selected="item.id == profiles.only_category_question"
 																     >
 																       {{item.name}}
 																     </option>
 														</select>
 													</div>
 													<div class="checkbox">
-														<input id="uved-email-7" name="uved-email-quest-inobl-buy" type="checkbox">
+														<input id="uved-email-7" name="uved-email-quest-inobl-buy" type="checkbox" :checked="profiles.only_pay_question">
 														<label for="uved-email-7">Только о платных вопросах в области знаний:</label>
 														<select id="paysquestion" name="oblast-2" class="select_main select_stag">
 															     <option
 																      v-for="item in category"
 																      :key="item.id"
 																      :value="item.id"
+																      :selected="item.id == profiles.only_pay_question"
 																     >
 																       {{item.name}}
 																     </option>
 														</select>
 													</div>
 													<div class="checkbox">
-														<input id="uved-email-8" name="uved-email-quest-no" type="checkbox">
+														<input id="uved-email-8" name="uved-email-quest-no" type="checkbox" @click="clearCategory()">
 														<label for="uved-email-8">Нет</label>
 													</div>
 												</div>
@@ -118,11 +120,11 @@
 												<textarea name="autoanswer" id="autoanswer" v-model="profiles.greeting_question_chat"></textarea>
 												<span class="txt ml-0">до 200 символов</span>
 											</div>
-											<div class="col-xs-12 col-lg-7 pl-5">
+											<!-- <div class="col-xs-12 col-lg-7 pl-5">
 												<p>Автоматическое приветствие новому пользователю</p>
 												<textarea name="autoanswer" id="autoanswer">Здравствуйте! Напишите Ваш вопрос и мы начнем консультацию. Чтобы мой ответ не потерялся, рекомендую зарегистрироваться.</textarea>
 												<span class="txt ml-0">до 200 символов</span>
-											</div>
+											</div> -->
 											<div class="col-xs-12 maru">
 												<p>Блокировать бесплатную консультацию</p>
 												<select name="free-cons" class="select_main select_stag">
@@ -171,9 +173,7 @@ export default {
 		} 
 	},
 	mounted(){
-		this.profiles = this.profile
 		  var vm = this;
-		  $('select').styler()
        $('#paysquestion').styler({
         onSelectClosed: function() {
             vm.checkPay($(this).find(":selected").val())
@@ -189,19 +189,23 @@ export default {
  						vm.checkCategory($(this).find(":selected").val())
         }
        });
+
+       this.profiles = this.profile
 	},
 	methods:{
 		checkPay(id){
-			alert('pay')
-			alert(id)
+			this.profiles.only_pay_question = id
 		},
 		checkAll(id){
 			alert('all')
 			alert(id)
 		},
 		checkCategory(id){
-			alert('categiry')
-			alert(id)
+			this.profiles.only_category_question = id
+		},
+		clearCategory(){
+			this.profiles.only_pay_question = 0
+			this.profiles.only_category_question = 0
 		},
 		save(){
 				let audio_signal; 
@@ -222,6 +226,8 @@ export default {
         params.append('mail_bonus', mail_bonus);
         params.append('mail_chat', mail_chat);
         params.append('mail_news', mail_news);
+        params.append('only_category_question', this.profiles.only_category_question)
+        params.append('only_pay_question', this.profiles.only_pay_question)
 
         this.$http({
           method: 'POST',
@@ -309,6 +315,9 @@ export default {
 		},
 		category(){
 			return this.$store.getters.CATEGORI
+		},
+		greeting(){
+			return this.$store.getters.GREETING
 		}
 	}
 }

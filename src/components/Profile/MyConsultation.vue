@@ -266,6 +266,8 @@
                         :status="item.question.status"
                         :title="item.question.title"
                         :id="item.question.id"
+                        :user_id="item.user_id"
+                        :expert="item.expert"
                         :url="item.url"
                         :question="true"
                     />

@@ -36,7 +36,7 @@
   </div>
   <button class="save-button" @click="createShare()">Сохранить</button>
   <button class="cancel-button" @click="clearShare()">Отменить</button>
-  <button class="delete-button">удалить акцию</button>
+  <button class="delete-button" @click="deleteShare()" v-if="share.id !== 0">удалить акцию</button>
 </div> 
 </template>
 
@@ -53,7 +53,8 @@
         description: null,
         days: 1,
         startPrice: null,
-        sharePrice: null
+        sharePrice: null,
+        id:0
       }
       }
     },
@@ -66,6 +67,13 @@
         vm.share.days = $(this).find(":selected").val()
       }
     });
+    if (this.action.length > 0) {
+      this.share.name = this.action[0].name
+      this.share.description = this.action[0].description
+      this.share.startPrice = this.action[0].price_to
+      this.share.sharePrice = this.action[0].price_from
+      this.share.id = this.action[0].id
+    }
      },
 		methods: {
     createShare(){
@@ -143,9 +151,47 @@
       for (let key in this.share){
         this.share[key] = null
       }
+    },
+    deleteShare(){
+      this.$http({
+          method: 'GET',
+          url: 'expert/action/remove?id=' + this.share.id,
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded', 
+              Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+          if (response.status === 200) {
+            this.$toast.success({
+              title:'Успешно',
+              message:'Ваша акция удалена'
+            })
+          }
+        })
+        .catch(error =>{
+          this.$toast.error({
+              title:'Ошибка',
+            })
+        })
     }
 		},
-		computed: {},
+		computed: {
+      action(){
+        return this.$store.getters.ACTION
+      },
+    },
+    watch:{
+      action(){
+     if (this.action.length > 0) {
+      this.share.name = this.action[0].name
+      this.share.description = this.action[0].description
+      this.share.startPrice = this.action[0].price_to
+      this.share.sharePrice = this.action[0].price_from
+      this.share.id = this.action[0].id
+    }
+  },
+    }
 	}
 </script>
 

@@ -56,21 +56,21 @@
                     <div class="sorting_questions">
                         <span class="title_sorting">Сортировать:</span>
                         <div class="item_sorting">
-                            <input type="radio" checked name="radio" value="1" class="radio" id="radio1" />
+                            <input type="radio" checked name="radio" value="last" class="radio" id="radio1" v-model="items" />
                             <label for="radio1"><img src="@/assets/img/sort1.png" alt="alt">последние</label>
                         </div>
                         <div class="item_sorting">
-                            <input type="radio" name="radio" value="1" class="radio" id="radio2" />
+                            <input type="radio" name="radio" value="pays" class="radio" id="radio2" v-model="items" />
                             <label for="radio2"><img src="@/assets/img/sort2.png" alt="alt">платные</label>
                         </div>
                         <div class="item_sorting">
-                            <input type="radio" name="radio" value="1" class="radio" id="radio3" />
+                            <input type="radio" name="radio" value="vip" class="radio" id="radio3" v-model="items"/>
                             <label for="radio3"><img src="@/assets/img/sort3.png" alt="alt">vip</label>
                         </div>
-                        <div class="item_sorting">
-                            <input type="radio" name="radio" value="1" class="radio" id="radio4" />
+                        <!-- <div class="item_sorting">
+                            <input type="radio" name="radio" value="best" class="radio" id="radio4" v-model="items"/>
                             <label for="radio4"><img src="@/assets/img/sort4.png" alt="alt">популярные</label>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="pagination_page">
                         <div class="number_pagination">{{pageNumber}}</div>
@@ -93,6 +93,7 @@
                         :title="item.question.title"
                         :id="item.question.id"
                         :expert="item.expert"
+                        :user_id="item.user_id"
                         :personId="item.question.client_id"
                         :anonim="item.question.anonim"
                         :url="item.url"
@@ -190,8 +191,24 @@
               login: false,
               register: false,
               registerExpert: false,
-              experts: []
+              experts: [],
+              items:null,
+              sortItems:{
+                last: null,
+                pays: null,
+                vip: null,
+                best: null
+              }
             }
+        },
+        watch:{
+          items(item){
+            for (let i in this.sortItems){
+              this.sortItems[i] = null
+            }
+            this.sortItems[item] = 1
+            this.getSortQuestions();
+          },
         },
         created() {
         },
@@ -206,6 +223,42 @@
           vm.getExperts()
         },
         methods: {
+          getSortQuestions(){
+            this.pageNumber = 1;
+            let params = new URLSearchParams();
+                params.append('category_id', this.selectCategory.id);
+                if (this.selectSubCategory !== null) {
+                  params.append('sub_category_id', this.selectSubCategory.id)
+                }
+                params.append('page', 1);
+
+                if (this.sortItems.vip !== null) {
+                  params.append('vip', this.sortItems.vip)
+                  // params.append('sort', 'create_at')
+                }
+                if (this.sortItems.last !== null) {
+                  params.append('create_at', this.sortItems.last)
+                  // params.append('sort', 'create_at')
+                }
+                if (this.sortItems.pays !== null) {
+                  params.append('price', this.sortItems.pays)
+                  // params.append('sort', 'create_at')
+                }
+
+              this.$http({
+                method: 'POST',
+                url: 'question/question/find',
+                data: params,
+                headers: { 
+                  'Content-Type': 'application/x-www-form-urlencoded', 
+                  Authorization: "Bearer " + localStorage.getItem('token')
+                }
+              })
+              .then(response=>{
+                this.pageCount = response.data.page_count
+                this.allQuestions = response.data[0]
+              })
+          },
           changeCategory(item){
             this.$store.dispatch('changeSelectCategory', item);
             this.selectCategory = this.categories.find(map => map.id == item)

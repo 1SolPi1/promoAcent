@@ -64,8 +64,10 @@
         default: false
       },
       expert:{
-        type: Boolean,
-        default: false
+        type: Number
+      },
+      user_id:{
+        type: Number
       },
       personId:{
         type: Number,
@@ -102,9 +104,9 @@
         if (this.anonim) {
           return;
         }else if(this.expert){
-          this.$router.push('/expert?expert=' + this.personId);
+          this.$router.push('/expert?expert=' + this.expert);
         }else {
-          this.$router.push('/person?id=' + this.personId);
+          this.$router.push('/person?id=' + this.user_id);
         }
       }
     },

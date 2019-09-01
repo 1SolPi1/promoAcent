@@ -20,17 +20,29 @@
 							<div class="section_nav_expert">
 								<div class="head_nav_expert">
 									<ul class="nav nav-tabs">
-										<li :class="{active: listSectionMenu.home}"><a href="#tab1" data-toggle="tab">Редактировать</a></li>
-										<li :class="{active: listSectionMenu.akcii}"><a href="#tab2" data-toggle="tab">Мои акции</a></li>
-										<li :class="{active: listSectionMenu.pro}"><a href="#tab3" data-toggle="tab">Стать PRO</a></li>
+										<li :class="{active: listSectionMenu.home}"><a href="javascript:void(0)" @click="changeShow('home')">Редактировать</a></li>
+										<li :class="{active: listSectionMenu.akcii}"><a href="javascript:void(0)" @click="changeShow('akcii')">Мои акции</a></li>
+										<li :class="{active: listSectionMenu.pro}"><a href="javascript:void(0)" @click="changeShow('pro')">Стать PRO</a></li>
 									</ul>
-									<a href="#" class="vacation">
+									<a 
+										v-if="expert.status !== 3"
+									href="javascript:void(0)" class="vacation" @click="goToVacation(3)">
 										<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 											<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
 											<circle cx="8.5" cy="7" r="4" />
 											<line x1="23" x2="17" y1="11" y2="11" />
 										</svg>
 										Уйти в отпуск<span class="info"></span>
+									</a>
+									<a 
+										v-else
+									href="javascript:void(0)" class="vacation" @click="goToVacation(1)">
+										<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+											<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+											<circle cx="8.5" cy="7" r="4" />
+											<line x1="23" x2="17" y1="11" y2="11" />
+										</svg>
+										Вернутся из отпуска<span class="info"></span>
 									</a>
 								</div>
 							</div>
@@ -223,7 +235,14 @@ export default {
 				akcii: false,
 				pro: false
 			},
-			filesData: []
+			filesData: [],
+			actions:{
+				id:0,
+				name: null,
+				description: null,
+				price_to: null,
+				price_from: null
+			}
 		} 
 	},
 	watch:{
@@ -504,6 +523,27 @@ export default {
           }
         })
 		},
+		goToVacation(id){
+			let params = new URLSearchParams();
+        params.append('status', id);
+
+        this.$http({
+          method: 'POST',
+          url: 'expert/profile/change-status',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(()=>{
+					this.$store.dispatch('getProfile');
+					this.$toast.success({
+						title:'Успешно',
+						message:'Информация изменена'
+					})
+        })
+		}
 	},
 	computed: {
 		categori(){

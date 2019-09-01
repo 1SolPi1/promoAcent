@@ -210,6 +210,10 @@ export default {
         	params.append('create_at', this.sortItem.date)
         	params.append('sort', 'create_at')
         }
+        if (this.sortItem.rating !== null) {
+        	params.append('rating', this.sortItem.rating)
+        	// params.append('sort', 'create_at')
+        }
          if (this.sortItem.akcii !== null) {
         	params.append('action', this.sortItem.akcii)
         	// params.append('sort', 'action')

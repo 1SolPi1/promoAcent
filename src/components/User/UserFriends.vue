@@ -37,7 +37,8 @@
 											</div>
 											<div class="col-xs-12 col-md-5 no-mr">
 												<div class="fr-block">
-													<input id="post-shortlink" :value="'http://sprosi-online.ru/?token=' + client.friend_token">
+													<input id="post-shortlink" :value="'http://sprosi-online.ru/expert?expert=' + expert.id" v-if="userinfo.expert">
+													<input id="post-shortlink" :value="'http://sprosi-online.ru/person?id=' + userinfo.id" v-else>
 													<p>Публикуйте ссылку на Ваш профиль</p>
 													<a href="javascript:void(0)" @click="alert()" id="copy-button" data-clipboard-target="#post-shortlink">Скопировать ссылку</a>
 												</div>
@@ -150,7 +151,7 @@ export default {
 			}else{
 				this.$http({
           method: 'GET',
-          url: 'client/friend/invitation?email=test@' + this.email,
+          url: 'client/friend/invitation?email=' + this.email,
           headers: { 
             'Content-Type': 'application/x-www-form-urlencoded', 
               Authorization: "Bearer " + localStorage.getItem('token')
@@ -175,7 +176,13 @@ export default {
 	computed: {
 		client(){
 			return this.$store.getters.CLIENT
-		}
+		},
+		userinfo(){
+			return this.$store.getters.USERINFO
+		},
+		expert(){
+			return this.$store.getters.EXPERT
+		},
 	},
 }
 </script>

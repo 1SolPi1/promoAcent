@@ -12,12 +12,19 @@ const state = {
   client: null,
   expert: {
     id: 0,
-    is_confirmed: false
+    is_confirmed: false,
+    status: 1
   },
   expertEducation: null,
   myCategory: null,
   mySubCategories: null,
-  chats: null
+  chats: null,
+  action: null,
+  greeting:{
+    only_sub_category: 0,
+    only_category_question: 0,
+    only_pay_question: 0
+  }
 };
 const getters = {
   PROFILE: state => state.profile,
@@ -27,7 +34,9 @@ const getters = {
   EXPERTEDUCATION: state => state.expertEducation,
   MYCATEGORY: state => state.myCategory,
   MYSUBCATEGORIES: state => state.mySubCategories,
-  CHATS: state => state.chats
+  CHATS: state => state.chats,
+  ACTION: state => state.action,
+  GREETING: state => state.greeting
 };
 const mutations = {
   SET_PROFILE: (state, payload) => {
@@ -72,6 +81,12 @@ const mutations = {
   },
   CLEAR_CHATS: (state) =>{
     state.chats = null
+  },
+  SET_ACTION: (state, playload) =>{
+    state.action = playload
+  },
+  SET_GREETING: (state, playload) =>{
+    state.greeting = playload
   }
 };
 const actions = {
@@ -86,11 +101,17 @@ const actions = {
       mySubCategories: data.expert.sub_categories
     });
     commit('SET_EXPERT_EDUCATION', data.expert.education[0]);
+    commit('SET_ACTION', data.expert.action)
   },
   saveSettings: ({commit}, data) => {
     commit('SET_NAME', data.name);
     commit('SET_SURNAME', data.surname);
     commit('SET_EMAIL', data.email);
+    commit('SET_GREETING', {
+      only_category_question: data.expert.only_category_question,
+      only_sub_category: data.expert.only_sub_category,
+      only_pay_question: data.expert.only_pay_question
+    });
   },
   setFalseId: ({commit}, id)=>{
     commit('SET_FALSE_ID', id)
