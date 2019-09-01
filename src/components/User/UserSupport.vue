@@ -140,16 +140,36 @@ export default {
 				message:'Описание должно содержать не меньше 20 символов'
 			})
 			}else{
-				this.$toast.success({
-				title:'Успешно',
-				message:'Ваша заявка отправлена в тех поддержку, ожидайте обратной связи'
-			})
-				this.name = null;
-				this.email = null;
-				this.type = '';
-				this.quest = '';
-				this.category = null;
-			}
+        let params = new URLSearchParams();
+        params.append('', this.name);
+        params.append('', this.email);
+        params.append('', this.type);
+        params.append('', this.quest);
+        params.append('', this.category);
+
+        this.$http({
+          method: 'POST',
+          url: 'user/profile/edit',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response =>{
+        	if (response.status === 200) {
+        		this.$toast.success({
+						title:'Успешно',
+						message:'Ваша заявка отправлена в тех поддержку, ожидайте обратной связи'
+					})
+						this.name = null;
+						this.email = null;
+						this.type = '';
+						this.quest = '';
+						this.category = null;
+        	}
+        })
+      }  
 		},
 		change(id){
 			this.category = id
