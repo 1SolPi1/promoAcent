@@ -14,7 +14,7 @@
                 <categories 
                   :category="categories"
                   :childcategory="selectChildCategory"
-                  v-if="categories"
+                  v-if="selectChildCategory"
                   @selectcategory="changeCategory"
                   @selectsubcategory="changeSubCategory"
                   />
@@ -160,17 +160,25 @@
         },
         props: {},
         beforeRouteUpdate (to, from, next) {
-          this.childCategory = null;
-          this.selectCategory = null;
-          this.selectChildCategory = null;
-          this.category = null;
+            if (!this.$route.params.subcategory){
+                this.selectSubCategory = null;
+            }
           this.pageCount = 1;
           this.pageNumber = 1;
           this.allQuestions = []
-          setTimeout(()=> {  
-              this.getSelectCategory(this.$store.getters.SELECTCATEGORY)
-              this.questionsList = this.$store.getters.QUESTIONS
-              this.getAllQuestions(this.pageCount, this.selectCategory.id);
+          setTimeout(()=> {
+              if (this.$route.params.subcategory){
+                  this.getAllQuestions(this.pageCount, this.selectCategory.slug);
+              }else {
+                  this.selectSubCategory = null;
+                  this.childCategory = null;
+                  this.selectCategory = null;
+                  this.selectChildCategory = null;
+                  this.category = null;
+                  this.getSelectCategory(this.$store.getters.SELECTCATEGORY)
+                  this.getAllQuestions(this.pageCount, this.selectCategory.slug);
+              }
+
             }, 500)
           next()
         },
@@ -209,6 +217,10 @@
             this.sortItems[item] = 1
             this.getSortQuestions();
           },
+            categories(){
+                this.getSelectCategory(this.selectCat);
+                this.getAllQuestions(this.pageCount, this.selectCategory.slug);
+            }
         },
         created() {
         },
@@ -217,8 +229,7 @@
           const vm = this;
             setTimeout(function() {  
               vm.getSelectCategory(vm.selectCat)
-              vm.questionsList = vm.$store.getters.QUESTIONS
-              vm.getAllQuestions(vm.pageCount, vm.selectCategory.id);
+              vm.getAllQuestions(vm.pageCount, vm.selectCategory.slug);
             }, 900)
           vm.getExperts()
         },
@@ -226,9 +237,9 @@
           getSortQuestions(){
             this.pageNumber = 1;
             let params = new URLSearchParams();
-                params.append('category_id', this.selectCategory.id);
+                params.append('category_id', this.selectCategory.slug);
                 if (this.selectSubCategory !== null) {
-                  params.append('sub_category_id', this.selectSubCategory.id)
+                  params.append('sub_category_id', this.selectSubCategory.slug)
                 }
                 params.append('page', 1);
 
@@ -261,11 +272,13 @@
           },
           changeCategory(item){
             this.$store.dispatch('changeSelectCategory', item);
-            this.selectCategory = this.categories.find(map => map.id == item)
+              this.selectSubCategory = null;
+            this.selectCategory = this.categories.find(map => map.slug == item)
+              this.$router.push('/questions/' + item);
             setTimeout(()=>{  
                 this.getChildCategory(this.selectCategory);
                 this.pageNumber = 1;
-                this.getAllQuestions(1, this.selectCategory.id);
+                this.getAllQuestions(1, this.selectCategory.slug);
                 this.getExperts();
             }, 300)
           },
@@ -274,12 +287,13 @@
             if (item == 0) {
               this.selectSubCategory = null
             }else{
-              this.selectSubCategory = this.selectChildCategory.find(map => map.id == item)
+              this.selectSubCategory = this.selectChildCategory.find(map => map.slug == item)
+                this.$router.push('/questions/' + this.selectCategory.slug + '/' + item);
             }
-            this.getAllQuestions(1, this.selectCategory.id);
+            this.getAllQuestions(1, this.selectCategory.slug);
           },
       getSelectCategory(id){
-        this.selectCategory = this.categories.find(item => item.id === id)
+        this.selectCategory = this.categories.find(item => item.slug === id)
         this.getChildCategory(this.selectCategory)
       },
       getChildCategory(arr){
@@ -287,17 +301,17 @@
       },
             nextPage () {
               this.pageNumber++
-              this.getAllQuestions(this.pageNumber, this.selectCategory.id);
+              this.getAllQuestions(this.pageNumber, this.selectCategory.slug);
             },
             prevPage () {
               this.pageNumber--
-              this.getAllQuestions(this.pageNumber, this.selectCategory.id);
+              this.getAllQuestions(this.pageNumber, this.selectCategory.slug);
             },
             getAllQuestions(page, category){
                 let params = new URLSearchParams();
                 params.append('category_id', category);
                 if (this.selectSubCategory !== null) {
-                  params.append('sub_category_id', this.selectSubCategory.id)
+                  params.append('sub_category_id', this.selectSubCategory.slug)
                 }
                 params.append('page', page);
 
@@ -377,7 +391,7 @@
             return this.$store.getters.CHILDCATEGORI
           },
           selectCat(){
-            return this.$store.getters.SELECTCATEGORY
+              return this.$route.params.category
           }
         },
     }

@@ -13,7 +13,7 @@
                         v-for="item in firstList"
                         :key="item.id"
                       >
-                        <a href="javascript:void(0)" @click="selectCategory(item.id)">
+                        <a href="javascript:void(0)" @click="selectCategory(item.slug)">
                           {{item.name}}
                         </a>
                       </li>
@@ -26,7 +26,7 @@
                         v-for="item in secondList"
                         :key="item.id"
                       >
-                        <a href="javascript:void(0)" @click="selectCategory(item.id)">
+                        <a href="javascript:void(0)" @click="selectCategory(item.slug)">
                           {{item.name}}
                         </a>
                       </li>
@@ -78,7 +78,7 @@ export default {
   methods: {
   selectCategory(id){
      this.$store.dispatch('changeSelectCategory', id);
-     this.$router.push('/questions?category=' + id);
+     this.$router.push('/questions/' + id);
   }
   },
   computed: {

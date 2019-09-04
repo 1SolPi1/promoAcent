@@ -3,7 +3,7 @@
   <li
     v-for="item in categories"
     :key="item.id"
-    @click="selectCategory(item.id)"
+    @click="selectCategory(item.slug)"
   >
     <a href="javascript:void(0)">{{item.name}}</a>
   </li>
@@ -29,7 +29,7 @@
 		methods: {
       selectCategory(id){
         this.$store.dispatch('changeSelectCategory', id);
-        this.$router.push('/questions?category=' + id);
+        this.$router.push('/questions/' + id);
         this.$emit('close')
       }
 		},

@@ -162,7 +162,7 @@ export default new Vuex.Store({
   ],
   addquestion: null,
   domen:'http://api.sprosi-online.ru/file/',
-  selectCategory: 1
+  selectCategory: 'psihologia'
   },
   getters:{
 		COMMENTS: state=> state.comments,

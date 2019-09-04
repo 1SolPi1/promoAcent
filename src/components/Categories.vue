@@ -5,8 +5,8 @@
      <option
       v-for="(item, index) in category"
       :key="item.id"
-      :value="item.id"
-      :selected="item.id === select"
+      :value="item.slug"
+      :selected="item.slug == select"
      >
        {{item.name}}
      </option>
@@ -15,7 +15,7 @@
       <option value="0">Выберите подкатегорию</option>
       <option 
         v-for="(item, index) in childcategory"
-        :value="item.id"
+        :value="item.slug"
       >
         {{item.name}}
       </option>
@@ -72,7 +72,7 @@
     },
     computed: {
       select(){
-        return this.$store.getters.SELECTCATEGORY
+        return this.$route.params.category
       }
     },
   }

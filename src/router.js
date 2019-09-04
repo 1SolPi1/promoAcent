@@ -48,13 +48,18 @@ let router = new Router({
       component: Home
     },
     {
-      path: '/questions',
-      name: 'questions',
+      path: '/questions/:category/:subcategory',
+      name: 'questionssub',
       component: Questions
     },
+      {
+          path: '/questions/:category',
+          name: 'questions',
+          component: Questions
+      },
     {
       path: '/question/:category/:subcategory/:question',
-      name: 'fullquestion',
+      name: 'fullquestionsub',
       component: Question,
     },
     {
