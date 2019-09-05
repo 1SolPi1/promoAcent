@@ -25,7 +25,7 @@
                              <button class="btn_search" @click="showSearchExp = !showSearchExp" v-if="$route.path == '/experts'"></button>
                         </div>
                         <ul class="header_nav">
-                            <li :class="{'active': $route.path == '/questions'}"> <router-link to="/questions/psihologia">Ваши вопросы</router-link></li>
+                            <li :class="{'active': $route.path == '/questions'}"> <router-link to="/zadat-vopros-psihologu">Ваши вопросы</router-link></li>
                             <li :class="{'active': $route.path == '/experts'}"><router-link to="/experts">Эксперты</router-link></li>
                             <li :class="{'active': $route.path == '/journal'}"><router-link to="/journal">Журнал</router-link></li>
                         </ul>

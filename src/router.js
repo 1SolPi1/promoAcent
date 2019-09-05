@@ -48,12 +48,12 @@ let router = new Router({
       component: Home
     },
     {
-      path: '/questions/:category/:subcategory',
+      path: '/zadat-vopros-:category/:subcategory',
       name: 'questionssub',
       component: Questions
     },
       {
-          path: '/questions/:category',
+          path: '/zadat-vopros-:category',
           name: 'questions',
           component: Questions
       },

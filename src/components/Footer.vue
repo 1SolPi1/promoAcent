@@ -78,7 +78,7 @@ export default {
   methods: {
   selectCategory(id){
      this.$store.dispatch('changeSelectCategory', id);
-     this.$router.push('/questions/' + id);
+     this.$router.push('/zadat-vopros-' + id);
   }
   },
   computed: {

@@ -274,7 +274,7 @@
             this.$store.dispatch('changeSelectCategory', item);
               this.selectSubCategory = null;
             this.selectCategory = this.categories.find(map => map.slug == item)
-              this.$router.push('/questions/' + item);
+              this.$router.push('/zadat-vopros-' + item);
             setTimeout(()=>{  
                 this.getChildCategory(this.selectCategory);
                 this.pageNumber = 1;
@@ -288,7 +288,7 @@
               this.selectSubCategory = null
             }else{
               this.selectSubCategory = this.selectChildCategory.find(map => map.slug == item)
-                this.$router.push('/questions/' + this.selectCategory.slug + '/' + item);
+                this.$router.push('/zadat-vopros-' + this.selectCategory.slug + '/' + item);
             }
             this.getAllQuestions(1, this.selectCategory.slug);
           },
@@ -309,7 +309,7 @@
             },
             getAllQuestions(page, category){
                 let params = new URLSearchParams();
-                params.append('category_id', category);
+                params.append('category_id', 'zadat-vopros-' + category);
                 if (this.selectSubCategory !== null) {
                   params.append('sub_category_id', this.selectSubCategory.slug)
                 }
