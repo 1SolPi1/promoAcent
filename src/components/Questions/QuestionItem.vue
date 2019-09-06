@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import dates from '@/scripts/getDate.js';
+  import dates from '@/scripts/getDate';
   export default {
     name: "QuestionItem",
     components: {},
@@ -90,7 +90,7 @@
     },
     created() {},
     mounted() {
-       this.resultDate = dates(this.date)
+       this.resultDate = dates(this.date);
       if(!this.question){
         new WOW().init();
       }

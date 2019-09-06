@@ -14,7 +14,7 @@
                 :name="item.name"
                 :image="item.image"
                 :clases="item.class"
-                :active="item.id == selectCategory.id ? true:false"
+                :active="item.id === selectCategory.id"
                 @changeitem="changeCategory(item.id)"
               />  
             </slick>
@@ -37,7 +37,7 @@
             <form>
               <div class="frm_question">
                 <p>Мой вопрос <span>*</span></p>
-                <input type="text" name="" placeholder="напишите вопрос" v-model="title">
+                <input type="text" name="" ref="title" placeholder="напишите вопрос" v-model="title">
               </div>
               <div class="frm_question">
                 <p>Необязательное уточнение</p>
@@ -168,10 +168,24 @@ export default {
       this.selectChildCategory = this.childCategories.filter(map => map.parent_id === arr.id)
     },
     addQuestion(){
+        let numbers = 0;
+        let text = 0;
+        for (let char of this.title) {
+            if (!isNaN(Number.parseInt(char))){
+                numbers++
+            }else{
+                text++
+            }
+        }
       if (!this.title) {
         this.$toast.error({
             title:'Ошибка',
             message: ' Укажите вопрос '
+          })
+      }else if (text === 0){
+          this.$toast.error({
+              title:'Ошибка',
+              message: ' Вопрос не может состоять только из цифр '
           })
       }else{
         let anonimus = 0;
@@ -201,7 +215,7 @@ export default {
         this.description = null;
         this.price =  0;
         this.anonim = false;
-        this.getSelectCategory(1)
+        this.getSelectCategory(1);
         if(response.status === 200){
           this.$toast.success({
             title:'Успешно',
@@ -209,7 +223,7 @@ export default {
           })
           }
       })
-      .catch(erorr=>{
+      .catch(error=>{
          this.$toast.error({
             title:'Ошибка',
             message: error.response.data.error

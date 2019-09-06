@@ -46,8 +46,8 @@
           <div class="firts_consultation" v-if="expert.action.length > 0 && actionTime">
             <div class="action_consultation"><span>Акция</span></div>
             <div class="left_first">
-              <div class="title_middle">{{expert.action[0].name}}</div>
-              <p>{{expert.action[0].description}}</p>
+              <div class="title_middle">{{expert.action[0].name || ' '}}</div>
+              <p>{{expert.action[0].description || ' '}}</p>
               <div class="price_consultation">{{expert.action[0].price_to}} ₽ <div class="old_price">{{expert.action[0].price_from}}₽</div></div>
             </div>
             <div class="right_first">

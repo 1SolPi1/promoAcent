@@ -237,7 +237,7 @@
           getSortQuestions(){
             this.pageNumber = 1;
             let params = new URLSearchParams();
-                params.append('category_id', this.selectCategory.slug);
+                params.append('category_id', 'zadat-vopros-' + this.selectCategory.slug);
                 if (this.selectSubCategory !== null) {
                   params.append('sub_category_id', this.selectSubCategory.slug)
                 }
@@ -248,8 +248,7 @@
                   // params.append('sort', 'create_at')
                 }
                 if (this.sortItems.last !== null) {
-                  params.append('create_at', this.sortItems.last)
-                  // params.append('sort', 'create_at')
+                  params.append('sort', 'create_at')
                 }
                 if (this.sortItems.pays !== null) {
                   params.append('price', this.sortItems.pays)

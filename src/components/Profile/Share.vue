@@ -49,8 +49,8 @@
     data() {
 			return {
       share:{
-        name: null,
-        description: null,
+        name: '',
+        description: '',
         days: 1,
         startPrice: null,
         sharePrice: null,

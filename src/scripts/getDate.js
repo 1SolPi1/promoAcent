@@ -7,7 +7,7 @@ export default function getDate(date){
 	let month = time.getMonth();
 
 if(day > months[month].days){
-	day = 1
+	day = 1;
 	month += 1
 }
 day < 10? day = '0' + day : day;

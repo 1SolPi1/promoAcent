@@ -42,31 +42,31 @@
 					<div class="title_section slideInUp wow" data-wow-iteration="1">Задайте бесплатно вопрос <br>и уже сейчас получите ответ</div>
 					<div class="descr_title slideInUp wow" data-wow-iteration="1">Выберите направление и задайте вопрос</div>
 					<div class="questions_items">
-						<a href="javascript:void(0)" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('medicina')">
+						<a href="javascript:void(0)" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('doktoru')">
 							<img src="img/quest1.png" alt="alt">
 							<span>Медицина</span>
 						</a>
-						<a href="javascript:void(0)" class="item_question question_psihology slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('psihologia')">
+						<a href="javascript:void(0)" class="item_question question_psihology slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('psihologu')">
 							<img src="img/quest2.png" alt="alt">
 							<span>Психология</span>
 						</a>
-						<a href="javascript:void(0)" class="item_question question_yrist slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('urisprudencia')">
+						<a href="javascript:void(0)" class="item_question question_yrist slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('yristu')">
 							<img src="img/quest3.png" alt="alt">
 							<span>Юриспруденция</span>
 						</a>
-						<a href="javascript:void(0)" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('uceba-i-nauka')">
+						<a href="javascript:void(0)" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('uchitelu')">
 							<img src="img/quest4.png" alt="alt">
 							<span>Учеба и наука</span>
 						</a>
-						<a href="javascript:void(0)" class="item_question question_ezot slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('ezoterika')">
+						<a href="javascript:void(0)" class="item_question question_ezot slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('po-ezoteriki')">
 							<img src="img/quest5.png" alt="alt">
 							<span>Эзотерика</span>
 						</a>
-						<a href="javascript:void(0)" class="item_question question_beautiful slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('krasota')">
+						<a href="javascript:void(0)" class="item_question question_beautiful slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('po-krasote')">
 							<img src="img/quest6.png" alt="alt">
 							<span>Красота</span>
 						</a>
-						<a href="javascript:void(0)" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('anglijskij')">
+						<a href="javascript:void(0)" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('po-anglijskomu')">
 							<img src="img/quest7.png" alt="alt">
 							<span>Английский</span>
 						</a>
@@ -77,19 +77,19 @@
 							</a>
 							<div class="hidden_questions_items">
 								<div class="questions_items">
-									<a href="javascript:void(0)" class="item_question question_hobi" @click="selectCategory('hobbi')">
+									<a href="javascript:void(0)" class="item_question question_hobi" @click="selectCategory('po-hobbi')">
 										<img src="img/bicycle.svg" alt="alt">
 										<span>Хобби</span>
 									</a>
-									<a href="javascript:void(0)" class="item_question question_business" @click="selectCategory('biznes')">
+									<a href="javascript:void(0)" class="item_question question_business" @click="selectCategory('po-biznesu')">
 										<img src="img/umbrella.svg" alt="alt">
 										<span>Бизнес</span>
 									</a>
-									<a href="javascript:void(0)" class="item_question question_religion" @click="selectCategory('religia')">
+									<a href="javascript:void(0)" class="item_question question_religion" @click="selectCategory('po-religii')">
 										<img src="img/church.svg" alt="alt">
 										<span>Религия</span>
 									</a>
-									<a href="javascript:void(0)" class="item_question question_tech" @click="selectCategory('tehnologii')">
+									<a href="javascript:void(0)" class="item_question question_tech" @click="selectCategory('po-tehnologii')">
 										<img src="img/antenna.svg" alt="alt">
 										<span>Технологии</span>
 									</a>
@@ -422,7 +422,7 @@ methods: {
 		},
 	selectCategory(id){
 		 this.$store.dispatch('changeSelectCategory', id);
-		 this.$router.push('/questions/' + id);
+		 this.$router.push('/zadat-vopros-' + id);
 	},
 	setSubscription(){
 			if(!this.emailSend){
