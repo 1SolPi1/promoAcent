@@ -112,7 +112,7 @@
 
         <div class="section_experts">
             <div class="container">
-                <div class="title_experts slideInUp wow" data-wow-iteration="1">Смотрите также экспертов этой категории</div>
+                <h2 class="title_experts slideInUp wow" data-wow-iteration="1">Смотрите также экспертов этой категории</h2>
                 <div class="row" v-if="experts.length > 0">
                     <profItem
                       v-for="(item, index) in experts"
@@ -348,7 +348,7 @@
             },
       getExperts(){
         let params = new URLSearchParams();
-        params.append('category_id', this.$store.getters.SELECTCATEGORY);
+        params.append('category_id', this.selectCategory.expert_slug);
 
         this.$http({
           method: 'POST',

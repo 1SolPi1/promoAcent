@@ -2,6 +2,16 @@
 	<div>
 		<div class="section_category_top">
 			<div class="container">
+        <breadcrumbs
+          :wayPages="
+          [
+            {
+              name: 'Главная',
+              route: '/',
+            }
+           ]"
+          currentPage="Эксперты"
+        />
 				<div class="wrap_category">
 					<ul class="list_category">
 			<slick

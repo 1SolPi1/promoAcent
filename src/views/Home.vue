@@ -39,7 +39,7 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="title_section slideInUp wow" data-wow-iteration="1">Задайте бесплатно вопрос <br>и уже сейчас получите ответ</div>
+					<h1 class="title_section slideInUp wow" data-wow-iteration="1">Задайте бесплатно вопрос <br>и уже сейчас получите ответ</h1>
 					<div class="descr_title slideInUp wow" data-wow-iteration="1">Выберите направление и задайте вопрос</div>
 					<div class="questions_items">
 						<a href="javascript:void(0)" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('doktoru')">
@@ -133,7 +133,7 @@
 
 		<div class="section_advantages">
 			<div class="container">
-				<div class="title_section align_center slideInUp wow" data-wow-iteration="1">Чем мы лучше штатных или оффлайн специалистов</div>
+				<h2 class="title_section align_center slideInUp wow" data-wow-iteration="1">Чем мы лучше штатных или оффлайн специалистов</h2>
 				<div class="row">
 					<div class="col-md-4 col-sm-4">
 						<div class="item_advantages advant_simple flipInX wow" data-wow-delay="0.5s" data-wow-iteration="1">
@@ -166,7 +166,7 @@
 						</div>
 					</div>
 					<div class="col-md-offset-1 col-md-6 col-sm-8 right_numbers">
-						<div class="title_section slideInUp wow" data-wow-iteration="1">«Спроси Онлайн» в цифрах</div>
+						<h2 class="title_section slideInUp wow" data-wow-iteration="1">«Спроси Онлайн» в цифрах</h2>
 						<div class="descr_number">Мы дорожим доверием клиентов — никаких скрытых платежей и комиссий за выдачу.</div>
 						<div class="row">
 							<div class="col-xs-4">
@@ -195,7 +195,7 @@
 
 		<div class="section_clients">
 			<div class="container">
-				<div class="title_section slideInUp wow" data-wow-iteration="1">Клиенты «Спроси Онлайн» говорят</div>
+				<h2 class="title_section slideInUp wow" data-wow-iteration="1">Клиенты «Спроси Онлайн» говорят</h2>
 				<ul class="slider_clients">
 					<slick
 						ref="slick"
@@ -216,7 +216,7 @@
 
 		<div class="section_journal">
 			<div class="container">
-				<div class="title_section slideInUp wow" data-wow-iteration="1">Журнал</div>
+				<h3 class="title_section slideInUp wow" data-wow-iteration="1">Журнал</h3>
 				<div class="row">
 					<journalItem
 						v-for="(item, index) in 4"
