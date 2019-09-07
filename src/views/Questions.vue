@@ -248,7 +248,8 @@
                   // params.append('sort', 'create_at')
                 }
                 if (this.sortItems.last !== null) {
-                  params.append('sort', 'create_at')
+                  params.append('sort', 'create_at');
+                  params.append('direction', 'desc')
                 }
                 if (this.sortItems.pays !== null) {
                   params.append('price', this.sortItems.pays)
