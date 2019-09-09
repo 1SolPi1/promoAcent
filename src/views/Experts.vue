@@ -17,6 +17,7 @@
 			<slick
 				ref="slick"
 				:options="slickOptions"
+        v-if="categories"
             >
 			<ItemCategory
 				v-for="item in categoryItem"
@@ -24,7 +25,7 @@
 				:name="item.name"
 				:image="item.image"
 				:clases="item.class"
-				:active="item.id == selectCategory.id ? true:false"
+				:active="item.id === selectCategory.id"
 				@changeitem="changeCategory(item.id)"
               />  
             </slick>
@@ -155,7 +156,16 @@ export default {
       category: null,
       childCategory: null,
       selectChildCategory: null,
-      selectCategory: {id: 1},
+      selectCategory: {
+          description:"",
+          expert_slug:"psiholog",
+          id:1,
+          image:"/file/category/psihologia/1231d487d9ac27b6579556329bf2a71b.png",
+          meta_id:null,
+          parent_id:null,
+          slug:"psihologu",
+          url:"/zadat-vopros-psihologu"
+      },
       selectSubCategory: null,
       bigImage: null,
       sortItem:{
@@ -170,13 +180,23 @@ export default {
 	},
 	created(){
 	},
+    beforeRouteUpdate (to, from, next) {
+        this.pageCount = 1;
+        this.pageNumber = 1;
+        this.experts = [];
+        setTimeout(()=> {
+               this.getExperts();
+        }, 500);
+        next()
+    },
 	methods:{
 			getBigImage(id){
 				this.bigImage = this.categoryItem.find(item => item.id == id).bigImage
 			},
       changeCategory(item){
-      this.selectCategory = this.categories.find(map => map.id == item)
-      this.getBigImage(item)
+      this.selectCategory = this.categories.find(map => map.id === item);
+          this.$router.push('/' + this.selectCategory.expert_slug);
+      this.getBigImage(item);
       setTimeout(()=>{  
         this.getChildCategory(this.selectCategory);
         this.pageNumber = 1;
@@ -189,7 +209,7 @@ export default {
       this.selectSubCategory= this.selectChildCategory.find(map => map.id == item)
     },
     getSelectCategory(id){
-      this.selectCategory = this.categories.find(item => item.id === id)
+      this.selectCategory = this.categories.find(item => item.id === id);
       this.getChildCategory(this.selectCategory)
     },
     getChildCategory(arr){
@@ -207,7 +227,7 @@ export default {
 		},
 		getExperts(){
         let params = new URLSearchParams();
-       params.append('category_id', this.selectCategory.id);
+       params.append('category_id', this.selectCategory.expert_slug);
        if (this.selectSubCategory !== null) {
        	params.append('sub_category_id', this.selectSubCategory.id)
        }
@@ -265,17 +285,18 @@ export default {
 	},
 	mounted(){
 		// eslint-disable-next-line
-		const vm = this
-    setTimeout(function() {  
-          vm.getSelectCategory(1)
-        }, 500)
-		this.getExperts()
-		this.getBigImage(1)
+    setTimeout(()=> {
+        let category = this.categories.find(item => item.expert_slug === this.$route.params.experts);
+          this.getSelectCategory(category.id)
+        }, 500);
+		this.getExperts();
+		this.getBigImage(1);
 		$('select').styler();
 	},
 	watch:{
 		categories(){
-			this.getSelectCategory(1)
+        let category = this.categories.find(item => item.expert_slug === this.$route.params.experts);
+			this.getSelectCategory(category.id);
 			this.getExperts()
 		}
 	},

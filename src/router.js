@@ -73,8 +73,8 @@ let router = new Router({
       component: AddQuesttion
     },
     {
-      path: '/experts',
-      name: 'esperts',
+      path: '/:experts',
+      name: 'experts',
       component: Experts,
     },
     {

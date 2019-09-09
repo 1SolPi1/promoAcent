@@ -21,13 +21,13 @@
                         />
                       </div>
                         <div class="search_main">
-                            <button class="btn_search" @click="showSearchQuest = !showSearchQuest" v-if="$route.path == '/questions'"></button>
-                             <button class="btn_search" @click="showSearchExp = !showSearchExp" v-if="$route.path == '/experts'"></button>
+                            <button class="btn_search" @click="showSearchQuest = !showSearchQuest" v-if="$route.name === 'questions'"></button>
+                             <button class="btn_search" @click="showSearchExp = !showSearchExp" v-if="$route.name === 'experts'"></button>
                         </div>
                         <ul class="header_nav">
-                            <li :class="{'active': $route.path == '/questions'}"> <router-link to="/zadat-vopros-psihologu">Ваши вопросы</router-link></li>
-                            <li :class="{'active': $route.path == '/experts'}"><router-link to="/experts">Эксперты</router-link></li>
-                            <li :class="{'active': $route.path == '/journal'}"><router-link to="/journal">Журнал</router-link></li>
+                            <li :class="{'active': $route.name === 'questions'}"> <router-link to="/zadat-vopros-psihologu">Ваши вопросы</router-link></li>
+                            <li :class="{'active': $route.name === 'experts'}"><router-link to="/psiholog">Эксперты</router-link></li>
+                            <li :class="{'active': $route.path === '/journal'}"><router-link to="/journal">Журнал</router-link></li>
                         </ul>
                     </div>
                     <logined  v-if="profile"/>

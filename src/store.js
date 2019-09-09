@@ -77,7 +77,8 @@ export default new Vuex.Store({
       class: 'psihol',
       image: require('@/assets/img/category2.png'),
       bigImage: require('@/assets/img/svg/psychology.svg'),
-      color: '#fff68a'
+      color: '#fff68a',
+      slug: 'psiholog'
     },
     {
       id:3,
@@ -85,7 +86,8 @@ export default new Vuex.Store({
       class: 'yrist',
       image: require('@/assets/img/category3.png'),
       bigImage: require('@/assets/img/svg/urist.svg'),
-      color: '#f5b485'
+      color: '#f5b485',
+        slug: 'yristu'
     },
     {
       id:6,
@@ -93,7 +95,8 @@ export default new Vuex.Store({
       class: 'med',
       image: require('@/assets/img/category1.png'),
       bigImage: require('@/assets/img/svg/medicine.svg'),
-      color: '#85f5b7'
+      color: '#85f5b7',
+        slug: 'doktor'
     },
     {
       id:64,
@@ -101,7 +104,8 @@ export default new Vuex.Store({
       class: 'scince',
       image: require('@/assets/img/category4.png'),
       bigImage: require('@/assets/img/svg/ucheba.svg'),
-      color: '#858ef5'
+      color: '#858ef5',
+        slug: 'uchitel'
     },
     {
       id:144,
@@ -109,7 +113,8 @@ export default new Vuex.Store({
       class: 'tech',
       image: require('@/assets/img/antenna.svg'),
       bigImage: require('@/assets/img/svg/technology.svg'),
-      color: '#858ef5'
+      color: '#858ef5',
+        slug: 'tehnologii'
     },
     {
       id:114,
@@ -117,7 +122,8 @@ export default new Vuex.Store({
       class: 'english',
       image: require('@/assets/img/category6.png'),
       bigImage: require('@/assets/img/svg/english.svg'),
-      color: '#f58585'
+      color: '#f58585',
+        slug: 'anglijskij'
     },
     {
       id:103,
@@ -125,7 +131,8 @@ export default new Vuex.Store({
       class: 'beaut',
       image: require('@/assets/img/quest6.png'),
       bigImage: require('@/assets/img/svg/krasota.svg'),
-      color: '#f585b9'
+      color: '#f585b9',
+        slug: 'krasota'
     },
     {
       id:119,
@@ -133,7 +140,8 @@ export default new Vuex.Store({
       class: 'hobbi',
       image: require('@/assets/img/bicycle.svg'),
       bigImage: require('@/assets/img/svg/hobbi.svg'),
-      color: '#85f5b7'
+      color: '#85f5b7',
+        slug: 'hobbi'
     },
     {
       id:165,
@@ -141,7 +149,8 @@ export default new Vuex.Store({
       class: 'busin',
       image: require('@/assets/img/umbrella.svg'),
       bigImage: require('@/assets/img/svg/business.svg'),
-      color: '#858ef5'
+      color: '#858ef5',
+        slug: 'biznes'
     },
     {
       id:138,
@@ -149,7 +158,8 @@ export default new Vuex.Store({
       class: 'religion',
       image: require('@/assets/img/church.svg'),
       bigImage: require('@/assets/img/svg/religiya.svg'),
-      color: 'black'
+      color: 'black',
+        slug: 'religia'
     },
     {
       id:81,
@@ -157,7 +167,8 @@ export default new Vuex.Store({
       class: 'ezot',
       image: require('@/assets/img/quest5.png'),
       bigImage: require('@/assets/img/svg/ezoteric.svg'),
-      color: '#916cea'
+      color: '#916cea',
+        slug: 'ezoterik'
     },
   ],
   addquestion: null,
