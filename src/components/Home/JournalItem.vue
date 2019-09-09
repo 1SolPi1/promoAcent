@@ -22,7 +22,7 @@
     mounted() {},
     methods: {
       pushToJournalItem(id){
-        this.$router.push(`/journal/article/${id}`)
+        this.$router.push(`/info/journal/article/${id}`)
       }
     },
     computed: {},

@@ -78,63 +78,63 @@ let router = new Router({
       component: Experts,
     },
     {
-      path: '/journal',
+      path: '/info/journal',
       name: 'journal',
       component: Journal,
     },
     {
-      path: '/journal/article/:id',
+      path: '/info/journal/article/:id',
       name: 'journalarticle',
       component: JournalArticle,
     },
     {
-      path: '/about',
+      path: '/info/about',
       name: 'about',
       component: About,
     },
     {
-      path: '/help',
+      path: '/info/help',
       name: 'help',
       component: Help,
     },
     {
-      path: '/mapsite',
+      path: '/info/mapsite',
       name: 'mapsite',
       component: MapSite,
     },
     {
-      path: '/policy',
+      path: '/info/policy',
       name: 'policy',
       component: Policy,
     },
     {
-      path: '/aboutpartners',
+      path: '/info/aboutpartners',
       name: 'aboutpartners',
       component: AboutPartners,
     },
     {
-      path: '/expert',
+      path: '/about/expert',
       name: 'expert',
       component: Expert,
     },
     {
-      path: '/person',
+      path: '/info/person',
       name: 'person',
       component: Person
     },
     {
-      path: '/programsharefriends',
+      path: '/info/programsharefriends',
       name: 'programsharefriends',
       component: ProgramShareFriends
     },
     {
-      path: '/tariggquestions',
+      path: '/info/tariffquestions',
       name: 'tariffquestions',
       component: TariffQuestions
     },
     //Expert Section
     {
-      path: '/profile',
+      path: '/user/profile',
       name: 'profile',
       component: Profile,
       meta: {
@@ -142,7 +142,7 @@ let router = new Router({
       }
     },
     {
-      path: '/myconsultation',
+      path: '/user/myconsultation',
       name: 'myconsultation',
       component: MyConsultation,
       meta: {
@@ -150,7 +150,7 @@ let router = new Router({
       }
     },
     {
-      path: '/mainsettings',
+      path: '/user/mainsettings',
       name: 'mainsettings',
       component: MainSettings,
       meta: {
@@ -159,7 +159,7 @@ let router = new Router({
     },
     //User Section
     {
-      path: '/user',
+      path: '/user/user',
       name: 'user',
       component: User,
       meta: {
@@ -167,7 +167,7 @@ let router = new Router({
       }
     },
     {
-      path: '/userprofile',
+      path: '/user/userprofile',
       name: 'userprofile',
       component: UserProfile,
       meta: {
@@ -175,7 +175,7 @@ let router = new Router({
       }
     },
     {
-      path: '/userconsultation',
+      path: '/user/userconsultation',
       name: 'userconsultation',
       component: UserConsultation,
       meta: {
@@ -183,7 +183,7 @@ let router = new Router({
       }
     },
     {
-      path: '/userpays',
+      path: '/user/userpays',
       name: 'userpays',
       component: UserPays,
       meta: {
@@ -191,7 +191,7 @@ let router = new Router({
       }
     },
     {
-      path: '/userfriends',
+      path: '/user/userfriends',
       name: 'userfriends',
       component: UserFriends,
       meta: {
@@ -199,7 +199,7 @@ let router = new Router({
       }
     },
     {
-      path: '/usersettings',
+      path: '/user/usersettings',
       name: 'usersettings',
       component: UserSettings,
       meta: {
@@ -207,7 +207,7 @@ let router = new Router({
       }
     },
     {
-      path: '/usersupport',
+      path: '/user/usersupport',
       name: 'usersupport',
       component: UserSupport,
       meta: {

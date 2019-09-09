@@ -27,7 +27,7 @@
                         <ul class="header_nav">
                             <li :class="{'active': $route.name === 'questions'}"> <router-link to="/zadat-vopros-psihologu">Ваши вопросы</router-link></li>
                             <li :class="{'active': $route.name === 'experts'}"><router-link to="/psiholog">Эксперты</router-link></li>
-                            <li :class="{'active': $route.path === '/journal'}"><router-link to="/journal">Журнал</router-link></li>
+                            <li :class="{'active': $route.path === '/info/journal'}"><router-link to="/info/journal">Журнал</router-link></li>
                         </ul>
                     </div>
                     <logined  v-if="profile"/>

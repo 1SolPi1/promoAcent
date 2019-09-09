@@ -89,7 +89,7 @@
 										:key="item.created_at"
 										:friend="item"
 									/>
-										<router-link href="javascript:void(0)" to="/programsharefriends">Ознакомится с условиями программы</router-link>
+										<router-link href="javascript:void(0)" to="/info/programsharefriends">Ознакомится с условиями программы</router-link>
 											</div>
 										</div>
 									</div>

@@ -134,8 +134,8 @@
         return year + '/' + month+ '/' + day
       },
       goToExpert(){
-        this.$emit('closesearch')
-        this.$router.push('/expert?expert=' +this.expert.id);
+        this.$emit('closesearch');
+        this.$router.push('/about/expert?expert=' +this.expert.id);
       }
 		},
 		computed: {

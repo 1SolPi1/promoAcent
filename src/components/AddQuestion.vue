@@ -52,7 +52,7 @@
             </form>
           </div>
           <div class="col-xs-12 col-md-7 col-lg-6 uslovia">
-            <p>Условия размещения <router-link href="javascript:void(0)" to="/tariggquestions">Ознакомится с тарифами размещения</router-link></p>
+            <p>Условия размещения <router-link href="javascript:void(0)" to="/info/tariffquestions">Ознакомится с тарифами размещения</router-link></p>
               <div class="sorting_questions">
                 <div class="item_sorting">
                   <input type="radio" name="radio" value="0" class="radio" id="radio1" checked/>
