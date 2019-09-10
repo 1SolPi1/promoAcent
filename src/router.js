@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Meta from 'vue-meta'
+Vue.use(Meta)
 
 const Home = () => import('./views/Home.vue')
 const Questions = () => import('./views/Questions.vue')
