@@ -156,18 +156,18 @@
         components: {
           profItem,
           registration,
-          login
+          login,
         },
         props: {},
         beforeRouteUpdate (to, from, next) {
-            if (!this.$route.params.subcategory){
+            if (this.$route.params.hasOwnProperty('subcategory')){
                 this.selectSubCategory = null;
             }
           this.pageCount = 1;
           this.pageNumber = 1;
           this.allQuestions = []
           setTimeout(()=> {
-              if (this.$route.params.subcategory){
+              if (this.$route.params.hasOwnProperty('subcategory')){
                   this.getAllQuestions(this.pageCount, this.selectCategory.slug);
               }else {
                   this.selectSubCategory = null;
@@ -228,18 +228,18 @@
           new WOW().init();
           const vm = this;
             setTimeout(function() {  
-              vm.getSelectCategory(vm.selectCat)
+              vm.getSelectCategory(vm.selectCat);
               vm.getAllQuestions(vm.pageCount, vm.selectCategory.slug);
-            }, 900)
+            }, 900);
           vm.getExperts()
         },
         methods: {
           getSortQuestions(){
             this.pageNumber = 1;
             let params = new URLSearchParams();
-                params.append('category_id', 'zadat-vopros-' + this.selectCategory.slug);
-                if (this.selectSubCategory !== null) {
-                  params.append('sub_category_id', this.selectSubCategory.slug)
+                params.append('category_id', 'zadat-vopros-' + this.$route.params.category);
+                if (this.$route.params.hasOwnProperty('subcategory')) {
+                  params.append('sub_category_id', this.$route.params.subcategory)
                 }
                 params.append('page', 1);
 
@@ -273,7 +273,7 @@
           changeCategory(item){
             this.$store.dispatch('changeSelectCategory', item);
               this.selectSubCategory = null;
-            this.selectCategory = this.categories.find(map => map.slug == item)
+            this.selectCategory = this.categories.find(map => map.slug == item);
               this.$router.push('/zadat-vopros-' + item);
             setTimeout(()=>{  
                 this.getChildCategory(this.selectCategory);
@@ -284,16 +284,17 @@
           },
           changeSubCategory(item){
             this.pageNumber = 1;
-            if (item == 0) {
-              this.selectSubCategory = null
+            if (item === this.$route.params.category) {
+              this.selectSubCategory = null;
+                this.$router.push('/zadat-vopros-' + this.$route.params.category);
             }else{
-              this.selectSubCategory = this.selectChildCategory.find(map => map.slug == item)
+              this.selectSubCategory = this.selectChildCategory.find(map => map.slug === item);
                 this.$router.push('/zadat-vopros-' + this.selectCategory.slug + '/' + item);
             }
             this.getAllQuestions(1, this.selectCategory.slug);
           },
       getSelectCategory(id){
-        this.selectCategory = this.categories.find(item => item.slug === id)
+        this.selectCategory = this.categories.find(item => item.slug === id);
         this.getChildCategory(this.selectCategory)
       },
       getChildCategory(arr){
@@ -307,11 +308,11 @@
               this.pageNumber--
               this.getAllQuestions(this.pageNumber, this.selectCategory.slug);
             },
-            getAllQuestions(page, category){
+            getAllQuestions(page){
                 let params = new URLSearchParams();
-                params.append('category_id', 'zadat-vopros-' + category);
-                if (this.selectSubCategory !== null) {
-                  params.append('sub_category_id', this.selectSubCategory.slug)
+                params.append('category_id', 'zadat-vopros-' + this.$route.params.category);
+                if (this.$route.params.hasOwnProperty('subcategory')) {
+                  params.append('sub_category_id', this.$route.params.subcategory)
                 }
                 params.append('page', page);
 
