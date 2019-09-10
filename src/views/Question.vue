@@ -141,7 +141,7 @@
         return this.$store.getters.USERINFO.expert && this.$store.getters.EXPERT.is_confirmed
       },
       creator(){
-        return this.$store.getters.USERINFO.id === this.question.client.id
+        return this.$store.getters.CLIENT.id === this.question.client.id
       },
       token(){
       return localStorage.getItem('token')

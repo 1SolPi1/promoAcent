@@ -50,9 +50,17 @@
              Authorization: "Bearer " + localStorage.getItem('token')
             }
         })
-        .then(()=>{
-          this.$router.push('/questions')
+        .then(response =>{
+            if (response.status === 200){
+                this.$router.push('/zadat-vopros-psihologu')
+            }
           })
+            .catch(error =>{
+                this.$toast.error({
+                    title:'Ошибка',
+                    message: ' У вопроса уже есть ответы '
+                })
+            })
       }
     },
     computed: {},

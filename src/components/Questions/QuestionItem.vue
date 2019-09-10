@@ -4,7 +4,7 @@
       <div class="name_question">{{title}}</div>
       <div class="price_question">{{price}} ₽</div>
       <div class="category_question">{{category}} / {{subcategory}}</div>
-      <div class="status_question" v-if="status !== 0">Решено</div>
+      <div class="status_question" v-if="status === 2">Решено</div>
         <div class="wrap_link_question">
           <a href="javascript:void(0)" class="link_gray" @click="openQuestion()">Читать полностью</a>
         </div>

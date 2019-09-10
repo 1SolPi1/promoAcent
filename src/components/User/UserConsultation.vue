@@ -70,30 +70,31 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="sorting_questions">
-								<span class="title_sorting">Сортировать:</span>
-								<div class="item_sorting">
-									<input type="radio" checked name="radio1" value="1" class="radio" id="radio6">
-									<label for="radio6">последние</label>
-								</div>
-								<div class="item_sorting">
-									<input type="radio" name="radio1" value="1" class="radio" id="radio7">
-									<label for="radio7">платные</label>
-								</div>
-								<div class="item_sorting">
-									<input type="radio" name="radio1" value="1" class="radio" id="radio8">
-									<label for="radio8">vip</label>
-								</div>
-								<div class="item_sorting">
-									<input type="radio" name="radio1" value="1" class="radio" id="radio9">
-									<label for="radio9">решены</label>
-								</div>
+<!--								<span class="title_sorting">Сортировать:</span>-->
+<!--								<div class="item_sorting">-->
+<!--									<input type="radio" checked name="radio1" value="1" class="radio" id="radio6">-->
+<!--									<label for="radio6">последние</label>-->
+<!--								</div>-->
+<!--								<div class="item_sorting">-->
+<!--									<input type="radio" name="radio1" value="1" class="radio" id="radio7">-->
+<!--									<label for="radio7">платные</label>-->
+<!--								</div>-->
+<!--								<div class="item_sorting">-->
+<!--									<input type="radio" name="radio1" value="1" class="radio" id="radio8">-->
+<!--									<label for="radio8">vip</label>-->
+<!--								</div>-->
+<!--								<div class="item_sorting">-->
+<!--									<input type="radio" name="radio1" value="1" class="radio" id="radio9">-->
+<!--									<label for="radio9">решены</label>-->
+<!--								</div>-->
 							</div>
 							<div v-if="listQuestions.length > 0">
 										<p>У Вас <span>{{listQuestions.length}}</span> вопрос</p>
 											<questionItem
                         v-for="(item, index) in listQuestions"
                         :key="item.question.id"
-                        :category="item.category"
+                        :category="item.parent_category"
+                        :subcategory="item.sub_category"
                         :countAnswer="item.answer_count"
                         :date="item.question.create_at"
                         :person="item.question.anonim? ' Анонимно ': item.user_name"
@@ -143,16 +144,17 @@ export default {
 	props: {},
 	data() {
 		return {
-			listQuestions:{},
+			listQuestions:[],
 			chatList: {
 				clientExpertChat: [],
-				expertExpertChat:[]
+				expertExpertChat:[],
 			},
+        page: 1
 		}
 	},
 	created() {},
 	mounted() {
-		this.getProfile()
+		this.getProfile();
 		this.getChats();
 		this.getExpert()
 	},
@@ -173,6 +175,7 @@ export default {
 		getQuestions(id){
 				let params = new URLSearchParams();
         params.append('client_id', id);
+        params.append('page', this.page);
 
         this.$http({
           method: 'POST',
@@ -184,7 +187,11 @@ export default {
           }
         })
         .then(response =>{
-					this.listQuestions = response.data[0]
+					response.data[0].forEach(item => this.listQuestions.push(item));
+            if (this.page < response.data.page_count){
+                this.page++;
+                this.getQuestions(id);
+            }
         })
 		},
 		getChats(){

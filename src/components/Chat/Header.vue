@@ -27,11 +27,11 @@
     <p style="width: 100px">{{activechat.opponent.fullName}}</p>  
     <div class="clearfix">
       <div class="item_statistics fst">
-        <img src="img/statistics_icon1.png" alt="alt">
+        <img src="@/assets/img/statistics_icon1.png" alt="alt">
         <p>Рейтинг <strong>{{activechat.opponent.rating}}</strong> из 10</p>
       </div>
       <div class="item_statistics">
-        <img src="img/statistics_icon4.png" alt="alt">
+        <img src="@/assets/img/statistics_icon4.png" alt="alt">
         <p><strong>{{activechat.opponent.sum}}₽ </strong></p>
         <span>(стоимость консультации)</span>
       </div>

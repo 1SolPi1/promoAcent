@@ -314,6 +314,7 @@ export default {
 				expertExpertChat:[]
 			},
 			listQuestions: [],
+        page: 1,
 			listAnswers:[],
 			score:[],
 			expertList: [],
@@ -367,14 +368,15 @@ export default {
           }
         })
         .then(response =>{
-					this.getQuestions(response.data.client.id)
-					this.getAnswers(response.data.expert[0].id)
-					this.getScore(response.data.expert[0].id)
+					this.getQuestions(response.data.user.id);
+					this.getAnswers(response.data.expert[0].id);
+					this.getScore(response.data.expert[0].id);
         })
 		},
 		getQuestions(id){
 				let params = new URLSearchParams();
         params.append('client_id', id);
+        params.append('page', this.page);
 
         this.$http({
           method: 'POST',
@@ -386,7 +388,11 @@ export default {
           }
         })
         .then(response =>{
-					this.listQuestions = response.data[0]
+            response.data[0].forEach(item => this.listQuestions.push(item));
+            if (this.page < response.data.page_count){
+                this.page++;
+                this.getQuestions(id);
+            }
         })
 		},
 		getAnswers(id){
