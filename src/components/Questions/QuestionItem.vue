@@ -94,8 +94,15 @@
     },
     methods: {
       openQuestion(){
-        this.$emit('closesearch')
-        this.$router.push('/question'+ this.url);
+          if (localStorage.getItem('token')) {
+              this.$emit('closesearch');
+              this.$router.push('/question'+ this.url);
+          } else {
+              this.$toast.error({
+                  title:'Ошибка',
+                  message: 'Войдите или зарегистрируйтесь'
+              })
+          }
       },
       goToProfile(){
         if (this.anonim) {
@@ -122,7 +129,8 @@
             return day + ' ' + months[month].name + ' ' + year
         }
     },
-    computed: {},
+    computed: {
+    },
     }
 </script>
 
