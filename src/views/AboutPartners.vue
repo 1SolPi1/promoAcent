@@ -20,6 +20,14 @@ export default {
 	name: "AboutPartners",
 	components: {},
 	props: {},
+    metaInfo () {
+        return{
+            title: ' Описание партнерства сервиса СпросиОнлайн 24/7 ',
+            meta: [
+                { name: 'description', content: ' Описание условий партнерства для экспертов с сервисом СпросиОнлайн' }
+            ]
+        }
+    },
 	data() {
 		return {}
 	},

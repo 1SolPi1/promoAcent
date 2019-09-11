@@ -285,6 +285,14 @@ export default {
 name: 'Home',
 components: {Slick, comments, registration, login},
 props: {},
+    metaInfo () {
+        return{
+            title: ' Задать вопрос эксперту онлайн | Круглосуточные бесплатные консультации ',
+            meta: [
+                { name: 'description', content: ' Задать вопрос и получить бесплатную онлайн консультацию от наших экспертов, можно на сервисе СпросиОнлайн. У нас исключительно лучшие эксперты. ' }
+            ]
+        }
+    },
 data() {
   return {
   	register: false,

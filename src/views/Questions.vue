@@ -157,8 +157,6 @@
             return{
                 title: this.titlePage,
                 meta: [
-                    { charset: 'utf-8' },
-                    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                     { name: 'description', content: ' Страница с вопросами ' }
                 ]
             }
