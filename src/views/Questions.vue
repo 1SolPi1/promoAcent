@@ -157,7 +157,8 @@
             return{
                 title: this.titlePage,
                 meta: [
-                    { name: 'description', content: ' Страница с вопросами ' }
+                    { name: 'description', content: this.descriptionPage },
+                    {name: 'keywords', content: this.keywordsPage}
                 ]
             }
         },
@@ -173,7 +174,7 @@
             }
           this.pageCount = 1;
           this.pageNumber = 1;
-          this.allQuestions = []
+          this.allQuestions = [];
           setTimeout(()=> {
               if (this.$route.params.hasOwnProperty('subcategory')){
                   this.getAllQuestions(this.pageCount, this.selectCategory.slug);
@@ -183,16 +184,18 @@
                   this.selectCategory = null;
                   this.selectChildCategory = null;
                   this.category = null;
-                  this.getSelectCategory(this.$store.getters.SELECTCATEGORY)
+                  this.getSelectCategory(this.$store.getters.SELECTCATEGORY);
                   this.getAllQuestions(this.pageCount, this.selectCategory.slug);
               }
-
-            }, 500)
+                this.getMeta();
+            }, 500);
           next()
         },
         data() {
             return {
               titlePage: ' Вопросы ',
+              descriptionPage: 'Вопросики',
+              keywordsPage: '',
               resizeTextarea: false,
               questionsList: [],
               pageNumber: 1,
@@ -229,18 +232,20 @@
             categories(){
                 this.getSelectCategory(this.selectCat);
                 this.getAllQuestions(this.pageCount, this.selectCategory.slug);
+                this.getMeta();
             }
         },
         created() {
         },
         mounted() {
           new WOW().init();
-          const vm = this;
-            setTimeout(function() {  
-              vm.getSelectCategory(vm.selectCat);
-              vm.getAllQuestions(vm.pageCount, vm.selectCategory.slug);
+            setTimeout(() =>{
+              this.getSelectCategory(this.selectCat);
+              this.getAllQuestions(this.pageCount, this.selectCategory.slug);
+              this.getMeta();
             }, 900);
-          vm.getExperts()
+          this.getExperts()
+
         },
         methods: {
           getSortQuestions(){
@@ -279,11 +284,23 @@
                 this.allQuestions = response.data[0]
               })
           },
+           getMeta(){
+              if (this.$route.params.hasOwnProperty('subcategory')){
+                  let currentCategory = this.childCategories.find(item => item.slug === this.$route.params.subcategory);
+                  this.titlePage = currentCategory.meta_question.title;
+                  this.descriptionPage = currentCategory.meta_question.description;
+              }else {
+                  let currentCategory = this.categories.find(item => item.slug === this.$route.params.category);
+                  this.titlePage = currentCategory.meta_question.title;
+                  this.descriptionPage = currentCategory.meta_question.description;
+              }
+           },
           changeCategory(item){
             this.$store.dispatch('changeSelectCategory', item);
               this.selectSubCategory = null;
             this.selectCategory = this.categories.find(map => map.slug == item);
               this.$router.push('/zadat-vopros-' + item);
+              this.getMeta();
             setTimeout(()=>{  
                 this.getChildCategory(this.selectCategory);
                 this.pageNumber = 1;
@@ -318,6 +335,7 @@
               this.getAllQuestions(this.pageNumber, this.selectCategory.slug);
             },
             getAllQuestions(page){
+                this.getMeta();
                 let params = new URLSearchParams();
                 params.append('category_id', 'zadat-vopros-' + this.$route.params.category);
                 if (this.$route.params.hasOwnProperty('subcategory')) {

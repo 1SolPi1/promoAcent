@@ -114,9 +114,21 @@ export default {
 		expertItem,
 		sortField
 	},
+    metaInfo () {
+        return{
+            title: this.titlePage,
+            meta: [
+                { name: 'description', content: this.descriptionPage },
+                {name: 'keywords', content: this.keywordsPage}
+            ]
+        }
+    },
   name: "Partners",
   data(){
 	return{
+	    titlePage: ' Эксперты ',
+      descriptionPage: '',
+      keywordsPage: '',
 		experts:[],
 		pageNumber: 1,
 		pageCount: 1,
@@ -193,6 +205,11 @@ export default {
 			getBigImage(id){
 				this.bigImage = this.categoryItem.find(item => item.id == id).bigImage
 			},
+      getMeta(){
+			    let currentCategory = this.categories.find(item => item.expert_slug === this.$route.params.experts);
+			    this.titlePage = currentCategory.meta_exert.title;
+			    this.descriptionPage = currentCategory.meta_exert.description;
+      },
       changeCategory(item){
       this.selectCategory = this.categories.find(map => map.id === item);
           this.$router.push('/' + this.selectCategory.expert_slug);
@@ -226,6 +243,7 @@ export default {
 			this.getExperts()
 		},
 		getExperts(){
+			    this.getMeta();
         let params = new URLSearchParams();
        params.append('category_id', this.selectCategory.expert_slug);
        if (this.selectSubCategory !== null) {
