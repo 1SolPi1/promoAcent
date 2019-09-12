@@ -7,8 +7,8 @@
   >
     <a href="javascript:void(0)">{{item.name}}</a>
   </li>
-  <li class="mi_m"><router-link to="/about">О проекте</router-link></li>
-  <li class="mi_m"><router-link to="/aboutpartners">Описание партнерства</router-link></li>
+  <li class="mi_m"><router-link to="/info/about">О проекте</router-link></li>
+  <li class="mi_m"><router-link to="/info/aboutpartners">Описание партнерства</router-link></li>
 </ul>
 </template>
 

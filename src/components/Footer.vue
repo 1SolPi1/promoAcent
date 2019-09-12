@@ -43,7 +43,7 @@
                       <li><router-link to="/info/about">О проекте</router-link></li>
                       <li><router-link to="/info/journal">Журнал</router-link></li>
                       <li><router-link to="/info/help">Помощь</router-link></li>
-                      <li><router-link to="/info/questions">Вопросы</router-link></li>
+                      <li><router-link to="/zadat-vopros-psihologu">Вопросы</router-link></li>
                   </ul>
               </div>
           </div>
