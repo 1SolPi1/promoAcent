@@ -14,10 +14,7 @@
  			Журнал
  		</div>
  		<div class="row">
- 			<journalItem
- 				v-for="(item, index) in 14"
- 				:key="index"
- 			/>
+ 			<journalItem/>
  		</div>
  	</div>
  </div>

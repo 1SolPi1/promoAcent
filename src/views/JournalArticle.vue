@@ -24,6 +24,14 @@ export default {
 	name: "JournalArticle",
 	components: {},
 	props: {},
+    metaInfo () {
+        return{
+            title: ' Топ-6 экспертов января 2019г|СпросиОнлайн ',
+            meta: [
+                { name: 'description', content: ' Статья почета, лучших экспертов круглосуточного бесплатного онлайн сервиса СпросиОнлайн 24/7 за январь 2019 года ' }
+            ]
+        }
+    },
 	data() {
 		return {}
 	},
