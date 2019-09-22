@@ -70,7 +70,7 @@ let router = new Router({
       component: Question,
     },
     {
-      path: '/addquestions',
+      path: '/newquestion/addquestions',
       name: 'addquestions',
       component: AddQuesttion
     },

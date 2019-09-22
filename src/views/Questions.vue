@@ -33,7 +33,7 @@
                                     <div class="btn_more_ask" @click="resizeTextarea = !resizeTextarea"><span>расширить поле</span></div>
                                 </div>
                             </div>
-                            <router-link to="addquestions" v-if="logined"><button class="btn_blue">Задать вопрос</button></router-link>
+                            <router-link to="/newquestion/addquestions" v-if="logined"><button class="btn_blue">Задать вопрос</button></router-link>
                             <button class="btn_blue" @click.prevent="showLogined()" v-else>Задать вопрос</button>
                             <div class="pay_wrap">
                                 <div class="pay_text">
