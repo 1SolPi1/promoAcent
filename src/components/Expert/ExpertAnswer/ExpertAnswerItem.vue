@@ -2,7 +2,7 @@
 <div :class="{'col-md-6' : !maincab}">
   <div class="block_question slideInUp wow" data-wow-iteration="1">
     <div class="name_question_min">{{question.title}}</div>
-    <div class="category_question">Психология / Дети и подростки</div>
+    <div class="category_question">{{ category }}/ </div>
     <div class="wrap_like">
        <!-- <div class="dislike_question">Ответ понравился</div> -->
     </div>
@@ -39,7 +39,11 @@
       answercount:{
         type: Number,
         default: 0
-      }
+      },
+        category: {
+          type: String,
+            default: ''
+        }
     },
     data() {
 			return {
