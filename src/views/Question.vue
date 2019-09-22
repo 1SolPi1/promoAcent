@@ -25,7 +25,8 @@
         <div class="row">
           <div class="col-xs-12 col-md-10">
             <div class="block_question slideInUp wow" data-wow-iteration="1">
-              <div class="name_question">{{question.question.title}}</div>
+              <div class="name_question" v-if="!changeQuest">{{question.question.title}}</div>
+              <input class="name_question" style="display: block;" v-model="question.question.title" v-else/>
               <div class="price_question">{{question.question.price}} ₽</div>
               <div class="category_question">{{question.parent_category}} /{{question.sub_category}} </div>
               <div class="data_question">{{dates}}</div>
@@ -58,6 +59,9 @@
           <userControlQuestion 
             v-if="creator"
             :questionId="question.question.id"
+            :changeQuestion="changeQuest"
+            @changeQuest="changeQuest = true"
+            @saveQuest="refactorQuest()"
           />
         </div>
       </div>
@@ -84,7 +88,8 @@
         login: null,
         password: null,
         question:null,
-        dates: null
+        dates: null,
+        changeQuest: false
       }
     },
     created() {
@@ -134,6 +139,36 @@
 
 
         this.dates = day +" "+ month +" "+ year
+      },
+      refactorQuest(){
+          let params = new URLSearchParams();
+          params.append('title', this.question.question.title);
+
+          this.$http({
+              method: 'POST',
+              data: params,
+              url: 'question/question/edit?id=' + this.question.question.id,
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  Authorization: "Bearer " + localStorage.getItem('token')
+              }
+          })
+              .then(response=>{
+                  if (response.status === 200) {
+                      this.$toast.success({
+                          title:'Успешно',
+                          message: ' Вопрос изменен '
+                      })
+                      this.getQuestion();
+                      this.changeQuest = false
+                  }
+              })
+              .catch(error=>{
+                  this.$toast.error({
+                      title:'Ошибка',
+                      message: error.response.data.message
+                  })
+              })
       }
 		},
 		computed: {

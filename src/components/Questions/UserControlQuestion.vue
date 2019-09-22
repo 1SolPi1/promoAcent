@@ -1,12 +1,16 @@
 <template>
   <div class="col-xs-12 col-md-2">
     <div class="user-red-menu">
-      <button>
+      <button @click="$emit('changeQuest')" v-if="!changeQuestion">
         <svg fill="none" height="24" stroke="#4d2ed1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
           <line x1="12" x2="12" y1="5" y2="19"/>
           <line x1="5" x2="19" y1="12" y2="12"/>
         </svg>
         Дополнить
+      </button>
+      <button @click="$emit('saveQuest')" class="checkButton" v-else>
+        <img src="../../assets/img/svg/check.svg" alt="check">
+        Сохранить
       </button>
       <button @click="removeQuestion()">
         <svg fill="#4d2ed1" viewBox="0.5 0.5 96 96" xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +36,10 @@
     props: {
       questionId:{
         type: String
+      },
+      changeQuestion:{
+          type: Boolean,
+          default: false
       }
     },
     data() {
@@ -68,5 +76,14 @@
 </script>
 
 <style scoped>
-    
+    .checkButton{
+      background: #5923d4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      padding: 5px;
+      width: 120px;
+      border-radius: 10px;
+    }
 </style>
