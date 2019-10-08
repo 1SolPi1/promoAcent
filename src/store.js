@@ -18,6 +18,7 @@ export default new Vuex.Store({
   childCategori: null,
   firstListCategoryFooter: null,
   secondListCategoryFooter: null,
+      pagesInfo: [],
   comments:[
   {
   name: 'Валера Иванов',
@@ -187,7 +188,8 @@ export default new Vuex.Store({
     DOMEN: state => state.domen,
     SELECTCATEGORY: state => state.selectCategory,
     FIRSTLISTCATEGORYFOOTER: state => state.firstListCategoryFooter,
-    SECONDLISTCATEGORYFOOTER: state => state.secondListCategoryFooter
+    SECONDLISTCATEGORYFOOTER: state => state.secondListCategoryFooter,
+      PAGEINFO: state => state.pagesInfo
   },
   mutations: {
     SET_CATEGORIES: (state, payload) => {
@@ -213,6 +215,9 @@ export default new Vuex.Store({
     },
     SET_SECOND_LIST_CATEGORY_FOOTER: (state, playload) =>{
       state.secondListCategoryFooter = playload
+    },
+    SET_PAGE_INFO: (state, playload) =>{
+        state.pagesInfo = playload
     }
   },
   actions: {
@@ -233,6 +238,10 @@ export default new Vuex.Store({
     commit('SET_FIRST_LIST_CATEGORY_FOOTER', firstlist);
     commit('SET_SECOND_LIST_CATEGORY_FOOTER', secondlist);
   },
+      getPagesInfo: async ({commit}) => {
+          let {data} = await Axios.get('pages/pages/all-page');
+          commit('SET_PAGE_INFO', data);
+      },
   setAddQuestion:({commit}, question) => {
     commit('SET_ADDQUESTION', question);
   },

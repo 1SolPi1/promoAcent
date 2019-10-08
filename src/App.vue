@@ -29,6 +29,7 @@ export default {
 			 this.$store.dispatch('setFalseId', token);
 		}
 		this.$store.dispatch('getCategories');
+      this.$store.dispatch('getPagesInfo');
 	},
 	methods: {
 		getRandom(min, max){

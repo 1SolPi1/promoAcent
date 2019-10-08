@@ -8,13 +8,13 @@
           },
           {
             name: 'Журнал',
-            route: '/journal',
+            route: '/info/journal',
           }
         ]"
-        currentPage="Статья"
+        :currentPage="desc.title"
         />
 		<div class="title_section slideInUp wow" data-wow-iteration="1">
-			Статья
+			{{desc.title}}
 		</div>
 	</div>
 </template>
@@ -26,20 +26,35 @@ export default {
 	props: {},
     metaInfo () {
         return{
-            title: ' Топ-6 экспертов января 2019г|СпросиОнлайн ',
+            title: this.desc.title,
             meta: [
                 { name: 'description', content: ' Статья почета, лучших экспертов круглосуточного бесплатного онлайн сервиса СпросиОнлайн 24/7 за январь 2019 года ' }
             ]
         }
     },
 	data() {
-		return {}
+		return {
+		    desc:{
+		        title: ''
+        }
+    }
 	},
 	created() {},
 	mounted() {
 		new WOW().init();
+		this.getItem()
 	},
-	methods: {},
+	methods: {
+      getItem(){
+          this.$http({
+              method: 'GET',
+              url: 'pages/pages/journal-one?id=' + this.$route.params.id
+          })
+              .then(response=>{
+                  this.desc = response.data
+              })
+      }
+  },
 	computed: {},
 }
 </script>

@@ -14,7 +14,12 @@
  			Журнал
  		</div>
  		<div class="row">
- 			<journalItem/>
+ 			<journalItem
+        v-for="item in questList"
+        :key="item.id"
+        :title="item.title"
+        :id="item.id"
+      />
  		</div>
  	</div>
  </div>
@@ -34,13 +39,26 @@ export default {
         }
     },
 	data() {
-		return {}
+		return {
+		    questList: []
+    }
 	},
 	created() {},
 	mounted() {
 		new WOW().init();
+		this.getAllQuestion()
 	},
-	methods: {},
+	methods: {
+      getAllQuestion(){
+          this.$http({
+              method: 'GET',
+              url: 'pages/pages/journal-category'
+          })
+              .then(response=>{
+                  this.questList = response.data[1]
+              })
+      }
+  },
 	computed: {},
 }
 </script>

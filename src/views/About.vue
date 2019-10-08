@@ -10,7 +10,7 @@
         currentPage="О проекте"
         />
 	<div class="title_section slideInUp wow" data-wow-iteration="1">
-		О проекте
+		{{pageInfo.title}}
 	</div>
 </div>
 </template>
@@ -29,14 +29,19 @@ export default {
         }
     },
 	data() {
-		return {}
+		return {
+    }
 	},
 	created() {},
 	mounted() {
 		new WOW().init();
 	},
 	methods: {},
-	computed: {},
+	computed: {
+	    pageInfo(){
+	        return this.$store.getters.PAGEINFO[0]
+      }
+  },
 }
 </script>
 
