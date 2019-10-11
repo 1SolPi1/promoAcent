@@ -19,7 +19,11 @@
             default: ''
         },
         dates: String,
-        id: Number
+        id: Number,
+        help:{
+          type: Boolean,
+          default: false
+        }
     },
     data() {
       return {}
@@ -28,7 +32,11 @@
     mounted() {},
     methods: {
       pushToJournalItem(id){
-        this.$router.push(`/info/journal/article/${id}`)
+        if (this.help) {
+          this.$router.push(`/info/help/article/${id}`);  
+        }else{
+          this.$router.push(`/info/journal/article/${id}`);
+        }
       }
     },
     computed: {},

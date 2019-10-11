@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
- 		<breadcrumbs
+   <div class="section_journal">
+    <div class="container">
+        <breadcrumbs
         :wayPages="[
           {
             name: 'Главная',
@@ -9,10 +10,20 @@
         ]"
         currentPage="Помощь"
         />
- 		<div class="title_section slideInUp wow" data-wow-iteration="1">
- 			Помощь
- 		</div>
- 	</div>
+        <div class="title_section slideInUp wow" data-wow-iteration="1">
+            Помощь
+        </div>
+        <div class="row">
+        <journalItem
+        v-for="item in questList"
+        :key="item.id"
+        :title="item.title"
+        :help="true"
+        :id="item.id"
+      />
+        </div>
+    </div>
+ </div>
 </template>
 
 <script>
@@ -29,13 +40,26 @@ export default {
         }
     },
 	data() {
-		return {}
+		return {
+      questList: []
+    }
 	},
 	created() {},
 	mounted() {
 		new WOW().init();
+    this.getAllQuestion()
 	},
-	methods: {},
+	methods: {
+    getAllQuestion(){
+                this.$http({
+                    method: 'GET',
+                    url: 'pages/pages/help-category'
+                })
+                    .then(response=>{
+                        this.questList = response.data[1]
+                    })
+            }
+  },
 	computed: {},
 }
 </script>

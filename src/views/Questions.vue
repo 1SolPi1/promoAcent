@@ -99,6 +99,7 @@
                         :url="item.url"
                     />
                 </div>
+                <span v-html="selectCategory.description"></span>
                 <div class="bottom_pagination">
                     <div class="pagination_page">
                         <div class="number_pagination">{{pageNumber}}</div>

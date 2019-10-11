@@ -12,6 +12,7 @@ const Profile = () => import('./views/Profile.vue')
 const AddQuesttion = () => import('./components/AddQuestion.vue')
 const Journal = () => import('./views/Journal.vue')
 const JournalArticle = () => import('./views/JournalArticle.vue')
+const HelpPage = () => import('./views/HelpPage.vue')
 const About = () => import('./views/About.vue')
 const Help = () => import('./views/Help.vue')
 const MapSite = () => import('./views/MapSite.vue')
@@ -88,6 +89,11 @@ let router = new Router({
       path: '/info/journal/article/:id',
       name: 'journalarticle',
       component: JournalArticle,
+    },
+    {
+      path: '/info/help/article/:id',
+      name: 'helpPage',
+      component: HelpPage,
     },
     {
       path: '/info/about',

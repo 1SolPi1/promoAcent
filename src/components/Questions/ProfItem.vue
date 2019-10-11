@@ -88,7 +88,7 @@
                 return Math.trunc(this.rating / 2)
             },
             goToExpert(){
-               this.$router.push('/expert?expert='+ this.id);
+               this.$router.push('/about/expert?expert='+ this.id);
             }
         },
         computed: {

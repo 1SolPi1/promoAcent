@@ -11,6 +11,7 @@
         />
  		<div class="title_section slideInUp wow" data-wow-iteration="1">
       {{pageInfo.title}}
+      <div style="margin-top: 50px">{{pageInfo.description}}</div>
  		</div>
  	</div>
 </template>
@@ -22,9 +23,9 @@ export default {
 	props: {},
     metaInfo () {
         return{
-            title: ' Описание партнерства сервиса СпросиОнлайн 24/7 ',
+            title: this.pageInfo.meta.title,
             meta: [
-                { name: 'description', content: ' Описание условий партнерства для экспертов с сервисом СпросиОнлайн' }
+                { name: 'description', content: this.pageInfo.meta.description}
             ]
         }
     },
@@ -45,7 +46,5 @@ export default {
 </script>
 
 <style scoped>
-.container{
-	height: calc(100vh - 237px);
-}  
+
 </style>
