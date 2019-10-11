@@ -11,7 +11,7 @@
         />
 	<div class="title_section slideInUp wow" data-wow-iteration="1">
 		{{pageInfo.title}}
-		<div style="margin-top: 50px">{{pageInfo.description}}</div>
+		<span style="margin-top: 50px" v-html="pageInfo.description"></span>
 	</div>
 </div>
 </template>
@@ -39,8 +39,11 @@ export default {
 	},
 	methods: {},
 	computed: {
-	    pageInfo(){
-	        return this.$store.getters.PAGEINFO[0]
+	    pages(){
+          return this.$store.getters.PAGEINFO
+      },
+      pageInfo(){
+        return this.pages.find(item => item.id === 1)
       }
   },
 }
