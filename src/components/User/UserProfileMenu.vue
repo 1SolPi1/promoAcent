@@ -3,7 +3,7 @@
 		<div class="profile-menu user">
 			<div class="image_expert expert_image_big user">
 				<div class="status__expert online_expert my_profile" @click="upload = !upload"></div>
-				<img src="img/svg/avatar.svg" alt="alt" v-if="profile.avatar === null">
+				<img src="@/assets/img/svg/avatar.svg" alt="alt" v-if="profile.avatar === null">
 				<img :src="domen + profile.avatar" alt="alt" class="avatar" v-else>
 			</div>
 			<div class="sh_info">

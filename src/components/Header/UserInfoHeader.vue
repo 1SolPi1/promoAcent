@@ -1,7 +1,7 @@
 <template>
 	<div class="boxHeaderProfile">
 		<div class="profile-img">
-			<img src="img/svg/man.svg" alt="alt" v-if="avatar === null" />
+			<img src="@/assets/img/svg/man.svg" alt="alt" v-if="avatar === null" />
 			<img :src="domen + avatar" class="avatar" alt="alt" v-else/>
 			<span class="activity my_profile" :class="{'active': expert.status === 3}"></span>
 		</div>

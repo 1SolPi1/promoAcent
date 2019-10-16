@@ -1883,52 +1883,38 @@ input[type="submit"],
     opacity: 0;
 }
 
-.question_med::after {
+.question_med:after {
+    background-color: #4daf7c;
+}
+.question_psihology:after {
     background-color: #fff68a;
 }
-
-.question_psihology::after {
-    background-color: #916cea;
+.question_yrist:after {
+    background-color: #e47832;
 }
-
-.question_yrist::after {
-    background-color: #85f5b7;
+.question_science:after {
+    background-color: #58abe3;
 }
-
-.question_science::after {
-    background-color: #f5b485;
+.question_ezot:after {
+    background-color: #674072;
 }
-
-.question_ezot::after {
-    background-color: #f585b9;
+.question_beautiful:after {
+    background-color: #d2527e;
 }
-
-.question_beautiful::after {
-    background-color: #f58585;
+.question_english:after {
+    background-color: #c0392b;
 }
-
-.question_english::after {
-    background-color: #858ef5;
+.question_tech:after{
+    background-color:#3a539b;
 }
-
-.question_more::after {
-    background-color: #c5c5c5;
+.question_hobi:after{
+    background-color:#c8f7c5
 }
-
-.question_hobi::after {
-    background-color: #6cf9ec;
+.question_business:after{
+    background-color:#67809f
 }
-
-.question_business::after {
-    background-color: #85f5b7;
-}
-
-.question_religion::after {
-    background-color: #916cea;
-}
-
-.question_tech::after {
-    background-color: #f585b9;
+.question_religion:after{
+    background-color:#2d3131
 }
 
 .item_question:hover::after {
@@ -2763,6 +2749,14 @@ input[type="submit"],
     background-repeat: no-repeat;
     transition: all 0.3s;
     background-position: 13px center;
+}
+
+.boxCategory > p {
+    white-space: nowrap;
+    max-width: 161px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 12px;
 }
 
 .choose_question .select_main {
@@ -4207,7 +4201,7 @@ input.radio, input.checkbox {
 }
 
 .head_expert_item {
-    padding-right: 200px;
+    padding-right: 70px;
     position: relative;
 }
 

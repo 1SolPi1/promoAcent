@@ -101,4 +101,10 @@
   left: 0;
   z-index: 890;
 }
+@media only screen and (max-width: 480px) {
+  .boxLogin[data-v-39b48146] {
+    right: calc(100%/2 - 125px);
+    top: 40vw;
+}
+}
 </style>

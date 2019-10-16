@@ -3,7 +3,7 @@
 		<h3>{{routes[$route.path]}}</h3>
 		<div class="buttons" v-if="!$store.getters.USERINFO.expert">
 			<router-link to="user" class="akcii" href="#" v-if="$route.path !== '/user'">Стать экспертом</router-link>
-			<router-link class="pro" to="/addquestions">Задать вопрос</router-link>
+			<router-link class="pro" to="/newquestion/addquestions">Задать вопрос</router-link>
 		</div>
 	</div>
 </template>

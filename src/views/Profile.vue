@@ -63,11 +63,6 @@
 												:experience="expert.experience"
 											/>
 										<div class="col-xs-12">
-											<p class="no-marg">Номер телефона<span>*</span></p>
-											<input class="mid-inp" type="text" value="+7 (978) 123 56 96">
-											<button class="edit-butt">Изменить</button>
-										</div>
-										<div class="col-xs-12">
 											<p class="no-marg ">Длительность консультирования<span>*</span></p>
 											<input id="minute" type="number" min="0" step="5" value="0" v-model.number="minute" ref="minute"/>
 											<span class="txt">мин.</span>
@@ -133,7 +128,7 @@
 													:selectend="education.endYear"
 												/>
 											</div>											
-											<span class="txt ml-0">Чтобы образование было подверждено <a href="javascript:void(0)"><label for="AddFile" style="cursor: pointer;">прикрепите</label> </a> копии документов подтверждающие получение образования.</span>
+											<span class="txt ml-0">Чтобы образование было подверждено <a href="javascript:void(0)"><label for="AddFile" style="cursor: pointer;">прикрепите</label> </a> копии документов подтверждающие получение образования.<span>*</span></span>
 											<input type='file' @change="loadFiles" id="AddFile" style="display: none">
 											<span 
 												class="txt ml-0"
