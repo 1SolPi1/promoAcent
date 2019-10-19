@@ -7,8 +7,11 @@
           <input type="text" placeholder="Логин" v-model="login">
           <input type="password" class="passInput" placeholder="Пароль" v-model="password">
           <button class="btn_blue"  @click.prevent="submit()">Войти</button>
-          <div style="display: flex; margin-top: 20px">
+          <div style="display: flex; margin-top: 20px; flex-direction: column;">
           <a href="javascript:void(0)" @click="$emit('gotoregister')">Регистрация</a>
+          <a href="javascript:void(0)" @click="showRecovery = !showRecovery">Восстановить пароль</a>
+          <input type="text" placeholder="Email" v-model="recoveryEmail" v-if="showRecovery">
+          <button class="btn_blue"  @click.prevent="recovery()" v-if="showRecovery">Восстановить</button>
           </div>
         </form>
     </div>
@@ -24,7 +27,9 @@
     data() {
 			return {
         login: null,
-        password: null
+        password: null,
+        showRecovery: false,
+        recoveryEmail: null
       }
     },
     created() {
@@ -53,7 +58,29 @@
                       message: error.response.data.error.password[0]
                     })
                 })
-			}
+			},
+      recovery(){
+        let params = new URLSearchParams();
+        params.append('email', this.recoveryEmail);
+
+        this.$http({
+          method: 'POST',
+          url: 'user/recovery/request',
+          data: params,
+        })
+        .then(response => {
+          this.$toast.success({
+            title:'Успешно',
+            message: ' Перейдите на свою почту для восстановления пароля '
+          })
+        })
+        .catch(error =>{
+          this.$toast.error({
+            title:'Ошибка',
+            message: error.response.data.error
+          })
+        })
+      }
 		},
 		computed: {},
 	}

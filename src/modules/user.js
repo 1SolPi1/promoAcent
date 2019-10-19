@@ -107,11 +107,13 @@ const actions = {
     commit('SET_NAME', data.name);
     commit('SET_SURNAME', data.surname);
     commit('SET_EMAIL', data.email);
-    commit('SET_GREETING', {
+    if (data.expert) {
+      commit('SET_GREETING', {
       only_category_question: data.expert.only_category_question,
       only_sub_category: data.expert.only_sub_category,
       only_pay_question: data.expert.only_pay_question
     });
+    }
   },
   setFalseId: ({commit}, id)=>{
     commit('SET_FALSE_ID', id)

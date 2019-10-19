@@ -124,7 +124,7 @@ export default {
 	},
 	methods: {
 		save(){
-			let data = {name: this.fullname, surname: '', email: this.email};
+			let data = {name: this.fullname, surname: '', email: this.email, expert: false};
 			this.$store.dispatch('saveSettings', data);
 
         let params = new URLSearchParams();

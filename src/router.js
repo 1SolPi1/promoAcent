@@ -46,6 +46,11 @@ let router = new Router({
       component: Home
     },
     {
+      path: '/password/recovery',
+      name: 'recovery',
+      component: Home
+    },
+    {
       path: '/confirm',
       name: 'confirm',
       component: Home

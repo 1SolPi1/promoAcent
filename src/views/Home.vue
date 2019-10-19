@@ -5,37 +5,37 @@
 				<div class="col-md-6 col_image_wrap">
 
 					<div class="image_section_top img_question_med">
-						<img src="img/svg/medicine.svg" alt="alt">
+						<img src="@/assets/img/svg/medicine.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_psihology">
-						<img src="img/svg/psychology.svg" alt="alt">
+						<img src="@/assets/img/svg/psychology.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_yrist">
-						<img src="img/svg/urist.svg" alt="alt">
+						<img src="@/assets/img/svg/urist.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_science">
-						<img src="img/svg/ucheba.svg" alt="alt">
+						<img src="@/assets/img/svg/ucheba.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_ezot">
-						<img src="img/svg/ezoteric.svg" alt="alt">
+						<img src="@/assets/img/svg/ezoteric.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_beautiful">
-						<img src="img/svg/krasota.svg" alt="alt">
+						<img src="@/assets/img/svg/krasota.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_english">
-						<img src="img/svg/english.svg" alt="alt">
+						<img src="@/assets/img/svg/english.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_hobi">
-						<img src="img/svg/hobbi.svg" alt="alt">
+						<img src="@/assets/img/svg/hobbi.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_business">
-						<img src="img/svg/business.svg" alt="alt">
+						<img src="@/assets/img/svg/business.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_religion">
-						<img src="img/svg/religiya.svg" alt="alt">
+						<img src="@/assets/img/svg/religiya.svg" alt="alt">
 					</div>
 					<div class="image_section_top img_question_tech">
-						<img src="img/svg/technology.svg" alt="alt">
+						<img src="@/assets/img/svg/technology.svg" alt="alt">
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -43,54 +43,54 @@
 					<div class="descr_title slideInUp wow" data-wow-iteration="1">Выберите направление и задайте вопрос</div>
 					<div class="questions_items">
 						<a href="javascript:void(0)" class="item_question question_med slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('doktoru')">
-							<img src="img/quest1.png" alt="alt">
+							<img src="@/assets/img/quest1.png" alt="alt">
 							<span>Медицина</span>
 						</a>
 						<a href="javascript:void(0)" class="item_question question_psihology slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('psihologu')">
-							<img src="img/quest2.png" alt="alt">
+							<img src="@/assets/img/quest2.png" alt="alt">
 							<span>Психология</span>
 						</a>
 						<a href="javascript:void(0)" class="item_question question_yrist slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('yristu')">
-							<img src="img/quest3.png" alt="alt">
+							<img src="@/assets/img/quest3.png" alt="alt">
 							<span>Юриспруденция</span>
 						</a>
 						<a href="javascript:void(0)" class="item_question question_science slideInUp wow" data-wow-delay="0.2s" data-wow-iteration="1" @click="selectCategory('uchitelu')">
-							<img src="img/quest4.png" alt="alt">
+							<img src="@/assets/img/quest4.png" alt="alt">
 							<span>Учеба и наука</span>
 						</a>
 						<a href="javascript:void(0)" class="item_question question_ezot slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('po-ezoteriki')">
-							<img src="img/quest5.png" alt="alt">
+							<img src="@/assets/img/quest5.png" alt="alt">
 							<span>Эзотерика</span>
 						</a>
 						<a href="javascript:void(0)" class="item_question question_beautiful slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('po-krasote')">
-							<img src="img/quest6.png" alt="alt">
+							<img src="@/assets/img/quest6.png" alt="alt">
 							<span>Красота</span>
 						</a>
 						<a href="javascript:void(0)" class="item_question question_english slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1" @click="selectCategory('po-anglijskomu')">
-							<img src="img/quest7.png" alt="alt">
+							<img src="@/assets/img/quest7.png" alt="alt">
 							<span>Английский</span>
 						</a>
 						<div class="parent_more" @mouseover="showHiddenItem()">
 							<a href="#" class="item_question question_more slideInUp wow" data-wow-delay="0.5s" data-wow-iteration="1">
-								<img src="img/quest8.png" alt="alt">
+								<img src="@/assets/img/quest8.png" alt="alt">
 								<span>Еще</span>
 							</a>
 							<div class="hidden_questions_items">
 								<div class="questions_items">
 									<a href="javascript:void(0)" class="item_question question_hobi" @click="selectCategory('po-hobbi')">
-										<img src="img/bicycle.svg" alt="alt">
+										<img src="@/assets/img/bicycle.svg" alt="alt">
 										<span>Хобби</span>
 									</a>
 									<a href="javascript:void(0)" class="item_question question_business" @click="selectCategory('po-biznesu')">
-										<img src="img/umbrella.svg" alt="alt">
+										<img src="@/assets/img/umbrella.svg" alt="alt">
 										<span>Бизнес</span>
 									</a>
 									<a href="javascript:void(0)" class="item_question question_religion" @click="selectCategory('po-religii')">
-										<img src="img/church.svg" alt="alt">
+										<img src="@/assets/img/church.svg" alt="alt">
 										<span>Религия</span>
 									</a>
 									<a href="javascript:void(0)" class="item_question question_tech" @click="selectCategory('po-tehnologii')">
-										<img src="img/antenna.svg" alt="alt">
+										<img src="@/assets/img/antenna.svg" alt="alt">
 										<span>Технологии</span>
 									</a>
 								</div>
@@ -110,19 +110,19 @@
 						<div class="item_step flipInY wow" data-wow-delay="0.5s" data-wow-iteration="1">
 							<div class="number_step">1</div>
 							<div class="name_step">Выберите категорию</div>
-							<img src="img/work1.png" alt="alt">
+							<img src="@/assets/img/work1.png" alt="alt">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="item_step flipInY wow" data-wow-delay="0.8s" data-wow-iteration="1">
 							<div class="number_step">2</div>
 							<div class="name_step">Задайте вопрос</div>
-							<img src="img/work2.png" alt="alt">
+							<img src="@/assets/img/work2.png" alt="alt">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="item_step flipInY wow" data-wow-delay="1s" data-wow-iteration="1">
-							<img src="img/work3.png" alt="alt">
+							<img src="@/assets/img/work3.png" alt="alt">
 							<div class="name_step">Получите ответ</div>
 							<div class="number_step">3</div>
 						</div>
@@ -162,7 +162,7 @@
 				<div class="row">
 					<div class="col-md-5 col-sm-4">
 						<div class="img_number zoomIn wow" data-wow-iteration="1">
-							<img src="img/img_number.png" alt="alt">
+							<img src="@/assets/img/img_number.png" alt="alt">
 						</div>
 					</div>
 					<div class="col-md-offset-1 col-md-6 col-sm-8 right_numbers">
@@ -272,6 +272,10 @@
       @close="login = !login"
       @gotoregister="showRegister()"
     /> 
+    <recovery
+			v-if="recoveryPass"
+			@close="recoveryPass = !recoveryPass"
+    />
   </div>
 </template>
 
@@ -279,11 +283,12 @@
 import Slick from 'vue-slick';
 import comments from '../components/Home/Comments'
 import registration from '@/components/Registration'
+import recovery from '@/components/recovery'
 import login from '@/components/Login'
 import $ from 'jquery'; 
 export default {
 name: 'Home',
-components: {Slick, comments, registration, login},
+components: {Slick, comments, registration, login, recovery},
 props: {},
     metaInfo () {
         return{
@@ -311,7 +316,8 @@ data() {
   	},
   	currentSlideComment: 1,
   	showHidden: false,
-  	componentsList: null
+  	componentsList: null,
+  	recoveryPass: false
   }
 },
 created() {
@@ -396,6 +402,9 @@ $(".question_med").on("mouseover", function () {
 		let item = this.$route.query.id.split('code=')
 		this.confrimUser(item[0], item[1])
 	}
+	if(this.$route.path == '/password/recovery'){
+		this.recoveryPass = true
+	}
   },
 methods: {
 	confrimUser(id, token){
@@ -404,7 +413,10 @@ methods: {
           url: 'user/confirm/'+id+'/'+token,
         })
         .then(() =>{
-        	alert(' Аккаунт подтвержден ')
+        	this.$toast.success({
+            title:'Успешно',
+            message: ' Ваш аккаунт подтвержден '
+          })
         })
 	},
 	handleSetPosition(event, slick) {
