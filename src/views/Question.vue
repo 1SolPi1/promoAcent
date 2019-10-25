@@ -112,6 +112,9 @@
           this.question = response.data
           this.getDate(response.data.question.create_at)
         })
+        .catch(error =>{
+          this.$router.push('/erorr/404')
+        })
       },
       getDate(items){
         let item = items.split(' ')

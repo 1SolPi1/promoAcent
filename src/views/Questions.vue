@@ -237,6 +237,25 @@
             }
         },
         created() {
+           let params = new URLSearchParams();
+                params.append('category_id', 'zadat-vopros-' + this.$route.params.category);
+              this.$http({
+                method: 'POST',
+                url: 'question/question/find',
+                data: params,
+                headers: { 
+                  'Content-Type': 'application/x-www-form-urlencoded', 
+                  Authorization: "Bearer " + localStorage.getItem('token')
+                }
+              })
+              .then(response=>{
+                if (response.status === 200) {
+                  this.showPage = true
+                }
+              })
+              .catch(error =>{
+                this.$router.push('/erorr/404')
+              })
         },
         mounted() {
           new WOW().init();
