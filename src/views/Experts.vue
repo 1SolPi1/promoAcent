@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="showPage">
 		<div class="section_category_top">
 			<div class="container">
         <breadcrumbs
@@ -126,6 +126,7 @@ export default {
   name: "Partners",
   data(){
 	return{
+		showPage: false,
 	    titlePage: ' Эксперты ',
       descriptionPage: '',
       keywordsPage: '',
@@ -191,6 +192,25 @@ export default {
     }
 	},
 	created(){
+		  let params = new URLSearchParams();
+       params.append('category_id', this.$route.params.experts);
+        this.$http({
+          method: 'POST',
+          url: 'expert/profile/find',
+          data: params,
+          headers: { 
+						'Content-Type': 'application/x-www-form-urlencoded', 
+						Authorization: "Bearer " + localStorage.getItem('token')
+          }
+        })
+        .then(response=>{
+					if (response.status === 200) {
+						this.showPage = true
+					}
+        })
+        .catch(error =>{
+        	this.$router.push('/erorr/404')
+        })
 	},
     beforeRouteUpdate (to, from, next) {
         this.pageCount = 1;
@@ -306,8 +326,8 @@ export default {
     setTimeout(()=> {
         let category = this.categories.find(item => item.expert_slug === this.$route.params.experts);
           this.getSelectCategory(category.id)
+          this.getExperts();
         }, 500);
-		this.getExperts();
 		this.getBigImage(1);
 		$('select').styler();
 	},

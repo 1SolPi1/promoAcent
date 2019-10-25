@@ -1,8 +1,10 @@
 <template>
 <div class="container">
   <div class="title_section slideInUp wow" data-wow-iteration="1">
-    <p>К сожалению, запрашиваемая страница не доступна... </p>
-    <button class="btn_blue" @click.prevent="goHome()">На главную</button>
+    <div class="error">
+      <div>  ОШИБКА 404 - Страница не найдена</div>
+      <div><a href="/">Перейти на главную</a></div>
+</div>
   </div>
 </div>
 </template>

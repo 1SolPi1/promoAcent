@@ -228,6 +228,11 @@ let router = new Router({
       }
     },
     {
+      path: '/erorr/404',
+      name: 'NotFounds',
+      component: NotFound
+    },
+    {
       path: '*',
       name: 'NotFound',
       component: NotFound
