@@ -29,7 +29,7 @@
           </div>
           <div class="col-lg-5 col-md-4">
             <div class="images_category_experts zoomIn wow" data-wow-iteration="1">
-              <img src="img/image_ask.png" alt="alt">
+              <img src="@/assets/img/image_ask.png" alt="alt">
             </div>
           </div>
         </div>
