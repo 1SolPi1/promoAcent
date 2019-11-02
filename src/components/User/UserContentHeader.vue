@@ -17,12 +17,12 @@ export default {
 		return {
 			routes:{
 				'/user': 'Стать экспертом',
-				'/userprofile': 'Мой профиль',
-				'/userconsultation': 'Мои консультации',
-				'/userpays': 'Мои платежи',
-				'/userfriends': 'Друзья и приглашения',
-				'/usersettings': 'Настройки',
-				'/usersupport': 'Техподдержка',
+				'/user/userprofile': 'Мой профиль',
+				'/user/userconsultation': 'Мои консультации',
+				'/user/userpays': 'Мои платежи',
+				'/user/userfriends': 'Друзья и приглашения',
+				'/user/usersettings': 'Настройки',
+				'/user/usersupport': 'Техподдержка',
 			}
 		}
 	},
