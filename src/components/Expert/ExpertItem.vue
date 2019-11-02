@@ -26,11 +26,13 @@
               class="boxCategory"
               v-if="expert.category_parent.length > 0"
               >
-              <div 
-                class="iconCategory" 
-                :style="{background: getColor()}"
+              <div
+                v-for="{id} in expert.category_parent"
+                class="iconCategory"
+                :key="id"
+                :style="{background: getColor(id)}"
               >
-                <img :src="getImage()" alt="">
+                <img :src="getImage(id)" alt="">
               </div>
               <p 
                 v-for="item in expert.sub_category"
@@ -99,11 +101,11 @@
       itemStar(){
         return Math.trunc(this.expert.rating / 2)
       },
-      getColor(){
-        return this.categoryItem.find(item => item.id === this.expert.category_parent[0].id).color
+      getColor(id){
+        return this.categoryItem.find(item => item.id === id).color
       },
-      getImage(){
-        return this.categoryItem.find(item => item.id === this.expert.category_parent[0].id).image
+      getImage(id){
+        return this.categoryItem.find(item => item.id === id).image
       },
       alert(){
         this.$toast.success({
