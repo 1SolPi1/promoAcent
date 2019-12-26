@@ -1,4 +1,4 @@
-import Vue from 'vue'
+﻿import Vue from 'vue'
 import App from './App.vue'
 import Axios from 'axios'
 import router from './router'
@@ -35,7 +35,7 @@ Vue.use(Chats)
 
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://194.87.190.158:3012/chatroom',
+    connection: 'https://194.87.190.158:3012/chatroom',
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
@@ -59,7 +59,7 @@ require('./assets/css/js-offcanvas.css');
 
 Vue.config.productionTip = false
 
-Vue.prototype.$http = Axios.create({baseURL: 'http://api.sprosi-online.ru/'});
+Vue.prototype.$http = Axios.create({baseURL: 'https://api.sprosi-online.ru/'});
 
 // const items = [
 // 	{
