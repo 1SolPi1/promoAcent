@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-Axios.defaults.baseURL = 'http://api.sprosi-online.ru/';
+Axios.defaults.baseURL = 'https://api.sprosi-online.ru/';
 
 const state = {
   profile: {

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 
-Axios.defaults.baseURL = 'http://api.sprosi-online.ru/';
+Axios.defaults.baseURL = 'https://api.sprosi-online.ru/';
 //modules
 import user from './modules/user'
 
