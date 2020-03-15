@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-6">
           <div class="image_client">
-            <img src="{{img}}" alt="alt">
+            <img :src="img" alt="alt">
           </div>
         </div>
       </div>
