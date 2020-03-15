@@ -1,0 +1,53 @@
+@font-face {
+	font-family: "SFUIDisplay-Regular";
+	src: url("../fonts/SFUIDisplay-Regular.eot");
+	src: url("../fonts/SFUIDisplay-Regular.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/SFUIDisplay-Regular.woff") format("woff"),
+	url("../fonts/SFUIDisplay-Regular.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "SFUIDisplay-Bold";
+	src: url("../fonts/SFUIDisplay-Bold.eot");
+	src: url("../fonts/SFUIDisplay-Bold.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/SFUIDisplay-Bold.woff") format("woff"),
+	url("../fonts/SFUIDisplay-Bold.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "SFUIDisplay-Light";
+	src: url("../fonts/SFUIDisplay-Light.eot");
+	src: url("../fonts/SFUIDisplay-Light.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/SFUIDisplay-Light.woff") format("woff"),
+	url("../fonts/SFUIDisplay-Light.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "SFUIDisplay-Semibold";
+	src: url("../fonts/SFUIDisplay-Semibold.eot");
+	src: url("../fonts/SFUIDisplay-Semibold.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/SFUIDisplay-Semibold.woff") format("woff"),
+	url("../fonts/SFUIDisplay-Semibold.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "SFUIDisplay-Black";
+	src: url("../fonts/SFUIDisplay-Black.otf?#iefix")format("embedded-opentype"),
+	url("../fonts/SFUIDisplay-Black.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "SFUIDisplay-Medium";
+	src: url("../fonts/SFUIDisplay-Medium.eot");
+	src: url("../fonts/SFUIDisplay-Medium.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/SFUIDisplay-Medium.woff") format("woff"),
+	url("../fonts/SFUIDisplay-Medium.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
