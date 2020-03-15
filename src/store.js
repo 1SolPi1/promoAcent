@@ -21,24 +21,24 @@ export default new Vuex.Store({
       pagesInfo: [],
   comments:[
   {
-  name: 'Валера Иванов',
+  name: 'Валерий Зайцев',
   desc: 'Хочу выразить большую благодарность эксперту Марине, которая оперативно и понятно разъяснила мои юридические права. Ее компетентность буквально спасла меня в споре с руководством и сохранила мне рабочее место.',
-	img: null
+	img: 'img/home-slider/valery.jpeg'
   },
   {
-  name: 'Петр Петров',
+  name: 'Цушко Эльвира',
   desc: 'Уже не впервые обращаюсь к экспертам сервиса "Спроси Онлайн" и каждый раз получаю быстрые и дельные советы. Спасибо за отличную работу!',
-	img: null
+	img: 'img/home-slider/elvira.jpeg'
   },
   {
-  name: 'Максим Максимов',
+  name: 'Максим Гончар',
   desc: 'НЕТ такого вопроса, ответить на который не смогли бы эксперты "Спроси Онлайн". Я убеждаюсь в этом на протяжении уже нескольких месяцев. Любые проблемы решаются проще с советами ваших уважаемых экспертов. Удачи вашему сайту!',
-	img: null
+  img: 'img/home-slider/maximus.jpeg'
   },
   {
-  name: 'Игорь Игоревич',
+  name: 'Игорь Игнатов',
   desc: 'Обращался на сайт с вопросами личного характера. Очень помог эксперт Аминас, который чутко и деликатно отнеся к моей проблеме. Ответ реально помог восстановить мое хрупкое равновесие с внешним миром после депрессии.',
-	img: null
+  img:'img/home-slider/igor.jpeg'
   },
   ],
   profi:[
@@ -224,13 +224,12 @@ export default new Vuex.Store({
     getCategories: async ({commit}) => {
     let parentCategory;
     let childCategories = [];
-    let massChild;
     let firstlist;
     let secondlist;
     let {data} = await Axios.get('category/category/find',{headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: "Bearer " + localStorage.getItem('token')}});
     commit('SET_CATEGORIES', data);
     parentCategory = data.map(map => map.category);
-    massChild = data.map(map => map.child).forEach(item => item.forEach(function(entry) {childCategories.push(entry)}));
+    data.map(map => map.child).forEach(item => item.forEach(function(entry) {childCategories.push(entry)}));
     firstlist = parentCategory.slice(0,6);
     secondlist = parentCategory.slice(6,15);
     commit('SET_CATEGORI', parentCategory);
