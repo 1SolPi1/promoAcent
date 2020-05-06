@@ -20,6 +20,7 @@
     </svg> 
     cкрыть чаты
   </button>
+     <button type="button" class="btn btn-primary btn_chat" @click="reviewForms = !reviewForms">Оставить отзыв</button>
   <button 
     type="button" 
     class="btn btn-primary btn_chat" 
@@ -31,14 +32,23 @@
   </button>
   <button type="button" class="btn btn-primary btn_chat" @click="submitTextExpert()" v-else>Отправить</button>
 </div>
+
+      <reviewForm
+              v-if="reviewForms"
+              :id="activechat[0].expert_id"
+              @close="reviewForms = !reviewForms"
+              :needClose="false"
+      />
 </div>
 </template>
 
 <script>
   import EventBus from '@/scripts/eventBus';
+  import reviewForm from '@/components/Expert/Reviews/FormReview'
 	export default {
     name: "Input",
     components: {
+        reviewForm
     },
     props: {
       activechat:{
@@ -46,8 +56,9 @@
       }
     },
     data() {
-			return {
-        newMessage: null
+        return {
+            newMessage: null,
+            reviewForms: false,
       }
     },
     created() {
