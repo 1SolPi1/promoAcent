@@ -1,4 +1,4 @@
-<template>	
+<template>
 	<div>
 <div class="section_top">
 			<div class="container">
@@ -206,6 +206,7 @@
 						v-for="(item, index) in comments"
 						:name="item.name"
 						:desc="item.desc"
+						:img = "item.img"
 						:key="index"
 					/>
 					</slick>
@@ -256,22 +257,22 @@
 				</div>
 			</div>
 		</div>
-		<registration 
-      v-if="register" 
+		<registration
+      v-if="register"
       @close="register = !register"
       @gotologin="showLogin()"
-    /> 
-    <registration 
+    />
+    <registration
       v-if="registerExpert"
-      :expert="true" 
+      :expert="true"
       @close="registerExpert = !registerExpert"
       @gotologin="showLogin()"
-    /> 
-    <login 
-      v-if="login" 
+    />
+    <login
+      v-if="login"
       @close="login = !login"
       @gotoregister="showRegister()"
-    /> 
+    />
     <recovery
 			v-if="recoveryPass"
 			@close="recoveryPass = !recoveryPass"
@@ -285,7 +286,7 @@ import comments from '../components/Home/Comments'
 import registration from '@/components/Registration'
 import recovery from '@/components/recovery'
 import login from '@/components/Login'
-import $ from 'jquery'; 
+import $ from 'jquery';
 export default {
 name: 'Home',
 components: {Slick, comments, registration, login, recovery},
@@ -458,8 +459,8 @@ methods: {
           method: 'POST',
           url: 'support/subscription/subscription-add',
           data: params,
-          headers: { 
-						'Content-Type': 'application/x-www-form-urlencoded', 
+          headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
 						Authorization: "Bearer " + localStorage.getItem('token')
           }
         })

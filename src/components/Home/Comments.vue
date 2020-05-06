@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-6">
           <div class="image_client">
-            <img src="img/client1.jpg" alt="alt">
+            <img :src="img" alt="alt">
           </div>
         </div>
       </div>
@@ -33,7 +33,10 @@
                 type: String,
                 default: 'desc'
             },
-            img:{}
+            img:{
+                type:String,
+                default:'img/client1.jpg'
+            }
         },
         data() {
             return {
@@ -49,5 +52,5 @@
 </script>
 
 <style scoped>
-    
+
 </style>
