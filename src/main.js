@@ -24,8 +24,8 @@ var toastrConfigs = {
     position: 'top right',
     // showDuration: 5000,
     // successColor:
-    // infoColor 
-    // warningColor 
+    // infoColor
+    // warningColor
     // errorColor
 }
 Vue.use(CxltToastr, toastrConfigs)
@@ -35,7 +35,7 @@ Vue.use(Chats)
 
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'https://194.87.190.158:3012/chatroom',
+    connection: 'https://sprosi-online.ru/:3012/chatroom',
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
