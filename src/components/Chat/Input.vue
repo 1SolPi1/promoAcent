@@ -20,7 +20,7 @@
     </svg> 
     cкрыть чаты
   </button>
-     <button type="button" class="btn btn-primary btn_chat" @click="reviewForms = !reviewForms">Оставить отзыв</button>
+     <button type="button" class="btn btn-primary btn_chat" @click="reviewForms = !reviewForms" v-if="activechat.count_message > 9">Оставить отзыв</button>
   <button 
     type="button" 
     class="btn btn-primary btn_chat" 
@@ -102,7 +102,8 @@
             message:text
           })
           }
-          this.newMessage = null
+          this.newMessage = null;
+        this.activechat.count_message++
     },
     submitTextExpert () {
       const text = this.newMessage
