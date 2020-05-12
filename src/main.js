@@ -35,7 +35,7 @@ Vue.use(Chats)
 
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'https://sprosi-online.ru:3012/chatroom',
+    connection: 'https://194.87.190.158:3012/chatroom',
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
