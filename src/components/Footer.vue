@@ -48,7 +48,7 @@
               </div>
           </div>
           <div class="line_links_footer">
-              <router-link to="/info/policy" class="link_footer">Политика конфиденциальности</router-link>
+              <router-link to="/info/policy" class="link_footer">Пользовательское соглашение </router-link>
           </div>
           <div class="row copiright">
               <div class="col-xs-6">
@@ -93,5 +93,5 @@ export default {
 </script>
 
 <style scoped>
-    
+
 </style>
