@@ -1,7 +1,7 @@
 <template>
 					<div class="col-md-5 col-sm-4">
 						<div class="right_header centerFlex">
-							<router-link to="/userpays?query=pays" class="money">
+							<router-link to="/user/userpays?query=pays" class="money">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404.09 404.091">
 									<path d="M195.591,99.628v28.446c-0.011,14.726-43.794,26.667-97.795,26.667C43.784,154.742,0.012,142.8,0,128.075V99.628
 			c0,14.73,43.784,26.67,97.795,26.67C151.808,126.299,195.591,114.359,195.591,99.628z M195.591,94.242
@@ -44,7 +44,7 @@
 								</svg>
 								<span>{{userInfo.cash}}₽</span>
 							</router-link>
-							<router-link v-if="userInfo.expert" to="/myconsultation?query=message" class="chat_mail">
+							<router-link v-if="userInfo.expert" to="/user/myconsultation?query=message" class="chat_mail">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550.795 550.795">
 									<path d="M501.613,491.782c12.381,0,23.109-4.088,32.229-12.16L377.793,323.567c-3.744,2.681-7.373,5.288-10.801,7.767
 			c-11.678,8.604-21.156,15.318-28.434,20.129c-7.277,4.822-16.959,9.737-29.045,14.755c-12.094,5.024-23.361,7.528-33.813,7.528
@@ -66,7 +66,7 @@
 			c0-13.525-4.873-25.098-14.598-34.737C526.461,63.829,514.932,59.013,501.613,59.013z" />
 								</svg>
 								<span>{{notReadChats}}</span></router-link>
-							<router-link v-else to="/userconsultation" class="chat_mail">
+							<router-link v-else to="/user/userconsultation" class="chat_mail">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550.795 550.795">
 									<path d="M501.613,491.782c12.381,0,23.109-4.088,32.229-12.16L377.793,323.567c-3.744,2.681-7.373,5.288-10.801,7.767
 			c-11.678,8.604-21.156,15.318-28.434,20.129c-7.277,4.822-16.959,9.737-29.045,14.755c-12.094,5.024-23.361,7.528-33.813,7.528
@@ -88,7 +88,7 @@
 			c0-13.525-4.873-25.098-14.598-34.737C526.461,63.829,514.932,59.013,501.613,59.013z" />
 								</svg>
 								<span>{{notReadChats}}</span></router-link>
-							<router-link v-if="userInfo.expert" to="/myconsultation?query=answer" class="chat_mail chat">
+							<router-link v-if="userInfo.expert" to="/user/myconsultation?query=answer" class="chat_mail chat">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.626 511.626">
 		<path d="M301.927,327.605c30.926-13.038,55.34-30.785,73.23-53.248c17.888-22.458,26.833-46.915,26.833-73.372
 			c0-26.458-8.945-50.917-26.84-73.376c-17.888-22.459-42.298-40.208-73.228-53.249c-30.93-13.039-64.571-19.556-100.928-19.556

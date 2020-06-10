@@ -18,7 +18,7 @@
           <button class="btn_blue"  @click.prevent="submit()">Отправить</button>
         </form>
     </div>
-    <span class="closeBackground" @click="$emit('close')"></span>
+    <span class="closeBackground" @click="$emit('close')" v-if="needClose"></span>
   </div>
 </template>
 
@@ -31,7 +31,11 @@
       id:{
         type: Number,
         default: 0
-      }
+      },
+        needClose: {
+          type: Boolean,
+            default: true,
+        }
     },
     data() {
 			return {
