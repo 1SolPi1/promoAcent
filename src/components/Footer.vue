@@ -35,7 +35,7 @@
               <div class="col-md-4 col-sm-2 col-xs-6">
                   <div class="title_footer">Экспертам</div>
                   <ul class="footer_list">
-                      <li><router-link to="/info/aboutpartners">Описание партнерства</router-link></li>
+                      <li><router-link to="/info/aboutpartners">Пользовательское соглашение</router-link></li>
                   </ul>
               </div>
               <div class="col-md-2 col_pl col-sm-3 col-xs-6">
@@ -47,9 +47,9 @@
                   </ul>
               </div>
           </div>
-          <div class="line_links_footer">
-              <router-link to="/info/policy" class="link_footer">Пользовательское соглашение </router-link>
-          </div>
+          <!--<div class="line_links_footer">
+              <router-link to="/info/policy" class="link_footer"> Политика конфиденциальности </router-link>
+          </div>-->
           <div class="row copiright">
               <div class="col-xs-6">
                   <p>2019  «Спроси Онлайн»</p>
