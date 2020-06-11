@@ -145,7 +145,7 @@ sockets: {
       }
     },
     connect(){
-      this.$socket.emit('joinUsers',this.clietnId, this.expertId);
+      this.$socket.emit('joinUsers',this.clientId, this.expertId);
     },
     getHistory(){
       this.$socket.emit('historyUsers',
