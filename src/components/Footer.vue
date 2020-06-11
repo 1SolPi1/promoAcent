@@ -47,6 +47,7 @@
                   </ul>
               </div>
           </div>
+          
           <!--<div class="line_links_footer">
               <router-link to="/info/policy" class="link_footer"> Политика конфиденциальности </router-link>
           </div>-->
